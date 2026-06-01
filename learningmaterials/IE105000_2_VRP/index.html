@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>City Delivery — VRP Game</title>
+  <link rel="icon" type="image/svg+xml" href="../../figures/learning/icon-vrp.svg">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header id="header">
+    <div class="header-title">🛵 City Delivery</div>
+    <div id="game-info">
+      <span class="stat-box">Vehicles: <strong id="info-vehicles">—</strong></span>
+      <span class="stat-box">Shipments: <strong id="info-shipments">—</strong></span>
+      <span class="stat-box" id="info-status"></span>
+    </div>
+    <div class="header-actions">
+      <button class="hdr-btn" id="btn-new-game">🎲 New Game</button>
+      <button class="hdr-btn" id="btn-leaderboard">🏆 Leaderboard</button>
+    </div>
+  </header>
+
+  <!-- ── Setup panel ────────────────────────────────────────────────────── -->
+  <div id="setup-panel">
+    <div id="setup-box">
+      <div class="setup-title">🛵 City Delivery</div>
+      <div class="setup-subtitle">
+        Plan pickup-and-delivery routes for your fleet.<br>
+        Beat the optimal solution to earn a perfect score!
+      </div>
+      <div class="setup-row">
+        <label>Vehicles</label>
+        <div class="setup-stepper">
+          <button onclick="changeVehicles(-1)">−</button>
+          <span id="setup-vehicles">2</span>
+          <button onclick="changeVehicles(1)">+</button>
+        </div>
+      </div>
+      <div class="setup-row">
+        <label>Shipments</label>
+        <div class="setup-stepper">
+          <button onclick="changeShipments(-1)">−</button>
+          <span id="setup-shipments">4</span>
+          <button onclick="changeShipments(1)">+</button>
+        </div>
+      </div>
+      <button id="btn-start" onclick="startGame()">▶ Start Game</button>
+    </div>
+  </div>
+
+  <!-- ── Game area ──────────────────────────────────────────────────────── -->
+  <div id="game-area" class="hidden">
+
+    <!-- Map -->
+    <div id="map-container">
+      <canvas id="map-canvas"></canvas>
+      <div id="legend">
+        <div class="legend-row"><span class="legend-circle"></span> Pickup</div>
+        <div class="legend-row"><span class="legend-diamond"></span> Delivery</div>
+      </div>
+    </div>
+
+    <!-- Vehicle panels -->
+    <div id="vehicle-panels"></div>
+
+    <!-- Action bar -->
+    <div id="action-bar">
+      <button id="btn-reset" onclick="resetRoutes()">↺ Reset</button>
+      <div id="assignment-hint">Select a vehicle below, then click stops on the map</div>
+      <button id="btn-submit" onclick="submitSolution()" disabled>Submit →</button>
+    </div>
+
+  </div>
+
+  <!-- ── Result overlay ─────────────────────────────────────────────────── -->
+  <div id="result-overlay" class="hidden">
+    <div id="result-box">
+      <div id="result-title"></div>
+      <div id="result-stats"></div>
+      <div id="submit-section">
+        <div id="submit-fields">
+          <input id="student-id"  type="text" placeholder="학번 (Student ID)" maxlength="20" />
+          <input id="player-name" type="text" placeholder="이름 (Name)"        maxlength="40" />
+        </div>
+        <button id="btn-submit-score">🏆 Submit to Leaderboard</button>
+      </div>
+      <div id="rank-result" style="display:none"></div>
+      <div id="result-actions">
+        <button onclick="playAgain()">🔄 Play Again</button>
+        <button onclick="openLeaderboard()">🏆 Leaderboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Leaderboard screen ─────────────────────────────────────────────── -->
+  <div id="leaderboard-screen" style="display:none">
+    <div class="lb-screen-nav">
+      <button onclick="closeLeaderboard()">← Back to Game</button>
+      <button onclick="Promise.all([loadLeaderboard(), loadComments()])">🔄 Refresh</button>
+    </div>
+    <h2 class="lb-screen-title">🏆 Leaderboard</h2>
+    <table class="lb-table">
+      <thead><tr><th>#</th><th>Name</th><th>Score</th><th>Gap</th><th>Ships</th><th>Vehs</th></tr></thead>
+      <tbody id="lb-tbody"><tr><td colspan="6" class="lb-msg">Loading…</td></tr></tbody>
+    </table>
+    <div id="comments-section">
+      <h3 class="lb-screen-subtitle">💬 Comments</h3>
+      <div id="comment-form">
+        <input id="comment-name" type="text" placeholder="이름 (Name)" maxlength="40" />
+        <textarea id="comment-text" placeholder="Share a reflection…" maxlength="300"></textarea>
+        <button class="comment-post-btn" onclick="submitComment()">Post</button>
+      </div>
+      <div id="comment-list"></div>
+    </div>
+  </div>
+
+  <!-- ── Toast ──────────────────────────────────────────────────────────── -->
+  <div id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="solver.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

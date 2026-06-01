@@ -1,0 +1,43 @@
+# Systems
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+dist/
+build/
+.netlify/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Streamlit DB
+learningmaterials/SCM_finalproject_v1/data/submissions.db
+
+# Secrets / credentials
+learningmaterials/IE105000_1_globalSCM/streamlit_secrets.txt
+learningmaterials/IE315000_3_INV/password.txt
+learningmaterials/IE105000_1_globalSCM/.streamlit/secrets.toml
+**/.streamlit/secrets.toml

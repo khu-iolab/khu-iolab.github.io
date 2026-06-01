@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IO-LAB | Intelligent Optimization Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="figures/logo.svg">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="figures/logo.svg" alt="IO LAB Logo" class="logo-icon">
+                <span class="logo-name"><span class="logo-text">IO</span><span class="logo-sep">-</span><span class="logo-accent">LAB</span></span>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-dropdown">
+                    <a href="team.html" class="nav-link" data-i18n="nav.team">구성원</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="team.html#advisor" data-i18n="nav.team.advisor">지도교수</a></li>
+                        <li><a href="team.html#members" data-i18n="nav.team.members">연구원</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="research.html" class="nav-link" data-i18n="nav.research">연구분야</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="research.html#logistics" data-i18n="nav.research.logistics">물류 최적화</a></li>
+                        <li><a href="research.html#network" data-i18n="nav.research.network">네트워크 최적화</a></li>
+                        <li><a href="research.html#production" data-i18n="nav.research.production">생산 최적화</a></li>
+                        <li><a href="research.html#nextgen" data-i18n="nav.research.nextgen">차세대 최적화</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="publications.html" class="nav-link" data-i18n="nav.publications">논문</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="publications.html#international" data-i18n="nav.pub.international">국제 논문</a></li>
+                        <li><a href="publications.html#domestic" data-i18n="nav.pub.domestic">국내 논문</a></li>
+                        <li><a href="publications.html#conference" data-i18n="nav.pub.conference">학회지</a></li>
+                        <li><a href="publications.html#patent" data-i18n="nav.pub.patent">특허</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="projects.html" class="nav-link" data-i18n="nav.projects">연구과제</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="projects.html#ongoing" data-i18n="nav.proj.ongoing">진행중인 과제</a></li>
+                        <li><a href="projects.html#completed" data-i18n="nav.proj.completed">완료한 과제</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="learningmaterials/index.html" class="nav-link" data-i18n="nav.courses">교육자료</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="learningmaterials/index.html#ie315000" data-i18n="nav.courses.scm">공급사슬관리</a></li>
+                        <li><a href="learningmaterials/index.html#ie105000" data-i18n="nav.courses.ie">산업경영공학의 이해</a></li>
+                        <li><a href="https://www.youtube.com/@IO-LAB-khu" data-i18n="nav.courses.youtube" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000" style="vertical-align:middle;margin-right:5px"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a></li>
+                        <li><a href="https://www.instagram.com/khu_iolab/" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" style="vertical-align:middle;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="news.html" class="nav-link" data-i18n="nav.community">커뮤니티</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="news.html" data-i18n="nav.community.news">소식</a></li>
+                        <li><a href="photos.html" data-i18n="nav.community.photos">사진</a></li>
+                        <li><a href="#contact" data-i18n="nav.community.contact">연락처</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="lang-toggle">
+                <span class="lang-option" data-lang="en" onclick="toggleLang('en')">EN</span>
+                <span class="lang-divider">|</span>
+                <span class="lang-option" data-lang="ko" onclick="toggleLang('ko')">KO</span>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero-premium">
+        <div class="hero-spline-container">
+            <iframe
+                src="https://my.spline.design/herobannerfortransportandlogisticscompanygmw2425-i9tIBV5PSdTL7pBjqIP7bNEL/"
+                frameborder="0" width="100%" height="100%" class="hero-spline-iframe" title="Spline 3D Scene"></iframe>
+            <div class="hero-overlay-refined"></div>
+        </div>
+        <div class="hero-content-premium">
+            <h1 class="hero-title-premium">
+                Intelligent<br />
+                Optimization<br />
+                <span class="hero-title-accent">Lab</span>
+            </h1>
+            <p class="hero-subtitle-premium" data-i18n="hero.subtitle">
+                지능형 최적화를 통해 물류, 제조, 생산 및 통합 시스템의 미래를 개척합니다.
+            </p>
+            <div class="hero-cta-premium">
+                <a href="publications.html" class="btn-premium-primary" data-i18n="hero.cta.primary">연구 분야 보기</a>
+                <a href="mailto:ghy27@khu.ac.kr" class="btn-premium-secondary" data-i18n="hero.cta.secondary">문의하기</a>
+            </div>
+            <div class="hero-stats-premium">
+                <div class="stat-glass">
+                    <span class="stat-num">17+</span>
+                    <span class="stat-lab">Publications</span>
+                </div>
+                <div class="glass-divider"></div>
+                <div class="stat-glass">
+                    <span class="stat-num">02</span>
+                    <span class="stat-lab">Projects</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down-premium">
+            <div class="mouse-premium"></div>
+        </div>
+    </section>
+
+    <!-- Recruiting Banner -->
+    <div class="recruiting-banner">
+        <div class="container">
+            <div class="recruiting-content">
+                <div class="recruiting-text">
+                    <h3 data-i18n="recruit.title">연구진 모집</h3>
+                    <p data-i18n="recruit.desc">운영과학과 최적화에 열정을 가진 동기부여된 연구자를 찾고 있습니다.</p>
+                </div>
+                <a href="https://forms.gle/HLLqtRMW9XrrN6pm9" target="_blank" rel="noopener noreferrer" class="recruiting-btn" data-i18n="recruit.btn">지원하기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <section id="news" class="section news">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title"><span class="highlight" data-i18n="news.title">최신 소식</span></h2>
+            </div>
+            <div class="news-list">
+                <article class="news-item">
+                    <div class="news-date">2026.05.28</div>
+                    <div class="news-content">
+                        <h3 class="news-title">경희대학교 신규 연구과제 선정 — 반도체 팹 OHT 제어 전략 연구</h3>
+                        <p class="news-description">경희대학교 교내 연구과제 「반도체 팹 물류 자동화를 위한 OHT 제어 전략의 체계적 비교 및 최적화 연구」에 연구책임자로 선정되었습니다. (연구기간: 2026.03.01 ~ 2027.02.28)</p>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">2026.04.25</div>
+                    <div class="news-content">
+                        <h3 class="news-title">한국스마트미디어학회 & 한국디지털산업학회 춘계학술대회 심사위원 참여</h3>
+                        <p class="news-description">한국스마트미디어학회 & 한국디지털산업학회 춘계학술대회에 심사위원으로 참여하였습니다.</p>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">2026.04.16–18</div>
+                    <div class="news-content">
+                        <h3 class="news-title">한국물류과학기술학회 2026 춘계학술대회 초청 강연</h3>
+                        <p class="news-description">한국물류과학기술학회 2026 춘계학술대회 YSC 특별 세션에 특사로 초청받아 강연하였습니다.</p>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">2026.02.10</div>
+                    <div class="news-content">
+                        <h3 class="news-title" data-i18n="news.item1.title">연구실 홈페이지 오픈</h3>
+                        <p class="news-description" data-i18n="news.item1.desc">Intelligent Optimization LAB (IO-LAB)의 공식 홈페이지를 오픈했습니다. 연구실의 최신 연구 성과와 소식을 확인하실 수 있습니다.</p>
+                    </div>
+                </article>
+            </div>
+            <a href="news.html" class="view-all-btn" data-i18n="news.viewall">전체 소식 보기 →</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-i18n="contact.tag">연락처</span>
+                <h2 class="section-title" data-i18n-html="contact.title">찾아오시는 <span class="highlight">길</span></h2>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <p data-i18n="contact.subtitle">연구 협력 및 문의는 아래 연락처로 연락해 주세요.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="contact.email">이메일</strong>
+                                <p>ghy27@khu.ac.kr</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                    <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="contact.office">교수 연구실</strong>
+                                <p data-i18n="contact.office.addr">우정원 6034호</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                                    <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong data-i18n="contact.lab">학생 연구실</strong>
+                                <p data-i18n="contact.lab.addr">공학관 504호</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <img src="figures/logo.svg" alt="IO LAB Logo" class="logo-icon">
+                        <span class="logo-name"><span class="logo-text">IO</span><span class="logo-sep">-</span><span class="logo-accent">LAB</span></span>
+                    </a>
+                    <p data-i18n-html="footer.brand">지능형 최적화 연구실<br>경희대학교</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 data-i18n="footer.quicklinks">빠른 링크</h4>
+                        <a href="#news" data-i18n="footer.news">소식</a>
+                        <a href="publications.html" data-i18n="footer.pubs">논문</a>
+                        <a href="projects.html" data-i18n="footer.projects">연구과제</a>
+                        <a href="team.html" data-i18n="footer.team">연구진</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4 data-i18n="footer.resources">자료</h4>
+                        <a href="#">GitHub</a>
+                        <a href="#">Google Scholar</a>
+                        <a href="#">ResearchGate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IO-LAB. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="lang.js"></script>
+</body>
+
+</html>

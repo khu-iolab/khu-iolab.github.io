@@ -1,0 +1,7 @@
+# Source files — obfuscated into bundle.js; do not deploy originals
+config.js
+engine.js
+solver.js
+app.js
+gas_leaderboard.js
+dist/

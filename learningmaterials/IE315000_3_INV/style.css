@@ -1,0 +1,149 @@
+/* style.css — IE315000 Lab #3: Safety Inventory & Bullwhip */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1e293b; background: #f8fafc; }
+
+/* ── Header ──────────────────────────────────────────────────── */
+header { background: #1e293b; color: #fff; padding: 20px 32px; }
+header h1 { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+header p  { font-size: 0.8rem; color: #94a3b8; }
+
+/* ── Tab nav ─────────────────────────────────────────────────── */
+.tab-nav { display: flex; gap: 2px; background: #1e293b; padding: 0 24px; overflow-x: auto; }
+.tab-btn {
+  padding: 12px 18px; font-size: .84rem; font-weight: 600;
+  background: transparent; border: none; color: #94a3b8;
+  cursor: pointer; border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s; white-space: nowrap;
+}
+.tab-btn:hover  { color: #e2e8f0; }
+.tab-btn.active { color: #38bdf8; border-bottom-color: #38bdf8; }
+
+/* ── Tab content ─────────────────────────────────────────────── */
+.tab-content         { display: none; padding: 24px 28px; max-width: 1300px; margin: 0 auto; }
+.tab-content.active  { display: block; }
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+  padding: 20px 24px; margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.card h2 { font-size: .93rem; font-weight: 700; color: #1e293b; margin-bottom: 14px; }
+
+/* ── Layout helpers ──────────────────────────────────────────── */
+.two-col   { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: start; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.four-col  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.five-col  { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+
+/* ── Sliders ─────────────────────────────────────────────────── */
+.section-label {
+  font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: #94a3b8;
+  margin: 16px 0 8px; padding-bottom: 4px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.slider-group { margin-bottom: 14px; }
+.slider-group label { display: block; font-size: .82rem; color: #475569; margin-bottom: 4px; font-weight: 500; }
+.slider-group input[type=range] { width: 100%; accent-color: #3b82f6; cursor: pointer; }
+
+/* ── Metric boxes ────────────────────────────────────────────── */
+.metric-box {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+  padding: 14px 12px; text-align: center;
+}
+.metric-label { font-size: .7rem; color: #64748b; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.metric-value { font-size: 1.3rem; font-weight: 800; color: #1e293b; }
+.metric-sub   { font-size: .7rem; color: #94a3b8; margin-top: 3px; }
+.metric-box.blue  { border-color: #93c5fd; background: #eff6ff; }
+.metric-box.blue  .metric-value { color: #1d4ed8; }
+.metric-box.red   { border-color: #fca5a5; background: #fff1f2; }
+.metric-box.red   .metric-value { color: #b91c1c; }
+.metric-box.green { border-color: #86efac; background: #f0fdf4; }
+.metric-box.green .metric-value { color: #166534; }
+.metric-box.amber { border-color: #fcd34d; background: #fffbeb; }
+.metric-box.amber .metric-value { color: #92400e; }
+
+/* ── Tables ──────────────────────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+th {
+  background: #f1f5f9; padding: 7px 10px; text-align: right;
+  border-bottom: 2px solid #cbd5e1; font-weight: 700; white-space: nowrap;
+}
+th:first-child { text-align: left; }
+td { padding: 6px 10px; border-bottom: 1px solid #f1f5f9; text-align: right; white-space: nowrap; }
+td:first-child { text-align: left; font-weight: 500; }
+tr:last-child td { border-bottom: none; }
+.total-row td { background: #eff6ff; font-weight: 700; border-top: 2px solid #93c5fd; }
+.highlight-row td { background: #fefce8; }
+
+/* ── Charts ──────────────────────────────────────────────────── */
+.chart-wrap { position: relative; height: 200px; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: 6px; font-size: .85rem; font-weight: 600;
+  cursor: pointer; border: 1px solid #e2e8f0; background: #f8fafc; color: #475569;
+  transition: all .15s;
+}
+.btn:hover      { background: #f1f5f9; }
+.btn-primary    { background: #1e40af; color: #fff; border-color: #1e40af; }
+.btn-primary:hover { background: #1d4ed8; }
+
+/* ── Info / hint box ─────────────────────────────────────────── */
+.info-box {
+  background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px;
+  padding: 10px 14px; font-size: .82rem; color: #0369a1; line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+/* ── Plan inputs ─────────────────────────────────────────────── */
+.plan-input {
+  width: 90px; padding: 6px 8px; border: 1px solid #cbd5e1;
+  border-radius: 5px; font-size: .9rem; text-align: center;
+}
+.plan-input:focus { outline: 2px solid #3b82f6; border-color: #3b82f6; }
+
+/* ── SC diagram ──────────────────────────────────────────────── */
+.sc-diagram {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin: 16px 0; flex-wrap: wrap;
+}
+.sc-node {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px;
+  padding: 12px 20px; text-align: center; min-width: 120px;
+}
+.sc-node.you  { border-color: #3b82f6; background: #eff6ff; }
+.sc-node-label { font-size: .72rem; color: #94a3b8; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
+.sc-node-name  { font-size: .9rem; font-weight: 700; }
+.sc-arrow { font-size: 1.4rem; color: #94a3b8; margin: 0 4px; }
+
+/* ── Legend ──────────────────────────────────────────────────── */
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; font-size: .78rem; }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── Score badge ─────────────────────────────────────────────── */
+.score-badge {
+  display: inline-block; padding: 6px 16px; border-radius: 20px;
+  font-size: .8rem; font-weight: 700; letter-spacing: .04em;
+}
+.score-badge.good { background: #dcfce7; color: #166534; }
+.score-badge.mid  { background: #fef9c3; color: #713f12; }
+.score-badge.bad  { background: #fee2e2; color: #991b1b; }
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .two-col   { grid-template-columns: 1fr; }
+  .three-col { grid-template-columns: repeat(2,1fr); }
+  .five-col  { grid-template-columns: repeat(2,1fr); }
+  .tab-content { padding: 16px 14px; }
+}

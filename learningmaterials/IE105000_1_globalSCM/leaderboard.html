@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏆 Global Logistics — Leaderboard</title>
+  <link rel="icon" type="image/svg+xml" href="../../figures/learning/icon-scm.svg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f1923;
+      color: #e8edf2;
+      min-height: 100vh;
+      padding: 32px 24px;
+    }
+    h1 { font-size: 1.5rem; color: #4fc3f7; margin-bottom: 6px; }
+    .subtitle { font-size: 0.82rem; color: #7a9bb5; margin-bottom: 24px; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .nav-btn {
+      background: #1a3448;
+      border: 1px solid #2a3f55;
+      border-radius: 8px;
+      color: #e8edf2;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      cursor: pointer;
+    }
+    .nav-btn:hover { background: #2a4a60; border-color: #4fc3f7; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-bottom: 40px;
+    }
+    th {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 2px solid #2a3f55;
+      color: #7a9bb5;
+      font-weight: 600;
+    }
+    td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #1e3045;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #1a2e44; }
+    .green { color: #81c784; font-weight: 700; }
+    .chain-cell { font-size: 0.75rem; color: #9ab; }
+    .lb-msg { padding: 24px; color: #7a9bb5; text-align: center; }
+
+    h2 { font-size: 1.1rem; font-weight: 700; color: #e8edf2; margin-bottom: 14px; }
+
+    #comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 14px 0;
+      border-bottom: 1px solid #2a3f55;
+      margin-bottom: 14px;
+      max-width: 560px;
+    }
+    #comment-form input,
+    #comment-form textarea {
+      background: #0f1923;
+      border: 1px solid #2a3f55;
+      border-radius: 7px;
+      color: #e8edf2;
+      font-size: 0.85rem;
+      padding: 9px 12px;
+      outline: none;
+      font-family: inherit;
+    }
+    #comment-form input:focus,
+    #comment-form textarea:focus { border-color: #4fc3f7; }
+    #comment-form input::placeholder,
+    #comment-form textarea::placeholder { color: #3a5068; }
+    #comment-form textarea { height: 72px; resize: none; }
+    .post-btn {
+      align-self: flex-end;
+      padding: 7px 22px;
+      background: #1565c0;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .post-btn:hover { background: #1976d2; }
+
+    .comment-card { padding: 10px 4px; border-bottom: 1px solid #1e3045; }
+    .comment-card:last-child { border-bottom: none; }
+    .comment-meta { font-size: 0.72rem; color: #7a9bb5; margin-bottom: 4px; }
+    .comment-body { font-size: 0.85rem; line-height: 1.5; }
+
+    #toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #1a2e44;
+      border: 1px solid #4fc3f7;
+      color: #e8edf2;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 600px) {
+      body { padding: 20px 14px; }
+      table th:nth-child(5), table td:nth-child(5) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <h1>🏆 Global Logistics — Leaderboard</h1>
+    <button class="nav-btn" onclick="refresh()">🔄 Refresh</button>
+  </div>
+  <div class="subtitle">Ranked by net profit (highest first)</div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Name</th><th>Profit</th><th>Units</th><th>Supply Chain</th></tr>
+    </thead>
+    <tbody id="lb-tbody">
+      <tr><td colspan="5" class="lb-msg">Loading…</td></tr>
+    </tbody>
+  </table>
+
+  <h2>💬 Comments</h2>
+  <div id="comment-form">
+    <input id="comment-name" type="text" placeholder="이름 (Name)" maxlength="40" />
+    <textarea id="comment-text" placeholder="Share a reflection…" maxlength="300"></textarea>
+    <button class="post-btn" onclick="submitComment()">Post</button>
+  </div>
+  <div id="comment-list"></div>
+
+  <div id="toast"></div>
+
+  <script src="config.js"></script>
+  <script>
+    const medals = ['🥇', '🥈', '🥉'];
+
+    async function loadLeaderboard() {
+      const tbody = document.getElementById('lb-tbody');
+      tbody.innerHTML = '<tr><td colspan="5" class="lb-msg">Loading…</td></tr>';
+      try {
+        const res  = await fetch(CONFIG.gasUrl + '?action=leaderboard');
+        const data = await res.json();
+        if (!data.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="lb-msg">No submissions yet!</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.slice(0, 50).map((r, i) => `
+          <tr>
+            <td>${medals[i] ?? (i + 1)}</td>
+            <td>${r.student_name}</td>
+            <td class="green">$${Number(r.profit).toLocaleString()}</td>
+            <td>${r.units}</td>
+            <td class="chain-cell">${r.chain}</td>
+          </tr>`).join('');
+      } catch {
+        tbody.innerHTML = '<tr><td colspan="5" class="lb-msg">Failed to load leaderboard.</td></tr>';
+      }
+    }
+
+    async function loadComments() {
+      const list = document.getElementById('comment-list');
+      list.innerHTML = '<p class="lb-msg">Loading…</p>';
+      try {
+        const res  = await fetch(CONFIG.gasUrl + '?action=get_comments');
+        const data = await res.json();
+        if (!data.length) {
+          list.innerHTML = '<p class="lb-msg">No comments yet — be first!</p>';
+          return;
+        }
+        list.innerHTML = data.map(c => `
+          <div class="comment-card">
+            <div class="comment-meta">${c.student_name} · ${String(c.posted_at).substring(0, 16)}</div>
+            <div class="comment-body">${c.comment}</div>
+          </div>`).join('');
+      } catch {
+        list.innerHTML = '<p class="lb-msg">Failed to load comments.</p>';
+      }
+    }
+
+    async function submitComment() {
+      const name = document.getElementById('comment-name').value.trim();
+      const text = document.getElementById('comment-text').value.trim();
+      if (!name) { toast('이름을 입력하세요!'); return; }
+      if (!text) { toast('댓글을 입력하세요!'); return; }
+      const params = new URLSearchParams({
+        action: 'save_comment',
+        data: JSON.stringify({ student_name: name, comment: text }),
+      });
+      try {
+        await fetch(CONFIG.gasUrl + '?' + params);
+        document.getElementById('comment-text').value = '';
+        loadComments();
+        toast('✅ 댓글이 등록되었습니다!');
+      } catch {
+        toast('❌ 댓글 등록 실패.');
+      }
+    }
+
+    function refresh() { loadLeaderboard(); loadComments(); }
+
+    let toastTimer;
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+    }
+
+    loadLeaderboard();
+    loadComments();
+  </script>
+</body>
+</html>

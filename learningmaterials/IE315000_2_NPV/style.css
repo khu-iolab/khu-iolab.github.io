@@ -1,0 +1,262 @@
+/* style.css — IE315000 Demand Forecasting & Aggregate Planning */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #f1f5f9;
+  --surface: #ffffff;
+  --border:  #e2e8f0;
+  --primary: #1e40af;
+  --primary-light: #3b82f6;
+  --text:    #1e293b;
+  --muted:   #64748b;
+  --ma:      #f59e0b;
+  --es:      #10b981;
+  --holt:    #8b5cf6;
+  --combo:   #ef4444;
+  --lp:      #1e40af;
+  --level:   #0891b2;
+  --chase:   #059669;
+  --radius:  8px;
+  --shadow:  0 1px 3px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.06);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+header {
+  background: var(--primary);
+  color: #fff;
+  padding: 14px 24px;
+}
+header h1 { font-size: 1.15rem; font-weight: 700; }
+header p  { font-size: 0.82rem; opacity: .8; margin-top: 2px; }
+
+/* ── Tab navigation ──────────────────────────────────────────────────────── */
+.tab-nav {
+  display: flex;
+  gap: 0;
+  background: var(--primary);
+  border-bottom: 2px solid var(--primary-light);
+  padding: 0 16px;
+  overflow-x: auto;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,.7);
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover  { color: #fff; }
+.tab-btn.active { color: #fff; border-bottom-color: #93c5fd; }
+
+/* ── Tab content ─────────────────────────────────────────────────────────── */
+.tab-content { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
+.tab-content.active { display: block; }
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+.card h2 { font-size: .95rem; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+.card h3 { font-size: .88rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+
+/* ── Two-column layout ───────────────────────────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ── Three-column layout ─────────────────────────────────────────────────── */
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
+
+/* ── Metric badges ───────────────────────────────────────────────────────── */
+.metric-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  text-align: center;
+}
+.metric-box .metric-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.metric-box .metric-value { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-top: 2px; }
+.metric-box .metric-sub   { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+th {
+  background: #f8fafc;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--border);
+  text-align: right;
+}
+th:first-child { text-align: left; }
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+td:first-child { text-align: left; font-weight: 500; }
+tr:hover td { background: #f8fafc; }
+tr.total-row td { font-weight: 700; background: #eff6ff; border-top: 2px solid #bfdbfe; }
+.tag-lp    { color: var(--lp);    font-weight: 600; }
+.tag-level { color: var(--level); font-weight: 600; }
+.tag-chase { color: var(--chase); font-weight: 600; }
+
+/* ── Sliders ─────────────────────────────────────────────────────────────── */
+.slider-group { margin-bottom: 12px; }
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  font-size: .82rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.slider-group label span { font-weight: 700; color: var(--primary); }
+input[type=range] {
+  width: 100%;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.section-label {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin: 12px 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Strategy selector ───────────────────────────────────────────────────── */
+.strategy-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.strategy-btn {
+  padding: 8px 18px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all .15s;
+}
+.strategy-btn.active-lp    { border-color: var(--lp);    color: var(--lp);    background: #eff6ff; }
+.strategy-btn.active-level { border-color: var(--level); color: var(--level); background: #ecfeff; }
+.strategy-btn.active-chase { border-color: var(--chase); color: var(--chase); background: #ecfdf5; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.btn:hover { opacity: .85; }
+.btn-primary   { background: var(--primary); color: #fff; }
+.btn-secondary { background: var(--border);  color: var(--text); }
+
+/* ── Planning input table ────────────────────────────────────────────────── */
+.plan-input {
+  width: 80px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: .9rem;
+  text-align: center;
+}
+.plan-input:focus { outline: none; border-color: var(--primary-light); }
+
+/* ── Canvas wrapper ──────────────────────────────────────────────────────── */
+.chart-wrap { position: relative; height: 280px; }
+
+/* ── Legend dots ─────────────────────────────────────────────────────────── */
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: .78rem; }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── Leaderboard form ────────────────────────────────────────────────────── */
+.submit-form { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.submit-form input[type=text] {
+  flex: 1; min-width: 180px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: .85rem;
+}
+.score-summary {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  padding: 12px 16px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  font-size: .85rem;
+}
+.score-summary b { color: var(--primary); }
+
+/* ── Status message ──────────────────────────────────────────────────────── */
+.msg { padding: 10px 14px; border-radius: var(--radius); font-size: .82rem; margin-bottom: 10px; }
+.msg-info    { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.msg-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.msg-error   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ── Rank badge ──────────────────────────────────────────────────────────── */
+.rank-1 { color: #b45309; font-weight: 800; }
+.rank-2 { color: #6b7280; font-weight: 700; }
+.rank-3 { color: #92400e; font-weight: 700; }
+
+/* ── Info callout ────────────────────────────────────────────────────────── */
+.info-box {
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-left: 4px solid var(--primary-light);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 12px;
+  font-size: .82rem;
+  color: var(--muted);
+}

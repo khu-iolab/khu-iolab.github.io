@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BestHome — Demand Forecasting &amp; Aggregate Planning (IE315000)</title>
+  <link rel="icon" type="image/svg+xml" href="../../figures/learning/icon-apl.svg">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <!-- LP Solver (javascript-lp-solver) -->
+  <script src="https://cdn.jsdelivr.net/npm/javascript-lp-solver@0.4.24/prod/solver.min.js"></script>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════════ -->
+  <header>
+    <h1>📦 BestHome Appliances — Demand Forecasting &amp; Aggregate Planning</h1>
+    <p>IE315000 Supply Chain Management &nbsp;|&nbsp; Ch.7 Forecasting · Ch.8 Aggregate Planning</p>
+  </header>
+
+  <!-- ═══════════════════════════════ TABS ═════════════════════════════════════ -->
+  <nav class="tab-nav">
+    <button class="tab-btn" data-tab="scenario" onclick="showTab('scenario')">📋 Scenario</button>
+    <button class="tab-btn" data-tab="forecast" onclick="tryShowTab('forecast')">📈 Forecasting</button>
+    <button class="tab-btn" data-tab="planning" onclick="tryShowTab('planning')">📝 Answering</button>
+    <button class="tab-btn" data-tab="leaderboard" onclick="showTab('leaderboard')">🏆 Leaderboard</button>
+    <button class="tab-btn" data-tab="comments" onclick="showTab('comments')">💬 Comments</button>
+  </nav>
+
+  <!-- ═══════════════════════════════ SCENARIO ═════════════════════════════════ -->
+  <div id="tab-scenario" class="tab-content">
+
+    <div class="card">
+      <h2>📋 Problem Overview</h2>
+      <p style="color:#475569;line-height:1.7">
+        <strong>BestHome Appliances Co.</strong> is a mid-size manufacturer of home appliances with 3 years of quarterly
+        sales history (12 periods). Your task: <br>
+        <strong>Step 1 — Forecast</strong> Year-4 demand (4 quarters) using Moving Average, Exponential Smoothing,
+        and Holt's model, then combine them into a weighted forecast.<br>
+        <strong>Step 2 — Plan</strong> production for Year 4 by solving an Aggregate Planning LP that
+        minimises total workforce, inventory, and backlog costs.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+      <div class="card">
+        <h2>Historical Demand (units)</h2>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Period</th>
+                <th>Year</th>
+                <th>Demand</th>
+              </tr>
+            </thead>
+            <tbody id="hist-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Aggregate Planning Parameters</h2>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="text-align:left">Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody id="ap-params-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ FORECASTING ══════════════════════════════ -->
+  <div id="tab-forecast" class="tab-content">
+
+    <div class="two-col">
+
+      <!-- Controls -->
+      <div class="card" style="position:sticky;top:10px">
+        <h2>⚙️ Model Parameters</h2>
+
+        <div class="section-label">Moving Average</div>
+        <div class="slider-group">
+          <label>Periods n <span id="n_ma_val">4</span></label>
+          <input type="range" id="n_ma" min="1" max="8" step="1" />
+        </div>
+
+        <div class="section-label">Exponential Smoothing</div>
+        <div class="slider-group">
+          <label>Smoothing α <span id="alpha_es_val">0.3</span></label>
+          <input type="range" id="alpha_es" min="0.1" max="0.9" step="0.1" />
+        </div>
+
+        <div class="section-label">Holt's Model</div>
+        <div class="slider-group">
+          <label>Level α <span id="alpha_h_val">0.2</span></label>
+          <input type="range" id="alpha_h" min="0.1" max="0.9" step="0.1" />
+        </div>
+        <div class="slider-group">
+          <label>Trend β <span id="beta_h_val">0.2</span></label>
+          <input type="range" id="beta_h" min="0.1" max="0.9" step="0.1" />
+        </div>
+
+        <div class="section-label">Combined Weights (adjustable)</div>
+
+        <div class="slider-group">
+          <label><span
+              style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f59e0b;margin-right:4px"></span>w<sub>MA</sub>
+            <span id="w_ma_val">0.3</span></label>
+          <input type="range" id="w_ma" min="0" max="10" step="1" />
+        </div>
+        <div class="slider-group">
+          <label><span
+              style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#10b981;margin-right:4px"></span>w<sub>ES</sub>
+            <span id="w_es_val">0.3</span></label>
+          <input type="range" id="w_es" min="0" max="10" step="1" />
+        </div>
+        <div class="slider-group">
+          <label><span
+              style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#8b5cf6;margin-right:4px"></span>w<sub>Holt</sub>
+            <span id="w_holt_val">0.2</span></label>
+          <input type="range" id="w_holt" min="0" max="10" step="1" />
+        </div>
+        <div class="slider-group">
+          <label><span
+              style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3b82f6;margin-right:4px"></span>w<sub>DS</sub>
+            <span id="w_ds_val">0.2</span></label>
+          <input type="range" id="w_ds" min="0" max="10" step="1" />
+        </div>
+
+        <table style="width:100%;font-size:.82rem;border-collapse:collapse;margin-top:8px">
+          <thead>
+            <tr style="color:#64748b">
+              <th style="text-align:left;padding:3px 6px">Method</th>
+              <th style="text-align:right;padding:3px 6px">Raw</th>
+              <th style="text-align:right;padding:3px 6px">Weight %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:3px 6px"><span class="dot"
+                  style="background:#f59e0b;display:inline-block;margin-right:4px"></span>Moving Avg</td>
+              <td id="w-raw-ma" style="text-align:right;padding:3px 6px">—</td>
+              <td id="w-pct-ma" style="text-align:right;padding:3px 6px">—</td>
+            </tr>
+            <tr>
+              <td style="padding:3px 6px"><span class="dot"
+                  style="background:#10b981;display:inline-block;margin-right:4px"></span>Exp. Smooth</td>
+              <td id="w-raw-es" style="text-align:right;padding:3px 6px">—</td>
+              <td id="w-pct-es" style="text-align:right;padding:3px 6px">—</td>
+            </tr>
+            <tr>
+              <td style="padding:3px 6px"><span class="dot"
+                  style="background:#8b5cf6;display:inline-block;margin-right:4px"></span>Holt's</td>
+              <td id="w-raw-holt" style="text-align:right;padding:3px 6px">—</td>
+              <td id="w-pct-holt" style="text-align:right;padding:3px 6px">—</td>
+            </tr>
+            <tr>
+              <td style="padding:3px 6px"><span class="dot"
+                  style="background:#3b82f6;display:inline-block;margin-right:4px"></span>Deseasonal</td>
+              <td id="w-raw-ds" style="text-align:right;padding:3px 6px">—</td>
+              <td id="w-pct-ds" style="text-align:right;padding:3px 6px">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart + tables -->
+      <div>
+        <div class="card">
+          <h2>Forecast Chart</h2>
+          <div class="legend">
+            <span class="legend-item"><span class="dot" style="background:#1e293b"></span>Historical</span>
+            <span class="legend-item"><span class="dot" style="background:#f59e0b"></span>Moving Avg</span>
+            <span class="legend-item"><span class="dot" style="background:#10b981"></span>Exp. Smooth</span>
+            <span class="legend-item"><span class="dot" style="background:#8b5cf6"></span>Holt's</span>
+            <span class="legend-item"><span class="dot" style="background:#3b82f6"></span>Deseasonal</span>
+            <span class="legend-item"><span class="dot" style="background:#ef4444"></span>Combined</span>
+            <span class="legend-item"><span class="dot" style="background:#000000"></span>Actual Y4</span>
+          </div>
+          <div class="chart-wrap"><canvas id="forecast-canvas"></canvas></div>
+        </div>
+
+        <div class="card">
+          <h2>Forecast Error Metrics (in-sample, Y1–Y3)</h2>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>MAD</th>
+                  <th>MSE</th>
+                  <th>MAPE</th>
+                  <th>Bias</th>
+                  <th>n</th>
+                </tr>
+              </thead>
+              <tbody id="error-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Year-4 Forecast (out-of-sample)</h2>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Y4-Q1</th>
+                  <th>Y4-Q2</th>
+                  <th>Y4-Q3</th>
+                  <th>Y4-Q4</th>
+                </tr>
+              </thead>
+              <tbody id="forecast-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PLANNING ═════════════════════════════════ -->
+  <div id="tab-planning" class="tab-content">
+
+    <div class="card">
+      <h2>🏭 Your Hiring Plan</h2>
+      <p class="info-box" style="margin-bottom:12px">
+        Enter how many workers to <strong>hire</strong> or <strong>lay off</strong> each quarter — integers only,
+        <strong>max 50 per quarter</strong>.
+        Regular production = workers × 150 units. No overtime allowed.
+        Any shortfall becomes <strong>backlog</strong> carried to the next quarter; any surplus goes to
+        <strong>inventory</strong>.
+        Costs are evaluated against <strong>actual Y4 demand</strong> after submission.
+      </p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Period</th>
+              <th>Hire ↑</th>
+              <th>Lay Off ↓</th>
+              <th>Workers</th>
+              <th>Reg Production</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Y4-Q1</td>
+              <td><input class="plan-input" type="number" id="hire-0" min="0" max="50" step="1" value="0"
+                  oninput="sanitizePlanInput(this)" /></td>
+              <td><input class="plan-input" type="number" id="layoff-0" min="0" max="50" step="1" value="0"
+                  oninput="sanitizePlanInput(this)" /></td>
+              <td id="pnw-0">—</td>
+              <td id="pprod-0">—</td>
+            </tr>
+            <tr>
+              <td>Y4-Q2</td>
+              <td><input class="plan-input" type="number" id="hire-1" min="0" value="0" /></td>
+              <td><input class="plan-input" type="number" id="layoff-1" min="0" value="0" /></td>
+              <td id="pnw-1">—</td>
+              <td id="pprod-1">—</td>
+            </tr>
+            <tr>
+              <td>Y4-Q3</td>
+              <td><input class="plan-input" type="number" id="hire-2" min="0" value="0" /></td>
+              <td><input class="plan-input" type="number" id="layoff-2" min="0" value="0" /></td>
+              <td id="pnw-2">—</td>
+              <td id="pprod-2">—</td>
+            </tr>
+            <tr>
+              <td>Y4-Q4</td>
+              <td><input class="plan-input" type="number" id="hire-3" min="0" value="0" /></td>
+              <td><input class="plan-input" type="number" id="layoff-3" min="0" value="0" /></td>
+              <td id="pnw-3">—</td>
+              <td id="pprod-3">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <input type="text" id="plan-sid" placeholder="Student ID" maxlength="20" oninput="planSidInput(this)"
+          style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:.9rem;width:140px" />
+        <input type="text" id="plan-name" placeholder="Name" maxlength="40"
+          style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:.9rem;width:140px" />
+        <button class="btn btn-primary" onclick="submitStudentPlan()">📤 Submit</button>
+        <span id="plan-attempts" style="font-size:.84rem"></span>
+        <span id="plan-warn" style="color:#dc2626;font-size:.84rem"></span>
+      </div>
+      <div id="plan-msg" style="display:none;margin-top:8px"></div>
+    </div>
+
+    <!-- Results — hidden until calculated -->
+    <div id="plan-results" style="display:none">
+
+      <div class="three-col">
+        <div class="metric-box">
+          <div class="metric-label">Your Total Cost</div>
+          <div class="metric-value" id="plan-total-cost">—</div>
+          <div class="metric-sub">Year 4 (4 quarters)</div>
+        </div>
+        <div class="metric-box" id="plan-lp-box">
+          <div class="metric-label">LP Optimal Cost</div>
+          <div class="metric-value" id="plan-lp-cost">—</div>
+          <div class="metric-sub">benchmark (computer-solved)</div>
+        </div>
+        <div class="metric-box" id="plan-gap-box">
+          <div class="metric-label">Gap vs LP Optimal</div>
+          <div class="metric-value" id="plan-gap">—</div>
+          <div class="metric-sub">lower = better decision</div>
+        </div>
+      </div>
+
+      <div class="card" id="plan-detail-card">
+        <h2>Production Plan</h2>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Actual Demand</th>
+                <th>Workers</th>
+                <th>Hired</th>
+                <th>Laid Off</th>
+                <th>Production</th>
+                <th>Inventory</th>
+                <th>Backlog</th>
+                <th>Period Cost</th>
+              </tr>
+            </thead>
+            <tbody id="plan-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="plan-chart-card">
+        <h2>Cost Breakdown by Period</h2>
+        <div class="chart-wrap"><canvas id="plan-canvas"></canvas></div>
+      </div>
+
+    </div>
+
+    <!-- hidden: keep combined-mad for leaderboard -->
+    <span id="combined-mad" style="display:none">—</span>
+
+  </div>
+
+  <!-- ═══════════════════════════════ LEADERBOARD ══════════════════════════════ -->
+  <div id="tab-leaderboard" class="tab-content">
+
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <h2 style="margin:0">🏆 Rankings</h2>
+        <button class="btn" onclick="loadLeaderboard()"
+          style="font-size:.82rem;padding:6px 14px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;color:#475569">↻
+          Refresh</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:center">Rank</th>
+              <th>Name</th>
+              <th>Student ID</th>
+              <th>Total Cost</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="lb-table-body">
+            <tr>
+              <td colspan="6" style="text-align:center;color:#64748b">Loading…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════ COMMENTS ═════════════════════════════════ -->
+  <div id="tab-comments" class="tab-content">
+
+    <div class="card">
+      <h2>💬 Leave a Comment</h2>
+      <p style="color:#64748b;font-size:.84rem;margin-bottom:12px">
+        이름을 비워두면 <strong>익명</strong>으로 등록됩니다.
+      </p>
+      <div id="cmt-msg" style="display:none"></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <input type="text" id="cmt-name" placeholder="이름 (선택 — 비워두면 익명)" maxlength="40"
+          style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:.9rem" />
+        <textarea id="cmt-text" placeholder="코멘트를 입력하세요…" maxlength="500" rows="4"
+          style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:.9rem;resize:vertical"></textarea>
+        <div style="display:flex;justify-content:flex-end">
+          <button class="btn btn-primary" onclick="submitComment()">등록</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📝 Comments</h2>
+      <div id="cmt-list" style="display:flex;flex-direction:column;gap:12px">
+        <p style="color:#64748b;text-align:center">Loading…</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════ LOADING OVERLAY ═════════════════════════ -->
+  <div id="loading-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);align-items:center;justify-content:center;z-index:9999">
+    <div style="text-align:center;color:#fff">
+      <div
+        style="width:48px;height:48px;border:5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px">
+      </div>
+      <p style="font-size:14px;font-weight:600">Recording your submission…</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px">Please wait</p>
+    </div>
+  </div>
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <!-- ═══════════════════════════════ SUBMIT CONFIRM MODAL ════════════════════ -->
+  <div id="submit-modal"
+    style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.7);align-items:center;justify-content:center;z-index:9999">
+    <div
+      style="background:#fff;border-radius:10px;padding:32px 36px;max-width:400px;width:92%;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+      <div style="font-size:36px;text-align:center;margin-bottom:12px">⚠️</div>
+      <h2 style="font-size:16px;color:#1e293b;margin-bottom:8px;text-align:center">Really submitting?</h2>
+      <p id="submit-modal-msg"
+        style="font-size:13px;color:#475569;text-align:center;line-height:1.7;margin-bottom:20px"></p>
+      <div style="display:flex;gap:10px">
+        <button onclick="document.getElementById('submit-modal').style.display='none'"
+          style="flex:1;padding:11px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;cursor:pointer;background:#f8fafc;color:#475569">Cancel</button>
+        <button id="submit-modal-yes" onclick="_confirmSubmit()"
+          style="flex:2;padding:11px;background:#1e40af;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Yes,
+          Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ LOCK MODAL ═══════════════════════════════ -->
+  <div id="lock-modal"
+    style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);align-items:center;justify-content:center;z-index:9999">
+    <div
+      style="background:#fff;border-radius:10px;padding:36px 40px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.35)">
+      <div style="font-size:44px;margin-bottom:12px">🔒</div>
+      <h2 style="font-size:16px;margin-bottom:8px;color:#1e293b">Homework In Progress</h2>
+      <p style="font-size:13px;color:#64748b;margin-bottom:20px;line-height:1.65">
+        This tab is locked until the homework deadline.<br>
+        Enter the instructor unlock code to continue.
+      </p>
+      <input id="lock-pw-input" type="password" placeholder="Unlock code"
+        style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;margin-bottom:6px;box-sizing:border-box"
+        onkeydown="if(event.key==='Enter')submitLockPassword()" />
+      <div id="lock-pw-err" style="color:#dc2626;font-size:12px;min-height:18px;margin-bottom:12px"></div>
+      <div style="display:flex;gap:10px">
+        <button onclick="document.getElementById('lock-modal').style.display='none'"
+          style="flex:1;padding:10px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;cursor:pointer;background:#f8fafc;color:#475569">Cancel</button>
+        <button onclick="submitLockPassword()"
+          style="flex:2;padding:10px;background:#1e40af;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ SCRIPTS ══════════════════════════════════ -->
+  <script src="bundle.js"></script>
+</body>
+
+</html>
