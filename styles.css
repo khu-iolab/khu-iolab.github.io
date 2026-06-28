@@ -235,6 +235,17 @@ img {
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 }
 
+/* Invisible hover bridge: covers the 4px gap between main tab and dropdown
+   so the mouse doesn't lose hover state while transiting. */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+}
+
 .nav-dropdown:hover .dropdown-menu {
     opacity: 1;
     visibility: visible;
@@ -2607,6 +2618,11 @@ img {
 
     .nav-menu .nav-dropdown.open > .nav-link::after {
         transform: rotate(180deg);
+    }
+
+    /* Disable the desktop hover-bridge pseudo-element on mobile (no hover behavior here) */
+    .dropdown-menu::before {
+        display: none;
     }
 
     /* Collapse sub-menu by default on mobile; expand when parent .open.
