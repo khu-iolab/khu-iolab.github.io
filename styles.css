@@ -149,6 +149,20 @@ img {
     transition: filter var(--transition-medium);
 }
 
+/* New wordmark logo (figures/newlogo_20260629.png) — replaces .logo-icon + .logo-name spans */
+.logo-mark {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: filter var(--transition-medium);
+}
+.navbar:not(.scrolled) .logo-mark {
+    /* Over dark Spline hero, force the navy PNG to render white */
+    filter: brightness(0) invert(1);
+}
+/* footer is light bg in v2.0 → no filter, native navy reads correctly */
+
 .logo-text {
     color: white;
     transition: color var(--transition-medium);

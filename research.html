@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>연구분야 - IO LAB</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/svg+xml" href="figures/logo.svg">
+    <link rel="icon" type="image/png" href="figures/newlogo_20260629.png">
     <style>
         .nav-link { color: var(--text-secondary) !important; }
         .nav-link:hover { color: var(--text-primary) !important; }
@@ -19,8 +19,9 @@
         .back-link:hover { transform: translateX(-3px); }
         .back-link svg { width: 14px; height: 14px; }
 
+        /* ── Tabs ── */
         .research-tabs {
-            display: flex; gap: 0; margin-bottom: 40px;
+            display: flex; gap: 0; margin-bottom: 36px;
             border-bottom: 1px solid var(--border-color);
         }
         .research-tab {
@@ -36,103 +37,236 @@
         .research-panel { display: none; }
         .research-panel.active { display: block; }
 
-        .research-detail {
+        /* ── Body: 2-column grid ── */
+        .research-body {
             display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
         }
-        .research-detail-left { }
-        .research-detail-left h2 {
-            font-size: 1.8rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;
+        .research-body-text h2 {
+            font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;
         }
-        #tab-logistics .research-detail-left h2  { color: #2563eb; }
-        #tab-network  .research-detail-left h2   { color: #00a882; }
-        #tab-production .research-detail-left h2 { color: #e07820; }
-        #tab-nextgen .research-detail-left h2    { color: #7c3aed; }
-        .research-detail-left p {
-            font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;
+        #tab-logistics  .research-body-text h2 { color: #2563eb; }
+        #tab-network    .research-body-text h2 { color: #00a882; }
+        #tab-production .research-body-text h2 { color: #e07820; }
+        #tab-nextgen    .research-body-text h2 { color: #7c3aed; }
+        .res-desc {
+            font-size: 0.93rem; color: var(--text-secondary); line-height: 1.82; margin-bottom: 14px;
         }
-        .research-detail-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+
+        /* ── Sub-topic cards ── */
+        .res-intro {
+            font-size: 0.93rem; color: var(--text-secondary); line-height: 1.78; margin-bottom: 18px;
+        }
+        .research-topics { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .res-topic {
+            padding: 11px 14px; border-radius: 8px;
+            border-left: 3px solid transparent;
+        }
+        #tab-logistics  .res-topic { border-left-color: #2563eb; background: rgba(59,130,246,.045); }
+        #tab-network    .res-topic { border-left-color: #00a882; background: rgba(0,168,130,.045); }
+        #tab-production .res-topic { border-left-color: #e07820; background: rgba(224,120,32,.045); }
+        #tab-nextgen    .res-topic { border-left-color: #7c3aed; background: rgba(124,58,237,.045); }
+        .res-topic-head {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 5px;
+        }
+        .res-topic-icon {
+            width: 22px; height: 22px; border-radius: 5px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; flex-shrink: 0; line-height: 1;
+        }
+        #tab-logistics  .res-topic-icon { background: rgba(59,130,246,.12); }
+        #tab-network    .res-topic-icon { background: rgba(0,168,130,.12); }
+        #tab-production .res-topic-icon { background: rgba(224,120,32,.12); }
+        #tab-nextgen    .res-topic-icon { background: rgba(124,58,237,.12); }
+        .res-topic-title {
+            font-size: 0.87rem; font-weight: 700; color: var(--text-primary);
+        }
+        .res-topic-desc {
+            font-size: 0.82rem; color: var(--text-secondary); line-height: 1.72; margin: 0;
+        }
+
+        /* ── Tags ── */
+        .research-detail-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
         .research-detail-tags span {
-            font-size: 0.76rem; padding: 4px 12px;
-            border-radius: 20px;
+            font-size: 0.74rem; padding: 3px 11px; border-radius: 20px;
         }
-        .research-detail-tags.tags-logistics span {
-            background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3);
-            color: #2563eb;
+        .tags-logistics span  { background:rgba(59,130,246,.1);  border:1px solid rgba(59,130,246,.28);  color:#2563eb; }
+        .tags-network span    { background:rgba(0,212,170,.1);    border:1px solid rgba(0,212,170,.28);   color:#00a882; }
+        .tags-production span { background:rgba(251,146,60,.1);   border:1px solid rgba(251,146,60,.28);  color:#e07820; }
+        .tags-nextgen span    { background:rgba(139,92,246,.1);   border:1px solid rgba(139,92,246,.28);  color:#7c3aed; }
+
+        /* ── Figure / sim frame ── */
+        .research-sim-wrap {
+            width: 100%; border-radius: 10px; overflow: hidden;
+            border: 1px solid var(--border-color); background: var(--bg-primary);
         }
-        .research-detail-tags.tags-network span {
-            background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.3);
-            color: #00a882;
+        .research-sim-wrap iframe {
+            width: 100%; height: 380px; display: block; border: none;
         }
-        .research-detail-tags.tags-production span {
-            background: rgba(251,146,60,0.12); border: 1px solid rgba(251,146,60,0.3);
-            color: #e07820;
+        .research-sim-wrap .research-animation {
+            width: 100%; aspect-ratio: 16 / 9; display: block; object-fit: cover;
         }
-        .research-detail-tags.tags-nextgen span {
-            background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.3);
-            color: #7c3aed;
+        .research-app-line {
+            margin-top: 10px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;
         }
-        .research-detail-right { display: flex; flex-direction: column; gap: 16px; }
-        .research-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .research-img-grid.single { grid-template-columns: 1fr; }
-        .research-img-grid img, .research-img-grid video {
-            width: 100%; height: 220px; border-radius: 12px;
-            border: 1px solid var(--border-color); object-fit: contain;
-            background: var(--bg-card);
+        .app-badge {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
+            text-transform: uppercase; color: var(--text-secondary); margin-right: 6px;
         }
-        .research-img-grid.single img, .research-img-grid.single video {
-            height: auto; object-fit: contain;
-        }
-        .research-img-full img, .research-img-full video {
-            width: 100%; height: 220px; border-radius: 12px;
-            border: 1px solid var(--border-color); object-fit: contain;
-            background: var(--bg-card);
-        }
-        .research-img-grid img, .research-img-full img, .research-img-grid.single img {
-            cursor: zoom-in;
-        }
-        #lightbox {
-            display: none; position: fixed; inset: 0; z-index: 9999;
-            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
-        }
-        #lightbox.open { display: flex; }
-        #lightbox img {
-            max-width: 90vw; max-height: 90vh;
-            object-fit: contain; border-radius: 8px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-        }
-        #lightbox-close {
-            position: absolute; top: 20px; right: 28px;
-            font-size: 2rem; color: #fff; cursor: pointer;
-            line-height: 1; background: none; border: none; opacity: 0.8;
-        }
-        #lightbox-close:hover { opacity: 1; }
+
+        /* ── Publications ── */
         .research-pubs {
-            margin-top: 36px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 24px;
+            margin-top: 36px; border-top: 1px solid var(--border-color); padding-top: 24px;
         }
         .research-pubs h4 {
             font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--accent-primary);
-            margin-bottom: 14px;
+            text-transform: uppercase; color: var(--accent-primary); margin-bottom: 14px;
         }
         .research-pubs ol {
-            margin: 0; padding-left: 18px;
-            display: flex; flex-direction: column; gap: 8px;
+            margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px;
         }
-        .research-pubs li {
-            font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;
-        }
+        .research-pubs li { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
         .research-pubs li em { color: var(--text-muted); }
-        .research-coming-soon {
-            display: flex; align-items: center; justify-content: center;
-            height: 200px; border-radius: 12px; border: 2px dashed var(--border-color);
-            color: var(--text-muted); font-size: 0.85rem;
+
+        /* ── Paper Graphical Abstracts ── */
+        .paper-ga-gallery {
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--bg-primary);
+        }
+        .paper-ga-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, #fff, var(--bg-secondary));
+        }
+        .paper-ga-heading {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+        .paper-ga-kicker {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+        }
+        .paper-ga-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        .paper-ga-open {
+            flex-shrink: 0;
+            color: var(--accent-primary);
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-decoration: none;
+            line-height: 1.4;
+        }
+        .paper-ga-open:hover { text-decoration: underline; }
+        .paper-ga-feature { margin: 0; }
+        .paper-ga-canvas {
+            height: clamp(230px, 32vw, 360px);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+        .paper-ga-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .paper-ga-caption {
+            border-top: 1px solid var(--border-color);
+            padding: 10px 14px 12px;
+            background: var(--bg-primary);
+        }
+        .paper-ga-caption strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.84rem;
+            line-height: 1.45;
+            margin-bottom: 3px;
+        }
+        .paper-ga-caption span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.74rem;
+            line-height: 1.4;
+        }
+        .paper-ga-thumbs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+            gap: 8px;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+        .paper-ga-thumb {
+            min-width: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px;
+            background: #fff;
+            color: var(--text-secondary);
+            cursor: pointer;
+            text-align: left;
+            transition: border-color .2s, box-shadow .2s, transform .2s;
+        }
+        .paper-ga-thumb:hover,
+        .paper-ga-thumb.active {
+            border-color: var(--accent-primary);
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+        }
+        .paper-ga-thumb:focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+        .paper-ga-thumb img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+            border-radius: 4px;
+            background: #fff;
+            margin-bottom: 5px;
+        }
+        .paper-ga-thumb span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.68rem;
+            font-weight: 700;
+            line-height: 1.35;
         }
 
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .research-detail { grid-template-columns: 1fr; }
+            .research-body { grid-template-columns: 1fr; }
             .research-tabs { overflow-x: auto; }
+            .paper-ga-header { flex-direction: column; gap: 8px; }
+            .paper-ga-open { align-self: flex-start; }
+            .paper-ga-canvas { height: 260px; padding: 8px; }
+            .paper-ga-thumbs {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x proximity;
+            }
+            .paper-ga-thumb {
+                flex: 0 0 116px;
+                scroll-snap-align: start;
+            }
         }
     </style>
 </head>
@@ -142,8 +276,7 @@
     <nav class="navbar scrolled">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="figures/logo.svg" alt="IO LAB Logo" class="logo-icon">
-                <span class="logo-name"><span class="logo-text">IO</span><span class="logo-sep">-</span><span class="logo-accent">LAB</span></span>
+                <img src="figures/newlogo_20260629.png" alt="IO-LAB" class="logo-mark">
             </a>
             <ul class="nav-menu">
                 <li class="nav-dropdown">
@@ -178,7 +311,6 @@
                         <li><a href="projects.html#completed" data-i18n="nav.proj.completed">완료한 과제</a></li>
                     </ul>
                 </li>
-                
                 <li class="nav-dropdown">
                     <a href="learningmaterials/index.html" class="nav-link" data-i18n="nav.courses">교육자료</a>
                     <ul class="dropdown-menu">
@@ -197,7 +329,7 @@
                     </ul>
                 </li>
             </ul>
-                        <div class="lang-toggle">
+            <div class="lang-toggle">
                 <span class="lang-option" data-lang="en" onclick="toggleLang('en')">EN</span>
                 <span class="lang-divider">|</span>
                 <span class="lang-option" data-lang="ko" onclick="toggleLang('ko')">KO</span>
@@ -218,7 +350,7 @@
                 홈으로
             </a>
 
-            <!-- 탭 -->
+            <!-- Tabs -->
             <div class="research-tabs" id="research-tabs">
                 <button class="research-tab active" data-tab="logistics" data-i18n="nav.research.logistics">물류 최적화</button>
                 <button class="research-tab" data-tab="network" data-i18n="nav.research.network">네트워크 최적화</button>
@@ -226,12 +358,37 @@
                 <button class="research-tab" data-tab="nextgen" data-i18n="nav.research.nextgen">차세대 최적화</button>
             </div>
 
-            <!-- 물류 최적화 -->
+            <!-- ── 물류 최적화 ── -->
             <div class="research-panel active" id="tab-logistics">
-                <div class="research-detail">
-                    <div class="research-detail-left">
+                <div class="research-body">
+                    <div class="research-body-text">
                         <h2 data-i18n="nav.research.logistics">물류 최적화</h2>
-                        <p data-i18n="research.logistics.desc" class="research-logistics-desc">도시 물류, <strong>드론 배송</strong>, <strong>지하 물류 네트워크</strong>, <strong>비행 창고(Flying Warehouse)</strong> 등 복잡한 물류 시스템에서 최적 운영 전략을 연구합니다. <strong>차량-드론 복합 배송</strong>, 다중 비행 수준(multi-flight level) 드론 경로 설계, 지하 운송망과 연계된 도시 물류 최적화 등을 다룹니다.</p>
+                        <p class="res-intro" data-i18n="research.logistics.intro">라스트마일 배송 비용(전체의 30~40%)을 절감하기 위해 드론 배송, 지하 물류 네트워크, 시뮬레이션 기반 운영 최적화 세 축을 연구합니다.</p>
+
+                        <div class="research-topics">
+                            <div class="res-topic">
+                                <div class="res-topic-head">
+                                    <span class="res-topic-icon">✈</span>
+                                    <span class="res-topic-title" data-i18n="research.logistics.topic1.title">드론 배송 최적화</span>
+                                </div>
+                                <p class="res-topic-desc" data-i18n="research.logistics.topic1.desc">트럭-드론 복합 경로(FSTSP/mFSTSP), 비행 창고(Flying Warehouse) 기반 보충 스케줄링, 다중 비행 수준(FL1 20m / FL2 60m / FL3 120m) 드론 경로 최적화를 연구합니다. MILP·ALNS·ML 에너지 모델을 결합해 페이로드-에너지 의존성과 No-fly zone 제약을 현실적으로 다룹니다.</p>
+                            </div>
+                            <div class="res-topic">
+                                <div class="res-topic-head">
+                                    <span class="res-topic-icon">⬇</span>
+                                    <span class="res-topic-title" data-i18n="research.logistics.topic2.title">지하 물류 네트워크</span>
+                                </div>
+                                <p class="res-topic-desc" data-i18n="research.logistics.topic2.desc">도심 지하를 활용한 화물 캡슐·AGV 터널망과 지상 라스트마일 구간을 통합 설계합니다. 지하-지상 복합 환승 거점 배치, 용량 제약 하의 경로 최적화, 탄소 배출 및 도로 혼잡 비용 동시 절감을 목표로 합니다.</p>
+                            </div>
+                            <div class="res-topic">
+                                <div class="res-topic-head">
+                                    <span class="res-topic-icon">⚙</span>
+                                    <span class="res-topic-title" data-i18n="research.logistics.topic3.title">운영 최적화 &amp; 시뮬레이션</span>
+                                </div>
+                                <p class="res-topic-desc" data-i18n="research.logistics.topic3.desc">VRP 및 변형 문제(CVRP, PDPTW 등)를 수리 모델로 정식화하고 ALNS·GRASP 메타휴리스틱으로 대규모 인스턴스를 해결합니다. 시뮬레이션 기반 검증으로 수요 불확실성·차량 고장·교통 혼잡 시나리오를 평가하여 실 운영에 바로 적용 가능한 알고리즘을 제공합니다.</p>
+                            </div>
+                        </div>
+
                         <div class="research-detail-tags tags-logistics">
                             <span data-i18n="research.logistics.tag1">차량 경로 (VRP)</span>
                             <span data-i18n="research.logistics.tag2">드론 배송</span>
@@ -240,14 +397,76 @@
                             <span data-i18n="research.logistics.tag5">지하 물류</span>
                             <span data-i18n="research.logistics.tag6">공급망 설계</span>
                         </div>
+                        <section class="paper-ga-gallery" aria-labelledby="ga-logistics-heading">
+                            <div class="paper-ga-header">
+                                <div class="paper-ga-heading">
+                                    <span class="paper-ga-kicker" id="ga-logistics-heading" data-i18n="research.ga.label">그래픽 초록</span>
+                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
+                                </div>
+                                <a class="paper-ga-open" href="figures/about/LogisticsOptimization/ga-underground-vrp-paper-schematic.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
+                            </div>
+                            <figure class="paper-ga-feature">
+                                <div class="paper-ga-canvas">
+                                    <img class="paper-ga-image" src="figures/about/LogisticsOptimization/ga-underground-vrp-paper-schematic.png" alt="지하 운송과 지상 라스트마일 VRP 경로를 결합한 도시 물류 그래픽 초록" loading="lazy">
+                                </div>
+                                <figcaption class="paper-ga-caption">
+                                    <strong data-i18n="research.ga.logistics.ugvrp.title">지하 운송 연계 VRP를 위한 생성형 그래픽 초록</strong>
+                                    <span data-i18n="research.ga.logistics.ugvrp.meta">IEEE Transactions on Intelligent Transportation Systems, 2025</span>
+                                </figcaption>
+                            </figure>
+                            <div class="paper-ga-thumbs" aria-label="Logistics graphical abstract choices">
+                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show underground VRP graphical abstract"
+                                    data-ga-src="figures/about/LogisticsOptimization/ga-underground-vrp-paper-schematic.png"
+                                    data-ga-src-en="figures/about/LogisticsOptimization/ga-underground-vrp-paper-schematic.png"
+                                    data-ga-src-ko="figures/about/LogisticsOptimization/ga-underground-vrp-paper-schematic-ko.png"
+                                    data-ga-title-key="research.ga.logistics.ugvrp.title"
+                                    data-ga-meta-key="research.ga.logistics.ugvrp.meta"
+                                    data-ga-alt-key="research.ga.logistics.ugvrp.alt"
+                                    data-ga-label-key="research.ga.logistics.ugvrp.short">
+                                    <img src="figures/about/LogisticsOptimization/ga-underground-vrp-paper-schematic.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.logistics.ugvrp.short">지하 VRP</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show flight-level routing figure"
+                                    data-ga-src="figures/about/LogisticsOptimization/L1.png"
+                                    data-ga-title-key="research.ga.logistics.l1.title"
+                                    data-ga-meta-key="research.ga.logistics.l1.meta"
+                                    data-ga-alt-key="research.ga.logistics.l1.alt"
+                                    data-ga-label-key="research.ga.logistics.l1.short">
+                                    <img src="figures/about/LogisticsOptimization/L1.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.logistics.l1.short">비행고도</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show obstacle-map figure"
+                                    data-ga-src="figures/about/LogisticsOptimization/L2.png"
+                                    data-ga-title-key="research.ga.logistics.l2.title"
+                                    data-ga-meta-key="research.ga.logistics.l2.meta"
+                                    data-ga-alt-key="research.ga.logistics.l2.alt"
+                                    data-ga-label-key="research.ga.logistics.l2.short">
+                                    <img src="figures/about/LogisticsOptimization/L2.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.logistics.l2.short">장애물 지도</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show city simulation figure"
+                                    data-ga-src="figures/about/LogisticsOptimization/11_converted.png"
+                                    data-ga-title-key="research.ga.logistics.city.title"
+                                    data-ga-meta-key="research.ga.logistics.city.meta"
+                                    data-ga-alt-key="research.ga.logistics.city.alt"
+                                    data-ga-label-key="research.ga.logistics.city.short">
+                                    <img src="figures/about/LogisticsOptimization/11_converted.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.logistics.city.short">도시 시뮬레이션</span>
+                                </button>
+                            </div>
+                        </section>
                     </div>
-                    <div class="research-detail-right">
-                        <div class="research-img-grid">
-                            <img src="figures/about/LogisticsOptimization/multilevel.gif" alt="Multi-level Drone Delivery">
-                            <img src="figures/about/LogisticsOptimization/L1.png" alt="Logistics Optimization 1">
+                    <div class="research-body-fig">
+                        <div class="research-sim-wrap">
+                            <iframe src="figures/about/LogisticsOptimization/sim3d_city.html" scrolling="no" allow="autoplay"></iframe>
                         </div>
+                        <p class="research-app-line">
+                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
+                            <span data-i18n="research.logistics.app">Amazon · UPS · DHL · 스마트시티 플랫폼</span>
+                        </p>
                     </div>
                 </div>
+
                 <div class="research-pubs">
                     <h4 data-i18n="research.pubs.label">관련 논문</h4>
                     <ol>
@@ -264,12 +483,13 @@
                 </div>
             </div>
 
-            <!-- 네트워크 최적화 -->
+            <!-- ── 네트워크 최적화 ── -->
             <div class="research-panel" id="tab-network">
-                <div class="research-detail">
-                    <div class="research-detail-left">
+                <div class="research-body">
+                    <div class="research-body-text">
                         <h2 data-i18n="nav.research.network">네트워크 최적화</h2>
-                        <p data-i18n="research.network.desc"><strong>기후변화 불확실성</strong>을 고려한 공급망(supply chain network) 설계 및 적응형 운영 전략, 시뮬레이션 기반 <strong>장애 전파·복구 전략</strong>과 <strong>네트워크 회복력(resilience)</strong> 분석, <strong>V2G 기반 EV 물류·배전망 통합 운영</strong> 등 복잡한 네트워크 시스템의 설계·운영·강건성을 연구합니다.</p>
+                        <p class="res-desc" data-i18n="research.network.desc1">기후변화, 공급망 붕괴, EV 대중화 등 복합 리스크가 글로벌 네트워크를 위협하는 시대에, 설계 단계부터 회복력(resilience)을 내재화하는 최적화 방법론을 개발합니다. 식품 공급망, 군사 물류, 스마트그리드 등 임무 중요(mission-critical) 분야에 직접 적용됩니다.</p>
+                        <p class="res-desc" data-i18n="research.network.desc2">기후 시나리오 기반 적응형 공급망 설계(시뮬레이션-최적화), 상호의존 시스템에서의 장애 전파·복구 전략 모델링, V2G/G2V 통합 EV 물류 스케줄링과 배전망 용량 확장 최적화를 연구합니다. 확률적 프로그래밍, 몬테카를로 시뮬레이션, 강건 최적화가 핵심 방법론입니다.</p>
                         <div class="research-detail-tags tags-network">
                             <span data-i18n="research.network.tag1">공급망 네트워크</span>
                             <span data-i18n="research.network.tag2">기후변화 대응</span>
@@ -280,14 +500,65 @@
                             <span data-i18n="research.network.tag6">EV 물류</span>
                             <span data-i18n="research.network.tag7">배전망 최적화</span>
                         </div>
+                        <section class="paper-ga-gallery" aria-labelledby="ga-network-heading">
+                            <div class="paper-ga-header">
+                                <div class="paper-ga-heading">
+                                    <span class="paper-ga-kicker" id="ga-network-heading" data-i18n="research.ga.label">그래픽 초록</span>
+                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
+                                </div>
+                                <a class="paper-ga-open" href="figures/about/NetworkOptimization/ga-network-resilience-generated.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
+                            </div>
+                            <figure class="paper-ga-feature">
+                                <div class="paper-ga-canvas">
+                                    <img class="paper-ga-image" src="figures/about/NetworkOptimization/ga-network-resilience-generated.png" alt="장애 전파와 복구 경로를 포함한 회복탄력적 네트워크 최적화 그래픽 초록" loading="lazy">
+                                </div>
+                                <figcaption class="paper-ga-caption">
+                                    <strong data-i18n="research.ga.network.generated.title">회복탄력적 네트워크 최적화를 위한 생성형 그래픽 초록</strong>
+                                    <span data-i18n="research.ga.network.generated.meta">Network resilience and smart-grid logistics research visual</span>
+                                </figcaption>
+                            </figure>
+                            <div class="paper-ga-thumbs" aria-label="Network graphical abstract choices">
+                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show generated network resilience graphical abstract"
+                                    data-ga-src="figures/about/NetworkOptimization/ga-network-resilience-generated.png"
+                                    data-ga-title-key="research.ga.network.generated.title"
+                                    data-ga-meta-key="research.ga.network.generated.meta"
+                                    data-ga-alt-key="research.ga.network.generated.alt"
+                                    data-ga-label-key="research.ga.network.generated.short">
+                                    <img src="figures/about/NetworkOptimization/ga-network-resilience-generated.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.network.generated.short">회복탄력성</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show supply-chain resilience figure"
+                                    data-ga-src="figures/about/NetworkOptimization/NO1.png"
+                                    data-ga-title-key="research.ga.network.no1.title"
+                                    data-ga-meta-key="research.ga.network.no1.meta"
+                                    data-ga-alt-key="research.ga.network.no1.alt"
+                                    data-ga-label-key="research.ga.network.no1.short">
+                                    <img src="figures/about/NetworkOptimization/NO1.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.network.no1.short">공급망</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show grid planning figure"
+                                    data-ga-src="figures/about/NetworkOptimization/NO2.png"
+                                    data-ga-title-key="research.ga.network.no2.title"
+                                    data-ga-meta-key="research.ga.network.no2.meta"
+                                    data-ga-alt-key="research.ga.network.no2.alt"
+                                    data-ga-label-key="research.ga.network.no2.short">
+                                    <img src="figures/about/NetworkOptimization/NO2.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.network.no2.short">전력망 계획</span>
+                                </button>
+                            </div>
+                        </section>
                     </div>
-                    <div class="research-detail-right">
-                        <div class="research-img-grid">
-                            <img src="figures/about/NetworkOptimization/NO1.png" alt="Network Optimization 1" style="height:300px">
-                            <img src="figures/about/NetworkOptimization/NO2.png" alt="Network Optimization 2" style="height:300px">
+                    <div class="research-body-fig">
+                        <div class="research-sim-wrap">
+                            <iframe src="figures/about/NetworkOptimization/sim3d_network.html" scrolling="no" allow="autoplay"></iframe>
                         </div>
+                        <p class="research-app-line">
+                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
+                            <span data-i18n="research.network.app">식품 공급망 · 군사 물류 · 스마트그리드 · EV 인프라</span>
+                        </p>
                     </div>
                 </div>
+
                 <div class="research-pubs">
                     <h4 data-i18n="research.pubs.label">관련 논문</h4>
                     <ol>
@@ -299,12 +570,13 @@
                 </div>
             </div>
 
-            <!-- 생산 최적화 -->
+            <!-- ── 생산 최적화 ── -->
             <div class="research-panel" id="tab-production">
-                <div class="research-detail">
-                    <div class="research-detail-left">
+                <div class="research-body">
+                    <div class="research-body-text">
                         <h2 data-i18n="nav.research.production">생산 최적화</h2>
-                        <p data-i18n="research.production.desc"><strong>반도체 팹</strong> 등 첨단 제조 시설의 <strong>자동화 물류 시스템(OHT, AGV, AMR)</strong> 배차·<strong>경로 최적화</strong>·교통 제어 전략을 <strong>시뮬레이션 기반</strong>으로 비교·최적화하고, <strong>열간 단조·스탬핑</strong> 등 제조 공정의 파라미터 최적화와 <strong>머신러닝 통합 FEM 시뮬레이션</strong>을 결합하여 생산 처리량과 효율을 극대화하는 연구를 수행합니다.</p>
+                        <p class="res-desc" data-i18n="research.production.desc1">반도체 팹 내 OHT·AGV 배차 최적화는 생산 처리량을 5~15% 향상시키며, FEM 시뮬레이션과 머신러닝을 결합한 공정 최적화는 열간 단조·딥드로잉의 불량률을 대폭 줄입니다. 삼성·SK하이닉스 등 첨단 제조 현장의 스마트팩토리 전환에 직결되는 연구입니다.</p>
+                        <p class="res-desc" data-i18n="research.production.desc2">반도체 팹 자동화 물류(OHT, AGV, AMR)의 배차·경로·교통 제어를 이산사건 시뮬레이션으로 최적화하고, DNN-GA-MCS 프레임워크로 블랭크홀더 하중·온도·변형률 파라미터를 튜닝합니다. 불안정도 맵(instability map)과 강화학습을 결합한 열간 단조 공정 설계도 핵심 연구 주제입니다.</p>
                         <div class="research-detail-tags tags-production">
                             <span data-i18n="research.production.tag1">열간 단조</span>
                             <span data-i18n="research.production.tag2">스탬핑</span>
@@ -313,16 +585,56 @@
                             <span data-i18n="research.production.tag5">품질 제어</span>
                             <span data-i18n="research.production.tag6">지능형 제조</span>
                         </div>
+                        <section class="paper-ga-gallery" aria-labelledby="ga-production-heading">
+                            <div class="paper-ga-header">
+                                <div class="paper-ga-heading">
+                                    <span class="paper-ga-kicker" id="ga-production-heading" data-i18n="research.ga.label">그래픽 초록</span>
+                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
+                                </div>
+                                <a class="paper-ga-open" href="figures/about/ProductionOptimizaiton/ga-production-manufacturing-generated.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
+                            </div>
+                            <figure class="paper-ga-feature">
+                                <div class="paper-ga-canvas">
+                                    <img class="paper-ga-image" src="figures/about/ProductionOptimizaiton/ga-production-manufacturing-generated.png" alt="반도체 팹 물류, 디지털 트윈, FEM 및 머신러닝 공정 최적화를 결합한 그래픽 초록" loading="lazy">
+                                </div>
+                                <figcaption class="paper-ga-caption">
+                                    <strong data-i18n="research.ga.production.generated.title">제조 및 생산 최적화를 위한 생성형 그래픽 초록</strong>
+                                    <span data-i18n="research.ga.production.generated.meta">Fab logistics, digital twin, FEM, and ML optimization research visual</span>
+                                </figcaption>
+                            </figure>
+                            <div class="paper-ga-thumbs" aria-label="Production graphical abstract choices">
+                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show generated manufacturing optimization graphical abstract"
+                                    data-ga-src="figures/about/ProductionOptimizaiton/ga-production-manufacturing-generated.png"
+                                    data-ga-title-key="research.ga.production.generated.title"
+                                    data-ga-meta-key="research.ga.production.generated.meta"
+                                    data-ga-alt-key="research.ga.production.generated.alt"
+                                    data-ga-label-key="research.ga.production.generated.short">
+                                    <img src="figures/about/ProductionOptimizaiton/ga-production-manufacturing-generated.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.production.generated.short">제조 최적화</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show process optimization figure"
+                                    data-ga-src="figures/about/ProductionOptimizaiton/PO2.png"
+                                    data-ga-title-key="research.ga.production.po2.title"
+                                    data-ga-meta-key="research.ga.production.po2.meta"
+                                    data-ga-alt-key="research.ga.production.po2.alt"
+                                    data-ga-label-key="research.ga.production.po2.short">
+                                    <img src="figures/about/ProductionOptimizaiton/PO2.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.production.po2.short">공정 모델</span>
+                                </button>
+                            </div>
+                        </section>
                     </div>
-                    <div class="research-detail-right">
-                        <div class="research-img-full">
-                            <img src="figures/about/ProductionOptimizaiton/PO2.gif" alt="Semiconductor Fab OHT Simulation" style="height:160px">
+                    <div class="research-body-fig">
+                        <div class="research-sim-wrap">
+                            <img class="research-animation" src="figures/about/ProductionOptimizaiton/production-optimization-animation.gif?v=20260714-fast1" alt="Semiconductor fab logistics and production optimization animation" loading="lazy">
                         </div>
-                        <div class="research-img-grid single">
-                            <img src="figures/about/ProductionOptimizaiton/PO2.png" alt="Production Optimization 2" style="height:160px">
-                        </div>
+                        <p class="research-app-line">
+                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
+                            <span data-i18n="research.production.app">반도체 팹 · 스마트팩토리 · 자동차 부품 제조</span>
+                        </p>
                     </div>
                 </div>
+
                 <div class="research-pubs">
                     <h4 data-i18n="research.pubs.label">관련 논문</h4>
                     <ol>
@@ -335,12 +647,13 @@
                 </div>
             </div>
 
-            <!-- 차세대 최적화 -->
+            <!-- ── 차세대 최적화 ── -->
             <div class="research-panel" id="tab-nextgen">
-                <div class="research-detail">
-                    <div class="research-detail-left">
+                <div class="research-body">
+                    <div class="research-body-text">
                         <h2 data-i18n="nav.research.nextgen">차세대 최적화</h2>
-                        <p data-i18n="research.nextgen.desc"><strong>메타러닝(meta-learning)</strong>, <strong>강화학습</strong>, 신경망 기반 해법을 활용한 <strong>조합 최적화</strong> 문제 해결 및 <strong>양자 컴퓨팅(quantum computing)</strong> 기반 알고리즘 개발 등 미래 지향적 최적화 기법을 연구합니다. 인공지능과 운영과학의 융합을 통해 복잡계 문제에 도전합니다.</p>
+                        <p class="res-desc" data-i18n="research.nextgen.desc1">NP-hard 조합 최적화 문제(TSP, VRP 등)를 기존 알고리즘보다 빠르고 범용적으로 풀기 위해 메타러닝, 강화학습, 양자 컴퓨팅을 운영과학에 접목합니다. 새로운 문제 유형에 즉각 적응하는 AI 솔버는 물류, 스케줄링, 네트워크 설계 전반에서 패러다임을 바꿀 잠재력을 지닙니다.</p>
+                        <p class="res-desc" data-i18n="research.nextgen.desc2">메타러닝 기반 적응형 대규모 이웃 탐색(ALNS), 강화학습 기반 신경망 조합 최적화 해법기, QAOA 등 양자 알고리즘의 조합 최적화 적용을 연구합니다. 소규모 인스턴스에서 대규모 실문제로의 일반화 성능과 전이 학습이 핵심 연구 과제입니다.</p>
                         <div class="research-detail-tags tags-nextgen">
                             <span data-i18n="research.nextgen.tag1">메타러닝</span>
                             <span data-i18n="research.nextgen.tag2">강화학습</span>
@@ -349,13 +662,56 @@
                             <span data-i18n="research.nextgen.tag5">조합 최적화</span>
                             <span data-i18n="research.nextgen.tag6">인공지능</span>
                         </div>
+                        <section class="paper-ga-gallery" aria-labelledby="ga-nextgen-heading">
+                            <div class="paper-ga-header">
+                                <div class="paper-ga-heading">
+                                    <span class="paper-ga-kicker" id="ga-nextgen-heading" data-i18n="research.ga.label">그래픽 초록</span>
+                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
+                                </div>
+                                <a class="paper-ga-open" href="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
+                            </div>
+                            <figure class="paper-ga-feature">
+                                <div class="paper-ga-canvas">
+                                    <img class="paper-ga-image" src="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png" alt="문제 인코딩, AI 솔버, 적응형 연산자, 최적해를 연결한 차세대 최적화 그래픽 초록" loading="lazy">
+                                </div>
+                                <figcaption class="paper-ga-caption">
+                                    <strong data-i18n="research.ga.nextgen.generated.title">차세대 최적화 알고리즘을 위한 생성형 그래픽 초록</strong>
+                                    <span data-i18n="research.ga.nextgen.generated.meta">AI solver, adaptive operators, reinforcement learning, and quantum-inspired optimization visual</span>
+                                </figcaption>
+                            </figure>
+                            <div class="paper-ga-thumbs" aria-label="Next-generation graphical abstract choices">
+                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show generated advanced optimization graphical abstract"
+                                    data-ga-src="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png"
+                                    data-ga-title-key="research.ga.nextgen.generated.title"
+                                    data-ga-meta-key="research.ga.nextgen.generated.meta"
+                                    data-ga-alt-key="research.ga.nextgen.generated.alt"
+                                    data-ga-label-key="research.ga.nextgen.generated.short">
+                                    <img src="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.nextgen.generated.short">차세대 최적화</span>
+                                </button>
+                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show meta-learning operator selection figure"
+                                    data-ga-src="figures/about/NextgenOptimization/NGO1.png"
+                                    data-ga-title-key="research.ga.nextgen.ngo1.title"
+                                    data-ga-meta-key="research.ga.nextgen.ngo1.meta"
+                                    data-ga-alt-key="research.ga.nextgen.ngo1.alt"
+                                    data-ga-label-key="research.ga.nextgen.ngo1.short">
+                                    <img src="figures/about/NextgenOptimization/NGO1.png" alt="" loading="lazy">
+                                    <span data-i18n="research.ga.nextgen.ngo1.short">메타러닝</span>
+                                </button>
+                            </div>
+                        </section>
                     </div>
-                    <div class="research-detail-right">
-                        <div class="research-img-grid single">
-                            <img src="figures/about/NextgenOptimization/NGO1.png" alt="Next-Gen Optimization">
+                    <div class="research-body-fig">
+                        <div class="research-sim-wrap">
+                            <img class="research-animation" src="figures/about/NextgenOptimization/nextgen-optimization-animation.gif?v=20260714-fast1" alt="Next-generation AI optimization solver animation" loading="lazy">
                         </div>
+                        <p class="research-app-line">
+                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
+                            <span data-i18n="research.nextgen.app">물류 라우팅 · 생산 스케줄링 · 네트워크 설계</span>
+                        </p>
                     </div>
                 </div>
+
                 <div class="research-pubs">
                     <h4 data-i18n="research.pubs.label">관련 논문</h4>
                     <ol>
@@ -370,20 +726,13 @@
         </div>
     </section>
 
-    <!-- Lightbox -->
-    <div id="lightbox">
-        <button id="lightbox-close">&times;</button>
-        <img id="lightbox-img" src="" alt="">
-    </div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <a href="index.html" class="nav-logo">
-                        <img src="figures/logo.svg" alt="IO LAB Logo" class="logo-icon">
-                        <span class="logo-name"><span class="logo-text">IO</span><span class="logo-sep">-</span><span class="logo-accent">LAB</span></span>
+                        <img src="figures/newlogo_20260629.png" alt="IO-LAB" class="logo-mark">
                     </a>
                     <p>지능형 최적화 연구실<br>경희대학교</p>
                 </div>
@@ -411,7 +760,6 @@
 
     <script src="script.js"></script>
     <script src="lang.js"></script>
-    <script src="lang.js"></script>
     <script>
         const rTabs = document.querySelectorAll('.research-tab');
         const rPanels = document.querySelectorAll('.research-panel');
@@ -430,27 +778,85 @@
         });
 
         function handleHash() {
-            const map = { '#logistics': 'logistics', '#network': 'network', '#production': 'production', '#nextgen': 'nextgen' };
+            const map = { '#logistics':'logistics','#network':'network','#production':'production','#nextgen':'nextgen' };
             const tab = map[window.location.hash];
             if (tab) switchResearchTab(tab);
         }
-
         handleHash();
         window.addEventListener('hashchange', handleHash);
 
-        // Lightbox
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        document.querySelectorAll('.research-img-grid img, .research-img-full img').forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                lightbox.classList.add('open');
+        function getResearchLang() {
+            return window._currentLang || localStorage.getItem('io-lab-lang') || 'en';
+        }
+
+        function getResearchText(key) {
+            const lang = getResearchLang();
+            if (typeof translations !== 'undefined' && translations[lang] && translations[lang][key] !== undefined) {
+                return translations[lang][key];
+            }
+            if (typeof translations !== 'undefined' && translations.en && translations.en[key] !== undefined) {
+                return translations.en[key];
+            }
+            return key || '';
+        }
+
+        function getGraphicalAbstractSrc(thumb) {
+            const lang = getResearchLang();
+            const suffix = lang ? lang.charAt(0).toUpperCase() + lang.slice(1) : 'En';
+            return thumb.dataset['gaSrc' + suffix] || thumb.dataset.gaSrc;
+        }
+
+        function setI18nText(el, key) {
+            if (!el || !key) return;
+            el.setAttribute('data-i18n', key);
+            el.textContent = getResearchText(key);
+        }
+
+        function updateGraphicalAbstract(gallery, thumb) {
+            const image = gallery.querySelector('.paper-ga-image');
+            const title = gallery.querySelector('.paper-ga-caption strong');
+            const meta = gallery.querySelector('.paper-ga-caption span');
+            const openLink = gallery.querySelector('.paper-ga-open');
+            const thumbs = gallery.querySelectorAll('.paper-ga-thumb');
+
+            if (!image || !thumb) return;
+
+            const selectedSrc = getGraphicalAbstractSrc(thumb);
+            image.src = selectedSrc;
+            image.alt = getResearchText(thumb.dataset.gaAltKey);
+            if (openLink) openLink.href = selectedSrc;
+            setI18nText(title, thumb.dataset.gaTitleKey);
+            setI18nText(meta, thumb.dataset.gaMetaKey);
+
+            thumbs.forEach(btn => {
+                const isActive = btn === thumb;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', String(isActive));
+                if (btn.dataset.gaLabelKey) {
+                    btn.setAttribute('aria-label', getResearchText(btn.dataset.gaLabelKey));
+                }
+                const thumbImage = btn.querySelector('img');
+                const thumbSrc = getGraphicalAbstractSrc(btn);
+                if (thumbImage && thumbSrc) {
+                    thumbImage.src = thumbSrc;
+                }
+            });
+        }
+
+        const gaGalleries = document.querySelectorAll('.paper-ga-gallery');
+        gaGalleries.forEach(gallery => {
+            const thumbs = gallery.querySelectorAll('.paper-ga-thumb');
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('click', () => updateGraphicalAbstract(gallery, thumb));
+            });
+            updateGraphicalAbstract(gallery, gallery.querySelector('.paper-ga-thumb.active') || thumbs[0]);
+        });
+
+        document.addEventListener('io-lab-lang-change', () => {
+            gaGalleries.forEach(gallery => {
+                updateGraphicalAbstract(gallery, gallery.querySelector('.paper-ga-thumb.active'));
             });
         });
-        document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
-        lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
     </script>
 </body>
 

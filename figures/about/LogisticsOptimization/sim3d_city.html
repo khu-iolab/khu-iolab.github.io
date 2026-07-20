@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Urban Drone Routing — 3D Simulation</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#87ceeb; overflow:hidden; font-family:'Segoe UI',system-ui,sans-serif; }
+  #c { display:block; width:100vw; height:100vh; }
+  #ui {
+    position:absolute; bottom:20px; left:20px;
+    background:rgba(255,255,255,0.88); backdrop-filter:blur(10px);
+    border:1px solid rgba(0,0,0,0.1); border-radius:8px; padding:12px 16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+  }
+  .leg { display:flex; align-items:center; gap:8px; margin-bottom:5px; font-size:11px; color:#374151; }
+  .leg:last-child{margin-bottom:0;}
+  .dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  #title {
+    position:absolute; top:20px; left:20px;
+    background:rgba(255,255,255,0.88); backdrop-filter:blur(10px);
+    border:1px solid rgba(0,0,0,0.1); border-radius:8px; padding:12px 18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+  }
+  #title h3 { font-size:13px; font-weight:700; color:#1a1a25; margin-bottom:3px; }
+  #title p  { font-size:11px; color:#64748b; }
+  #hint { position:absolute; top:20px; right:20px; font-size:11px; color:#374151; text-align:right; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="title">
+  <h3>Truck–Drone Last-Mile Delivery</h3>
+  <p>Multi-level urban routing simulation · IO-LAB, Kyung Hee Univ.</p>
+</div>
+<div id="ui">
+  <div class="leg"><div class="dot" style="background:#3b82f6"></div>Truck (ground route)</div>
+  <div class="leg"><div class="dot" style="background:#f59e0b"></div>Drone FL1 — 20 m</div>
+  <div class="leg"><div class="dot" style="background:#14b8a6"></div>Drone FL2 — 60 m</div>
+  <div class="leg"><div class="dot" style="background:#ef4444"></div>Drone FL3 — 120 m</div>
+</div>
+<div id="hint">Drag · Scroll · Right-drag</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const W = window.innerWidth, H = window.innerHeight;
+const canvas = document.getElementById('c');
+
+// ── Renderer ─────────────────────────────────────────────
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+
+// ── Scene ────────────────────────────────────────────────
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb); // sky blue
+scene.fog = new THREE.Fog(0xb0d8f0, 60, 160);
+
+// ── Camera ───────────────────────────────────────────────
+const camera = new THREE.PerspectiveCamera(50, W/H, 0.1, 300);
+camera.position.set(-18, 22, 28);
+camera.lookAt(0, 0, 0);
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 2, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.minDistance = 10;
+controls.maxDistance = 80;
+controls.maxPolarAngle = Math.PI / 2.1;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.4;
+
+// ── Lights ───────────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0xd6e8ff, 0.7));
+
+const sun = new THREE.DirectionalLight(0xfffbf0, 1.4);
+sun.position.set(30, 50, 20);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { near:1, far:120, left:-40, right:40, top:40, bottom:-40 });
+scene.add(sun);
+
+const fill = new THREE.DirectionalLight(0x8bb8ff, 0.4);
+fill.position.set(-20, 10, -20);
+scene.add(fill);
+
+// ── Materials ────────────────────────────────────────────
+const roadMat   = new THREE.MeshLambertMaterial({ color:0x374151 });
+const sidewalkM = new THREE.MeshLambertMaterial({ color:0x9ca3af });
+const grassMat  = new THREE.MeshLambertMaterial({ color:0x4ade80 });
+const lineMat   = new THREE.MeshLambertMaterial({ color:0xffffff });
+const yellowMat = new THREE.MeshLambertMaterial({ color:0xfbbf24 });
+
+// ── Ground / roads ───────────────────────────────────────
+function box(w,h,d,mat,x,y,z,rx=0,ry=0) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
+  m.position.set(x,y,z); m.rotation.set(rx,ry,0);
+  m.receiveShadow = true; m.castShadow = true;
+  scene.add(m); return m;
+}
+
+// Grass base
+box(80, 0.2, 80, grassMat, 0, -0.1, 0);
+
+// Main intersection roads
+box(36, 0.25, 10, roadMat,  0, 0,  0);  // E-W
+box(10, 0.25, 36, roadMat,  0, 0,  0);  // N-S
+
+// Sidewalks
+box(36, 0.22, 2, sidewalkM,  0, 0,  6);
+box(36, 0.22, 2, sidewalkM,  0, 0, -6);
+box(2,  0.22, 36, sidewalkM,  6, 0,  0);
+box(2,  0.22, 36, sidewalkM, -6, 0,  0);
+
+// Crosswalk stripes
+for (let i = -3; i <= 3; i += 1.2) {
+  box(0.5, 0.26, 2.8, lineMat,  i, 0,  5.5);
+  box(0.5, 0.26, 2.8, lineMat,  i, 0, -5.5);
+  box(2.8, 0.26, 0.5, lineMat,  5.5, 0, i);
+  box(2.8, 0.26, 0.5, lineMat, -5.5, 0, i);
+}
+
+// Center yellow lines
+box(36, 0.27, 0.15, yellowMat, 0, 0, 0.6);
+box(36, 0.27, 0.15, yellowMat, 0, 0, -0.6);
+box(0.15, 0.27, 36, yellowMat, 0.6, 0, 0);
+box(0.15, 0.27, 36, yellowMat, -0.6, 0, 0);
+
+// ── Buildings ────────────────────────────────────────────
+const buildingColors = [0x94a3b8, 0x7a8fa3, 0x6b7f91, 0x8899a8, 0x607080];
+function building(x, z, w, h, d) {
+  const col = buildingColors[Math.floor(Math.random()*buildingColors.length)];
+  const mat = new THREE.MeshLambertMaterial({ color: col });
+  const mesh = box(w, h, d, mat, x, h/2, z);
+
+  // Windows (dark grid pattern)
+  const winMat = new THREE.MeshLambertMaterial({ color:0x1e3a5f, emissive:0x1e3a5f, emissiveIntensity:0.3 });
+  const cols = Math.floor(w/1.2), rows = Math.floor(h/2);
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const wx = x - w/2 + 0.8 + c*1.2;
+      const wy = 1.2 + r*2;
+      const wz = z + d/2 + 0.01;
+      const win = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.9, 0.05), winMat);
+      win.position.set(wx, wy, wz);
+      scene.add(win);
+    }
+  }
+  return mesh;
+}
+
+// 4 city quadrants
+building(-14, -14, 8, 18, 8);
+building(-22, -12, 6, 12, 6);
+building(-12, -22, 7, 14, 7);
+building(-20, -22, 5, 8,  5);
+
+building( 14, -14, 8, 22, 8);
+building( 22, -12, 6, 14, 6);
+building( 12, -22, 7, 18, 7);
+building( 20, -20, 5, 10, 5);
+
+building(-14,  14, 8, 16, 8);
+building(-22,  12, 6, 10, 6);
+building(-12,  22, 7, 12, 7);
+building(-20,  20, 5, 8,  5);
+
+building( 14,  14, 8, 20, 8);
+building( 22,  12, 6, 16, 6);
+building( 12,  22, 7, 14, 7);
+building( 20,  20, 5, 12, 5);
+
+// ── Traffic lights ───────────────────────────────────────
+function trafficLight(x, z) {
+  const poleMat = new THREE.MeshLambertMaterial({ color:0x374151 });
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 4, 8), poleMat);
+  pole.position.set(x, 2, z);
+  pole.castShadow = true;
+  scene.add(pole);
+  const head = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1, 0.3), poleMat);
+  head.position.set(x, 4.2, z);
+  scene.add(head);
+  // Red light
+  const rMat = new THREE.MeshLambertMaterial({ color:0xef4444, emissive:0xef4444, emissiveIntensity:0.8 });
+  const rLight = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), rMat);
+  rLight.position.set(x, 4.5, z + 0.16);
+  scene.add(rLight);
+}
+trafficLight( 5.5,  5.5);
+trafficLight(-5.5,  5.5);
+trafficLight( 5.5, -5.5);
+trafficLight(-5.5, -5.5);
+
+// ── Cars ─────────────────────────────────────────────────
+const carColors = [0xef4444,0x3b82f6,0xf59e0b,0x10b981,0x8b5cf6,0xffffff,0x1f2937,0xe5e7eb];
+function createCar(color) {
+  const g = new THREE.Group();
+  const bodyMat = new THREE.MeshLambertMaterial({ color });
+  // Body lower
+  const lower = new THREE.Mesh(new THREE.BoxGeometry(2, 0.5, 1), bodyMat);
+  lower.position.y = 0.35; lower.castShadow = true;
+  g.add(lower);
+  // Body upper (cabin)
+  const upper = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 0.85), bodyMat);
+  upper.position.set(-0.1, 0.75, 0); upper.castShadow = true;
+  g.add(upper);
+  // Windshield
+  const wsMat = new THREE.MeshLambertMaterial({ color:0x93c5fd, transparent:true, opacity:0.6 });
+  const ws = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.35, 0.8), wsMat);
+  ws.position.set(0.5, 0.72, 0);
+  g.add(ws);
+  // Wheels
+  const wheelMat = new THREE.MeshLambertMaterial({ color:0x1f2937 });
+  const rimMat   = new THREE.MeshLambertMaterial({ color:0xd1d5db });
+  [[-0.65,-0.4],[-0.65,0.4],[0.65,-0.4],[0.65,0.4]].forEach(([x,z]) => {
+    const w = new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.2,0.15,12), wheelMat);
+    w.rotation.x = Math.PI/2; w.position.set(x, 0.2, z); g.add(w);
+    const r = new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.1,0.16,8), rimMat);
+    r.rotation.x = Math.PI/2; r.position.set(x, 0.2, z); g.add(r);
+  });
+  return g;
+}
+
+// Place cars on roads
+const carData = [
+  { pos:[-8, 0.2,  2], ry:0    },
+  { pos:[-3, 0.2,  2], ry:0    },
+  { pos:[ 9, 0.2, -2], ry:Math.PI },
+  { pos:[14, 0.2, -2], ry:Math.PI },
+  { pos:[ 2, 0.2, -9], ry:Math.PI/2 },
+  { pos:[-2, 0.2, 12], ry:-Math.PI/2 },
+  // Bus
+  { pos:[-15, 0.2, 2], ry:0, type:'bus' },
+];
+
+carData.forEach(d => {
+  const col = carColors[Math.floor(Math.random()*carColors.length)];
+  const car = createCar(col);
+  car.position.set(...d.pos);
+  car.rotation.y = d.ry;
+  scene.add(car);
+});
+
+// ── Drone factory ─────────────────────────────────────────
+function createDrone(bodyColor=0x1a1a2e, accentColor=0x3b82f6) {
+  const g = new THREE.Group();
+  const bodyMat   = new THREE.MeshLambertMaterial({ color:bodyColor });
+  const accentMat = new THREE.MeshLambertMaterial({ color:accentColor, emissive:accentColor, emissiveIntensity:0.4 });
+  const armMat    = new THREE.MeshLambertMaterial({ color:0x374151 });
+  const rotorMat  = new THREE.MeshLambertMaterial({ color:0x6b7280, transparent:true, opacity:0.65 });
+
+  // Central body
+  const body = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.16, 0.5), bodyMat);
+  body.castShadow = true; g.add(body);
+
+  // Camera gimbal
+  const cam = new THREE.Mesh(new THREE.SphereGeometry(0.1,10,10), accentMat);
+  cam.position.set(0, -0.14, 0); g.add(cam);
+
+  // LED strip
+  const led = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.04, 0.52), accentMat);
+  led.position.y = -0.06; g.add(led);
+
+  // 4 arms + rotors
+  const armAngles = [Math.PI/4, 3*Math.PI/4, 5*Math.PI/4, 7*Math.PI/4];
+  armAngles.forEach(angle => {
+    const ax = Math.cos(angle)*0.35, az = Math.sin(angle)*0.35;
+
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.06, 0.1), armMat);
+    arm.rotation.y = angle; arm.position.set(ax*0.5, 0.02, az*0.5);
+    arm.castShadow = true; g.add(arm);
+
+    const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.08,0.08,0.1,10), armMat);
+    motor.position.set(ax, 0.05, az); g.add(motor);
+
+    const rotor = new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.28,0.025,16), rotorMat);
+    rotor.position.set(ax, 0.12, az); g.add(rotor);
+  });
+
+  // Landing legs
+  [[-0.22,-0.22],[0.22,-0.22],[-0.22,0.22],[0.22,0.22]].forEach(([lx,lz]) => {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,0.2,6), armMat);
+    leg.position.set(lx, -0.18, lz); g.add(leg);
+  });
+
+  return g;
+}
+
+// ── Place drones ─────────────────────────────────────────
+// FL1 drone (20m) — orange accent, near intersection
+const drone1 = createDrone(0x1e293b, 0xf59e0b);
+drone1.position.set(3, 6, -3);
+drone1.scale.setScalar(1.4);
+scene.add(drone1);
+
+// FL2 drone (60m) — teal accent, further away
+const drone2 = createDrone(0x1e293b, 0x14b8a6);
+drone2.position.set(-8, 14, 5);
+drone2.scale.setScalar(1.6);
+scene.add(drone2);
+
+// FL3 drone (120m) — red accent, high and far
+const drone3 = createDrone(0x1e293b, 0xef4444);
+drone3.position.set(12, 24, -10);
+drone3.scale.setScalar(1.8);
+scene.add(drone3);
+
+// ── Drone route lines ─────────────────────────────────────
+function routeLine(pts, color) {
+  const geo = new THREE.BufferGeometry().setFromPoints(pts.map(([x,y,z])=>new THREE.Vector3(x,y,z)));
+  const mat = new THREE.LineBasicMaterial({ color, opacity:0.55, transparent:true });
+  scene.add(new THREE.Line(geo, mat));
+}
+routeLine([[0,0.3,0],[3,6,-3],[8,6,-8]],  0xf59e0b);
+routeLine([[0,0.3,0],[-8,14,5],[-18,14,12]], 0x14b8a6);
+routeLine([[0,0.3,0],[12,24,-10],[22,24,-18]], 0xef4444);
+
+// ── Truck on road ─────────────────────────────────────────
+const truckMat = new THREE.MeshLambertMaterial({ color:0x1d4ed8 });
+const truck = new THREE.Group();
+const trBody = new THREE.Mesh(new THREE.BoxGeometry(4, 1.4, 2), truckMat);
+trBody.position.set(0, 0.8, 0); trBody.castShadow = true;
+truck.add(trBody);
+const trCab = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.2, 2), new THREE.MeshLambertMaterial({color:0x1e40af}));
+trCab.position.set(-2.1, 0.9, 0); trCab.castShadow = true;
+truck.add(trCab);
+const wMat = new THREE.MeshLambertMaterial({color:0x111827});
+[[-2,-1.4],[-1.2,-1.4],[1,-1.4],[1.4,-1.4]].forEach(([x,z_off])=>{
+  [-0.85,0.85].forEach(z=>{
+    const w = new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,0.2,12), wMat);
+    w.rotation.x=Math.PI/2; w.position.set(x,0.3,z); truck.add(w);
+  });
+});
+truck.position.set(-12, 0, 2);
+truck.rotation.y = 0;
+scene.add(truck);
+
+// ── Trees ────────────────────────────────────────────────
+function tree(x, z) {
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.2,1.5,8), new THREE.MeshLambertMaterial({color:0x78350f}));
+  trunk.position.set(x, 0.75, z); trunk.castShadow=true; scene.add(trunk);
+  const foliage = new THREE.Mesh(new THREE.SphereGeometry(1.1,8,8), new THREE.MeshLambertMaterial({color:0x16a34a}));
+  foliage.position.set(x, 2.5, z); foliage.castShadow=true; scene.add(foliage);
+}
+[[-8,7],[-9,8],[8,7],[9,8],[-8,-7],[-9,-8],[8,-7],[9,-8]].forEach(([x,z])=>tree(x,z));
+
+// ── Animation ────────────────────────────────────────────
+let t = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  t += 0.008;
+  controls.update();
+
+  // Drone hover bobbing + rotor spin
+  drone1.position.y = 6   + Math.sin(t*2.1)*0.12;
+  drone2.position.y = 14  + Math.sin(t*1.7+1)*0.18;
+  drone3.position.y = 24  + Math.sin(t*1.3+2)*0.25;
+  drone1.rotation.y = t * 0.5;
+  drone2.rotation.y = -t * 0.4;
+  drone3.rotation.y = t * 0.3;
+  // Slight tilt during movement
+  drone1.rotation.z = Math.sin(t*0.8)*0.05;
+  drone2.rotation.z = Math.sin(t*0.6+1)*0.06;
+
+  // Truck moves along road
+  const tx = -12 + (t * 1.2 % 24);
+  truck.position.x = tx;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  const W=window.innerWidth, H=window.innerHeight;
+  camera.aspect=W/H; camera.updateProjectionMatrix();
+  renderer.setSize(W,H);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" width="1672" height="941" role="img" aria-labelledby="title desc">
+  <title id="title">Integrated underground-surface last-mile VRP schematic</title>
+  <desc id="desc">Research-paper style schematic showing depot dispatch, surface last-mile vehicle routing, transfer hubs, and underground transport.</desc>
+  <defs>
+    <style>
+      .font { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+      .caption { font-size: 24px; font-weight: 700; fill: #263238; }
+      .small { font-size: 18px; fill: #455a64; }
+      .tiny { font-size: 15px; fill: #607d8b; }
+      .label { font-size: 31px; font-weight: 750; fill: #263238; }
+      .panel-label { font-size: 20px; font-weight: 700; fill: #455a64; letter-spacing: .3px; }
+      .road { stroke: #e3e9ee; stroke-width: 24; stroke-linecap: square; }
+      .road-center { stroke: #ffffff; stroke-width: 2.2; stroke-dasharray: 14 16; stroke-linecap: round; opacity: .95; }
+      .building { fill: #eef3f7; stroke: #aab7c2; stroke-width: 2; }
+      .building-top { fill: #f8fafc; stroke: #c4ccd4; stroke-width: 1.5; }
+      .node { fill: #fff7ed; stroke: #f97316; stroke-width: 4; }
+      .node-text { font-size: 22px; font-weight: 800; fill: #9a3412; }
+      .hub { fill: #f0fdfa; stroke: #0f766e; stroke-width: 4; }
+      .hub-dark { fill: #0f766e; }
+      .hub-icon { fill: none; stroke: #ffffff; stroke-width: 3; stroke-linejoin: round; }
+      .route-blue { fill: none; stroke: #1565c0; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+      .route-orange { fill: none; stroke: #ef6c00; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+      .route-teal { fill: none; stroke: #0f766e; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; }
+      .thin-blue { fill: none; stroke: #1565c0; stroke-width: 3; }
+      .thin-teal { fill: none; stroke: #0f766e; stroke-width: 3; }
+      .callout { fill: #ffffff; stroke: #90a4ae; stroke-width: 2.2; }
+      .legend-box { fill: #ffffff; stroke: #d5dde3; stroke-width: 2; }
+    </style>
+    <marker id="arrow-blue" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 2 2 L 17 9 L 2 16 Z" fill="#1565c0"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 2 2 L 17 9 L 2 16 Z" fill="#ef6c00"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 2 2 L 17 9 L 2 16 Z" fill="#0f766e"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 2 2 L 13 7 L 2 12 Z" fill="#78909c"/>
+    </marker>
+  </defs>
+
+  <rect width="1672" height="941" fill="#ffffff"/>
+  <g class="font">
+    <text x="68" y="57" class="caption">Integrated underground-surface last-mile logistics network</text>
+    <text x="68" y="86" class="small">Conceptual research figure for vehicle routing with underground freight transfer hubs</text>
+
+    <rect x="66" y="112" width="1540" height="435" rx="6" fill="#fbfcfd" stroke="#d6dee5" stroke-width="2"/>
+    <text x="94" y="148" class="panel-label">(a) Surface road network and last-mile VRP</text>
+
+    <g opacity=".98">
+      <line x1="120" y1="204" x2="1548" y2="204" class="road"/>
+      <line x1="120" y1="292" x2="1548" y2="292" class="road"/>
+      <line x1="120" y1="380" x2="1548" y2="380" class="road"/>
+      <line x1="120" y1="468" x2="1548" y2="468" class="road"/>
+      <line x1="234" y1="170" x2="234" y2="520" class="road"/>
+      <line x1="396" y1="170" x2="396" y2="520" class="road"/>
+      <line x1="558" y1="170" x2="558" y2="520" class="road"/>
+      <line x1="720" y1="170" x2="720" y2="520" class="road"/>
+      <line x1="882" y1="170" x2="882" y2="520" class="road"/>
+      <line x1="1044" y1="170" x2="1044" y2="520" class="road"/>
+      <line x1="1206" y1="170" x2="1206" y2="520" class="road"/>
+      <line x1="1368" y1="170" x2="1368" y2="520" class="road"/>
+
+      <line x1="120" y1="204" x2="1548" y2="204" class="road-center"/>
+      <line x1="120" y1="292" x2="1548" y2="292" class="road-center"/>
+      <line x1="120" y1="380" x2="1548" y2="380" class="road-center"/>
+      <line x1="120" y1="468" x2="1548" y2="468" class="road-center"/>
+      <line x1="234" y1="170" x2="234" y2="520" class="road-center"/>
+      <line x1="396" y1="170" x2="396" y2="520" class="road-center"/>
+      <line x1="558" y1="170" x2="558" y2="520" class="road-center"/>
+      <line x1="720" y1="170" x2="720" y2="520" class="road-center"/>
+      <line x1="882" y1="170" x2="882" y2="520" class="road-center"/>
+      <line x1="1044" y1="170" x2="1044" y2="520" class="road-center"/>
+      <line x1="1206" y1="170" x2="1206" y2="520" class="road-center"/>
+      <line x1="1368" y1="170" x2="1368" y2="520" class="road-center"/>
+    </g>
+
+    <g opacity=".95">
+      <rect x="292" y="158" width="74" height="56" rx="4" class="building"/>
+      <rect x="302" y="148" width="54" height="18" rx="2" class="building-top"/>
+      <rect x="462" y="222" width="92" height="60" rx="4" class="building"/>
+      <rect x="474" y="212" width="68" height="18" rx="2" class="building-top"/>
+      <rect x="610" y="336" width="84" height="58" rx="4" class="building"/>
+      <rect x="622" y="326" width="60" height="18" rx="2" class="building-top"/>
+      <rect x="774" y="250" width="90" height="70" rx="4" class="building"/>
+      <rect x="786" y="238" width="66" height="20" rx="2" class="building-top"/>
+      <rect x="930" y="150" width="108" height="72" rx="4" class="building"/>
+      <rect x="944" y="138" width="80" height="20" rx="2" class="building-top"/>
+      <rect x="1104" y="324" width="86" height="64" rx="4" class="building"/>
+      <rect x="1116" y="312" width="62" height="20" rx="2" class="building-top"/>
+      <rect x="1266" y="230" width="96" height="74" rx="4" class="building"/>
+      <rect x="1278" y="218" width="72" height="20" rx="2" class="building-top"/>
+      <rect x="1424" y="336" width="88" height="62" rx="4" class="building"/>
+      <rect x="1436" y="326" width="64" height="18" rx="2" class="building-top"/>
+      <rect x="1458" y="146" width="78" height="58" rx="4" class="building"/>
+      <rect x="1468" y="136" width="58" height="18" rx="2" class="building-top"/>
+    </g>
+
+    <g>
+      <rect x="112" y="334" width="142" height="88" rx="4" fill="#f5f7f9" stroke="#78909c" stroke-width="3"/>
+      <rect x="132" y="362" width="64" height="60" fill="#e9eef2" stroke="#90a4ae" stroke-width="2"/>
+      <rect x="198" y="360" width="38" height="62" fill="#e0f2f1" stroke="#0f766e" stroke-width="3"/>
+      <rect x="145" y="324" width="86" height="34" rx="4" fill="#0f766e"/>
+      <text x="188" y="348" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">DEPOT</text>
+      <rect x="244" y="388" width="56" height="28" rx="6" fill="#ffffff" stroke="#455a64" stroke-width="3"/>
+      <rect x="290" y="398" width="24" height="18" rx="4" fill="#cfd8dc" stroke="#455a64" stroke-width="3"/>
+      <circle cx="260" cy="421" r="7" fill="#263238"/>
+      <circle cx="300" cy="421" r="7" fill="#263238"/>
+    </g>
+
+    <path d="M 306 400 L 392 400 L 392 300 L 490 300 L 490 206 L 640 206 L 640 292 L 722 292 L 722 206 L 840 206 L 840 382 L 720 382 L 720 468 L 558 468 L 558 512"
+          class="route-blue" marker-end="url(#arrow-blue)"/>
+    <path d="M 1144 512 L 1144 468 L 1220 468 L 1220 382 L 1368 382 L 1368 292 L 1504 292 L 1504 204 L 1368 204 L 1368 160 L 1220 160 L 1220 246 L 1116 246 L 1116 382 L 1044 382 L 1044 468 L 1144 468"
+          class="route-orange" marker-end="url(#arrow-orange)"/>
+
+    <g>
+      <circle cx="392" cy="300" r="24" class="node"/><text x="392" y="308" text-anchor="middle" class="node-text">1</text>
+      <circle cx="640" cy="206" r="24" class="node"/><text x="640" y="214" text-anchor="middle" class="node-text">2</text>
+      <circle cx="722" cy="292" r="24" class="node"/><text x="722" y="300" text-anchor="middle" class="node-text">3</text>
+      <circle cx="720" cy="468" r="24" class="node"/><text x="720" y="476" text-anchor="middle" class="node-text">4</text>
+      <circle cx="1220" cy="246" r="24" class="node"/><text x="1220" y="254" text-anchor="middle" class="node-text">5</text>
+      <circle cx="1368" cy="160" r="24" class="node"/><text x="1368" y="168" text-anchor="middle" class="node-text">6</text>
+      <circle cx="1504" cy="292" r="24" class="node"/><text x="1504" y="300" text-anchor="middle" class="node-text">7</text>
+      <circle cx="1368" cy="382" r="24" class="node"/><text x="1368" y="390" text-anchor="middle" class="node-text">8</text>
+    </g>
+
+    <g>
+      <rect x="536" y="470" width="92" height="66" rx="10" class="hub"/>
+      <rect x="556" y="454" width="52" height="36" rx="6" class="hub-dark"/>
+      <path d="M 570 465 L 582 458 L 596 465 L 596 480 L 583 488 L 570 480 Z M 582 458 L 582 473 M 570 465 L 582 473 L 596 465" class="hub-icon"/>
+      <rect x="1120" y="470" width="92" height="66" rx="10" class="hub"/>
+      <rect x="1140" y="454" width="52" height="36" rx="6" class="hub-dark"/>
+      <path d="M 1154 465 L 1166 458 L 1180 465 L 1180 480 L 1167 488 L 1154 480 Z M 1166 458 L 1166 473 M 1154 465 L 1166 473 L 1180 465" class="hub-icon"/>
+    </g>
+
+    <g>
+      <rect x="820" y="120" width="300" height="64" rx="5" class="callout"/>
+      <text x="970" y="161" text-anchor="middle" class="label">Last-mile VRP</text>
+      <line x1="970" y1="184" x2="970" y2="226" class="thin-blue" marker-end="url(#arrow-blue)"/>
+
+      <rect x="690" y="497" width="294" height="62" rx="5" class="callout"/>
+      <text x="837" y="537" text-anchor="middle" class="label">Transfer Hub</text>
+      <line x1="690" y1="528" x2="630" y2="510" class="thin-teal" marker-end="url(#arrow-teal)"/>
+      <line x1="984" y1="528" x2="1118" y2="510" class="thin-teal" marker-end="url(#arrow-teal)"/>
+    </g>
+
+    <rect x="66" y="547" width="1540" height="308" fill="#f3f4f5" stroke="#cfd8dc" stroke-width="2"/>
+    <line x1="66" y1="547" x2="1606" y2="547" stroke="#546e7a" stroke-width="4"/>
+    <text x="94" y="585" class="panel-label">(b) Underground freight layer</text>
+
+    <path d="M 146 728 L 520 728 L 520 644 L 520 728 L 837 728 L 1144 728 L 1144 644 L 1144 728 L 1510 728"
+          fill="none" stroke="#d6e3e2" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 146 728 L 520 728 L 520 644 L 520 728 L 837 728 L 1144 728 L 1144 644 L 1144 728 L 1510 728"
+          class="route-teal" marker-end="url(#arrow-teal)"/>
+    <line x1="520" y1="536" x2="520" y2="644" stroke="#0f766e" stroke-width="16" stroke-linecap="round" marker-end="url(#arrow-teal)"/>
+    <line x1="1144" y1="536" x2="1144" y2="644" stroke="#0f766e" stroke-width="16" stroke-linecap="round" marker-end="url(#arrow-teal)"/>
+
+    <g>
+      <rect x="228" y="700" width="116" height="50" rx="25" fill="#ffffff" stroke="#455a64" stroke-width="3"/>
+      <rect x="268" y="710" width="42" height="30" rx="4" fill="#80cbc4"/>
+      <circle cx="250" cy="752" r="7" fill="#263238"/><circle cx="322" cy="752" r="7" fill="#263238"/>
+      <rect x="760" y="700" width="142" height="50" rx="25" fill="#ffffff" stroke="#455a64" stroke-width="3"/>
+      <rect x="810" y="710" width="52" height="30" rx="4" fill="#80cbc4"/>
+      <circle cx="786" cy="752" r="7" fill="#263238"/><circle cx="876" cy="752" r="7" fill="#263238"/>
+      <rect x="1290" y="700" width="126" height="50" rx="25" fill="#ffffff" stroke="#455a64" stroke-width="3"/>
+      <rect x="1334" y="710" width="48" height="30" rx="4" fill="#80cbc4"/>
+      <circle cx="1316" cy="752" r="7" fill="#263238"/><circle cx="1390" cy="752" r="7" fill="#263238"/>
+    </g>
+
+    <rect x="630" y="586" width="414" height="58" rx="5" class="callout"/>
+    <text x="837" y="624" text-anchor="middle" class="label">Underground Transport</text>
+    <line x1="837" y1="644" x2="837" y2="700" class="thin-teal" marker-end="url(#arrow-teal)"/>
+
+    <g>
+      <rect x="1236" y="584" width="318" height="94" rx="5" class="legend-box"/>
+      <text x="1260" y="612" font-size="19" font-weight="700" fill="#37474f">Legend</text>
+      <line x1="1260" y1="635" x2="1314" y2="635" class="route-blue" stroke-width="8" marker-end="url(#arrow-blue)"/>
+      <text x="1330" y="642" class="tiny">surface truck route</text>
+      <line x1="1260" y1="659" x2="1314" y2="659" class="route-teal" stroke-width="8" marker-end="url(#arrow-teal)"/>
+      <text x="1330" y="666" class="tiny">underground transport</text>
+      <circle cx="1490" cy="635" r="12" class="node"/>
+      <text x="1510" y="642" class="tiny">customer</text>
+      <rect x="1478" y="651" width="24" height="18" rx="3" class="hub"/>
+      <text x="1510" y="666" class="tiny">transfer hub</text>
+    </g>
+  </g>
+</svg>

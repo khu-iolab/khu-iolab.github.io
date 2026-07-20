@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Semiconductor Fab AMHS Simulation</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#f8f9fa; overflow:hidden; font-family:'Segoe UI',system-ui,sans-serif; }
+#c { display:block; }
+#hdr { position:absolute; top:14px; left:16px; }
+#hdr h3 { font-size:12px; font-weight:700; color:#1a1a25; }
+#hdr p  { font-size:10px; color:#64748b; margin-top:2px; }
+#stats {
+  position:absolute; top:14px; right:16px;
+  background:rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.1);
+  border-radius:8px; padding:8px 14px; display:flex; flex-direction:column; gap:4px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+.stat { font-size:10px; color:#374151; display:flex; justify-content:space-between; gap:16px; }
+.stat span:last-child { color:#1a1a25; font-weight:700; font-variant-numeric:tabular-nums; }
+#leg { position:absolute; bottom:12px; left:16px; display:flex; flex-wrap:wrap; gap:8px; }
+.leg { display:flex; align-items:center; gap:6px; font-size:10px; color:#374151; }
+.dot { width:10px; height:6px; border-radius:2px; flex-shrink:0; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hdr">
+  <h3>Semiconductor Fab — AMHS Simulation</h3>
+  <p>OHT / AGV dispatching &amp; throughput optimization · IO-LAB</p>
+</div>
+<div id="stats">
+  <div class="stat"><span>Throughput</span><span id="s-tp">0</span></div>
+  <div class="stat"><span>WIP Lots</span><span id="s-wip">0</span></div>
+  <div class="stat"><span>Vehicle Util.</span><span id="s-util">0%</span></div>
+</div>
+<div id="leg">
+  <div class="leg"><div class="dot" style="background:#3b82f6"></div>Litho</div>
+  <div class="leg"><div class="dot" style="background:#14b8a6"></div>Etch</div>
+  <div class="leg"><div class="dot" style="background:#f59e0b"></div>Deposition</div>
+  <div class="leg"><div class="dot" style="background:#a855f7"></div>CMP</div>
+  <div class="leg"><div class="dot" style="background:#6b7280"></div>OHT Vehicle</div>
+</div>
+<script>
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+function resize() { cv.width=window.innerWidth; cv.height=window.innerHeight; }
+resize(); window.addEventListener('resize',resize);
+
+// ── Fab layout constants ──────────────────────────────────
+const COLS=5, ROWS=3;
+const BAY_TYPES = ['Litho','Etch','Depo','CMP','Litho','Etch','Depo','CMP','Litho','Etch','Depo','CMP','Litho','Etch','Depo'];
+const TYPE_COLORS = { 'Litho':'#3b82f6','Etch':'#14b8a6','Depo':'#f59e0b','CMP':'#a855f7' };
+const BAY_UTIL_UPDATE_FRAMES = 90;
+const OHT_SPEED = 0.7;
+let bayUtilState = Array.from({ length: ROWS*COLS }, () => 0.42 + Math.random()*0.28);
+
+function computeLayout() {
+  const W=cv.width, H=cv.height;
+  const PAD=48, STOCKER=30;
+  const bayW = Math.floor((W-PAD*2-STOCKER*2)/(COLS+0.5));
+  const bayH = Math.floor((H-PAD*2-STOCKER*2)/(ROWS+0.5));
+  const railH = 18; // height of OHT rail lane between bays
+  const blockH = bayH + railH;
+  const startX = PAD+STOCKER;
+  const startY = PAD+STOCKER;
+  const railYFor = r => startY + r*(bayH+railH+6) - railH/2 - 3;
+  const lastRy = startY + ROWS*(bayH+railH+6) - railH/2 - 3;
+  const railLeftX = startX - STOCKER + 4;
+  const railRightX = startX + COLS*(bayW+6) - 6 + STOCKER - 4;
+  const stockers = {
+    left: {
+      label:'STOCKER\nA',
+      boxX:12,
+      boxY:railYFor(0)-16,
+      boxW:34,
+      boxH:lastRy-railYFor(0)+32,
+      portX:railLeftX
+    },
+    right: {
+      label:'STOCKER\nB',
+      boxX:W-46,
+      boxY:railYFor(0)-16,
+      boxW:34,
+      boxH:lastRy-railYFor(0)+32,
+      portX:railRightX
+    }
+  };
+
+  const bays = [];
+  for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++) {
+    const bx = startX + c*(bayW+6);
+    const by = startY + r*(bayH+railH+6);
+    const tp = BAY_TYPES[r*COLS+c] || 'Litho';
+    bays.push({ c,r, x:bx, y:by, w:bayW, h:bayH, type:tp, color:TYPE_COLORS[tp], util:bayUtilState[r*COLS+c] });
+  }
+
+  // OHT horizontal rails (one per row gap + top/bottom of each row)
+  const rails = [];
+  for(let r=0;r<ROWS;r++) {
+    const ry = railYFor(r);
+    rails.push({ x1:railLeftX, x2:railRightX, y:ry, row:r, type:'h' });
+  }
+  // Bottom of last row
+  rails.push({ x1:railLeftX, x2:railRightX, y:lastRy, row:ROWS, type:'h' });
+
+  // Vertical connector rail (left side of each bay column)
+  for(let c=0;c<=COLS;c++) {
+    const rx = startX + c*(bayW+6) - 6;
+    rails.push({ y1:startY-railH/2-3, y2:lastRy, x:rx, col:c, type:'v' });
+  }
+
+  return { bays, rails, stockers, bayW, bayH, railH, startX, startY, W, H };
+}
+
+// ── Vehicles ─────────────────────────────────────────────
+// Each vehicle moves along a path of rail waypoints
+function makeWaypoints(lyt) {
+  const { startX, startY, bayW, bayH, railH } = lyt;
+  function bayRailY(r) { return startY + r*(bayH+railH+6) - railH/2 - 3; }
+  function bayRailX(c) { return startX + c*(bayW+6) + bayW/2; }
+  const sourceRow = Math.floor(Math.random()*ROWS);
+  const sourceStocker = Math.random()>.82 ? 'right' : 'left';
+  const stocker = stockerPort(lyt, sourceStocker, sourceRow);
+  const tIdx = { r:Math.floor(Math.random()*ROWS), c:Math.floor(Math.random()*COLS) };
+  const pts = [
+    { x:stocker.x, y:stocker.y },                                // depart stocker
+    { x:bayRailX(tIdx.c), y:stocker.y },                         // travel on stocker row
+    { x:bayRailX(tIdx.c), y:bayRailY(tIdx.r) },                  // horizontal move
+    { x:bayRailX(tIdx.c), y:startY+tIdx.r*(bayH+railH+6)+bayH/2 }, // enter dest bay
+  ];
+  return pts;
+}
+
+function stockerPort(lyt, side, row) {
+  const { startY, bayH, railH, stockers } = lyt;
+  const st = stockers[side] || stockers.left;
+  return {
+    x:st.portX,
+    y:startY + row*(bayH+railH+6) - railH/2 - 3
+  };
+}
+
+const N_VEHICLES = 6;
+let vehicles = [], lyt;
+
+function initVehicles() {
+  lyt = computeLayout();
+  vehicles = [];
+  for(let i=0;i<N_VEHICLES;i++) {
+    const wps = makeWaypoints(lyt);
+    const delay = Math.floor(Math.random()*200);
+    vehicles.push({
+      pts:wps, pi:0, x:wps[0].x, y:wps[0].y,
+      sp: OHT_SPEED+Math.random()*.25, delay, carrying:Math.random()>.3,
+      color: ['#6b7280','#4b5563','#374151','#4b5680','#6b7290','#5b6880'][i]
+    });
+  }
+}
+initVehicles();
+
+// ── Stats ─────────────────────────────────────────────────
+let throughput=0, wip=12, frame=0;
+function updateStats() {
+  if(frame%120===0 && Math.random()>.3) throughput++;
+  if(frame%60===0) wip = 10+Math.floor(Math.random()*6);
+  const busy = vehicles.filter(v=>v.carrying).length;
+  document.getElementById('s-tp').textContent = throughput+' lots/hr';
+  document.getElementById('s-wip').textContent = wip;
+  document.getElementById('s-util').textContent = Math.round(busy/N_VEHICLES*100)+'%';
+}
+
+function updateBayUtilization() {
+  bayUtilState = bayUtilState.map((util, idx) => {
+    const wave = Math.sin((frame + idx*17) / 180) * 0.05;
+    const demand = 0.54 + wave + (Math.random() - 0.5) * 0.08;
+    const next = util + (demand - util) * 0.22;
+    return Math.max(0.18, Math.min(0.92, next));
+  });
+}
+
+// ── Draw ──────────────────────────────────────────────────
+function drawBay(b) {
+  // Bay box
+  ctx.fillStyle = b.color+'18';
+  ctx.strokeStyle = b.color+'44';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.roundRect(b.x, b.y, b.w, b.h, 4);
+  ctx.fill(); ctx.stroke();
+  // Tool equipment icon (simple square grid)
+  const ic = 4, iw=(b.w-8)/ic;
+  for(let r2=0;r2<2;r2++) for(let c2=0;c2<ic;c2++) {
+    ctx.fillStyle = b.color+(b.util>.7?'55':'33');
+    ctx.fillRect(b.x+4+c2*iw, b.y+8+r2*(b.h/2-10), iw-3, b.h/2-14);
+  }
+  // Utilization bar
+  ctx.fillStyle='#e5e7eb';
+  ctx.fillRect(b.x+4, b.y+b.h-10, b.w-8, 6);
+  ctx.fillStyle=b.color+'aa';
+  ctx.fillRect(b.x+4, b.y+b.h-10, (b.w-8)*b.util, 6);
+  // Label
+  ctx.fillStyle=b.color; ctx.font='bold 8px system-ui';
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  ctx.fillText(b.type, b.x+b.w/2, b.y+2);
+}
+
+function drawRails(rails) {
+  ctx.strokeStyle='#94a3b8'; ctx.lineWidth=2;
+  rails.forEach(r => {
+    ctx.beginPath();
+    if(r.type==='h') { ctx.moveTo(r.x1,r.y); ctx.lineTo(r.x2,r.y); }
+    else             { ctx.moveTo(r.x,r.y1);  ctx.lineTo(r.x,r.y2); }
+    ctx.stroke();
+  });
+  // Rail ticks
+  ctx.strokeStyle='#cbd5e1'; ctx.lineWidth=1;
+  rails.filter(r=>r.type==='h').forEach(r=>{
+    for(let x=r.x1;x<r.x2;x+=12){
+      ctx.beginPath(); ctx.moveTo(x,r.y-3); ctx.lineTo(x,r.y+3); ctx.stroke();
+    }
+  });
+}
+
+function drawVehicle(v) {
+  const vw=14, vh=10;
+  ctx.save();
+  ctx.fillStyle='#374151'; ctx.strokeStyle='#6b7280'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.roundRect(v.x-vw/2, v.y-vh/2, vw, vh, 3);
+  ctx.fill(); ctx.stroke();
+  if(v.carrying) {
+    // Small cassette icon on top
+    ctx.fillStyle='#f59e0b55'; ctx.strokeStyle='#f59e0b';
+    ctx.lineWidth=1; ctx.beginPath();
+    ctx.roundRect(v.x-5, v.y-vh/2-6, 10, 6, 2);
+    ctx.fill(); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawStockers(stockers) {
+  Object.values(stockers).forEach(st => {
+    ctx.fillStyle='#f1f5f9'; ctx.strokeStyle='#94a3b8'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.roundRect(st.boxX,st.boxY,st.boxW,st.boxH,4); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#374151'; ctx.font='bold 7px system-ui';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    st.label.split('\n').forEach((l,li)=>ctx.fillText(l,st.boxX+st.boxW/2,st.boxY+st.boxH/2-7+li*14));
+
+    ctx.fillStyle='#f59e0b';
+    for(let r=0;r<ROWS;r++) {
+      const port = stockerPort(lyt, st===stockers.left?'left':'right', r);
+      ctx.beginPath(); ctx.arc(port.x, port.y, 3, 0, Math.PI*2); ctx.fill();
+    }
+  });
+}
+
+function moveVehicle(v) {
+  if(v.delay>0){ v.delay--; return; }
+  const tgt = v.pts[v.pi+1];
+  if(!tgt){ v.pts=makeWaypoints(lyt); v.pi=0; v.carrying=Math.random()>.3; return; }
+  const dx=tgt.x-v.x, dy=tgt.y-v.y, dist=Math.hypot(dx,dy);
+  if(dist<v.sp){ v.x=tgt.x; v.y=tgt.y; v.pi++; }
+  else { v.x+=dx/dist*v.sp; v.y+=dy/dist*v.sp; }
+}
+
+function draw() {
+  requestAnimationFrame(draw);
+  frame++;
+  if(frame % BAY_UTIL_UPDATE_FRAMES === 0) updateBayUtilization();
+  lyt = computeLayout();
+  const {W,H,bays,rails,stockers} = lyt;
+  ctx.fillStyle='#f8f9fa'; ctx.fillRect(0,0,W,H);
+
+  drawRails(rails);
+  bays.forEach(b=>drawBay(b));
+  drawStockers(stockers);
+  vehicles.forEach(v=>{ moveVehicle(v); drawVehicle(v); });
+
+  if(frame%300===0) initVehicles();
+  if(frame%30===0) updateStats();
+}
+draw();
+</script>
+</body>
+</html>

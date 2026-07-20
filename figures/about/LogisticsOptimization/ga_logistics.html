@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;background:#fff;}
+svg{display:block;}
+.grp{cursor:default;}
+.grp-bg{opacity:0;transition:opacity .15s;}
+.grp:hover .grp-bg{opacity:1;}
+.tip{visibility:hidden;opacity:0;transition:opacity .15s;}
+.grp:hover .tip{visibility:visible;opacity:1;}
+</style>
+</head>
+<body>
+<svg viewBox="0 0 540 186" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+     font-family="'Inter','Segoe UI',system-ui,sans-serif">
+
+  <rect width="540" height="186" fill="#ffffff"/>
+
+  <!-- ══ HEADER ══ -->
+  <rect width="540" height="22" fill="#f8faff"/>
+  <text x="270" y="14" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1e40af" letter-spacing="0.06em">URBAN LOGISTICS OPTIMIZATION — THREE RESEARCH PILLARS</text>
+  <rect y="22" width="540" height="1" fill="#e0e7ff"/>
+
+  <!-- ── Column dividers ── -->
+  <line x1="180" y1="22" x2="180" y2="160" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="360" y1="22" x2="360" y2="160" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ══ COL 1: DRONE DELIVERY ══ -->
+  <g class="grp">
+    <rect class="grp-bg" x="0" y="22" width="180" height="138" fill="#eff6ff" rx="0"/>
+
+    <!-- Column header -->
+    <rect x="8" y="28" width="164" height="20" fill="#dbeafe" rx="4"/>
+    <text x="90" y="41" text-anchor="middle" font-size="8" font-weight="800" fill="#1d4ed8">✈  DRONE DELIVERY</text>
+
+    <!-- Road -->
+    <rect x="8" y="108" width="164" height="11" fill="#f1f5f9" rx="1"/>
+    <line x1="28" y1="113" x2="44" y2="113" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5,4"/>
+    <line x1="60" y1="113" x2="76" y2="113" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5,4"/>
+    <line x1="92" y1="113" x2="108" y2="113" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5,4"/>
+
+    <!-- Depot -->
+    <rect x="12" y="94" width="28" height="22" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.2" rx="2"/>
+    <text x="26" y="104" text-anchor="middle" font-size="6" font-weight="700" fill="#1d4ed8">DEPOT</text>
+    <rect x="21" y="108" width="10" height="8" fill="#bfdbfe" stroke="#3b82f6" stroke-width="0.8" rx="1"/>
+
+    <!-- Truck -->
+    <rect x="58" y="98" width="32" height="13" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2" rx="1.5"/>
+    <rect x="56" y="101" width="14" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2" rx="1.5"/>
+    <circle cx="63" cy="112" r="3" fill="#374151" stroke="#9ca3af" stroke-width="0.8"/>
+    <circle cx="83" cy="112" r="3" fill="#374151" stroke="#9ca3af" stroke-width="0.8"/>
+    <text x="76" y="107" text-anchor="middle" font-size="5.5" font-weight="700" fill="#1d4ed8">TRUCK</text>
+
+    <!-- Flying Warehouse -->
+    <ellipse cx="90" cy="60" rx="30" ry="9" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+    <rect x="75" y="65" width="30" height="7" fill="#f0f9ff" stroke="#38bdf8" stroke-width="0.8" rx="1.5"/>
+    <text x="90" y="70" text-anchor="middle" font-size="5" font-weight="700" fill="#0369a1">FLYING WH.</text>
+    <line x1="84" y1="72" x2="82" y2="79" stroke="#94a3b8" stroke-width="0.8"/>
+    <line x1="96" y1="72" x2="98" y2="79" stroke="#94a3b8" stroke-width="0.8"/>
+
+    <!-- FL1 arc (amber, 20m) -->
+    <path d="M 80,105 Q 110,80 148,100" stroke="#f59e0b" stroke-width="1.6" fill="none" stroke-dasharray="4,2.5"/>
+    <circle cx="116" cy="84" r="4.5" fill="#fef9c3" stroke="#f59e0b" stroke-width="1.2"/>
+    <line x1="112" y1="84" x2="109" y2="84" stroke="#d97706" stroke-width="1"/>
+    <line x1="120" y1="84" x2="123" y2="84" stroke="#d97706" stroke-width="1"/>
+    <text x="116" y="79" text-anchor="middle" font-size="5" font-weight="700" fill="#92400e">FL1</text>
+    <!-- Customer 1 -->
+    <rect x="142" y="94" width="12" height="9" fill="#fef3c7" stroke="#f59e0b" stroke-width="1" rx="1"/>
+    <polygon points="142,94 148,88 154,94" fill="#fff7ed" stroke="#f59e0b" stroke-width="1"/>
+
+    <!-- FL3 from Flying WH (red, 120m) -->
+    <path d="M 90,69 Q 140,50 165,92" stroke="#dc2626" stroke-width="1.6" fill="none" stroke-dasharray="4,2.5"/>
+    <circle cx="140" cy="56" r="4.5" fill="#fee2e2" stroke="#dc2626" stroke-width="1.2"/>
+    <line x1="136" y1="56" x2="133" y2="56" stroke="#dc2626" stroke-width="1"/>
+    <line x1="144" y1="56" x2="147" y2="56" stroke="#dc2626" stroke-width="1"/>
+    <text x="140" y="51" text-anchor="middle" font-size="5" font-weight="700" fill="#991b1b">FL3</text>
+    <!-- Customer 2 -->
+    <rect x="158" y="86" width="12" height="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1" rx="1"/>
+    <polygon points="158,86 164,80 170,86" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+
+    <!-- Badges -->
+    <rect x="8" y="122" width="38" height="13" fill="#eff6ff" stroke="#bfdbfe" stroke-width="0.8" rx="2"/>
+    <text x="27" y="131" text-anchor="middle" font-size="6" font-weight="700" fill="#1d4ed8">MILP · ALNS</text>
+    <rect x="50" y="122" width="40" height="13" fill="#eff6ff" stroke="#bfdbfe" stroke-width="0.8" rx="2"/>
+    <text x="70" y="131" text-anchor="middle" font-size="6" font-weight="700" fill="#1d4ed8">ML Energy</text>
+    <rect x="94" y="122" width="50" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+    <text x="119" y="131" text-anchor="middle" font-size="6" font-weight="700" fill="#15803d">Cost ↓ CO₂ ↓</text>
+
+    <!-- Key papers -->
+    <text x="8" y="146" font-size="5.5" fill="#6b7280">IEEE ITS · TR-E · Comp&amp;IE · ESA</text>
+
+    <!-- Tooltip -->
+    <rect class="tip" x="4" y="148" width="172" height="13" fill="#1e3a8a" rx="3"/>
+    <text class="tip" x="90" y="157" text-anchor="middle" font-size="6" fill="#fff">FSTSP · mFSTSP · No-fly zones · Flying Warehouse</text>
+  </g>
+
+  <!-- ══ COL 2: UNDERGROUND LOGISTICS ══ -->
+  <g class="grp">
+    <rect class="grp-bg" x="180" y="22" width="180" height="138" fill="#f0fdf4" rx="0"/>
+
+    <!-- Column header -->
+    <rect x="188" y="28" width="164" height="20" fill="#dcfce7" rx="4"/>
+    <text x="270" y="41" text-anchor="middle" font-size="8" font-weight="800" fill="#166534">⬇  UNDERGROUND LOGISTICS</text>
+
+    <!-- Surface city icons -->
+    <!-- Building 1 -->
+    <rect x="194" y="54" width="16" height="26" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1" rx="1"/>
+    <rect x="197" y="57" width="4" height="4" fill="#bae6fd"/>
+    <rect x="203" y="57" width="4" height="4" fill="#bae6fd"/>
+    <rect x="197" y="63" width="4" height="4" fill="#bae6fd"/>
+    <rect x="203" y="63" width="4" height="4" fill="#bae6fd"/>
+    <!-- Building 2 -->
+    <rect x="214" y="60" width="14" height="20" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1" rx="1"/>
+    <rect x="216" y="63" width="4" height="3" fill="#bae6fd"/>
+    <rect x="222" y="63" width="4" height="3" fill="#bae6fd"/>
+    <!-- Surface road -->
+    <rect x="188" y="82" width="164" height="10" fill="#f1f5f9" rx="1"/>
+    <line x1="208" y1="87" x2="224" y2="87" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="240" y1="87" x2="256" y2="87" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="272" y1="87" x2="288" y2="87" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="304" y1="87" x2="320" y2="87" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="190" y="80" font-size="5.5" font-weight="700" fill="#6b7280">SURFACE</text>
+
+    <!-- Entry point arrow down -->
+    <line x1="230" y1="92" x2="230" y2="104" stroke="#16a34a" stroke-width="2"/>
+    <polygon points="227,102 230,106 233,102" fill="#16a34a"/>
+    <rect x="222" y="90" width="16" height="2" fill="#16a34a" rx="1"/>
+
+    <!-- Underground tunnel -->
+    <rect x="188" y="106" width="164" height="18" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.2" rx="3"/>
+    <text x="270" y="115" text-anchor="middle" font-size="6.5" font-weight="700" fill="#166534">UNDERGROUND TUNNEL</text>
+    <text x="270" y="121" text-anchor="middle" font-size="5.5" fill="#166534">Capsule / AGV freight system</text>
+
+    <!-- Capsule vehicles in tunnel -->
+    <rect x="200" y="109" width="20" height="10" fill="#16a34a" rx="3"/>
+    <text x="210" y="116" text-anchor="middle" font-size="5" font-weight="700" fill="#fff">CAP1</text>
+    <rect x="240" y="109" width="20" height="10" fill="#16a34a" rx="3"/>
+    <text x="250" y="116" text-anchor="middle" font-size="5" font-weight="700" fill="#fff">AGV</text>
+    <rect x="308" y="109" width="20" height="10" fill="#15803d" rx="3"/>
+    <text x="318" y="116" text-anchor="middle" font-size="5" font-weight="700" fill="#fff">CAP2</text>
+
+    <!-- Exit arrow up at right -->
+    <line x1="322" y1="124" x2="322" y2="92" stroke="#16a34a" stroke-width="2"/>
+    <polygon points="319,94 322,90 325,94" fill="#16a34a"/>
+
+    <!-- Transfer hub -->
+    <rect x="194" y="52" width="14" height="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1" rx="1"/>
+    <text x="201" y="59" text-anchor="middle" font-size="5" font-weight="600" fill="#166534">HUB</text>
+
+    <!-- Right-side buildings -->
+    <rect x="316" y="56" width="14" height="24" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1" rx="1"/>
+    <rect x="318" y="59" width="4" height="3" fill="#bae6fd"/>
+    <rect x="324" y="59" width="4" height="3" fill="#bae6fd"/>
+    <rect x="333" y="60" width="16" height="20" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1" rx="1"/>
+    <!-- Customer house (destination) -->
+    <rect x="330" y="68" width="12" height="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="1"/>
+    <polygon points="330,68 336,62 342,68" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+    <text x="336" y="82" text-anchor="middle" font-size="5.5" fill="#15803d">CUSTOMER</text>
+
+    <!-- Badges -->
+    <rect x="188" y="128" width="48" height="13" fill="#f0fdf4" stroke="#86efac" stroke-width="0.8" rx="2"/>
+    <text x="212" y="137" text-anchor="middle" font-size="6" font-weight="700" fill="#15803d">Hub Design</text>
+    <rect x="240" y="128" width="44" height="13" fill="#f0fdf4" stroke="#86efac" stroke-width="0.8" rx="2"/>
+    <text x="262" y="137" text-anchor="middle" font-size="6" font-weight="700" fill="#15803d">Cap. Routing</text>
+    <rect x="288" y="128" width="58" height="13" fill="#dcfce7" stroke="#86efac" stroke-width="0.8" rx="2"/>
+    <text x="317" y="137" text-anchor="middle" font-size="6" font-weight="700" fill="#166534">Congestion ↓ CO₂ ↓</text>
+
+    <text x="188" y="146" font-size="5.5" fill="#6b7280">IEEE ITS · VRP with Underground Transport</text>
+
+    <rect class="tip" x="184" y="148" width="172" height="13" fill="#14532d" rx="3"/>
+    <text class="tip" x="270" y="157" text-anchor="middle" font-size="6" fill="#fff">Multi-modal transfer hubs · Capacity routing · CO₂ &amp; congestion reduction</text>
+  </g>
+
+  <!-- ══ COL 3: SIM-OPTIMIZATION ══ -->
+  <g class="grp">
+    <rect class="grp-bg" x="360" y="22" width="180" height="138" fill="#faf5ff" rx="0"/>
+
+    <!-- Column header -->
+    <rect x="368" y="28" width="164" height="20" fill="#ede9fe" rx="4"/>
+    <text x="450" y="41" text-anchor="middle" font-size="8" font-weight="800" fill="#5b21b6">⚙  OPS OPTIMIZATION &amp; SIM</text>
+
+    <!-- Pipeline: Problem → Model → Solve → Validate -->
+    <!-- Step boxes with arrows -->
+    <!-- Box 1: VRP Problem -->
+    <rect x="368" y="52" width="68" height="22" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2" rx="3"/>
+    <text x="402" y="61" text-anchor="middle" font-size="6.5" font-weight="700" fill="#4c1d95">VRP Problem</text>
+    <text x="402" y="70" text-anchor="middle" font-size="5.5" fill="#6d28d9">CVRP · PDPTW</text>
+
+    <!-- Arrow right -->
+    <line x1="436" y1="63" x2="446" y2="63" stroke="#7c3aed" stroke-width="1.5"/>
+    <polygon points="445,60 449,63 445,66" fill="#7c3aed"/>
+
+    <!-- Box 2: MILP/Math Model -->
+    <rect x="450" y="52" width="72" height="22" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2" rx="3"/>
+    <text x="486" y="61" text-anchor="middle" font-size="6.5" font-weight="700" fill="#4c1d95">Math Model</text>
+    <text x="486" y="70" text-anchor="middle" font-size="5.5" fill="#6d28d9">MILP formulation</text>
+
+    <!-- Arrow down from MILP -->
+    <line x1="486" y1="74" x2="486" y2="84" stroke="#7c3aed" stroke-width="1.5"/>
+    <polygon points="483,83 486,87 489,83" fill="#7c3aed"/>
+
+    <!-- Box 3: Metaheuristic Solver -->
+    <rect x="450" y="88" width="72" height="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.2" rx="3"/>
+    <text x="486" y="97" text-anchor="middle" font-size="6.5" font-weight="700" fill="#4c1d95">ALNS · GRASP</text>
+    <text x="486" y="106" text-anchor="middle" font-size="5.5" fill="#6d28d9">Metaheuristic</text>
+
+    <!-- Arrow left from solver -->
+    <line x1="450" y1="99" x2="440" y2="99" stroke="#7c3aed" stroke-width="1.5"/>
+    <polygon points="441,96 437,99 441,102" fill="#7c3aed"/>
+
+    <!-- Box 4: Simulation Validation -->
+    <rect x="368" y="88" width="68" height="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.2" rx="3"/>
+    <text x="402" y="97" text-anchor="middle" font-size="6.5" font-weight="700" fill="#4c1d95">Simulation</text>
+    <text x="402" y="106" text-anchor="middle" font-size="5.5" fill="#6d28d9">Stochastic valid.</text>
+
+    <!-- Output arrow down from simulation -->
+    <line x1="402" y1="110" x2="402" y2="120" stroke="#7c3aed" stroke-width="1.5"/>
+    <polygon points="399,119 402,123 405,119" fill="#7c3aed"/>
+
+    <!-- Result box -->
+    <rect x="368" y="122" width="154" height="16" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1" rx="3"/>
+    <text x="445" y="133" text-anchor="middle" font-size="7" font-weight="700" fill="#2e1065">Deployable Routing Policy</text>
+
+    <!-- Scenario icons -->
+    <text x="453" y="96" font-size="5.5" fill="#6b7280">Scenarios:</text>
+    <text x="453" y="104" font-size="5.5" fill="#6b7280">Demand · Breakdown · Traffic</text>
+
+    <!-- Paper tags -->
+    <text x="368" y="146" font-size="5.5" fill="#6b7280">Comp&amp;OR · EJOR · Comp&amp;IE</text>
+
+    <!-- Tooltip -->
+    <rect class="tip" x="362" y="148" width="174" height="13" fill="#2e1065" rx="3"/>
+    <text class="tip" x="449" y="157" text-anchor="middle" font-size="6" fill="#fff">Demand uncertainty · Fleet breakdowns · Traffic congestion</text>
+  </g>
+
+  <!-- ══ BOTTOM STRIP ══ -->
+  <rect y="160" width="540" height="26" fill="#f8faff"/>
+  <line y1="160" x2="540" y2="160" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="14" y="171" font-size="7.5" font-weight="700" fill="#374151">Methods</text>
+  <text x="14" y="180" font-size="7" fill="#6b7280">MILP · ALNS · GRASP · ML Energy Model · Discrete-Event Simulation · Robust Optimization</text>
+  <rect x="434" y="163" width="42" height="15" fill="#dbeafe" stroke="#93c5fd" stroke-width="1" rx="3"/>
+  <text x="455" y="174" text-anchor="middle" font-size="7" font-weight="700" fill="#1d4ed8">Cost ↓ CO₂ ↓</text>
+  <rect x="482" y="163" width="50" height="15" fill="#dcfce7" stroke="#86efac" stroke-width="1" rx="3"/>
+  <text x="507" y="174" text-anchor="middle" font-size="7" font-weight="600" fill="#15803d">IEEE ITS · TR-E</text>
+</svg>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;background:#fff;}
+svg{display:block;}
+.grp{cursor:default;}
+.grp-bg{opacity:0;transition:opacity .15s;}
+.grp:hover .grp-bg{opacity:1;}
+.tip{visibility:hidden;opacity:0;transition:opacity .15s;}
+.grp:hover .tip{visibility:visible;opacity:1;}
+</style>
+</head>
+<body>
+<svg viewBox="0 0 540 180" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+     font-family="'Inter','Segoe UI',system-ui,sans-serif">
+
+  <rect width="540" height="180" fill="#ffffff"/>
+
+  <!-- Header -->
+  <rect width="540" height="22" fill="#f5f3ff"/>
+  <text x="270" y="14" text-anchor="middle" font-size="8.5" font-weight="700" fill="#4c1d95" letter-spacing="0.06em">NEXT-GEN OPTIMIZATION: META-LEARNING · RL · QUANTUM</text>
+  <rect y="22" width="540" height="1" fill="#ddd6fe"/>
+
+  <!-- ══ LEFT: Problem Instances ══ -->
+  <g class="grp">
+    <rect class="grp-bg" x="12" y="28" width="120" height="118" fill="#f5f3ff" rx="5"/>
+    <rect x="16" y="32" width="112" height="112" fill="#fafafa" stroke="#e5e7eb" stroke-width="1" rx="3"/>
+    <text x="72" y="44" text-anchor="middle" font-size="7" font-weight="700" fill="#4c1d95">PROBLEM INSTANCES</text>
+
+    <!-- TSP mini graph -->
+    <circle cx="36" cy="62" r="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+    <circle cx="58" cy="54" r="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+    <circle cx="76" cy="66" r="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+    <circle cx="48" cy="76" r="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+    <circle cx="66" cy="80" r="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+    <line x1="36" y1="62" x2="58" y2="54" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="58" y1="54" x2="76" y2="66" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="76" y1="66" x2="66" y2="80" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="66" y1="80" x2="48" y2="76" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="48" y1="76" x2="36" y2="62" stroke="#a78bfa" stroke-width="1"/>
+    <text x="56" y="90" text-anchor="middle" font-size="6" fill="#6d28d9">TSP (NP-Hard)</text>
+
+    <!-- VRP mini routes -->
+    <circle cx="96" cy="58" r="4" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.2"/>
+    <text x="96" y="61" text-anchor="middle" font-size="5" font-weight="700" fill="#4c1d95">D</text>
+    <circle cx="84" cy="68" r="3" fill="#ede9fe" stroke="#a78bfa" stroke-width="1"/>
+    <circle cx="108" cy="66" r="3" fill="#ede9fe" stroke="#a78bfa" stroke-width="1"/>
+    <circle cx="90" cy="80" r="3" fill="#ede9fe" stroke="#a78bfa" stroke-width="1"/>
+    <line x1="96" y1="58" x2="84" y2="68" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="84" y1="68" x2="90" y2="80" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="96" y1="58" x2="108" y2="66" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="96" y="90" text-anchor="middle" font-size="6" fill="#6d28d9">VRP / CVRP</text>
+
+    <!-- Instance diversity -->
+    <line x1="24" y1="96" x2="118" y2="96" stroke="#e5e7eb" stroke-width="1"/>
+    <text x="72" y="106" text-anchor="middle" font-size="6.5" font-weight="600" fill="#4c1d95">Problem diversity</text>
+    <text x="72" y="116" text-anchor="middle" font-size="5.5" fill="#6b7280">n=20 → n=500 cities</text>
+    <text x="72" y="126" text-anchor="middle" font-size="5.5" fill="#6b7280">Benchmark + Real-world</text>
+    <rect class="tip" x="20" y="130" width="108" height="14" fill="#2e1065" rx="3"/>
+    <text class="tip" x="74" y="140" text-anchor="middle" font-size="6.5" fill="#fff">TSP · VRP · Scheduling · Net design</text>
+  </g>
+
+  <!-- ══ CENTER: Meta-Learning Engine ══ -->
+  <g class="grp">
+    <rect class="grp-bg" x="138" y="28" width="258" height="118" fill="#f5f3ff" rx="5"/>
+    <rect x="142" y="32" width="250" height="112" fill="#fafafa" stroke="#e5e7eb" stroke-width="1" rx="3"/>
+    <text x="267" y="44" text-anchor="middle" font-size="7" font-weight="700" fill="#4c1d95">META-LEARNING ENGINE</text>
+
+    <!-- Meta-Learner box -->
+    <rect x="192" y="50" width="150" height="28" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" rx="4"/>
+    <text x="267" y="62" text-anchor="middle" font-size="7" font-weight="700" fill="#4c1d95">Meta-Learner (MAML-style)</text>
+    <text x="267" y="73" text-anchor="middle" font-size="6" fill="#6d28d9">Task-agnostic policy · Fast adaptation</text>
+
+    <!-- RL branch -->
+    <rect x="152" y="86" width="90" height="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.2" rx="3"/>
+    <text x="197" y="96" text-anchor="middle" font-size="6.5" font-weight="700" fill="#4c1d95">RL-ALNS Solver</text>
+    <text x="197" y="105" text-anchor="middle" font-size="5.5" fill="#6d28d9">Destroy/Repair Operators</text>
+    <line x1="217" y1="78" x2="200" y2="86" stroke="#7c3aed" stroke-width="1.5"/>
+    <polygon points="201,83 197,87 204,87" fill="#7c3aed"/>
+
+    <!-- Neural solver branch -->
+    <rect x="254" y="86" width="90" height="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.2" rx="3"/>
+    <text x="299" y="96" text-anchor="middle" font-size="6.5" font-weight="700" fill="#4c1d95">Attn. Encoder</text>
+    <text x="299" y="105" text-anchor="middle" font-size="5.5" fill="#6d28d9">RL Policy Gradient</text>
+    <line x1="317" y1="78" x2="300" y2="86" stroke="#7c3aed" stroke-width="1.5"/>
+    <polygon points="301,83 297,87 304,87" fill="#7c3aed"/>
+
+    <!-- QAOA chip -->
+    <rect x="152" y="116" width="56" height="18" fill="#f0fdf4" stroke="#16a34a" stroke-width="1" rx="2"/>
+    <text x="180" y="124" text-anchor="middle" font-size="6" font-weight="700" fill="#166534">QAOA</text>
+    <text x="180" y="131" text-anchor="middle" font-size="5.5" fill="#166534">Quantum ⊕ Classical</text>
+    <line x1="180" y1="108" x2="180" y2="116" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+    <!-- Transfer learning arrow -->
+    <rect x="218" y="116" width="82" height="18" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="2"/>
+    <text x="259" y="124" text-anchor="middle" font-size="6" font-weight="700" fill="#78350f">Transfer Learning</text>
+    <text x="259" y="131" text-anchor="middle" font-size="5.5" fill="#92400e">Small → Large scale</text>
+    <line x1="259" y1="108" x2="259" y2="116" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+    <rect class="tip" x="146" y="127" width="240" height="14" fill="#2e1065" rx="3"/>
+    <text class="tip" x="266" y="137" text-anchor="middle" font-size="6.5" fill="#fff">Faster convergence on unseen instances vs. from-scratch solving</text>
+  </g>
+
+  <!-- ══ RIGHT: Convergence chart ══ -->
+  <g class="grp">
+    <rect class="grp-bg" x="402" y="28" width="126" height="118" fill="#f5f3ff" rx="5"/>
+    <rect x="406" y="32" width="118" height="112" fill="#fafafa" stroke="#e5e7eb" stroke-width="1" rx="3"/>
+    <text x="465" y="44" text-anchor="middle" font-size="7" font-weight="700" fill="#4c1d95">CONVERGENCE</text>
+
+    <!-- Chart axes -->
+    <line x1="424" y1="52" x2="424" y2="116" stroke="#9ca3af" stroke-width="1.5"/>
+    <line x1="424" y1="116" x2="514" y2="116" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="469" y="128" text-anchor="middle" font-size="5.5" fill="#6b7280">Iterations</text>
+    <text x="416" y="84" text-anchor="middle" font-size="5.5" fill="#6b7280" transform="rotate(-90,416,84)">Cost</text>
+    <text x="435" y="62" font-size="5.5" fill="#6b7280">High</text>
+    <text x="430" y="114" font-size="5.5" fill="#6b7280">Low</text>
+
+    <!-- Baseline (slow, grey) -->
+    <path d="M 424,58 C 442,68 468,86 514,100" stroke="#d1d5db" stroke-width="2" fill="none"/>
+    <text x="516" y="100" font-size="5.5" fill="#9ca3af">Base</text>
+
+    <!-- Meta-learned (fast, purple) -->
+    <path d="M 424,58 C 436,64 450,76 514,82" stroke="#7c3aed" stroke-width="2" fill="none"/>
+    <text x="516" y="82" font-size="5.5" fill="#7c3aed">Meta</text>
+
+    <!-- Gap annotation -->
+    <line x1="514" y1="82" x2="514" y2="100" stroke="#7c3aed" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="518" y="92" font-size="5.5" fill="#7c3aed">Gap</text>
+
+    <!-- Stars -->
+    <circle cx="514" cy="82" r="3" fill="#7c3aed"/>
+    <circle cx="514" cy="100" r="3" fill="#d1d5db"/>
+
+    <!-- Legend -->
+    <line x1="428" y1="108" x2="440" y2="108" stroke="#7c3aed" stroke-width="2"/>
+    <text x="443" y="111" font-size="5.5" fill="#4c1d95">Meta-learned</text>
+    <line x1="428" y1="118" x2="440" y2="118" stroke="#d1d5db" stroke-width="2"/>
+    <text x="443" y="121" font-size="5.5" fill="#6b7280">From scratch</text>
+
+    <rect class="tip" x="408" y="127" width="114" height="14" fill="#2e1065" rx="3"/>
+    <text class="tip" x="465" y="137" text-anchor="middle" font-size="6.5" fill="#fff">Faster + generalizes to unseen instances</text>
+  </g>
+
+  <!-- ══ BOTTOM STRIP ══ -->
+  <rect y="154" width="540" height="26" fill="#f5f3ff"/>
+  <line y1="154" x2="540" y2="154" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="14" y="165" font-size="7.5" font-weight="700" fill="#374151">Method</text>
+  <text x="14" y="176" font-size="7" fill="#6b7280">Meta-Learning (MAML) · RL Policy Gradient · ALNS with Learned Operators · Neural Combinatorial Solver · QAOA</text>
+  <rect x="436" y="157" width="40" height="16" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1" rx="3"/>
+  <text x="456" y="168" text-anchor="middle" font-size="7" font-weight="700" fill="#6d28d9">Speed ↑</text>
+  <rect x="482" y="157" width="52" height="16" fill="#ddd6fe" stroke="#a78bfa" stroke-width="1" rx="3"/>
+  <text x="508" y="168" text-anchor="middle" font-size="7" font-weight="600" fill="#4c1d95">ApplSoftComp · ITS</text>
+</svg>
+</body>
+</html>

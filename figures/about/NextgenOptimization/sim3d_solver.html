@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meta-Learning Combinatorial Optimizer</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#f8f9fa; overflow:hidden; font-family:'Segoe UI',system-ui,sans-serif; }
+#c { display:block; }
+#hdr { position:absolute; top:14px; left:16px; }
+#hdr h3 { font-size:12px; font-weight:700; color:#1a1a25; }
+#hdr p  { font-size:10px; color:#64748b; margin-top:2px; }
+#panel {
+  position:absolute; top:14px; right:16px;
+  background:rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.1);
+  border-radius:8px; padding:10px 14px; display:flex; flex-direction:column; gap:5px; min-width:160px;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+.stat { font-size:10px; color:#374151; display:flex; justify-content:space-between; gap:12px; }
+.stat span:last-child { color:#7c3aed; font-weight:700; font-variant-numeric:tabular-nums; }
+#leg { position:absolute; bottom:12px; left:16px; display:flex; gap:14px; flex-wrap:wrap; }
+.leg { display:flex; align-items:center; gap:6px; font-size:10px; color:#374151; }
+.sq { width:12px; height:4px; border-radius:2px; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hdr">
+  <h3>Meta-Learning TSP / VRP Solver</h3>
+  <p>Adaptive operator selection &amp; RL-based optimization · IO-LAB</p>
+</div>
+<div id="panel">
+  <div class="stat"><span>Algorithm</span><span id="s-alg">ALNS</span></div>
+  <div class="stat"><span>Iteration</span><span id="s-iter">0</span></div>
+  <div class="stat"><span>Tour Length</span><span id="s-tour">—</span></div>
+  <div class="stat"><span>Best Found</span><span id="s-best">—</span></div>
+  <div class="stat"><span>Improvement</span><span id="s-imp">—</span></div>
+  <div class="stat"><span>Instance</span><span id="s-inst">1 / 3</span></div>
+</div>
+<div id="leg">
+  <div class="leg"><div class="sq" style="background:#a78bfa"></div>Current Tour</div>
+  <div class="leg"><div class="sq" style="background:#22d3ee"></div>Best Tour</div>
+  <div class="leg"><div class="sq" style="background:#f59e0b88"></div>Swap Candidate</div>
+</div>
+<script>
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+function resize() { cv.width=window.innerWidth; cv.height=window.innerHeight; }
+resize(); window.addEventListener('resize',resize);
+
+const N_CITIES = 14;
+const ALGS = ['ALNS','RL-Solver','2-opt+','Meta-Learn'];
+let alg = 0;
+
+// ── Generate problem instance ─────────────────────────────
+function genCities() {
+  const W=cv.width, H=cv.height;
+  const PAD=80, chartH=120;
+  const cities = [];
+  for(let i=0;i<N_CITIES;i++) {
+    cities.push({
+      x: PAD + Math.random()*(W-PAD*2),
+      y: PAD + Math.random()*(H-PAD*2-chartH-20)
+    });
+  }
+  return cities;
+}
+
+function tourLength(tour, cities) {
+  let d=0;
+  for(let i=0;i<tour.length;i++) {
+    const a=cities[tour[i]], b=cities[tour[(i+1)%tour.length]];
+    d+=Math.hypot(b.x-a.x,b.y-a.y);
+  }
+  return d;
+}
+
+function randomTour(n) {
+  const t=[...Array(n).keys()];
+  for(let i=t.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[t[i],t[j]]=[t[j],t[i]];}
+  return t;
+}
+
+// 2-opt swap
+function twoOptSwap(tour, i, k) {
+  const t = [...tour];
+  let l=i, r=k;
+  while(l<r) { [t[l],t[r]]=[t[r],t[l]]; l++; r--; }
+  return t;
+}
+
+// ── State ─────────────────────────────────────────────────
+let cities, tour, bestTour, bestLen, curLen, initLen;
+let swapI=-1, swapK=-1, swapTimer=0;
+let iter=0, frame=0, instanceIdx=0;
+let history=[], maxHistory=60; // convergence chart data
+let phase='init'; // 'init','improving','done'
+let phaseTimer=0;
+
+const STEP_INTERVAL_FRAMES = 4;
+const SWAP_HIGHLIGHT_FRAMES = 28;
+const IMPROVE_DUR=720, DONE_DUR=110, INIT_DUR=60;
+
+function initInstance() {
+  cities = genCities();
+  tour = randomTour(N_CITIES);
+  initLen = tourLength(tour,cities);
+  curLen=initLen; bestLen=initLen; bestTour=[...tour];
+  iter=0; history=[]; swapI=-1; swapK=-1; phase='init'; phaseTimer=0;
+  alg=(alg+1)%ALGS.length;
+  instanceIdx++;
+  document.getElementById('s-alg').textContent=ALGS[alg];
+  document.getElementById('s-inst').textContent=instanceIdx+' / 3';
+}
+initInstance();
+
+// ── One optimization step ─────────────────────────────────
+function step() {
+  iter++;
+  // Pick random i,k
+  const i=1+Math.floor(Math.random()*(N_CITIES-2));
+  const k=i+1+Math.floor(Math.random()*(N_CITIES-i-1));
+  swapI=i; swapK=k; swapTimer=SWAP_HIGHLIGHT_FRAMES;
+  const candidate = twoOptSwap(tour,i,k);
+  const cLen = tourLength(candidate,cities);
+  const accept = cLen<curLen || (Math.random()<Math.exp((curLen-cLen)/Math.max(curLen*.02,1)));
+  if(accept){ tour=[...candidate]; curLen=cLen; }
+  if(curLen<bestLen){ bestLen=curLen; bestTour=[...tour]; }
+  history.push(curLen/initLen);
+  if(history.length>maxHistory) history.shift();
+}
+
+// ── Draw tour ─────────────────────────────────────────────
+function drawTour(t, cities, color, alpha, w=1.5) {
+  ctx.save(); ctx.strokeStyle=color; ctx.globalAlpha=alpha; ctx.lineWidth=w;
+  ctx.beginPath();
+  t.forEach((ci,i)=>{
+    const p=cities[ci];
+    i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y);
+  });
+  ctx.closePath(); ctx.stroke(); ctx.restore();
+}
+
+function drawCities() {
+  cities.forEach((c,i)=>{
+    const isSwap = (i===tour[swapI]||i===tour[swapK]) && swapTimer>0;
+    ctx.beginPath(); ctx.arc(c.x,c.y,isSwap?7:5,0,Math.PI*2);
+    if(i===0){ ctx.fillStyle='#ef4444'; } // depot
+    else { ctx.fillStyle=isSwap?'#f59e0b':'#818cf8'; }
+    ctx.fill();
+    ctx.strokeStyle=isSwap?'#fbbf24':'#6366f1'; ctx.lineWidth=1.5; ctx.stroke();
+    // City index
+    ctx.fillStyle='#1a1a25'; ctx.font='bold 8px system-ui';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(i===0?'D':i,c.x,c.y);
+  });
+}
+
+function drawSwapHighlight() {
+  if(swapI<0||swapTimer<=0) return;
+  const a=cities[tour[swapI]], b=cities[tour[swapK]];
+  ctx.save(); ctx.strokeStyle='#f59e0b'; ctx.globalAlpha=swapTimer/SWAP_HIGHLIGHT_FRAMES*.7;
+  ctx.lineWidth=2; ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+  ctx.restore();
+  swapTimer--;
+}
+
+function drawChart() {
+  const W=cv.width, H=cv.height;
+  const ch=90, cw=Math.min(W-40,300), cx=W-cw-20, cy=H-ch-14;
+  // Background
+  ctx.fillStyle='rgba(255,255,255,.92)'; ctx.strokeStyle='#d1d5db'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.roundRect(cx,cy,cw,ch,6); ctx.fill(); ctx.stroke();
+  // Label
+  ctx.fillStyle='#374151'; ctx.font='9px system-ui'; ctx.textAlign='left';
+  ctx.fillText('Convergence (normalized tour length)',cx+8,cy+12);
+  // Line
+  if(history.length<2) return;
+  const mn=Math.min(...history), mx=Math.max(...history);
+  const range=Math.max(mx-mn,.001);
+  ctx.beginPath(); ctx.strokeStyle='#a78bfa'; ctx.lineWidth=1.5;
+  history.forEach((v,i)=>{
+    const px=cx+8+(i/(maxHistory-1))*(cw-16);
+    const py=cy+ch-14-(v-mn)/range*(ch-28);
+    i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+  });
+  ctx.stroke();
+  // Current value dot
+  const last=history[history.length-1];
+  const lpx=cx+8+((history.length-1)/(maxHistory-1))*(cw-16);
+  const lpy=cy+ch-14-(last-mn)/range*(ch-28);
+  ctx.beginPath(); ctx.arc(lpx,lpy,3,0,Math.PI*2);
+  ctx.fillStyle='#a78bfa'; ctx.fill();
+}
+
+// ── Main loop ─────────────────────────────────────────────
+function draw() {
+  requestAnimationFrame(draw);
+  frame++; phaseTimer++;
+
+  if(phase==='init' && phaseTimer>INIT_DUR){ phase='improving'; phaseTimer=0; }
+  else if(phase==='improving'){
+    if(phaseTimer % STEP_INTERVAL_FRAMES === 0) step();
+    if(phaseTimer>IMPROVE_DUR || (curLen<initLen*.82 && iter>90)){ phase='done'; phaseTimer=0; }
+  }
+  else if(phase==='done' && phaseTimer>DONE_DUR){ initInstance(); }
+
+  const W=cv.width, H=cv.height;
+  ctx.fillStyle='#f8f9fa'; ctx.fillRect(0,0,W,H);
+
+  // Faint dot grid
+  ctx.fillStyle='#d1d5db';
+  for(let x=40;x<W;x+=40) for(let y=40;y<H;y+=40){
+    ctx.beginPath(); ctx.arc(x,y,1,0,Math.PI*2); ctx.fill();
+  }
+
+  if(cities){
+    drawTour(bestTour,cities,'#22d3ee',0.3,1);
+    drawTour(tour,cities,'#a78bfa',0.8,1.5);
+    drawSwapHighlight();
+    drawCities();
+    drawChart();
+  }
+
+  // Update stats
+  if(cities && bestLen){
+    const imp = ((initLen-bestLen)/initLen*100).toFixed(1);
+    document.getElementById('s-iter').textContent=iter;
+    document.getElementById('s-tour').textContent=Math.round(curLen);
+    document.getElementById('s-best').textContent=Math.round(bestLen);
+    document.getElementById('s-imp').textContent=(initLen?'-'+imp+'%':'—');
+  }
+
+  // Phase label
+  if(phase==='init'){ ctx.fillStyle='#374151'; ctx.font='11px system-ui'; ctx.textAlign='center'; ctx.fillText('Generating new instance…',W/2,H/2); }
+  if(phase==='done'){ ctx.fillStyle='#16a34a'; ctx.font='bold 11px system-ui'; ctx.textAlign='center'; ctx.fillText('Converged — loading next instance',W/2,50); }
+}
+draw();
+</script>
+</body>
+</html>

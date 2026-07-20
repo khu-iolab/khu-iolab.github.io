@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supply Chain Network Resilience</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#f8f9fa; overflow:hidden; font-family:'Segoe UI',system-ui,sans-serif; }
+#c { display:block; }
+#hdr { position:absolute; top:14px; left:16px; }
+#hdr h3 { font-size:12px; font-weight:700; color:#1a1a25; }
+#hdr p  { font-size:10px; color:#64748b; margin-top:2px; }
+#badge {
+  position:absolute; top:14px; right:16px;
+  padding:4px 12px; border-radius:20px; font-size:10px; font-weight:700;
+  letter-spacing:.05em; transition: background .4s, color .4s, border-color .4s;
+}
+.b-normal   { background:rgba(16,185,129,.15); color:#059669; border:1px solid rgba(16,185,129,.4); }
+.b-disrupt  { background:rgba(239,68,68,.12);  color:#dc2626; border:1px solid rgba(239,68,68,.35); }
+.b-recover  { background:rgba(59,130,246,.12); color:#2563eb; border:1px solid rgba(59,130,246,.3); }
+.b-stable   { background:rgba(16,185,129,.15); color:#059669; border:1px solid rgba(16,185,129,.4); }
+#leg { position:absolute; bottom:12px; left:16px; display:flex; flex-direction:column; gap:5px; }
+.leg { display:flex; align-items:center; gap:7px; font-size:10px; color:#374151; }
+.dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hdr">
+  <h3>Supply Chain Network Resilience</h3>
+  <p>Disruption propagation &amp; adaptive recovery · IO-LAB</p>
+</div>
+<div id="badge" class="b-normal">NORMAL OPERATION</div>
+<div id="leg">
+  <div class="leg"><div class="dot" style="background:#22c55e"></div>Supplier</div>
+  <div class="leg"><div class="dot" style="background:#3b82f6"></div>Distribution Center</div>
+  <div class="leg"><div class="dot" style="background:#f59e0b"></div>Customer</div>
+  <div class="leg"><div class="dot" style="background:#ef4444"></div>Disrupted</div>
+</div>
+<script>
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+const badge = document.getElementById('badge');
+
+function resize() {
+  cv.width = window.innerWidth;
+  cv.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── Layout ────────────────────────────────────────────────
+function layout() {
+  const W = cv.width, H = cv.height;
+  const suppliers = [
+    { x:W*.18, y:H*.18, tier:'sup', idx:0, label:'S1' },
+    { x:W*.50, y:H*.14, tier:'sup', idx:1, label:'S2' },
+    { x:W*.82, y:H*.18, tier:'sup', idx:2, label:'S3' },
+  ];
+  const dcs = [
+    { x:W*.18, y:H*.48, tier:'dc', idx:0, label:'DC1' },
+    { x:W*.38, y:H*.46, tier:'dc', idx:1, label:'DC2' },
+    { x:W*.62, y:H*.46, tier:'dc', idx:2, label:'DC3' },
+    { x:W*.82, y:H*.48, tier:'dc', idx:3, label:'DC4' },
+  ];
+  const cust = [
+    { x:W*.10, y:H*.80, tier:'cust', idx:0, label:'C1' },
+    { x:W*.25, y:H*.84, tier:'cust', idx:1, label:'C2' },
+    { x:W*.40, y:H*.80, tier:'cust', idx:2, label:'C3' },
+    { x:W*.60, y:H*.80, tier:'cust', idx:3, label:'C4' },
+    { x:W*.75, y:H*.84, tier:'cust', idx:4, label:'C5' },
+    { x:W*.90, y:H*.80, tier:'cust', idx:5, label:'C6' },
+  ];
+  const edges = [
+    // sup→dc
+    {a:suppliers[0],b:dcs[0]}, {a:suppliers[0],b:dcs[1]},
+    {a:suppliers[1],b:dcs[1]}, {a:suppliers[1],b:dcs[2]},
+    {a:suppliers[2],b:dcs[2]}, {a:suppliers[2],b:dcs[3]},
+    // dc→cust
+    {a:dcs[0],b:cust[0]}, {a:dcs[0],b:cust[1]},
+    {a:dcs[1],b:cust[1]}, {a:dcs[1],b:cust[2]},
+    {a:dcs[2],b:cust[3]}, {a:dcs[2],b:cust[4]},
+    {a:dcs[3],b:cust[4]}, {a:dcs[3],b:cust[5]},
+  ];
+  return { suppliers, dcs, cust, edges, all:[...suppliers,...dcs,...cust] };
+}
+
+// ── Particles ─────────────────────────────────────────────
+let particles = [];
+function nodeKey(n){ return n.tier+':'+n.idx; }
+function initParticles(edges) {
+  particles = [];
+  edges.forEach(e => {
+    for (let i = 0; i < 4; i++) {
+      particles.push({ aTier:e.a.tier, aIdx:e.a.idx, bTier:e.b.tier, bIdx:e.b.idx, t: i/4, sp: .004+Math.random()*.003 });
+    }
+  });
+}
+function lookupNode(net, tier, idx) {
+  if(tier==='sup') return net.suppliers[idx];
+  if(tier==='dc')  return net.dcs[idx];
+  return net.cust[idx];
+}
+
+// ── State machine ─────────────────────────────────────────
+const PHASES = { normal:220, disrupting:45, cascading:90, recovering:110, stable:55 };
+let state = 'normal', timer = 0, disruptedDCIdx = -1, affectedCust = [], altEdges = [];
+
+function setBadge(cls, txt) {
+  badge.className = cls;
+  badge.textContent = txt;
+}
+
+function nextState(net) {
+  const disruptedDC = disruptedDCIdx >= 0 ? net.dcs[disruptedDCIdx] : null;
+  if (state==='normal' && timer>PHASES.normal) {
+    state='disrupting'; timer=0;
+    disruptedDCIdx = Math.floor(Math.random()*4);
+    const dc = net.dcs[disruptedDCIdx];
+    affectedCust = net.edges
+      .filter(e=>(e.a.tier==='dc'&&e.a.idx===disruptedDCIdx)||(e.b.tier==='dc'&&e.b.idx===disruptedDCIdx))
+      .map(e=>(e.b.tier==='dc'&&e.b.idx===disruptedDCIdx)?{tier:e.a.tier,idx:e.a.idx}:{tier:e.b.tier,idx:e.b.idx});
+    setBadge('b-disrupt','DISRUPTION DETECTED');
+  } else if (state==='disrupting' && timer>PHASES.disrupting) {
+    state='cascading'; timer=0;
+    setBadge('b-disrupt','CASCADE IN PROGRESS');
+  } else if (state==='cascading' && timer>PHASES.cascading) {
+    state='recovering'; timer=0;
+    // alt edges: reroute affected customers through neighboring DC
+    const altDCIdx = net.dcs.findIndex((_,i)=>i!==disruptedDCIdx);
+    altEdges = affectedCust
+      .filter(n=>n.tier==='cust')
+      .map(c=>({altDCIdx,custIdx:c.idx,alt:true,prog:0}));
+    setBadge('b-recover','RECOVERY ROUTING');
+  } else if (state==='recovering' && timer>PHASES.recovering) {
+    state='stable'; timer=0;
+    setBadge('b-stable','SYSTEM STABLE');
+  } else if (state==='stable' && timer>PHASES.stable) {
+    state='normal'; timer=0; disruptedDCIdx=-1; affectedCust=[]; altEdges=[];
+    setBadge('b-normal','NORMAL OPERATION');
+  }
+}
+
+// ── Draw helpers ──────────────────────────────────────────
+function nodeColor(n) {
+  return n.tier==='sup' ? '#22c55e' : n.tier==='dc' ? '#3b82f6' : '#f59e0b';
+}
+
+function drawEdgeLine(a, b, color, alpha, dash=false, w=1.5) {
+  ctx.save();
+  ctx.globalAlpha = alpha; ctx.strokeStyle = color; ctx.lineWidth = w;
+  if (dash) ctx.setLineDash([5,5]);
+  ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+  ctx.restore();
+}
+
+function drawNode(n, overColor, pulse=0) {
+  const c = overColor||nodeColor(n);
+  const r = n.tier==='dc' ? 16 : n.tier==='sup' ? 12 : 10;
+  const rr = r*(1+pulse*0.08);
+  // glow
+  const g = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,rr*2.5);
+  g.addColorStop(0,c+'28'); g.addColorStop(1,c+'00');
+  ctx.beginPath(); ctx.arc(n.x,n.y,rr*2.5,0,Math.PI*2);
+  ctx.fillStyle=g; ctx.fill();
+  // fill + stroke
+  ctx.beginPath(); ctx.arc(n.x,n.y,rr,0,Math.PI*2);
+  ctx.fillStyle=c+'30'; ctx.fill();
+  ctx.strokeStyle=c; ctx.lineWidth=2; ctx.stroke();
+  // label
+  ctx.fillStyle='#1a1a25'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.font=`bold ${n.tier==='dc'?10:8}px system-ui`;
+  ctx.fillText(n.label,n.x,n.y);
+}
+
+let frame=0;
+function draw() {
+  requestAnimationFrame(draw);
+  frame++; timer++;
+  const W=cv.width, H=cv.height;
+  const net = layout();
+  nextState(net);
+
+  ctx.fillStyle='#f8f9fa'; ctx.fillRect(0,0,W,H);
+
+  // Grid lines (faint)
+  ctx.strokeStyle='#e5e7eb'; ctx.lineWidth=0.5;
+  for(let i=0;i<W;i+=40){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,H);ctx.stroke();}
+  for(let j=0;j<H;j+=40){ctx.beginPath();ctx.moveTo(0,j);ctx.lineTo(W,j);ctx.stroke();}
+
+  const disruptedDC = disruptedDCIdx >= 0 ? net.dcs[disruptedDCIdx] : null;
+
+  // Edges (normal)
+  net.edges.forEach(e => {
+    const disrupted = (state==='cascading'||state==='recovering'||state==='stable')
+      && disruptedDC && (e.a.idx===disruptedDCIdx&&e.a.tier==='dc' || e.b.idx===disruptedDCIdx&&e.b.tier==='dc');
+    if (disrupted) {
+      drawEdgeLine(e.a,e.b,'#ef4444',0.35);
+    } else {
+      const c = e.a.tier==='sup' ? '#22c55e' : '#3b82f6';
+      drawEdgeLine(e.a,e.b,c,0.35);
+    }
+  });
+
+  // Alt edges (recovery)
+  altEdges.forEach(ae => {
+    if(state==='recovering') ae.prog = Math.min(ae.prog+0.014,1);
+    const a = net.dcs[ae.altDCIdx], b = net.cust[ae.custIdx];
+    if(a&&b&&ae.prog>0) drawEdgeLine(a,b,'#2563eb',0.7*ae.prog,true,2);
+  });
+  if(state==='stable') altEdges.forEach(ae=>{
+    const a=net.dcs[ae.altDCIdx],b=net.cust[ae.custIdx];
+    if(a&&b) drawEdgeLine(a,b,'#2563eb',0.6,false,2);
+  });
+
+  // Particles
+  particles.forEach(p => {
+    p.t += p.sp; if(p.t>1) p.t-=1;
+    const isDisruptEdge = disruptedDCIdx>=0 && state!=='normal' &&
+      ((p.aTier==='dc'&&p.aIdx===disruptedDCIdx)||(p.bTier==='dc'&&p.bIdx===disruptedDCIdx));
+    if(isDisruptEdge) return;
+    const a = lookupNode(net,p.aTier,p.aIdx), b = lookupNode(net,p.bTier,p.bIdx);
+    if(!a||!b) return;
+    const x = a.x+(b.x-a.x)*p.t;
+    const y = a.y+(b.y-a.y)*p.t;
+    const c = p.aTier==='sup'?'#22c55e':'#3b82f6';
+    ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2);
+    ctx.fillStyle=c; ctx.globalAlpha=0.85; ctx.fill(); ctx.globalAlpha=1;
+  });
+
+  // Nodes
+  const pulse = Math.sin(frame*.06);
+  net.all.forEach(n => {
+    const isDisr = disruptedDC && n.tier==='dc' && n.idx===disruptedDCIdx;
+    const isAff  = affectedCust.some(a=>a.tier===n.tier&&a.idx===n.idx) && (state==='cascading'||state==='recovering');
+    let oc = null;
+    if(isDisr){ const fl=Math.sin(frame*.25)>.0; oc=fl?'#ef4444':'#f87171'; }
+    else if(isAff) oc='#fb923c';
+    drawNode(n, oc, pulse);
+  });
+
+  // Disruption pulse ring
+  if(state==='disrupting' && disruptedDC){
+    const prog = timer/PHASES.disrupting;
+    ctx.beginPath(); ctx.arc(disruptedDC.x,disruptedDC.y,18+prog*50,0,Math.PI*2);
+    ctx.strokeStyle='#ef4444'; ctx.globalAlpha=(1-prog)*.9; ctx.lineWidth=2;
+    ctx.stroke(); ctx.globalAlpha=1;
+  }
+
+  // Tier labels
+  ctx.font='bold 9px system-ui'; ctx.textAlign='left'; ctx.textBaseline='middle';
+  [['Tier 1 — Suppliers',net.suppliers[0].y,'#16a34a'],
+   ['Tier 2 — Distribution Centers',net.dcs[0].y,'#2563eb'],
+   ['Tier 3 — Customers',net.cust[0].y,'#d97706']]
+  .forEach(([t,y,c])=>{
+    ctx.fillStyle=c+'99'; ctx.fillText(t, 6, y);
+  });
+}
+draw();
+// init particles once
+initParticles(layout().edges);
+</script>
+</body>
+</html>
