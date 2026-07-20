@@ -149,16 +149,17 @@ img {
     transition: filter var(--transition-medium);
 }
 
-/* New wordmark logo (figures/newlogo_20260629.png) — replaces .logo-icon + .logo-name spans */
+/* Cropped transparent wordmark logo for navbar and footer */
 .logo-mark {
-    height: 38px;
+    height: 40px;
     width: auto;
+    max-width: 180px;
     object-fit: contain;
     display: block;
     transition: filter var(--transition-medium);
 }
 .navbar:not(.scrolled) .logo-mark {
-    /* Over dark Spline hero, force the navy PNG to render white */
+    /* Over dark hero sections, force the navy PNG to render white */
     filter: brightness(0) invert(1);
 }
 /* footer is light bg in v2.0 → no filter, native navy reads correctly */
