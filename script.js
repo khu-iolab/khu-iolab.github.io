@@ -3,10 +3,12 @@ const navbar = document.querySelector('.navbar');
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 
+const isHomePage = !navbar.classList.contains('scrolled');
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
-    } else {
+    } else if (isHomePage) {
         navbar.classList.remove('scrolled');
     }
 
