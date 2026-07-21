@@ -149,17 +149,16 @@ img {
     transition: filter var(--transition-medium);
 }
 
-/* Cropped transparent wordmark logo for navbar and footer */
+/* Icon-only logo — square mark, no wordmark text */
 .logo-mark {
-    height: 40px;
-    width: auto;
-    max-width: 180px;
+    height: 36px;
+    width: 36px;
     object-fit: contain;
     display: block;
+    margin: -2px;
     transition: filter var(--transition-medium);
 }
 .navbar:not(.scrolled) .logo-mark {
-    /* Over dark hero sections, force the navy PNG to render white */
     filter: brightness(0) invert(1);
 }
 /* footer is light bg in v2.0 → no filter, native navy reads correctly */
@@ -2881,7 +2880,7 @@ img {
     z-index: 10;
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 var(--container-padding-x);
+    padding: 5rem var(--container-padding-x) 0;
     width: 100%;
     text-align: left;
 }
