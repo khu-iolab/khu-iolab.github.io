@@ -1,445 +1,272 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>연구과제 - IO LAB</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
-    <style>
-        .nav-link {
-            color: var(--text-secondary) !important;
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary) !important;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--accent-primary);
-            font-size: 0.85rem;
-            margin-bottom: 30px;
-            transition: all var(--transition-fast);
-            text-decoration: none;
-        }
-
-        .back-link:hover {
-            transform: translateX(-3px);
-        }
-
-        .back-link svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .project-section {
-            margin-bottom: 40px;
-        }
-
-        .project-section-title {
-            font-size: 1.2rem;
-            margin-bottom: 14px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--border-color);
-            color: var(--accent-primary);
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연구과제 · IO-LAB</title>
+<link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: #1a1a25; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  a:hover { color: #00a882; }
+  .nav-l { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+  .nav-l:hover { color: #5eead4; }
+  .ft-l { color: #6a6a7a; }
+  .ft-l:hover { color: #00D4AA; }
+  .prj-row:hover { background: rgba(0,212,170,0.04); }
+</style>
 </head>
-
 <body>
-    <!-- Navigation -->
-    <nav class="navbar scrolled">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-            </a>
-            <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="team.html" class="nav-link" data-i18n="nav.team">구성원</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="team.html#advisor" data-i18n="nav.team.advisor">지도교수</a></li>
-                        <li><a href="team.html#members" data-i18n="nav.team.members">연구원</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="research.html" class="nav-link" data-i18n="nav.research">연구분야</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="research.html#logistics" data-i18n="nav.research.logistics">물류 최적화</a></li>
-                        <li><a href="research.html#network" data-i18n="nav.research.network">네트워크 최적화</a></li>
-                        <li><a href="research.html#production" data-i18n="nav.research.production">생산 최적화</a></li>
-                        <li><a href="research.html#nextgen" data-i18n="nav.research.nextgen">차세대 최적화</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="publications.html" class="nav-link" data-i18n="nav.publications">논문</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="publications.html#international" data-i18n="nav.pub.international">국제 논문</a></li>
-                        <li><a href="publications.html#domestic" data-i18n="nav.pub.domestic">국내 논문</a></li>
-                        <li><a href="publications.html#conference" data-i18n="nav.pub.conference">학회지</a></li>
-                        <li><a href="publications.html#patent" data-i18n="nav.pub.patent">특허</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="projects.html" class="nav-link" style="color: var(--text-primary) !important;" data-i18n="nav.projects">연구과제</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="projects.html#ongoing" data-i18n="nav.proj.ongoing">진행중인 과제</a></li>
-                        <li><a href="projects.html#completed" data-i18n="nav.proj.completed">완료한 과제</a></li>
-                    </ul>
-                </li>
-                
-                <li class="nav-dropdown">
-                    <a href="learningmaterials/index.html" class="nav-link" data-i18n="nav.courses">교육자료</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="learningmaterials/index.html#ie315000" data-i18n="nav.courses.scm">공급사슬관리</a></li>
-                        <li><a href="learningmaterials/index.html#ie105000" data-i18n="nav.courses.ie">산업경영공학의 이해</a></li>
-                        <li><a href="https://www.youtube.com/@IO-LAB-khu" data-i18n="nav.courses.youtube" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000" style="vertical-align:middle;margin-right:5px"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a></li>
-                        <li><a href="https://www.instagram.com/khu_iolab/" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" style="vertical-align:middle;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="news.html" class="nav-link" data-i18n="nav.community">커뮤니티</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="news.html" data-i18n="nav.community.news">소식</a></li>
-                        <li><a href="photos.html" data-i18n="nav.community.photos">사진</a></li>
-                        <li><a href="contact.html" data-i18n="nav.community.contact">연락처</a></li>
-                    </ul>
-                </li>
-            </ul>
-                        <div class="lang-toggle">
-                <span class="lang-option" data-lang="en" onclick="toggleLang('en')">EN</span>
-                <span class="lang-divider">|</span>
-                <span class="lang-option" data-lang="ko" onclick="toggleLang('ko')">KO</span>
+<div style="background:#fff;min-height:100vh;">
+
+  <!-- nav -->
+  <nav style="background:#0b1120;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+    <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:32px;width:32px;object-fit:contain;">IO-LAB</a>
+    <div style="display:flex;gap:34px;font-size:0.9rem;font-weight:500;">
+      <a href="members.html" class="nav-l">구성원</a><a href="research.html" class="nav-l">연구분야</a><a href="publications.html" class="nav-l">논문</a><a href="projects.html" style="color:#5eead4;font-weight:600;">연구과제</a><a href="courses.html" class="nav-l">교육자료</a><a href="community.html" class="nav-l">커뮤니티</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
+  </nav>
+
+  <!-- page hero -->
+  <div style="background:#0b1120;padding:72px 52px 58px;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;">Projects</span>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;">연구과제</h1>
+      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:560px;">진행 중이거나 완료된 정부·산학 연구과제입니다.</p>
+    </div>
+  </div>
+
+  <div style="padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:64px;">
+
+      <!-- Ongoing -->
+      <div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.7rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;">진행중인 <span style="color:#00a882;">과제</span></h3>
+        <p style="font-size:0.9rem;color:#8a8a98;margin-bottom:18px;">Ongoing Projects</p>
+        <div style="display:flex;flex-direction:column;">
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#00a882;line-height:1.9;">2025.06 ~ 2028.05</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">V2G 기반 스마트 물류-전력망 통합 운영 최적화 연구</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">전기차가 소비 주체를 넘어 에너지 조절 자원으로 기능하는 상황을 전제로, 물류 네트워크의 운영 의사결정과 전력 계통의 안정적 관리를 하나의 최적화 틀에서 통합하여 비용 효율성·계통 안정성·지속가능성을 동시에 달성할 수 있는 통합 운영 전략을 제시하는 연구</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">한국연구재단 · 연구책임자</span>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Projects Page -->
-    <section class="section projects-page">
-        <div class="container">
-            <a href="index.html" class="back-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                홈으로
-            </a>
-
-            <div id="ongoing" class="project-section">
-            <h3 class="project-section-title" data-i18n="nav.proj.ongoing">진행중인 과제</h3>
-            <div class="projects-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2025.06 ~ 2028.05</span>
-                                <h4>V2G 기반 스마트 물류-전력망 통합 운영 최적화 연구</h4>
-                                <p>전기차가 소비 주체를 넘어 에너지 조절 자원으로 기능하는 상황을 전제로, 물류 네트워크의 운영 의사결정과 전력 계통의 안정적 관리를 하나의 최적화 틀에서
-                                    통합하여 비용 효율성·계통 안정성·지속가능성을 동시에 달성할 수 있는 통합 운영 전략을 제시하는 연구</p>
-                                <span class="timeline-funder">한국연구재단 · 연구책임자</span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/NRF.svg" alt="한국연구재단" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2026.01 ~ 2026.12</span>
-                                <h4>실시간 동적 가격 반응형 EV 물류–배전망 통합 운영 모형(EVRP–OPF) 정립에 관한 연구</h4>
-                                <p>실시간 전력요금 신호를 내재화하여 EV 물류 경로·충방전 의사결정과 배전망 최적화(OPF)를 연계하고, 이를 통해 물류 비용과 전력 계통 부담을 동시에
-                                    최소화하는 통합 운영 최적화 프레임워크를 정립하는 연구</p>
-                                <span class="timeline-funder">정석물류학술재단 · 연구책임자</span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/jungseok.jpg" alt="정석물류학술재단" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2026.03 ~ 2027.02</span>
-                                <h4>반도체 팹 물류 자동화를 위한 OHT 제어 전략의 체계적 비교 및 최적화 연구</h4>
-                                <p>반도체 팹의 자동화 물류 시스템의 핵심인 OHT(Overhead Hoist Transport)의 다양한 배차·경로·교통 제어 전략을
-                                    체계적으로 비교·분석하고, 시뮬레이션 기반 평가와 수리적 최적화 기법을 결합하여 혼잡·교착 상황에서도 팹 전체의 물류 처리량과
-                                    운영 효율을 극대화할 수 있는 통합 제어 전략을 도출하는 연구</p>
-                                <span class="timeline-funder">경희대학교 · 연구책임자</span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/경희대.png" alt="경희대학교" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2023 ~ 현재</span>
-                                <h4>Real-time last mile delivery system using collaborative ground-aerial movable
-                                    stations: Theory, algorithm and application</h4>
-                                <p>실시간 라스트마일 배송 시스템 개발을 위한 지상-공중 이동 기지 협업 시스템의 이론, 알고리즘 및 응용 연구</p>
-                                <span class="timeline-funder">한국연구재단</span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/NRF.svg" alt="한국연구재단" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.projects-timeline -->
-            </div><!-- /#ongoing -->
-
-            <div id="completed" class="project-section">
-            <h3 class="project-section-title" data-i18n="nav.proj.completed">완료한 과제</h3>
-            <div class="projects-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2023</span>
-                                <h4>Development of multipoint servocontrol die cushion and process monitoring module for
-                                    improving the press forming quality</h4>
-                                <p>프레스 성형 품질 향상을 위한 다점 서보 제어 다이 쿠션 및 공정 모니터링 모듈 개발</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)한빛산업</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/한빛.png" alt="(주)한빛산업" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2023</span>
-                                <h4>Development of motor housing for high-quality electric vehicles through the
-                                    application of high-function intelligent molds</h4>
-                                <p>고기능 지능형 금형 적용을 통한 고품질 전기차 모터 하우징 개발</p>
-                                <span class="timeline-funder">중소벤처기업부 · <strong>(주)대국정공</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/중소벤처기업부.png" alt="중소벤처기업부" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2023</span>
-                                <h4>Development of material forging and manufacturing process technology to improve the
-                                    mechanical properties of the core parts of the reducer</h4>
-                                <p>감속기 핵심 부품의 기계적 특성 향상을 위한 소재 단조 및 제조 공정 기술 개발</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)케이피에프충주공장</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/케이피에프.jpg" alt="(주)케이피에프충주공장" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2023</span>
-                                <h4>Development of vibration insulation products using hybrid materials for powertrain
-                                    mount systems</h4>
-                                <p>파워트레인 마운트 시스템용 하이브리드 소재를 활용한 진동 절연 제품 개발</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)코다코</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/코다코.gif" alt="(주)코다코" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2022</span>
-                                <h4>Development of multipoint servocontrol die cushion and monitoring module</h4>
-                                <p>다점 서보 제어 다이 쿠션 및 모니터링 모듈 개발</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)한빛산업</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/한빛.png" alt="(주)한빛산업" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2022</span>
-                                <h4>Development of manufacturing technology for multilateral body parts</h4>
-                                <p>다각형 차체 부품 제조 기술 개발</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)새한산업</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/세한.jpg" alt="(주)새한산업" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2022</span>
-                                <h4>Forging and process technology to improve reducer component strength</h4>
-                                <p>감속기 부품 강도 향상을 위한 단조 및 공정 기술</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)케이피에프충주공장</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/케이피에프.jpg" alt="(주)케이피에프충주공장" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2022</span>
-                                <h4>High-performance powertrain housing using intelligent mold tech</h4>
-                                <p>지능형 금형 기술을 활용한 고성능 파워트레인 하우징</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)코넥</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/코넥.jpg" alt="(주)코넥" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2022</span>
-                                <h4>Hybrid vibration proof system development for PBV powertrain mounts</h4>
-                                <p>PBV 파워트레인 마운트용 하이브리드 진동 방지 시스템 개발</p>
-                                <span class="timeline-funder">산업통상자원부 · <strong>(주)코다코</strong></span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/산자부.png" alt="산업통상자원부" class="org-logo">
-                                <img src="figures/project/코다코.gif" alt="(주)코다코" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2019 ~ 2022</span>
-                                <h4>Visualization of Repair Operations Management for Networked Systems Resilience</h4>
-                                <p>네트워크 시스템 회복력을 위한 수리 운영 관리 시각화</p>
-                                <span class="timeline-funder">Navy Crane Center, U.S.</span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/navycranecenter.png" alt="Navy Crane Center" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-main">
-                            <div class="timeline-text">
-                                <span class="timeline-period">2018 ~ 2019</span>
-                                <h4>Resilience in Networked Systems using collaboration (RNSC) Project</h4>
-                                <p>협업을 활용한 네트워크 시스템 회복력 (RNSC) 프로젝트</p>
-                                <span class="timeline-funder">Navy Crane Center, U.S.</span>
-                            </div>
-                            <div class="timeline-logo">
-                                <img src="figures/project/navycranecenter.png" alt="Navy Crane Center" class="org-logo">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.projects-timeline -->
-            </div><!-- /#completed -->
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="nav-logo">
-                        <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-                    </a>
-                    <p>지능형 최적화 연구실<br>경희대학교</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4>빠른 링크</h4>
-                        <a href="index.html#news" data-i18n="nav.community.news">소식</a>
-                        <a href="index.html#research" data-i18n="nav.research">연구분야</a>
-                        <a href="index.html#publications" data-i18n="nav.publications">논문</a>
-                        <a href="index.html#projects" data-i18n="nav.projects">연구과제</a>
-                        <a href="index.html#team" data-i18n="nav.team">구성원</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>자료</h4>
-                        <a href="#">GitHub</a>
-                        <a href="#">Google Scholar</a>
-                        <a href="#">ResearchGate</a>
-                    </div>
-                </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/NRF.svg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 IO LAB. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+          </div>
 
-    <script src="script.js"></script>
-    <script src="lang.js"></script>
-    <script src="lang.js"></script>
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#00a882;line-height:1.9;">2026.01 ~ 2026.12</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">실시간 동적 가격 반응형 EV 물류–배전망 통합 운영 모형(EVRP–OPF) 정립에 관한 연구</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">실시간 전력요금 신호를 내재화하여 EV 물류 경로·충방전 의사결정과 배전망 최적화(OPF)를 연계하고, 물류 비용과 전력 계통 부담을 동시에 최소화하는 통합 운영 최적화 프레임워크를 정립하는 연구</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">정석물류학술재단 · 연구책임자</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/jungseok.jpg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#00a882;line-height:1.9;">2026.03 ~ 2027.02</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">반도체 팹 물류 자동화를 위한 OHT 제어 전략의 체계적 비교 및 최적화 연구</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">OHT(Overhead Hoist Transport)의 다양한 배차·경로·교통 제어 전략을 체계적으로 비교·분석하고, 시뮬레이션 기반 평가와 수리적 최적화 기법을 결합하여 혼잡·교착 상황에서도 팹 전체의 물류 처리량과 운영 효율을 극대화할 수 있는 통합 제어 전략을 도출하는 연구</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">경희대학교 · 연구책임자</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/khu.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#00a882;line-height:1.9;">2023 ~ 현재</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Real-time last mile delivery system using collaborative ground-aerial movable stations: Theory, algorithm and application</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">실시간 라스트마일 배송 시스템 개발을 위한 지상-공중 이동 기지 협업 시스템의 이론, 알고리즘 및 응용 연구</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">한국연구재단</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/NRF.svg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Completed -->
+      <div>
+        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.7rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;">완료한 <span style="color:#7B68EE;">과제</span></h3>
+        <p style="font-size:0.9rem;color:#8a8a98;margin-bottom:18px;">Completed Projects</p>
+        <div style="display:flex;flex-direction:column;">
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2023</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Development of multipoint servocontrol die cushion and process monitoring module for improving the press forming quality</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">프레스 성형 품질 향상을 위한 다점 서보 제어 다이 쿠션 및 공정 모니터링 모듈 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)한빛산업</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/hanbit.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2023</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Development of motor housing for high-quality electric vehicles through the application of high-function intelligent molds</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">고기능 지능형 금형 적용을 통한 고품질 전기차 모터 하우징 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">중소벤처기업부 · (주)대국정공</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/mss.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2023</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Development of material forging and manufacturing process technology to improve the mechanical properties of the core parts of the reducer</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">감속기 핵심 부품의 기계적 특성 향상을 위한 소재 단조 및 제조 공정 기술 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)케이피에프충주공장</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/kpf.jpg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2023</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Development of vibration insulation products using hybrid materials for powertrain mount systems</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">파워트레인 마운트 시스템용 하이브리드 소재를 활용한 진동 절연 제품 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)코다코</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/kodaco.gif" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2022</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Development of multipoint servocontrol die cushion and monitoring module</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">다점 서보 제어 다이 쿠션 및 모니터링 모듈 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)한빛산업</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/hanbit.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2022</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Development of manufacturing technology for multilateral body parts</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">다각형 차체 부품 제조 기술 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)새한산업</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/sehan.jpg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2022</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Forging and process technology to improve reducer component strength</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">감속기 부품 강도 향상을 위한 단조 및 공정 기술</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)케이피에프충주공장</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/kpf.jpg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2022</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">High-performance powertrain housing using intelligent mold tech</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">지능형 금형 기술을 활용한 고성능 파워트레인 하우징</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)코넥</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/konec.jpg" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2022</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Hybrid vibration proof system development for PBV powertrain mounts</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">PBV 파워트레인 마운트용 하이브리드 진동 방지 시스템 개발</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">산업통상자원부 · (주)코다코</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/motie.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+              <img src="figures/project/kodaco.gif" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2019 ~ 2022</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Visualization of Repair Operations Management for Networked Systems Resilience</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">네트워크 시스템 회복력을 위한 수리 운영 관리 시각화</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">Navy Crane Center, U.S.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/navycranecenter.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+          <div class="prj-row" style="display:grid;grid-template-columns:170px 1fr 150px;gap:28px;align-items:start;padding:26px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;">
+            <span style="font-family:'Space Grotesk',monospace;font-size:0.9rem;font-weight:600;color:#6a6a7a;line-height:1.9;">2018 ~ 2019</span>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:700;line-height:1.5;margin-bottom:7px;">Resilience in Networked Systems using collaboration (RNSC) Project</h4>
+              <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-bottom:9px;">협업을 활용한 네트워크 시스템 회복력 (RNSC) 프로젝트</p>
+              <span style="display:inline-block;font-size:0.78rem;font-weight:600;color:#7B68EE;">Navy Crane Center, U.S.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+              <img src="figures/project/navycranecenter.png" style="width:120px;height:56px;object-fit:contain;border:1px solid rgba(0,0,0,0.06);border-radius:10px;background:#fff;padding:8px 10px;" alt="funder logo">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div style="padding:52px 52px 28px;background:#f8f9fa;border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;gap:40px;margin-bottom:34px;flex-wrap:wrap;">
+        <div><div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:34px;width:34px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div><p style="margin-top:14px;font-size:0.9rem;color:#6a6a7a;line-height:1.6;">지능형 최적화 연구실<br>경희대학교</p></div>
+        <div style="display:flex;gap:72px;">
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">빠른 링크</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="community.html" class="ft-l" style="font-size:0.9rem;">소식</a><a href="publications.html" class="ft-l" style="font-size:0.9rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.9rem;">연구과제</a><a href="members.html" class="ft-l" style="font-size:0.9rem;">구성원</a></div></div>
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">자료</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.9rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.9rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.9rem;">Instagram</a></div></div>
+        </div>
+      </div>
+      <div style="padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);text-align:center;"><p style="font-size:0.82rem;color:#6a6a7a;">© 2026 IO-LAB. All rights reserved.</p></div>
+    </div>
+  </div>
+
+</div>
 </body>
-
 </html>
