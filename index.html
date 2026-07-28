@@ -1,274 +1,142 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO-LAB | Intelligent Optimization Lab</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IO-LAB · 지능형 최적화 연구실 | 경희대학교</title>
+<link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: #1a1a25; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  a:hover { color: #00a882; }
+  .nav-l { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+  .nav-l:hover { color: #5eead4; }
+  .link-u:hover { color: #00D4AA; }
+  .rl-btnp:hover { background: #5eead4 !important; transform: translateY(-2px); }
+  .eb-news:hover { background: rgba(0,212,170,0.04) !important; }
+  .eb-news:hover .eb-idx { color: #00D4AA !important; }
+  .eb-news:hover .eb-arrow { transform: translate(6px,-6px); opacity: 1 !important; }
+  .ft-l { color: #6a6a7a; }
+  .ft-l:hover { color: #00D4AA; }
+</style>
 </head>
-
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-            </a>
-            <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="team.html" class="nav-link" data-i18n="nav.team">구성원</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="team.html#advisor" data-i18n="nav.team.advisor">지도교수</a></li>
-                        <li><a href="team.html#members" data-i18n="nav.team.members">연구원</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="research.html" class="nav-link" data-i18n="nav.research">연구분야</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="research.html#logistics" data-i18n="nav.research.logistics">물류 최적화</a></li>
-                        <li><a href="research.html#network" data-i18n="nav.research.network">네트워크 최적화</a></li>
-                        <li><a href="research.html#production" data-i18n="nav.research.production">생산 최적화</a></li>
-                        <li><a href="research.html#nextgen" data-i18n="nav.research.nextgen">차세대 최적화</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="publications.html" class="nav-link" data-i18n="nav.publications">논문</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="publications.html#international" data-i18n="nav.pub.international">국제 논문</a></li>
-                        <li><a href="publications.html#domestic" data-i18n="nav.pub.domestic">국내 논문</a></li>
-                        <li><a href="publications.html#conference" data-i18n="nav.pub.conference">학회지</a></li>
-                        <li><a href="publications.html#patent" data-i18n="nav.pub.patent">특허</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="projects.html" class="nav-link" data-i18n="nav.projects">연구과제</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="projects.html#ongoing" data-i18n="nav.proj.ongoing">진행중인 과제</a></li>
-                        <li><a href="projects.html#completed" data-i18n="nav.proj.completed">완료한 과제</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="learningmaterials/index.html" class="nav-link" data-i18n="nav.courses">교육자료</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="learningmaterials/index.html#ie315000" data-i18n="nav.courses.scm">공급사슬관리</a></li>
-                        <li><a href="learningmaterials/index.html#ie105000" data-i18n="nav.courses.ie">산업경영공학의 이해</a></li>
-                        <li><a href="https://www.youtube.com/@IO-LAB-khu" data-i18n="nav.courses.youtube" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000" style="vertical-align:middle;margin-right:5px"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a></li>
-                        <li><a href="https://www.instagram.com/khu_iolab/" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" style="vertical-align:middle;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="news.html" class="nav-link" data-i18n="nav.community">커뮤니티</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="news.html" data-i18n="nav.community.news">소식</a></li>
-                        <li><a href="photos.html" data-i18n="nav.community.photos">사진</a></li>
-                        <li><a href="contact.html" data-i18n="nav.community.contact">연락처</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="lang-toggle">
-                <span class="lang-option" data-lang="en" onclick="toggleLang('en')">EN</span>
-                <span class="lang-divider">|</span>
-                <span class="lang-option" data-lang="ko" onclick="toggleLang('ko')">KO</span>
-            </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+<div style="background:#fff;min-height:100vh;">
+
+  <!-- hero -->
+  <div style="position:relative;height:700px;background:#0b1120;overflow:hidden;">
+    <iframe src="https://my.spline.design/herobannerfortransportandlogisticscompanygmw2425-i9tIBV5PSdTL7pBjqIP7bNEL/" frameborder="0" title="Spline" style="position:absolute;inset:0;width:100%;height:100%;transform:scale(1.08);pointer-events:none;border:0;"></iframe>
+    <div style="position:absolute;inset:0;background:radial-gradient(120% 100% at 0% 50%, rgba(11,17,32,0.97) 30%, rgba(11,17,32,0.5) 62%, rgba(11,17,32,0) 100%);"></div>
+    <nav style="position:absolute;top:0;left:0;right:0;z-index:10;padding:26px 52px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:34px;width:34px;object-fit:contain;">IO-LAB</a>
+      <div style="display:flex;gap:34px;font-size:0.9rem;font-weight:500;">
+        <a href="members.html" class="nav-l">구성원</a><a href="research.html" class="nav-l">연구분야</a><a href="publications.html" class="nav-l">논문</a><a href="projects.html" class="nav-l">연구과제</a><a href="courses.html" class="nav-l">교육자료</a><a href="community.html" class="nav-l">커뮤니티</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
     </nav>
-
-    <section class="hero-premium">
-        <div class="hero-spline-container">
-            <iframe
-                src="https://my.spline.design/herobannerfortransportandlogisticscompanygmw2425-i9tIBV5PSdTL7pBjqIP7bNEL/"
-                frameborder="0" width="100%" height="100%" class="hero-spline-iframe" title="Spline 3D Scene"></iframe>
-            <div class="hero-overlay-refined"></div>
+    <div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;justify-content:center;padding:0 52px;max-width:1400px;margin:0 auto;width:100%;">
+      <span style="align-self:flex-start;font-family:'Space Grotesk',monospace;font-size:0.78rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:30px;">KYUNG HEE UNIV · Industrial and Management Systems Engineering</span>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:5.2rem;font-weight:800;line-height:0.92;letter-spacing:-0.05em;color:#fff;margin-bottom:26px;">Intelligent<br>Optimization<br><span style="background:linear-gradient(100deg,#5eead4,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Lab.</span></h1>
+      <p style="font-size:1.25rem;color:#94a3b8;max-width:600px;line-height:1.6;margin-bottom:44px;">지능형 최적화를 통해 물류·제조·생산 및 통합 시스템의 미래를 개척합니다.</p>
+      <div style="display:flex;align-items:center;gap:36px;">
+        <a href="research.html" class="rl-btnp" style="padding:15px 32px;background:#14b8a6;color:#0b1120;font-weight:700;border-radius:12px;transition:all 0.3s;">연구 분야 보기 →</a>
+        <div style="display:flex;align-items:center;gap:26px;font-family:'Space Grotesk',sans-serif;color:#fff;">
+          <div><span style="font-size:1.9rem;font-weight:700;">17+</span> <span style="font-size:0.78rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;">Publications</span></div>
+          <span style="color:#334155;">/</span>
+          <div><span style="font-size:1.9rem;font-weight:700;">04</span> <span style="font-size:0.78rem;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;">Projects</span></div>
         </div>
-        <div class="hero-content-premium">
-            <h1 class="hero-title-premium">
-                Intelligent<br />
-                Optimization<br />
-                <span class="hero-title-accent">Lab</span>
-            </h1>
-            <p class="hero-subtitle-premium" data-i18n="hero.subtitle">
-                지능형 최적화를 통해 물류, 제조, 생산 및 통합 시스템의 미래를 개척합니다.
-            </p>
-            <div class="hero-cta-premium">
-                <a href="publications.html" class="btn-premium-primary" data-i18n="hero.cta.primary">연구 분야 보기</a>
-                <a href="mailto:ghy27@khu.ac.kr" class="btn-premium-secondary" data-i18n="hero.cta.secondary">문의하기</a>
-            </div>
-            <div class="hero-stats-premium">
-                <div class="stat-glass">
-                    <span class="stat-num">17+</span>
-                    <span class="stat-lab">Publications</span>
-                </div>
-                <div class="glass-divider"></div>
-                <div class="stat-glass">
-                    <span class="stat-num">02</span>
-                    <span class="stat-lab">Projects</span>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-down-premium">
-            <div class="mouse-premium"></div>
-        </div>
-    </section>
-
-    <!-- Recruiting Banner -->
-    <div class="recruiting-banner">
-        <div class="container">
-            <div class="recruiting-content">
-                <div class="recruiting-text">
-                    <h3 data-i18n="recruit.title">연구진 모집</h3>
-                    <p data-i18n="recruit.desc">운영과학과 최적화에 열정을 가진 동기부여된 연구자를 찾고 있습니다.</p>
-                </div>
-                <a href="https://forms.gle/HLLqtRMW9XrrN6pm9" target="_blank" rel="noopener noreferrer" class="recruiting-btn" data-i18n="recruit.btn">지원하기</a>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- News Section -->
-    <section id="news" class="section news">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title"><span class="highlight" data-i18n="news.title">최신 소식</span></h2>
-            </div>
-            <div class="news-list">
-                <a href="news.html" class="news-item">
-                    <div class="news-date">2026.06.23</div>
-                    <div class="news-content">
-                        <h3 class="news-title">IO-LAB 첫 연구실 회식</h3>
-                        <p class="news-description">연구실의 첫 회식을 가졌습니다. 미처 사진을 남기지 못해 GPT로 합성한 이미지로 기록을 대신합니다.</p>
-                    </div>
-                </a>
-                <a href="news.html" class="news-item">
-                    <div class="news-date">2026.05.28</div>
-                    <div class="news-content">
-                        <h3 class="news-title">경희대학교 신규 연구과제 선정 — 반도체 팹 OHT 제어 전략 연구</h3>
-                        <p class="news-description">경희대학교 교내 연구과제 「반도체 팹 물류 자동화를 위한 OHT 제어 전략의 체계적 비교 및 최적화 연구」에 연구책임자로 선정되었습니다. (연구기간: 2026.03.01 ~ 2027.02.28)</p>
-                    </div>
-                </a>
-                <a href="news.html" class="news-item">
-                    <div class="news-date">2026.04.25</div>
-                    <div class="news-content">
-                        <h3 class="news-title">한국스마트미디어학회 & 한국디지털산업학회 춘계학술대회 심사위원 참여</h3>
-                        <p class="news-description">한국스마트미디어학회 & 한국디지털산업학회 춘계학술대회에 심사위원으로 참여하였습니다.</p>
-                    </div>
-                </a>
-                <a href="news.html" class="news-item">
-                    <div class="news-date">2026.04.16–18</div>
-                    <div class="news-content">
-                        <h3 class="news-title">한국물류과학기술학회 2026 춘계학술대회 초청 강연</h3>
-                        <p class="news-description">한국물류과학기술학회 2026 춘계학술대회 YSC 특별 세션에 특사로 초청받아 강연하였습니다.</p>
-                    </div>
-                </a>
-                <a href="news.html" class="news-item">
-                    <div class="news-date">2026.02.10</div>
-                    <div class="news-content">
-                        <h3 class="news-title" data-i18n="news.item1.title">연구실 홈페이지 오픈</h3>
-                        <p class="news-description" data-i18n="news.item1.desc">Intelligent Optimization LAB (IO-LAB)의 공식 홈페이지를 오픈했습니다. 연구실의 최신 연구 성과와 소식을 확인하실 수 있습니다.</p>
-                    </div>
-                </a>
-            </div>
-            <a href="news.html" class="view-all-btn" data-i18n="news.viewall">전체 소식 보기 →</a>
+  <!-- recruiting -->
+  <div style="padding:20px 52px;background:linear-gradient(120deg,#00D4AA,#7B68EE);display:flex;align-items:center;justify-content:space-between;gap:20px;">
+    <div><h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px;">연구진 모집</h3><p style="font-size:0.85rem;color:rgba(255,255,255,0.9);">운영과학과 최적화에 열정을 가진 동기부여된 연구자를 찾고 있습니다.</p></div>
+    <a href="community.html" style="flex-shrink:0;padding:10px 24px;background:#0b1120;color:#fff;font-size:0.85rem;font-weight:700;border-radius:24px;white-space:nowrap;">지원하기 →</a>
+  </div>
+
+  <!-- news -->
+  <div style="padding:80px 52px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;">
+        <div>
+          <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:#00D4AA;">News</span>
+          <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.8rem;font-weight:700;letter-spacing:-0.03em;color:#1a1a25;margin-top:8px;">최신 소식</h2>
         </div>
-    </section>
+        <a href="community.html" class="link-u" style="font-weight:600;color:#00D4AA;font-size:0.95rem;">전체 보기 →</a>
+      </div>
+      <div>
+        <a href="community.html" class="eb-news" style="display:grid;grid-template-columns:64px 150px 1fr 28px;gap:26px;align-items:center;padding:28px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;color:inherit;">
+          <span class="eb-idx" style="font-family:'Space Grotesk',monospace;font-size:1rem;font-weight:600;color:#b6bcc6;transition:color 0.3s;">01</span>
+          <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;color:#6a6a7a;">2026.06.23</span>
+          <div><h3 style="font-size:1.35rem;font-weight:700;color:#1a1a25;margin-bottom:5px;">IO-LAB 첫 연구실 회식</h3><p style="font-size:0.92rem;color:#6a6a7a;line-height:1.5;">연구실의 첫 회식을 가졌습니다. 미처 사진을 남기지 못해 GPT로 합성한 이미지로 기록을 대신합니다.</p></div>
+          <span class="eb-arrow" style="font-size:1.2rem;color:#00D4AA;opacity:0.3;transition:all 0.3s;">↗</span>
+        </a>
+        <a href="community.html" class="eb-news" style="display:grid;grid-template-columns:64px 150px 1fr 28px;gap:26px;align-items:center;padding:28px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;color:inherit;">
+          <span class="eb-idx" style="font-family:'Space Grotesk',monospace;font-size:1rem;font-weight:600;color:#b6bcc6;transition:color 0.3s;">02</span>
+          <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;color:#6a6a7a;">2026.05.28</span>
+          <div><h3 style="font-size:1.35rem;font-weight:700;color:#1a1a25;margin-bottom:5px;">경희대학교 신규 연구과제 선정 — 반도체 팹 OHT 제어 전략</h3><p style="font-size:0.92rem;color:#6a6a7a;line-height:1.5;">교내 연구과제 「반도체 팹 물류 자동화를 위한 OHT 제어 전략」에 연구책임자로 선정되었습니다.</p></div>
+          <span class="eb-arrow" style="font-size:1.2rem;color:#00D4AA;opacity:0.3;transition:all 0.3s;">↗</span>
+        </a>
+        <a href="community.html" class="eb-news" style="display:grid;grid-template-columns:64px 150px 1fr 28px;gap:26px;align-items:center;padding:28px 8px;border-top:1px solid rgba(0,0,0,0.08);transition:background 0.3s;color:inherit;">
+          <span class="eb-idx" style="font-family:'Space Grotesk',monospace;font-size:1rem;font-weight:600;color:#b6bcc6;transition:color 0.3s;">03</span>
+          <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;color:#6a6a7a;">2026.04.25</span>
+          <div><h3 style="font-size:1.35rem;font-weight:700;color:#1a1a25;margin-bottom:5px;">한국스마트미디어학회 &amp; 한국디지털산업학회 심사위원 참여</h3><p style="font-size:0.92rem;color:#6a6a7a;line-height:1.5;">춘계학술대회에 심사위원으로 참여하였습니다.</p></div>
+          <span class="eb-arrow" style="font-size:1.2rem;color:#00D4AA;opacity:0.3;transition:all 0.3s;">↗</span>
+        </a>
+        <a href="community.html" class="eb-news" style="display:grid;grid-template-columns:64px 150px 1fr 28px;gap:26px;align-items:center;padding:28px 8px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);transition:background 0.3s;color:inherit;">
+          <span class="eb-idx" style="font-family:'Space Grotesk',monospace;font-size:1rem;font-weight:600;color:#b6bcc6;transition:color 0.3s;">04</span>
+          <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;color:#6a6a7a;">2026.04.16</span>
+          <div><h3 style="font-size:1.35rem;font-weight:700;color:#1a1a25;margin-bottom:5px;">한국물류과학기술학회 2026 춘계학술대회 초청 강연</h3><p style="font-size:0.92rem;color:#6a6a7a;line-height:1.5;">YSC 특별 세션에 특사로 초청받아 강연하였습니다.</p></div>
+          <span class="eb-arrow" style="font-size:1.2rem;color:#00D4AA;opacity:0.3;transition:all 0.3s;">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag" data-i18n="contact.tag">연락처</span>
-                <h2 class="section-title" data-i18n-html="contact.title">찾아오시는 <span class="highlight">길</span></h2>
-            </div>
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <p data-i18n="contact.subtitle">연구 협력 및 문의는 아래 연락처로 연락해 주세요.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                    <polyline points="22,6 12,13 2,6"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong data-i18n="contact.email">이메일</strong>
-                                <p>ghy27@khu.ac.kr</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                                    <polyline points="9 22 9 12 15 12 15 22"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong data-i18n="contact.office">교수 연구실</strong>
-                                <p data-i18n="contact.office.addr">우정원 6034호</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                                    <polyline points="9 22 9 12 15 12 15 22"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong data-i18n="contact.lab">학생 연구실</strong>
-                                <p data-i18n="contact.lab.addr">공학관 504호</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- contact -->
+  <div style="padding:80px 52px;background:#fff;border-top:1px solid rgba(0,0,0,0.06);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <span style="display:block;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#00D4AA;margin-bottom:10px;">Contact</span>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:36px;">찾아오시는 <span style="background:linear-gradient(135deg,#00D4AA,#7B68EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">길</span></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:stretch;">
+        <div>
+          <p style="color:#4a4a5a;margin-bottom:32px;font-size:1.05rem;">연구 협력 및 문의는 아래 연락처로 연락해 주세요.</p>
+          <div style="display:flex;flex-direction:column;gap:22px;">
+            <div style="display:flex;gap:18px;align-items:center;"><div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(0,212,170,0.1);border-radius:12px;color:#00D4AA;flex-shrink:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><strong style="font-size:0.85rem;display:block;">이메일</strong><p style="font-size:0.95rem;color:#4a4a5a;">ghy27@khu.ac.kr</p></div></div>
+            <div style="display:flex;gap:18px;align-items:center;"><div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(0,212,170,0.1);border-radius:12px;color:#00D4AA;flex-shrink:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div><div><strong style="font-size:0.85rem;display:block;">교수 연구실</strong><p style="font-size:0.95rem;color:#4a4a5a;">우정원 6034호</p></div></div>
+            <div style="display:flex;gap:18px;align-items:center;"><div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(0,212,170,0.1);border-radius:12px;color:#00D4AA;flex-shrink:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div><div><strong style="font-size:0.85rem;display:block;">학생 연구실</strong><p style="font-size:0.95rem;color:#4a4a5a;">공학관 504호</p></div></div>
+          </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="#" class="nav-logo">
-                        <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-                    </a>
-                    <p data-i18n-html="footer.brand">지능형 최적화 연구실<br>경희대학교</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4 data-i18n="footer.quicklinks">빠른 링크</h4>
-                        <a href="#news" data-i18n="footer.news">소식</a>
-                        <a href="publications.html" data-i18n="footer.pubs">논문</a>
-                        <a href="projects.html" data-i18n="footer.projects">연구과제</a>
-                        <a href="team.html" data-i18n="footer.team">연구진</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4 data-i18n="footer.resources">자료</h4>
-                        <a href="#">GitHub</a>
-                        <a href="#">Google Scholar</a>
-                        <a href="#">ResearchGate</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 IO-LAB. All rights reserved.</p>
-            </div>
+        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:repeating-linear-gradient(135deg,#eef1f4,#eef1f4 11px,#e6eaef 11px,#e6eaef 22px);min-height:280px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <div style="text-align:center;">
+            <div style="width:44px;height:44px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;box-shadow:0 4px 14px rgba(15,23,42,0.1);color:#7B68EE;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:0.8rem;color:#6a6a7a;line-height:1.6;">경희대학교 국제캠퍼스</div>
+            <div style="font-size:0.82rem;color:#8a8a98;margin-top:4px;">우정원 6034호 / 공학관 504호</div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-    <script src="lang.js"></script>
+  <!-- footer -->
+  <div style="padding:52px 52px 28px;background:#f8f9fa;border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;gap:40px;margin-bottom:34px;flex-wrap:wrap;">
+        <div><div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:34px;width:34px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div><p style="margin-top:14px;font-size:0.9rem;color:#6a6a7a;line-height:1.6;">지능형 최적화 연구실<br>경희대학교</p></div>
+        <div style="display:flex;gap:72px;">
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">빠른 링크</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="community.html" class="ft-l" style="font-size:0.9rem;">소식</a><a href="publications.html" class="ft-l" style="font-size:0.9rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.9rem;">연구과제</a><a href="members.html" class="ft-l" style="font-size:0.9rem;">구성원</a></div></div>
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">자료</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&hl=en" target="_blank" class="ft-l" style="font-size:0.9rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.9rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.9rem;">Instagram</a></div></div>
+        </div>
+      </div>
+      <div style="padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);text-align:center;"><p style="font-size:0.82rem;color:#6a6a7a;">© 2026 IO-LAB. All rights reserved.</p></div>
+    </div>
+  </div>
+
+</div>
 </body>
-
 </html>
