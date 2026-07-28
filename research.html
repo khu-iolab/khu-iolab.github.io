@@ -1,932 +1,325 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>연구분야 - IO LAB</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
-    <style>
-        .nav-link { color: var(--text-secondary) !important; }
-        .nav-link:hover { color: var(--text-primary) !important; }
-        .back-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            color: var(--accent-primary); font-size: 0.85rem;
-            margin-bottom: 30px; transition: all var(--transition-fast); text-decoration: none;
-        }
-        .back-link:hover { transform: translateX(-3px); }
-        .back-link svg { width: 14px; height: 14px; }
-
-        /* ── Tabs ── */
-        .research-tabs {
-            display: flex; gap: 0; margin-bottom: 36px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .research-tab {
-            background: none; border: none; padding: 12px 24px;
-            font-size: 0.9rem; font-weight: 600; color: var(--text-muted);
-            cursor: pointer; border-bottom: 2px solid transparent;
-            margin-bottom: -1px; transition: color 0.2s, border-color 0.2s;
-            white-space: nowrap;
-        }
-        .research-tab:hover { color: var(--text-primary); }
-        .research-tab.active { color: var(--accent-primary); border-bottom-color: var(--accent-primary); }
-
-        .research-panel { display: none; }
-        .research-panel.active { display: block; }
-
-        /* ── Body: 2-column grid ── */
-        .research-body {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
-        }
-        .research-body-text h2 {
-            font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;
-        }
-        #tab-logistics  .research-body-text h2 { color: #2563eb; }
-        #tab-network    .research-body-text h2 { color: #00a882; }
-        #tab-production .research-body-text h2 { color: #e07820; }
-        #tab-nextgen    .research-body-text h2 { color: #7c3aed; }
-        .res-desc {
-            font-size: 0.93rem; color: var(--text-secondary); line-height: 1.82; margin-bottom: 14px;
-        }
-
-        /* ── Sub-topic cards ── */
-        .res-intro {
-            font-size: 0.93rem; color: var(--text-secondary); line-height: 1.78; margin-bottom: 18px;
-        }
-        .research-topics { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        .res-topic {
-            padding: 11px 14px; border-radius: 8px;
-            border-left: 3px solid transparent;
-        }
-        #tab-logistics  .res-topic { border-left-color: #2563eb; background: rgba(59,130,246,.045); }
-        #tab-network    .res-topic { border-left-color: #00a882; background: rgba(0,168,130,.045); }
-        #tab-production .res-topic { border-left-color: #e07820; background: rgba(224,120,32,.045); }
-        #tab-nextgen    .res-topic { border-left-color: #7c3aed; background: rgba(124,58,237,.045); }
-        .res-topic-head {
-            display: flex; align-items: center; gap: 8px; margin-bottom: 5px;
-        }
-        .res-topic-icon {
-            width: 22px; height: 22px; border-radius: 5px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px; flex-shrink: 0; line-height: 1;
-        }
-        #tab-logistics  .res-topic-icon { background: rgba(59,130,246,.12); }
-        #tab-network    .res-topic-icon { background: rgba(0,168,130,.12); }
-        #tab-production .res-topic-icon { background: rgba(224,120,32,.12); }
-        #tab-nextgen    .res-topic-icon { background: rgba(124,58,237,.12); }
-        .res-topic-title {
-            font-size: 0.87rem; font-weight: 700; color: var(--text-primary);
-        }
-        .res-topic-desc {
-            font-size: 0.82rem; color: var(--text-secondary); line-height: 1.72; margin: 0;
-        }
-
-        /* ── Tags ── */
-        .research-detail-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
-        .research-detail-tags span {
-            font-size: 0.74rem; padding: 3px 11px; border-radius: 20px;
-        }
-        .tags-logistics span  { background:rgba(59,130,246,.1);  border:1px solid rgba(59,130,246,.28);  color:#2563eb; }
-        .tags-network span    { background:rgba(0,212,170,.1);    border:1px solid rgba(0,212,170,.28);   color:#00a882; }
-        .tags-production span { background:rgba(251,146,60,.1);   border:1px solid rgba(251,146,60,.28);  color:#e07820; }
-        .tags-nextgen span    { background:rgba(139,92,246,.1);   border:1px solid rgba(139,92,246,.28);  color:#7c3aed; }
-
-        /* ── Figure / sim frame ── */
-        .research-sim-wrap {
-            width: 100%; border-radius: 10px; overflow: hidden;
-            border: 1px solid var(--border-color); background: var(--bg-primary);
-        }
-        .research-sim-wrap iframe {
-            width: 100%; height: 380px; display: block; border: none;
-        }
-        .research-sim-wrap .research-animation {
-            width: 100%; aspect-ratio: 16 / 9; display: block; object-fit: cover;
-        }
-        .research-app-line {
-            margin-top: 10px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;
-        }
-        .app-badge {
-            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
-            text-transform: uppercase; color: var(--text-secondary); margin-right: 6px;
-        }
-
-        /* ── Publications ── */
-        .research-pubs {
-            margin-top: 36px; border-top: 1px solid var(--border-color); padding-top: 24px;
-        }
-        .research-pubs h4 {
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--accent-primary); margin-bottom: 14px;
-        }
-        .research-pubs ol {
-            margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px;
-        }
-        .research-pubs li { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
-        .research-pubs li em { color: var(--text-muted); }
-
-        /* ── Paper Graphical Abstracts ── */
-        .paper-ga-gallery {
-            margin-top: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--bg-primary);
-        }
-        .paper-ga-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border-color);
-            background: linear-gradient(180deg, #fff, var(--bg-secondary));
-        }
-        .paper-ga-heading {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-width: 0;
-        }
-        .paper-ga-kicker {
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--accent-primary);
-        }
-        .paper-ga-subtitle {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-        .paper-ga-open {
-            flex-shrink: 0;
-            color: var(--accent-primary);
-            font-size: 0.76rem;
-            font-weight: 700;
-            text-decoration: none;
-            line-height: 1.4;
-        }
-        .paper-ga-open:hover { text-decoration: underline; }
-        .paper-ga-feature { margin: 0; }
-        .paper-ga-canvas {
-            height: clamp(230px, 32vw, 360px);
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-        }
-        .paper-ga-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-        .paper-ga-caption {
-            border-top: 1px solid var(--border-color);
-            padding: 10px 14px 12px;
-            background: var(--bg-primary);
-        }
-        .paper-ga-caption strong {
-            display: block;
-            color: var(--text-primary);
-            font-size: 0.84rem;
-            line-height: 1.45;
-            margin-bottom: 3px;
-        }
-        .paper-ga-caption span {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.74rem;
-            line-height: 1.4;
-        }
-        .paper-ga-thumbs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
-            gap: 8px;
-            padding: 10px;
-            border-top: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-        }
-        .paper-ga-thumb {
-            min-width: 0;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 6px;
-            background: #fff;
-            color: var(--text-secondary);
-            cursor: pointer;
-            text-align: left;
-            transition: border-color .2s, box-shadow .2s, transform .2s;
-        }
-        .paper-ga-thumb:hover,
-        .paper-ga-thumb.active {
-            border-color: var(--accent-primary);
-            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
-        }
-        .paper-ga-thumb:focus-visible {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
-        .paper-ga-thumb img {
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-            display: block;
-            border-radius: 4px;
-            background: #fff;
-            margin-bottom: 5px;
-        }
-        .paper-ga-thumb span {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-size: 0.68rem;
-            font-weight: 700;
-            line-height: 1.35;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-            .research-body { grid-template-columns: 1fr; }
-            .research-tabs { overflow-x: auto; }
-            .paper-ga-header { flex-direction: column; gap: 8px; }
-            .paper-ga-open { align-self: flex-start; }
-            .paper-ga-canvas { height: 260px; padding: 8px; }
-            .paper-ga-thumbs {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x proximity;
-            }
-            .paper-ga-thumb {
-                flex: 0 0 116px;
-                scroll-snap-align: start;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연구분야 · IO-LAB</title>
+<link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: #1a1a25; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  a:hover { color: #00a882; }
+  .nav-l { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+  .nav-l:hover { color: #5eead4; }
+  .ft-l { color: #6a6a7a; }
+  .ft-l:hover { color: #00D4AA; }
+  .pg-tab { padding: 13px 26px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: #6a6a7a; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .pg-tab:hover { color: #1a1a25; }
+  .pg-tab[data-active="true"] { color: #00D4AA; border-bottom-color: #00D4AA; }
+</style>
 </head>
-
 <body>
-    <!-- Navigation -->
-    <nav class="navbar scrolled">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-            </a>
-            <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="team.html" class="nav-link" data-i18n="nav.team">구성원</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="team.html#advisor" data-i18n="nav.team.advisor">지도교수</a></li>
-                        <li><a href="team.html#members" data-i18n="nav.team.members">연구원</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="research.html" class="nav-link" style="color: var(--text-primary) !important;" data-i18n="nav.research">연구분야</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="research.html#logistics" data-i18n="nav.research.logistics">물류 최적화</a></li>
-                        <li><a href="research.html#network" data-i18n="nav.research.network">네트워크 최적화</a></li>
-                        <li><a href="research.html#production" data-i18n="nav.research.production">생산 최적화</a></li>
-                        <li><a href="research.html#nextgen" data-i18n="nav.research.nextgen">차세대 최적화</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="publications.html" class="nav-link" data-i18n="nav.publications">논문</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="publications.html#international" data-i18n="nav.pub.international">국제 논문</a></li>
-                        <li><a href="publications.html#domestic" data-i18n="nav.pub.domestic">국내 논문</a></li>
-                        <li><a href="publications.html#conference" data-i18n="nav.pub.conference">학회지</a></li>
-                        <li><a href="publications.html#patent" data-i18n="nav.pub.patent">특허</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="projects.html" class="nav-link" data-i18n="nav.projects">연구과제</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="projects.html#ongoing" data-i18n="nav.proj.ongoing">진행중인 과제</a></li>
-                        <li><a href="projects.html#completed" data-i18n="nav.proj.completed">완료한 과제</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="learningmaterials/index.html" class="nav-link" data-i18n="nav.courses">교육자료</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="learningmaterials/index.html#ie315000" data-i18n="nav.courses.scm">공급사슬관리</a></li>
-                        <li><a href="learningmaterials/index.html#ie105000" data-i18n="nav.courses.ie">산업경영공학의 이해</a></li>
-                        <li><a href="https://www.youtube.com/@IO-LAB-khu" data-i18n="nav.courses.youtube" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000" style="vertical-align:middle;margin-right:5px"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a></li>
-                        <li><a href="https://www.instagram.com/khu_iolab/" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" style="vertical-align:middle;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="news.html" class="nav-link" data-i18n="nav.community">커뮤니티</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="news.html" data-i18n="nav.community.news">소식</a></li>
-                        <li><a href="photos.html" data-i18n="nav.community.photos">사진</a></li>
-                        <li><a href="contact.html" data-i18n="nav.community.contact">연락처</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="lang-toggle">
-                <span class="lang-option" data-lang="en" onclick="toggleLang('en')">EN</span>
-                <span class="lang-divider">|</span>
-                <span class="lang-option" data-lang="ko" onclick="toggleLang('ko')">KO</span>
+<div style="background:#fff;min-height:100vh;">
+
+  <!-- nav -->
+  <nav style="background:#0b1120;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+    <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:32px;width:32px;object-fit:contain;">IO-LAB</a>
+    <div style="display:flex;gap:34px;font-size:0.9rem;font-weight:500;">
+      <a href="members.html" class="nav-l">구성원</a><a href="research.html" style="color:#5eead4;font-weight:600;">연구분야</a><a href="publications.html" class="nav-l">논문</a><a href="projects.html" class="nav-l">연구과제</a><a href="courses.html" class="nav-l">교육자료</a><a href="community.html" class="nav-l">커뮤니티</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
+  </nav>
+
+  <!-- page hero -->
+  <div style="background:#0b1120;padding:72px 52px 58px;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;">Research</span>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;">연구분야</h1>
+      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:620px;">물류·네트워크·생산, 그리고 차세대 최적화 방법론까지 — IO-LAB의 네 가지 연구 축을 소개합니다.</p>
+    </div>
+  </div>
+
+  <!-- tabs -->
+  <div style="border-bottom:1px solid rgba(0,0,0,0.08);padding:0 52px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;display:flex;">
+      <button class="pg-tab" data-active="true" data-tab="logistics">물류 최적화</button>
+      <button class="pg-tab" data-active="false" data-tab="network">네트워크 최적화</button>
+      <button class="pg-tab" data-active="false" data-tab="production">생산 최적화</button>
+      <button class="pg-tab" data-active="false" data-tab="nextgen">차세대 최적화</button>
+    </div>
+  </div>
+
+  <!-- ── 물류 최적화 ── -->
+  <div data-tab-panel="logistics" style="padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
+        <div>
+          <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">물류 <span style="color:#2563eb;">최적화</span></h2>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">드론 배송, 지하 물류 네트워크, 시뮬레이션 기반 운영 최적화 세 축을 통해 라스트마일 배송의 비용·탄소 배출을 줄이는 연구를 수행합니다.</p>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#2563eb;">01</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">드론 배송 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">트럭-드론 복합 경로(FSTSP/mFSTSP), 비행 창고 기반 보충 스케줄링, 다중 비행 수준(FL1 20m / FL2 60m / FL3 120m) 드론 경로 최적화를 연구합니다. MILP·ALNS·ML 에너지 모델을 결합해 페이로드-에너지 의존성과 No-fly zone 제약을 현실적으로 다룹니다.</p></div>
             </div>
-            <button class="nav-toggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#2563eb;">02</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">지하 물류 네트워크</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">도심 지하를 활용한 화물 캡슐·AGV 터널망과 지상 라스트마일 구간을 통합 설계합니다. 지하-지상 복합 환승 거점 배치, 용량 제약 하의 경로 최적화, 탄소 배출 및 도로 혼잡 비용 동시 절감을 목표로 합니다.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#2563eb;">03</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">운영 최적화 &amp; 시뮬레이션</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">VRP 및 변형 문제(CVRP, PDPTW 등)를 수리 모델로 정식화하고 ALNS·GRASP 메타휴리스틱으로 대규모 인스턴스를 해결합니다. 시뮬레이션 기반 검증으로 수요 불확실성·차량 고장·교통 혼잡 시나리오를 평가합니다.</p></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">차량 경로 (VRP)</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">드론 배송</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">라스트마일</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">비행 창고</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">지하 물류</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">공급망 설계</span>
+          </div>
         </div>
-    </nav>
-
-    <!-- Research Page -->
-    <section class="section research">
-        <div class="container">
-            <a href="index.html" class="back-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                홈으로
-            </a>
-
-            <!-- Tabs -->
-            <div class="research-tabs" id="research-tabs">
-                <button class="research-tab active" data-tab="logistics" data-i18n="nav.research.logistics">물류 최적화</button>
-                <button class="research-tab" data-tab="network" data-i18n="nav.research.network">네트워크 최적화</button>
-                <button class="research-tab" data-tab="production" data-i18n="nav.research.production">생산 최적화</button>
-                <button class="research-tab" data-tab="nextgen" data-i18n="nav.research.nextgen">차세대 최적화</button>
+        <div>
+          <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;">
+            <img src="figures/about/ga-logistics.png" style="width:100%;display:block;" alt="지하 운송 연계 VRP 그래픽 초록">
+            <div style="padding:14px 18px;border-top:1px solid rgba(0,0,0,0.08);">
+              <strong style="display:block;font-size:0.88rem;line-height:1.45;">지하 운송 연계 VRP를 위한 그래픽 초록</strong>
+              <span style="font-size:0.76rem;color:#8a8a98;">IEEE Transactions on Intelligent Transportation Systems, 2025</span>
             </div>
-
-            <!-- ── 물류 최적화 ── -->
-            <div class="research-panel active" id="tab-logistics">
-                <div class="research-body">
-                    <div class="research-body-text">
-                        <h2 data-i18n="nav.research.logistics">물류 최적화</h2>
-                        <p class="res-intro" data-i18n="research.logistics.intro">드론 배송, 지하 물류 네트워크, 시뮬레이션 기반 운영 최적화 세 축을 통해 라스트마일 배송의 비용·탄소 배출을 줄이는 연구를 수행합니다.</p>
-
-                        <div class="research-topics">
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">✈</span>
-                                    <span class="res-topic-title" data-i18n="research.logistics.topic1.title">드론 배송 최적화</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.logistics.topic1.desc">트럭-드론 복합 경로(FSTSP/mFSTSP), 비행 창고(Flying Warehouse) 기반 보충 스케줄링, 다중 비행 수준(FL1 20m / FL2 60m / FL3 120m) 드론 경로 최적화를 연구합니다. MILP·ALNS·ML 에너지 모델을 결합해 페이로드-에너지 의존성과 No-fly zone 제약을 현실적으로 다룹니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">⬇</span>
-                                    <span class="res-topic-title" data-i18n="research.logistics.topic2.title">지하 물류 네트워크</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.logistics.topic2.desc">도심 지하를 활용한 화물 캡슐·AGV 터널망과 지상 라스트마일 구간을 통합 설계합니다. 지하-지상 복합 환승 거점 배치, 용량 제약 하의 경로 최적화, 탄소 배출 및 도로 혼잡 비용 동시 절감을 목표로 합니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">⚙</span>
-                                    <span class="res-topic-title" data-i18n="research.logistics.topic3.title">운영 최적화 &amp; 시뮬레이션</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.logistics.topic3.desc">VRP 및 변형 문제(CVRP, PDPTW 등)를 수리 모델로 정식화하고 ALNS·GRASP 메타휴리스틱으로 대규모 인스턴스를 해결합니다. 시뮬레이션 기반 검증으로 수요 불확실성·차량 고장·교통 혼잡 시나리오를 평가하여 실 운영에 바로 적용 가능한 알고리즘을 제공합니다.</p>
-                            </div>
-                        </div>
-
-                        <div class="research-detail-tags tags-logistics">
-                            <span data-i18n="research.logistics.tag1">차량 경로 (VRP)</span>
-                            <span data-i18n="research.logistics.tag2">드론 배송</span>
-                            <span data-i18n="research.logistics.tag3">라스트마일</span>
-                            <span data-i18n="research.logistics.tag4">비행 창고</span>
-                            <span data-i18n="research.logistics.tag5">지하 물류</span>
-                            <span data-i18n="research.logistics.tag6">공급망 설계</span>
-                        </div>
-                        <section class="paper-ga-gallery" aria-labelledby="ga-logistics-heading">
-                            <div class="paper-ga-header">
-                                <div class="paper-ga-heading">
-                                    <span class="paper-ga-kicker" id="ga-logistics-heading" data-i18n="research.ga.label">그래픽 초록</span>
-                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
-                                </div>
-                                <a class="paper-ga-open" href="figures/about/LogisticsOptimization/ga-underground-vrp-research-figure.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
-                            </div>
-                            <figure class="paper-ga-feature">
-                                <div class="paper-ga-canvas">
-                                    <img class="paper-ga-image" src="figures/about/LogisticsOptimization/ga-underground-vrp-research-figure.png" alt="지하 운송과 지상 라스트마일 VRP 경로를 결합한 도시 물류 그래픽 초록" loading="lazy">
-                                </div>
-                                <figcaption class="paper-ga-caption">
-                                    <strong data-i18n="research.ga.logistics.ugvrp.title">지하 운송 연계 VRP를 위한 생성형 그래픽 초록</strong>
-                                    <span data-i18n="research.ga.logistics.ugvrp.meta">IEEE Transactions on Intelligent Transportation Systems, 2025</span>
-                                </figcaption>
-                            </figure>
-                            <div class="paper-ga-thumbs" aria-label="Logistics graphical abstract choices">
-                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show underground VRP graphical abstract"
-                                    data-ga-src="figures/about/LogisticsOptimization/ga-underground-vrp-research-figure.png"
-                                    data-ga-src-en="figures/about/LogisticsOptimization/ga-underground-vrp-research-figure.png"
-                                    data-ga-src-ko="figures/about/LogisticsOptimization/ga-underground-vrp-research-figure-ko.png"
-                                    data-ga-title-key="research.ga.logistics.ugvrp.title"
-                                    data-ga-meta-key="research.ga.logistics.ugvrp.meta"
-                                    data-ga-alt-key="research.ga.logistics.ugvrp.alt"
-                                    data-ga-label-key="research.ga.logistics.ugvrp.short">
-                                    <img src="figures/about/LogisticsOptimization/ga-underground-vrp-research-figure.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.logistics.ugvrp.short">지하 VRP</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show flight-level routing figure"
-                                    data-ga-src="figures/about/LogisticsOptimization/L1.png"
-                                    data-ga-title-key="research.ga.logistics.l1.title"
-                                    data-ga-meta-key="research.ga.logistics.l1.meta"
-                                    data-ga-alt-key="research.ga.logistics.l1.alt"
-                                    data-ga-label-key="research.ga.logistics.l1.short">
-                                    <img src="figures/about/LogisticsOptimization/L1.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.logistics.l1.short">비행고도</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show obstacle-map figure"
-                                    data-ga-src="figures/about/LogisticsOptimization/L2.png"
-                                    data-ga-title-key="research.ga.logistics.l2.title"
-                                    data-ga-meta-key="research.ga.logistics.l2.meta"
-                                    data-ga-alt-key="research.ga.logistics.l2.alt"
-                                    data-ga-label-key="research.ga.logistics.l2.short">
-                                    <img src="figures/about/LogisticsOptimization/L2.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.logistics.l2.short">장애물 지도</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show city simulation figure"
-                                    data-ga-src="figures/about/LogisticsOptimization/11_converted.png"
-                                    data-ga-title-key="research.ga.logistics.city.title"
-                                    data-ga-meta-key="research.ga.logistics.city.meta"
-                                    data-ga-alt-key="research.ga.logistics.city.alt"
-                                    data-ga-label-key="research.ga.logistics.city.short">
-                                    <img src="figures/about/LogisticsOptimization/11_converted.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.logistics.city.short">도시 시뮬레이션</span>
-                                </button>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="research-body-fig">
-                        <div class="research-sim-wrap">
-                            <iframe src="figures/about/LogisticsOptimization/sim3d_city.html" scrolling="no" allow="autoplay"></iframe>
-                        </div>
-                        <p class="research-app-line">
-                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
-                            <span data-i18n="research.logistics.app">Amazon · UPS · DHL · 스마트시티 플랫폼</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="research-pubs">
-                    <h4 data-i18n="research.pubs.label">관련 논문</h4>
-                    <ol>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimizing Urban Logistics: VRP with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimization of Urban Logistics with Multi-Modal Systems: Airship-Vehicle Routing Problem. <em>Transportation Research Part E</em>.</li>
-                        <li>Kim, Y., <strong>Jeong, H. Y.</strong>*, Lee, S. (2024). Drone delivery problem with multi-flight level: Machine learning based solution approach. <em>Computers &amp; Industrial Engineering</em>.</li>
-                        <li>Kim, B., <strong>Jeong, H. Y.</strong>*, Lee, S. (2023). Two-echelon collaborative routing problem with heterogeneous crowd-shippers. <em>Computers &amp; Operations Research</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Lee, S.* (2023). Drone routing problem with truck: Optimization and quantitative analysis. <em>Expert Systems with Applications</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, Lee, S. (2022). Optimal scheduling for multi-flying warehouse: Amazon airborne fulfillment center. <em>Transportation Research Part C</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, Lee, S. (2020). The flying warehouse delivery system. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, David, J. Y., Min, B. C., Lee, S.* (2020). The humanitarian flying warehouse. <em>Transportation Research Part E</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, Lee, S. (2019). Truck-drone hybrid delivery routing: Payload-energy dependency and No-Fly zones. <em>International Journal of Production Economics</em>.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <!-- ── 네트워크 최적화 ── -->
-            <div class="research-panel" id="tab-network">
-                <div class="research-body">
-                    <div class="research-body-text">
-                        <h2 data-i18n="nav.research.network">네트워크 최적화</h2>
-                        <p class="res-desc" data-i18n="research.network.desc1">기후변화, 공급망 붕괴, EV 대중화 등 복합 리스크가 글로벌 네트워크를 위협하는 시대에, 설계 단계부터 회복력(resilience)을 내재화하는 최적화 방법론을 개발합니다. 식품 공급망, 군사 물류, 스마트그리드 등 임무 중요(mission-critical) 분야에 직접 적용됩니다.</p>
-                        <p class="res-desc" data-i18n="research.network.desc2">기후 시나리오 기반 적응형 공급망 설계(시뮬레이션-최적화), 상호의존 시스템에서의 장애 전파·복구 전략 모델링, V2G/G2V 통합 EV 물류 스케줄링과 배전망 용량 확장 최적화를 연구합니다. 확률적 프로그래밍, 몬테카를로 시뮬레이션, 강건 최적화가 핵심 방법론입니다.</p>
-                        <div class="research-topics">
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">SC</span>
-                                    <span class="res-topic-title" data-i18n="research.network.topic1.title">기후 적응형 공급망 설계</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.network.topic1.desc">기후 시나리오와 작황·시장 교란 시뮬레이션, 확률적 최적화를 결합해 식품 공급망의 조달·재고·용량 결정을 회복력 있게 재설계합니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">RS</span>
-                                    <span class="res-topic-title" data-i18n="research.network.topic2.title">상호의존 네트워크 회복력</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.network.topic2.desc">물류·인프라·임무 시스템 사이에서 장애가 전파되는 과정을 모델링하고, 제한된 자원하에서 복구 순서·중복성·회복 정책을 최적화합니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">EV</span>
-                                    <span class="res-topic-title" data-i18n="research.network.topic3.title">EV-전력망 통합 운영</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.network.topic3.desc">차량 경로, 충·방전 스케줄, V2G/G2V 의사결정, 배전망 용량 계획을 통합해 EV 물류가 이동성과 전력망 안정성을 함께 지원하도록 설계합니다.</p>
-                            </div>
-                        </div>
-                        <div class="research-detail-tags tags-network">
-                            <span data-i18n="research.network.tag1">공급망 네트워크</span>
-                            <span data-i18n="research.network.tag2">기후변화 대응</span>
-                            <span data-i18n="research.network.tag3">군사 네트워크</span>
-                            <span data-i18n="research.network.tag4">네트워크 회복력</span>
-                            <span data-i18n="research.network.tag5">시뮬레이션 최적화</span>
-                            <span>V2G / G2V</span>
-                            <span data-i18n="research.network.tag6">EV 물류</span>
-                            <span data-i18n="research.network.tag7">배전망 최적화</span>
-                        </div>
-                        <section class="paper-ga-gallery" aria-labelledby="ga-network-heading">
-                            <div class="paper-ga-header">
-                                <div class="paper-ga-heading">
-                                    <span class="paper-ga-kicker" id="ga-network-heading" data-i18n="research.ga.label">그래픽 초록</span>
-                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
-                                </div>
-                                <a class="paper-ga-open" href="figures/about/NetworkOptimization/ga-network-resilience-generated.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
-                            </div>
-                            <figure class="paper-ga-feature">
-                                <div class="paper-ga-canvas">
-                                    <img class="paper-ga-image" src="figures/about/NetworkOptimization/ga-network-resilience-generated.png" alt="장애 전파와 복구 경로를 포함한 회복탄력적 네트워크 최적화 그래픽 초록" loading="lazy">
-                                </div>
-                                <figcaption class="paper-ga-caption">
-                                    <strong data-i18n="research.ga.network.generated.title">회복탄력적 네트워크 최적화를 위한 생성형 그래픽 초록</strong>
-                                    <span data-i18n="research.ga.network.generated.meta">Network resilience and smart-grid logistics research visual</span>
-                                </figcaption>
-                            </figure>
-                            <div class="paper-ga-thumbs" aria-label="Network graphical abstract choices">
-                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show generated network resilience graphical abstract"
-                                    data-ga-src="figures/about/NetworkOptimization/ga-network-resilience-generated.png"
-                                    data-ga-title-key="research.ga.network.generated.title"
-                                    data-ga-meta-key="research.ga.network.generated.meta"
-                                    data-ga-alt-key="research.ga.network.generated.alt"
-                                    data-ga-label-key="research.ga.network.generated.short">
-                                    <img src="figures/about/NetworkOptimization/ga-network-resilience-generated.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.network.generated.short">회복탄력성</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show supply-chain resilience figure"
-                                    data-ga-src="figures/about/NetworkOptimization/NO1.png"
-                                    data-ga-title-key="research.ga.network.no1.title"
-                                    data-ga-meta-key="research.ga.network.no1.meta"
-                                    data-ga-alt-key="research.ga.network.no1.alt"
-                                    data-ga-label-key="research.ga.network.no1.short">
-                                    <img src="figures/about/NetworkOptimization/NO1.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.network.no1.short">공급망</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show grid planning figure"
-                                    data-ga-src="figures/about/NetworkOptimization/NO2.png"
-                                    data-ga-title-key="research.ga.network.no2.title"
-                                    data-ga-meta-key="research.ga.network.no2.meta"
-                                    data-ga-alt-key="research.ga.network.no2.alt"
-                                    data-ga-label-key="research.ga.network.no2.short">
-                                    <img src="figures/about/NetworkOptimization/NO2.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.network.no2.short">전력망 계획</span>
-                                </button>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="research-body-fig">
-                        <div class="research-sim-wrap">
-                            <iframe src="figures/about/NetworkOptimization/sim3d_network.html" scrolling="no" allow="autoplay"></iframe>
-                        </div>
-                        <p class="research-app-line">
-                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
-                            <span data-i18n="research.network.app">식품 공급망 · 군사 물류 · 스마트그리드 · EV 인프라</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="research-pubs">
-                    <h4 data-i18n="research.pubs.label">관련 논문</h4>
-                    <ol>
-                        <li><strong>Jeong, H. Y.</strong>, Choi, C.* (2023). Adaptive supply chain system design for fruit crops under climate change. <em>Systems</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>*, Kim, Y., Lee, S., Moreland, J., Zhou, C. (2023). Disruption propagation and repair response in interdependent systems. <em>Simulation Modelling Practice and Theory</em>.</li>
-                        <li>(Under review) Choi, C., <strong>Jeong, H. Y.</strong>*. Integrated approach for long-term capacity expansion and operational scheduling of grid system. <em>Sustainable Energy, Grids and Networks</em>.</li>
-                        <li>(In preparation) <strong>Jeong, H. Y.</strong>, Song, B. D. Tariff-Aware Heuristic Optimization for Integrated VRP and V2G/G2V Scheduling. <em>IEEE Transactions on Transportation Electrification</em>.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <!-- ── 생산 최적화 ── -->
-            <div class="research-panel" id="tab-production">
-                <div class="research-body">
-                    <div class="research-body-text">
-                        <h2 data-i18n="nav.research.production">생산 최적화</h2>
-                        <p class="res-desc" data-i18n="research.production.desc1">반도체 팹 내 OHT·AGV 배차 최적화를 통해 생산 처리량과 흐름 효율을 개선하고, FEM 시뮬레이션과 머신러닝을 결합한 공정 최적화로 열간 단조·딥드로잉의 품질을 향상시킵니다. 첨단 제조 현장의 스마트팩토리 전환에 기여하는 연구입니다.</p>
-                        <p class="res-desc" data-i18n="research.production.desc2">반도체 팹 자동화 물류(OHT, AGV, AMR)의 배차·경로·교통 제어를 이산사건 시뮬레이션으로 최적화하고, DNN-GA-MCS 프레임워크로 블랭크홀더 하중·온도·변형률 파라미터를 튜닝합니다. 불안정도 맵(instability map)과 강화학습을 결합한 열간 단조 공정 설계도 핵심 연구 주제입니다.</p>
-                        <div class="research-topics">
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">DT</span>
-                                    <span class="res-topic-title" data-i18n="research.production.topic1.title">팹 물류 디지털 트윈</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.production.topic1.desc">반도체 팹의 OHT·AGV·AMR 배차, 경로, 교통 제어를 이산사건 시뮬레이션으로 재현해 혼잡을 줄이고 장비 가동률과 처리량을 높입니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">FE</span>
-                                    <span class="res-topic-title" data-i18n="research.production.topic2.title">FEM+ML 공정 최적화</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.production.topic2.desc">유한요소 해석과 DNN-GA-MCS 프레임워크를 결합해 블랭크홀더 하중, 온도, 변형률 속도 등 핵심 공정 파라미터를 다목적으로 조정합니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">RL</span>
-                                    <span class="res-topic-title" data-i18n="research.production.topic3.title">지능형 제조 제어</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.production.topic3.desc">불안정도 맵, 강화학습, 품질 지표를 연결해 열간 단조·스탬핑 공정의 결함을 줄이고 실시간 제어 정책을 설계합니다.</p>
-                            </div>
-                        </div>
-                        <div class="research-detail-tags tags-production">
-                            <span data-i18n="research.production.tag1">열간 단조</span>
-                            <span data-i18n="research.production.tag2">스탬핑</span>
-                            <span data-i18n="research.production.tag3">유한요소법 (FEM)</span>
-                            <span data-i18n="research.production.tag4">공정 최적화</span>
-                            <span data-i18n="research.production.tag5">품질 제어</span>
-                            <span data-i18n="research.production.tag6">지능형 제조</span>
-                        </div>
-                        <section class="paper-ga-gallery" aria-labelledby="ga-production-heading">
-                            <div class="paper-ga-header">
-                                <div class="paper-ga-heading">
-                                    <span class="paper-ga-kicker" id="ga-production-heading" data-i18n="research.ga.label">그래픽 초록</span>
-                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
-                                </div>
-                                <a class="paper-ga-open" href="figures/about/ProductionOptimizaiton/ga-production-manufacturing-research-figure-labeled.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
-                            </div>
-                            <figure class="paper-ga-feature">
-                                <div class="paper-ga-canvas">
-                                    <img class="paper-ga-image" src="figures/about/ProductionOptimizaiton/ga-production-manufacturing-research-figure-labeled.png" alt="반도체 팹 물류, 디지털 트윈, FEM 및 머신러닝 공정 최적화를 결합한 그래픽 초록" loading="lazy">
-                                </div>
-                                <figcaption class="paper-ga-caption">
-                                    <strong data-i18n="research.ga.production.generated.title">제조 및 생산 최적화를 위한 생성형 그래픽 초록</strong>
-                                    <span data-i18n="research.ga.production.generated.meta">Fab logistics, digital twin, FEM, and ML optimization research visual</span>
-                                </figcaption>
-                            </figure>
-                            <div class="paper-ga-thumbs" aria-label="Production graphical abstract choices">
-                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show generated manufacturing optimization graphical abstract"
-                                    data-ga-src="figures/about/ProductionOptimizaiton/ga-production-manufacturing-research-figure-labeled.png"
-                                    data-ga-title-key="research.ga.production.generated.title"
-                                    data-ga-meta-key="research.ga.production.generated.meta"
-                                    data-ga-alt-key="research.ga.production.generated.alt"
-                                    data-ga-label-key="research.ga.production.generated.short">
-                                    <img src="figures/about/ProductionOptimizaiton/ga-production-manufacturing-research-figure-labeled.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.production.generated.short">제조 최적화</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show process optimization figure"
-                                    data-ga-src="figures/about/ProductionOptimizaiton/PO2.png"
-                                    data-ga-title-key="research.ga.production.po2.title"
-                                    data-ga-meta-key="research.ga.production.po2.meta"
-                                    data-ga-alt-key="research.ga.production.po2.alt"
-                                    data-ga-label-key="research.ga.production.po2.short">
-                                    <img src="figures/about/ProductionOptimizaiton/PO2.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.production.po2.short">공정 모델</span>
-                                </button>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="research-body-fig">
-                        <div class="research-sim-wrap">
-                            <img class="research-animation" src="figures/about/ProductionOptimizaiton/PO2.gif" alt="Semiconductor fab logistics and production optimization animation" loading="lazy">
-                        </div>
-                        <p class="research-app-line">
-                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
-                            <span data-i18n="research.production.app">반도체 팹 · 스마트팩토리 · 자동차 부품 제조</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="research-pubs">
-                    <h4 data-i18n="research.pubs.label">관련 논문</h4>
-                    <ol>
-                        <li>Guo, F., <strong>Jeong, H. Y.</strong>, Park, D., Kim, G., Sung, B., Kim, N. (2024). Numerical optimization of variable blank holder force trajectories in stamping. <em>Materials</em>.</li>
-                        <li>Guo, F.†, <strong>Jeong, H. Y.</strong>†, Park, D., Sung, B., Kim, N.* (2024). Multi-objective optimization of blank holder force in deep drawing based on DNN-GA-MCS. <em>The International Journal of Advanced Manufacturing Technology</em>.</li>
-                        <li>Kim, Y., <strong>Jeong, H. Y.</strong>, Park, J., et al. (2023). Optimizing process parameters for hot forging of Ti-6242 alloy: ML and FEM simulation. <em>Journal of Materials Research and Technology</em>.</li>
-                        <li>Park, J., Kim, Y., <strong>Jeong, H. Y.</strong>, et al. (2023). Cogging process design of M50 bearing steel for billet quality. <em>Journal of Materials Research and Technology</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Park, J., Kim, Y., Shin, S. Y., Kim, N.* (2023). Processing parameters optimization in hot forging of AISI 4340 steel using instability map and RL. <em>Journal of Materials Research and Technology</em>.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <!-- ── 차세대 최적화 ── -->
-            <div class="research-panel" id="tab-nextgen">
-                <div class="research-body">
-                    <div class="research-body-text">
-                        <h2 data-i18n="nav.research.nextgen">차세대 최적화</h2>
-                        <p class="res-desc" data-i18n="research.nextgen.desc1">NP-hard 조합 최적화 문제(TSP, VRP 등)를 기존 알고리즘보다 빠르고 범용적으로 풀기 위해 메타러닝, 강화학습, 양자 컴퓨팅을 운영과학에 접목합니다. 새로운 문제 유형에 즉각 적응하는 AI 솔버는 물류, 스케줄링, 네트워크 설계 전반에서 패러다임을 바꿀 잠재력을 지닙니다.</p>
-                        <p class="res-desc" data-i18n="research.nextgen.desc2">메타러닝 기반 적응형 대규모 이웃 탐색(ALNS), 강화학습 기반 신경망 조합 최적화 해법기, QAOA 등 양자 알고리즘의 조합 최적화 적용을 연구합니다. 소규모 인스턴스에서 대규모 실문제로의 일반화 성능과 전이 학습이 핵심 연구 과제입니다.</p>
-                        <div class="research-topics">
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">ML</span>
-                                    <span class="res-topic-title" data-i18n="research.nextgen.topic1.title">메타러닝 해법기</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.nextgen.topic1.desc">문제 특성에 따라 ALNS 연산자와 탐색 전략을 자동 선택하는 메타러닝 기반 솔버를 설계해 새로운 인스턴스에 빠르게 적응합니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">RL</span>
-                                    <span class="res-topic-title" data-i18n="research.nextgen.topic2.title">강화학습 최적화</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.nextgen.topic2.desc">신경망 정책과 보상 설계를 활용해 경로, 스케줄, 네트워크 설계 문제의 순차적 의사결정을 학습하고 대규모 문제로 일반화합니다.</p>
-                            </div>
-                            <div class="res-topic">
-                                <div class="res-topic-head">
-                                    <span class="res-topic-icon">QA</span>
-                                    <span class="res-topic-title" data-i18n="research.nextgen.topic3.title">양자 영감 최적화</span>
-                                </div>
-                                <p class="res-topic-desc" data-i18n="research.nextgen.topic3.desc">QAOA와 양자 영감 탐색을 조합 최적화 모델에 적용해 고전적 휴리스틱과 비교하고, 하이브리드 솔버의 활용 가능성을 평가합니다.</p>
-                            </div>
-                        </div>
-                        <div class="research-detail-tags tags-nextgen">
-                            <span data-i18n="research.nextgen.tag1">메타러닝</span>
-                            <span data-i18n="research.nextgen.tag2">강화학습</span>
-                            <span data-i18n="research.nextgen.tag3">딥러닝</span>
-                            <span data-i18n="research.nextgen.tag4">양자 컴퓨팅</span>
-                            <span data-i18n="research.nextgen.tag5">조합 최적화</span>
-                            <span data-i18n="research.nextgen.tag6">인공지능</span>
-                        </div>
-                        <section class="paper-ga-gallery" aria-labelledby="ga-nextgen-heading">
-                            <div class="paper-ga-header">
-                                <div class="paper-ga-heading">
-                                    <span class="paper-ga-kicker" id="ga-nextgen-heading" data-i18n="research.ga.label">그래픽 초록</span>
-                                    <span class="paper-ga-subtitle" data-i18n="research.ga.subtitle">선별된 논문 그림</span>
-                                </div>
-                                <a class="paper-ga-open" href="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png" target="_blank" rel="noopener" data-i18n="research.ga.open">원본 보기</a>
-                            </div>
-                            <figure class="paper-ga-feature">
-                                <div class="paper-ga-canvas">
-                                    <img class="paper-ga-image" src="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png" alt="문제 인코딩, AI 솔버, 적응형 연산자, 최적해를 연결한 차세대 최적화 그래픽 초록" loading="lazy">
-                                </div>
-                                <figcaption class="paper-ga-caption">
-                                    <strong data-i18n="research.ga.nextgen.generated.title">차세대 최적화 알고리즘을 위한 생성형 그래픽 초록</strong>
-                                    <span data-i18n="research.ga.nextgen.generated.meta">AI solver, adaptive operators, reinforcement learning, and quantum-inspired optimization visual</span>
-                                </figcaption>
-                            </figure>
-                            <div class="paper-ga-thumbs" aria-label="Next-generation graphical abstract choices">
-                                <button class="paper-ga-thumb active" type="button" aria-pressed="true" aria-label="Show generated advanced optimization graphical abstract"
-                                    data-ga-src="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png"
-                                    data-ga-title-key="research.ga.nextgen.generated.title"
-                                    data-ga-meta-key="research.ga.nextgen.generated.meta"
-                                    data-ga-alt-key="research.ga.nextgen.generated.alt"
-                                    data-ga-label-key="research.ga.nextgen.generated.short">
-                                    <img src="figures/about/NextgenOptimization/ga-nextgen-advanced-generated.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.nextgen.generated.short">차세대 최적화</span>
-                                </button>
-                                <button class="paper-ga-thumb" type="button" aria-pressed="false" aria-label="Show meta-learning operator selection figure"
-                                    data-ga-src="figures/about/NextgenOptimization/NGO1.png"
-                                    data-ga-title-key="research.ga.nextgen.ngo1.title"
-                                    data-ga-meta-key="research.ga.nextgen.ngo1.meta"
-                                    data-ga-alt-key="research.ga.nextgen.ngo1.alt"
-                                    data-ga-label-key="research.ga.nextgen.ngo1.short">
-                                    <img src="figures/about/NextgenOptimization/NGO1.png" alt="" loading="lazy">
-                                    <span data-i18n="research.ga.nextgen.ngo1.short">메타러닝</span>
-                                </button>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="research-body-fig">
-                        <div class="research-sim-wrap">
-                            <img class="research-animation" src="figures/about/NextgenOptimization/nextgen-optimization-animation.gif?v=20260714-fast1" alt="Next-generation AI optimization solver animation" loading="lazy">
-                        </div>
-                        <p class="research-app-line">
-                            <span class="app-badge" data-i18n="research.app.label">Applications</span>
-                            <span data-i18n="research.nextgen.app">물류 라우팅 · 생산 스케줄링 · 네트워크 설계</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="research-pubs">
-                    <h4 data-i18n="research.pubs.label">관련 논문</h4>
-                    <ol>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Meta-Learning-Based Adaptive Operator Selection for Traveling Salesman Problem. <em>Applied Soft Computing</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimizing Urban Logistics: VRP with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
-                        <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimization of Urban Logistics with Multi-Modal Systems: Airship-Vehicle Routing Problem. <em>Transportation Research Part E</em>.</li>
-                        <li>Kim, Y., <strong>Jeong, H. Y.</strong>*, Lee, S. (2024). Drone delivery problem with multi-flight level: Machine learning based solution approach. <em>Computers &amp; Industrial Engineering</em>.</li>
-                    </ol>
-                </div>
-            </div>
-
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px;">
+            <img src="figures/about/L1.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="비행고도">
+            <img src="figures/about/L2.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="장애물 지도">
+            <img src="figures/about/city-sim.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="도시 시뮬레이션">
+          </div>
+          <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>Amazon · UPS · DHL · 스마트시티 플랫폼</p>
         </div>
-    </section>
+      </div>
+      <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
+        <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimizing Urban Logistics: VRP with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimization of Urban Logistics with Multi-Modal Systems: Airship-Vehicle Routing Problem. <em>Transportation Research Part E</em>.</li>
+          <li>Kim, Y., <strong>Jeong, H. Y.</strong>*, Lee, S. (2024). Drone delivery problem with multi-flight level: Machine learning based solution approach. <em>Computers &amp; Industrial Engineering</em>.</li>
+          <li>Kim, B., <strong>Jeong, H. Y.</strong>*, Lee, S. (2023). Two-echelon collaborative routing problem with heterogeneous crowd-shippers. <em>Computers &amp; Operations Research</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Lee, S.* (2023). Drone routing problem with truck: Optimization and quantitative analysis. <em>Expert Systems with Applications</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, Lee, S. (2022). Optimal scheduling for multi-flying warehouse: Amazon airborne fulfillment center. <em>Transportation Research Part C</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, Lee, S. (2020). The flying warehouse delivery system. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, David, J. Y., Min, B. C., Lee, S.* (2020). The humanitarian flying warehouse. <em>Transportation Research Part E</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, Lee, S. (2019). Truck-drone hybrid delivery routing: Payload-energy dependency and No-Fly zones. <em>International Journal of Production Economics</em>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="nav-logo">
-                        <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-                    </a>
-                    <p>지능형 최적화 연구실<br>경희대학교</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4>빠른 링크</h4>
-                        <a href="index.html#news" data-i18n="nav.community.news">소식</a>
-                        <a href="research.html" data-i18n="nav.research">연구분야</a>
-                        <a href="publications.html" data-i18n="nav.publications">논문</a>
-                        <a href="projects.html" data-i18n="nav.projects">연구과제</a>
-                        <a href="team.html" data-i18n="nav.team">구성원</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>자료</h4>
-                        <a href="#">GitHub</a>
-                        <a href="learningmaterials/index.html" data-i18n="nav.courses">교육자료</a>
-                    </div>
-                </div>
+  <!-- ── 네트워크 최적화 ── -->
+  <div data-tab-panel="network" style="display:none;padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
+        <div>
+          <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">네트워크 <span style="color:#00a882;">최적화</span></h2>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;">기후변화, 공급망 붕괴, EV 대중화 등 복합 리스크가 글로벌 네트워크를 위협하는 시대에, 설계 단계부터 회복력(resilience)을 내재화하는 최적화 방법론을 개발합니다. 식품 공급망, 군사 물류, 스마트그리드 등 임무 중요 분야에 직접 적용됩니다.</p>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">확률적 프로그래밍, 몬테카를로 시뮬레이션, 강건 최적화가 핵심 방법론입니다.</p>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">01</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">기후 적응형 공급망 설계</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">기후 시나리오와 작황·시장 교란 시뮬레이션, 확률적 최적화를 결합해 식품 공급망의 조달·재고·용량 결정을 회복력 있게 재설계합니다.</p></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 IO LAB. All rights reserved.</p>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">02</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">상호의존 네트워크 회복력</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">물류·인프라·임무 시스템 사이에서 장애가 전파되는 과정을 모델링하고, 제한된 자원하에서 복구 순서·중복성·회복 정책을 최적화합니다.</p></div>
             </div>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">03</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">EV-전력망 통합 운영</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">차량 경로, 충·방전 스케줄, V2G/G2V 의사결정, 배전망 용량 계획을 통합해 EV 물류가 이동성과 전력망 안정성을 함께 지원하도록 설계합니다.</p></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">공급망 네트워크</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">기후변화 대응</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">군사 네트워크</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">네트워크 회복력</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">시뮬레이션 최적화</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">V2G / G2V</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">EV 물류</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">배전망 최적화</span>
+          </div>
         </div>
-    </footer>
+        <div>
+          <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;">
+            <img src="figures/about/ga-network.png" style="width:100%;display:block;" alt="회복탄력적 네트워크 최적화 그래픽 초록">
+            <div style="padding:14px 18px;border-top:1px solid rgba(0,0,0,0.08);">
+              <strong style="display:block;font-size:0.88rem;line-height:1.45;">회복탄력적 네트워크 최적화를 위한 그래픽 초록</strong>
+              <span style="font-size:0.76rem;color:#8a8a98;">Network resilience and smart-grid logistics research visual</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+            <img src="figures/about/NO1.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="공급망">
+            <img src="figures/about/NO2.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="전력망 계획">
+          </div>
+          <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>식품 공급망 · 군사 물류 · 스마트그리드 · EV 인프라</p>
+        </div>
+      </div>
+      <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
+        <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
+          <li><strong>Jeong, H. Y.</strong>, Choi, C.* (2023). Adaptive supply chain system design for fruit crops under climate change. <em>Systems</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>*, Kim, Y., Lee, S., Moreland, J., Zhou, C. (2023). Disruption propagation and repair response in interdependent systems. <em>Simulation Modelling Practice and Theory</em>.</li>
+          <li>(Under review) Choi, C., <strong>Jeong, H. Y.</strong>*. Integrated approach for long-term capacity expansion and operational scheduling of grid system. <em>Sustainable Energy, Grids and Networks</em>.</li>
+          <li>(In preparation) <strong>Jeong, H. Y.</strong>, Song, B. D. Tariff-Aware Heuristic Optimization for Integrated VRP and V2G/G2V Scheduling. <em>IEEE Transactions on Transportation Electrification</em>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-    <script src="lang.js"></script>
-    <script>
-        const rTabs = document.querySelectorAll('.research-tab');
-        const rPanels = document.querySelectorAll('.research-panel');
+  <!-- ── 생산 최적화 ── -->
+  <div data-tab-panel="production" style="display:none;padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
+        <div>
+          <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">생산 <span style="color:#e07820;">최적화</span></h2>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;">반도체 팹 내 OHT·AGV 배차 최적화를 통해 생산 처리량과 흐름 효율을 개선하고, FEM 시뮬레이션과 머신러닝을 결합한 공정 최적화로 열간 단조·딥드로잉의 품질을 향상시킵니다.</p>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">첨단 제조 현장의 스마트팩토리 전환에 기여하는 연구입니다.</p>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">01</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">팹 물류 디지털 트윈</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">반도체 팹의 OHT·AGV·AMR 배차, 경로, 교통 제어를 이산사건 시뮬레이션으로 재현해 혼잡을 줄이고 장비 가동률과 처리량을 높입니다.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">02</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">FEM+ML 공정 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">유한요소 해석과 DNN-GA-MCS 프레임워크를 결합해 블랭크홀더 하중, 온도, 변형률 속도 등 핵심 공정 파라미터를 다목적으로 조정합니다.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">03</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">지능형 제조 제어</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">불안정도 맵, 강화학습, 품질 지표를 연결해 열간 단조·스탬핑 공정의 결함을 줄이고 실시간 제어 정책을 설계합니다.</p></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">열간 단조</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">스탬핑</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">유한요소법 (FEM)</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">공정 최적화</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">품질 제어</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">지능형 제조</span>
+          </div>
+        </div>
+        <div>
+          <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;">
+            <img src="figures/about/PO2.gif" style="width:100%;display:block;" alt="반도체 팹 물류 최적화 애니메이션">
+            <div style="padding:14px 18px;border-top:1px solid rgba(0,0,0,0.08);">
+              <strong style="display:block;font-size:0.88rem;line-height:1.45;">반도체 팹 물류·생산 최적화 시뮬레이션</strong>
+              <span style="font-size:0.76rem;color:#8a8a98;">Fab logistics, digital twin, FEM, and ML optimization</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+            <img src="figures/about/ga-production.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="제조 최적화">
+            <img src="figures/about/PO2.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="공정 모델">
+          </div>
+          <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>반도체 팹 · 스마트팩토리 · 자동차 부품 제조</p>
+        </div>
+      </div>
+      <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
+        <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
+          <li>Guo, F., <strong>Jeong, H. Y.</strong>, Park, D., Kim, G., Sung, B., Kim, N. (2024). Numerical optimization of variable blank holder force trajectories in stamping. <em>Materials</em>.</li>
+          <li>Guo, F.†, <strong>Jeong, H. Y.</strong>†, Park, D., Sung, B., Kim, N.* (2024). Multi-objective optimization of blank holder force in deep drawing based on DNN-GA-MCS. <em>The International Journal of Advanced Manufacturing Technology</em>.</li>
+          <li>Kim, Y., <strong>Jeong, H. Y.</strong>, Park, J., et al. (2023). Optimizing process parameters for hot forging of Ti-6242 alloy: ML and FEM simulation. <em>Journal of Materials Research and Technology</em>.</li>
+          <li>Park, J., Kim, Y., <strong>Jeong, H. Y.</strong>, et al. (2023). Cogging process design of M50 bearing steel for billet quality. <em>Journal of Materials Research and Technology</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Park, J., Kim, Y., Shin, S. Y., Kim, N.* (2023). Processing parameters optimization in hot forging of AISI 4340 steel using instability map and RL. <em>Journal of Materials Research and Technology</em>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
 
-        function switchResearchTab(tabName) {
-            rTabs.forEach(t => t.classList.remove('active'));
-            rPanels.forEach(p => p.classList.remove('active'));
-            const t = document.querySelector('[data-tab="' + tabName + '"]');
-            const p = document.getElementById('tab-' + tabName);
-            if (t) t.classList.add('active');
-            if (p) p.classList.add('active');
-        }
+  <!-- ── 차세대 최적화 ── -->
+  <div data-tab-panel="nextgen" style="display:none;padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
+        <div>
+          <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">차세대 <span style="color:#7c3aed;">최적화</span></h2>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;">NP-hard 조합 최적화 문제(TSP, VRP 등)를 기존 알고리즘보다 빠르고 범용적으로 풀기 위해 메타러닝, 강화학습, 양자 컴퓨팅을 운영과학에 접목합니다.</p>
+          <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">새로운 문제 유형에 즉각 적응하는 AI 솔버는 물류, 스케줄링, 네트워크 설계 전반에서 패러다임을 바꿀 잠재력을 지닙니다.</p>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">01</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">메타러닝 해법기</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">문제 특성에 따라 ALNS 연산자와 탐색 전략을 자동 선택하는 메타러닝 기반 솔버를 설계해 새로운 인스턴스에 빠르게 적응합니다.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">02</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">강화학습 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">신경망 정책과 보상 설계를 활용해 경로, 스케줄, 네트워크 설계 문제의 순차적 의사결정을 학습하고 대규모 문제로 일반화합니다.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">03</span>
+              <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">양자 영감 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">QAOA와 양자 영감 탐색을 조합 최적화 모델에 적용해 고전적 휴리스틱과 비교하고, 하이브리드 솔버의 활용 가능성을 평가합니다.</p></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">메타러닝</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">강화학습</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">딥러닝</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">양자 컴퓨팅</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">조합 최적화</span>
+            <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">인공지능</span>
+          </div>
+        </div>
+        <div>
+          <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;">
+            <img src="figures/about/nextgen-anim.gif" style="width:100%;display:block;" alt="차세대 AI 최적화 솔버 애니메이션">
+            <div style="padding:14px 18px;border-top:1px solid rgba(0,0,0,0.08);">
+              <strong style="display:block;font-size:0.88rem;line-height:1.45;">차세대 AI 최적화 솔버 시각화</strong>
+              <span style="font-size:0.76rem;color:#8a8a98;">AI solver, adaptive operators, RL, and quantum-inspired optimization</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+            <img src="figures/about/ga-nextgen.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="차세대 최적화">
+            <img src="figures/about/NGO1.png" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="메타러닝">
+          </div>
+          <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>물류 라우팅 · 생산 스케줄링 · 네트워크 설계</p>
+        </div>
+      </div>
+      <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
+        <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+        <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Meta-Learning-Based Adaptive Operator Selection for Traveling Salesman Problem. <em>Applied Soft Computing</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimizing Urban Logistics: VRP with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
+          <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimization of Urban Logistics with Multi-Modal Systems: Airship-Vehicle Routing Problem. <em>Transportation Research Part E</em>.</li>
+          <li>Kim, Y., <strong>Jeong, H. Y.</strong>*, Lee, S. (2024). Drone delivery problem with multi-flight level: Machine learning based solution approach. <em>Computers &amp; Industrial Engineering</em>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
 
-        rTabs.forEach(tab => {
-            tab.addEventListener('click', () => switchResearchTab(tab.dataset.tab));
-        });
+  <!-- footer -->
+  <div style="padding:52px 52px 28px;background:#f8f9fa;border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;gap:40px;margin-bottom:34px;flex-wrap:wrap;">
+        <div><div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:34px;width:34px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div><p style="margin-top:14px;font-size:0.9rem;color:#6a6a7a;line-height:1.6;">지능형 최적화 연구실<br>경희대학교</p></div>
+        <div style="display:flex;gap:72px;">
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">빠른 링크</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="community.html" class="ft-l" style="font-size:0.9rem;">소식</a><a href="publications.html" class="ft-l" style="font-size:0.9rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.9rem;">연구과제</a><a href="members.html" class="ft-l" style="font-size:0.9rem;">구성원</a></div></div>
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">자료</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.9rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.9rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.9rem;">Instagram</a></div></div>
+        </div>
+      </div>
+      <div style="padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);text-align:center;"><p style="font-size:0.82rem;color:#6a6a7a;">© 2026 IO-LAB. All rights reserved.</p></div>
+    </div>
+  </div>
 
-        function handleHash() {
-            const map = { '#logistics':'logistics','#network':'network','#production':'production','#nextgen':'nextgen' };
-            const tab = map[window.location.hash];
-            if (tab) switchResearchTab(tab);
-        }
-        handleHash();
-        window.addEventListener('hashchange', handleHash);
-
-        function getResearchLang() {
-            return window._currentLang || localStorage.getItem('io-lab-lang') || 'en';
-        }
-
-        function getResearchText(key) {
-            const lang = getResearchLang();
-            if (typeof translations !== 'undefined' && translations[lang] && translations[lang][key] !== undefined) {
-                return translations[lang][key];
-            }
-            if (typeof translations !== 'undefined' && translations.en && translations.en[key] !== undefined) {
-                return translations.en[key];
-            }
-            return key || '';
-        }
-
-        function getGraphicalAbstractSrc(thumb) {
-            const lang = getResearchLang();
-            const suffix = lang ? lang.charAt(0).toUpperCase() + lang.slice(1) : 'En';
-            return thumb.dataset['gaSrc' + suffix] || thumb.dataset.gaSrc;
-        }
-
-        function setI18nText(el, key) {
-            if (!el || !key) return;
-            el.setAttribute('data-i18n', key);
-            el.textContent = getResearchText(key);
-        }
-
-        function updateGraphicalAbstract(gallery, thumb) {
-            const image = gallery.querySelector('.paper-ga-image');
-            const title = gallery.querySelector('.paper-ga-caption strong');
-            const meta = gallery.querySelector('.paper-ga-caption span');
-            const openLink = gallery.querySelector('.paper-ga-open');
-            const thumbs = gallery.querySelectorAll('.paper-ga-thumb');
-
-            if (!image || !thumb) return;
-
-            const selectedSrc = getGraphicalAbstractSrc(thumb);
-            image.src = selectedSrc;
-            image.alt = getResearchText(thumb.dataset.gaAltKey);
-            if (openLink) openLink.href = selectedSrc;
-            setI18nText(title, thumb.dataset.gaTitleKey);
-            setI18nText(meta, thumb.dataset.gaMetaKey);
-
-            thumbs.forEach(btn => {
-                const isActive = btn === thumb;
-                btn.classList.toggle('active', isActive);
-                btn.setAttribute('aria-pressed', String(isActive));
-                if (btn.dataset.gaLabelKey) {
-                    btn.setAttribute('aria-label', getResearchText(btn.dataset.gaLabelKey));
-                }
-                const thumbImage = btn.querySelector('img');
-                const thumbSrc = getGraphicalAbstractSrc(btn);
-                if (thumbImage && thumbSrc) {
-                    thumbImage.src = thumbSrc;
-                }
-            });
-        }
-
-        const gaGalleries = document.querySelectorAll('.paper-ga-gallery');
-        gaGalleries.forEach(gallery => {
-            const thumbs = gallery.querySelectorAll('.paper-ga-thumb');
-            thumbs.forEach(thumb => {
-                thumb.addEventListener('click', () => updateGraphicalAbstract(gallery, thumb));
-            });
-            updateGraphicalAbstract(gallery, gallery.querySelector('.paper-ga-thumb.active') || thumbs[0]);
-        });
-
-        document.addEventListener('io-lab-lang-change', () => {
-            gaGalleries.forEach(gallery => {
-                updateGraphicalAbstract(gallery, gallery.querySelector('.paper-ga-thumb.active'));
-            });
-        });
-    </script>
+</div>
+<script>
+document.querySelectorAll('.pg-tab').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.pg-tab').forEach(function (b) {
+      b.setAttribute('data-active', String(b === btn));
+    });
+    var name = btn.getAttribute('data-tab');
+    document.querySelectorAll('[data-tab-panel]').forEach(function (p) {
+      p.style.display = (p.getAttribute('data-tab-panel') === name) ? '' : 'none';
+    });
+  });
+});
+</script>
 </body>
-
 </html>
