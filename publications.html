@@ -1,36 +1,28 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>논문 | IO LAB</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>논문 · IO-LAB</title>
+<link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
     .nav-link {
         color: var(--text-secondary) !important;
     }
-
     .nav-link:hover {
         color: var(--text-primary) !important;
     }
-
     .publications-page {
         padding-top: 120px;
         min-height: 100vh;
     }
-
     .publications-page .section-header {
         margin-bottom: 40px;
     }
-
     .back-link {
         display: inline-flex;
         align-items: center;
@@ -41,20 +33,16 @@
         transition: all var(--transition-fast);
         text-decoration: none;
     }
-
     .back-link:hover {
         transform: translateX(-3px);
     }
-
     .back-link svg {
         width: 14px;
         height: 14px;
     }
-
     .pub-section {
         margin-bottom: 35px;
     }
-
     .pub-section-title {
         font-family: var(--font-display);
         font-size: 1.2rem;
@@ -63,13 +51,11 @@
         border-bottom: 2px solid var(--border-color);
         color: var(--accent-primary);
     }
-
     .publications-full-list {
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-
     .pub-item-full {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -80,22 +66,19 @@
         border-radius: 16px;
         transition: all var(--transition-medium);
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-
     .pub-item-full:hover {
         border-color: var(--border-highlight);
         transform: translateX(10px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-
     .pub-item-full h4 {
         font-size: 0.88rem;
         font-weight: 600;
         margin-bottom: 5px;
         line-height: 1.5;
     }
-
     .year-label {
         font-size: 0.85rem;
         font-weight: 700;
@@ -104,143 +87,37 @@
         margin-top: 10px;
         border-left: 3px solid var(--accent-primary);
     }
-
-    .pub-cover-full {
-        width: 80px;
-        height: 110px;
+    .pub-badges {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        min-width: 120px;
+        gap: 10px;
+        flex-wrap: wrap;
     }
-
-    .journal-cover-full {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform var(--transition-medium);
-    }
-
-    .pub-cover-full img[src*="conference"] {
-        object-fit: contain;
-        background: var(--bg-secondary);
-        padding: 10px;
-    }
-
-    .pub-item-full:hover .journal-cover-full {
-        transform: scale(1.05);
-    }
-
     .pub-item-full h4 a {
         color: var(--text-primary);
         text-decoration: none;
         transition: color var(--transition-fast);
     }
-
     .pub-item-full h4 a:hover {
         color: var(--accent-primary);
         text-decoration: underline;
     }
-
     .pub-item-full .pub-authors {
         font-size: 0.78rem;
         color: var(--text-secondary);
         margin-bottom: 3px;
     }
-
     .pub-item-full .pub-journal {
         font-size: 0.76rem;
         color: var(--text-muted);
         font-style: italic;
         margin-bottom: 6px;
     }
-
-    .pub-badges {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .pub-badge {
-        display: inline-block;
-        font-size: 0.7rem;
-        padding: 4px 10px;
-        background: rgba(100, 116, 139, 0.12);
-        color: #64748b;
-        border-radius: 4px;
-        font-weight: 600;
-        border: 1px solid rgba(100, 116, 139, 0.2);
-    }
-
-    .pub-badge.metric {
-        background: rgba(8, 145, 178, 0.12);
-        color: #0891b2;
-        border: 1px solid rgba(8, 145, 178, 0.25);
-    }
-
-    .pub-badge.conference {
-        background: rgba(123, 104, 238, 0.15);
-        color: var(--accent-secondary);
-        border: 1px solid rgba(123, 104, 238, 0.25);
-    }
-
-    .pub-badge.tag-logistics {
-        background: rgba(59, 130, 246, 0.12);
-        color: #2563eb;
-        border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .pub-badge.tag-network {
-        background: rgba(0, 212, 170, 0.12);
-        color: #00a882;
-        border: 1px solid rgba(0, 212, 170, 0.3);
-    }
-
-    .pub-badge.tag-production {
-        background: rgba(251, 146, 60, 0.12);
-        color: #e07820;
-        border: 1px solid rgba(251, 146, 60, 0.25);
-    }
-
-    .pub-badge.tag-nextgen {
-        background: rgba(139, 92, 246, 0.12);
-        color: #7c3aed;
-        border: 1px solid rgba(139, 92, 246, 0.3);
-    }
-
-    @media (max-width: 768px) {
-        .pub-item-full {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .pub-cover-full {
-            width: 100px;
-            height: 130px;
-            margin: 0 auto;
-        }
-
-        .pub-cover-full img[src*="conference"] {
-            padding: 8px;
-        }
-
-        .timeline-logo .org-logo {
-            width: 160px;
-            height: 100px;
-        }
-    }
-
     .year-tabs {
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
         margin-bottom: 16px;
     }
-
     .year-tab {
         padding: 4px 14px;
         font-size: 0.78rem;
@@ -252,25 +129,27 @@
         cursor: pointer;
         transition: all 0.2s ease;
     }
-
     .year-tab:hover {
         border-color: var(--accent-primary);
         color: var(--accent-primary);
     }
-
     .year-tab.active {
         background: var(--accent-primary);
         border-color: var(--accent-primary);
         color: #fff;
     }
-
     .pub-item-full.hidden,
     .year-label.hidden {
         display: none;
     }
+    @media (max-width: 768px) {
+        .pub-item-full {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
 </style>
 </head>
-
 <body>
     <!-- Navigation -->
     <nav class="navbar scrolled">
@@ -280,10 +159,10 @@
             </a>
             <ul class="nav-menu">
                 <li class="nav-dropdown">
-                    <a href="team.html" class="nav-link" data-i18n="nav.team">구성원</a>
+                    <a href="members.html" class="nav-link" data-i18n="nav.team">구성원</a>
                     <ul class="dropdown-menu">
-                        <li><a href="team.html#advisor" data-i18n="nav.team.advisor">지도교수</a></li>
-                        <li><a href="team.html#members" data-i18n="nav.team.members">연구원</a></li>
+                        <li><a href="members.html#advisor" data-i18n="nav.team.advisor">지도교수</a></li>
+                        <li><a href="members.html#members" data-i18n="nav.team.members">연구원</a></li>
                     </ul>
                 </li>
                 <li class="nav-dropdown">
@@ -311,7 +190,6 @@
                         <li><a href="projects.html#completed" data-i18n="nav.proj.completed">완료한 과제</a></li>
                     </ul>
                 </li>
-                
                 <li class="nav-dropdown">
                     <a href="learningmaterials/index.html" class="nav-link" data-i18n="nav.courses">교육자료</a>
                     <ul class="dropdown-menu">
@@ -322,15 +200,15 @@
                     </ul>
                 </li>
                 <li class="nav-dropdown">
-                    <a href="news.html" class="nav-link" data-i18n="nav.community">커뮤니티</a>
+                    <a href="community.html" class="nav-link" data-i18n="nav.community">커뮤니티</a>
                     <ul class="dropdown-menu">
-                        <li><a href="news.html" data-i18n="nav.community.news">소식</a></li>
-                        <li><a href="photos.html" data-i18n="nav.community.photos">사진</a></li>
-                        <li><a href="contact.html" data-i18n="nav.community.contact">연락처</a></li>
+                        <li><a href="community.html#news" data-i18n="nav.community.news">소식</a></li>
+                        <li><a href="community.html#photos" data-i18n="nav.community.photos">사진</a></li>
+                        <li><a href="community.html#contact" data-i18n="nav.community.contact">연락처</a></li>
                     </ul>
                 </li>
             </ul>
-                        <div class="lang-toggle">
+            <div class="lang-toggle">
                 <span class="lang-option" data-lang="en" onclick="toggleLang('en')">EN</span>
                 <span class="lang-divider">|</span>
                 <span class="lang-option" data-lang="ko" onclick="toggleLang('ko')">KO</span>
@@ -348,7 +226,7 @@
         <div class="container">
             <a href="index.html" class="back-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
                 홈으로
             </a>
@@ -358,41 +236,48 @@
                 <h3 class="pub-section-title" data-i18n="nav.pub.international">국제 논문</h3>
 
                 <!-- Working Papers -->
-                <div class="publications-full-list" style="margin-bottom: 20px;">
+                <div class="publications-full-list" style="margin-bottom:20px">
                     <div class="year-label">Working Paper</div>
+
+                    <!-- WP 1 -->
                     <article class="pub-item-full">
                         <div>
                             <h4>Integrated long-term capacity expansion and operational scheduling for regional power grids: A MISO case study</h4>
                             <p class="pub-authors">Choi, C.H., <strong>Jeong, H.Y.*</strong></p>
                             <div class="pub-badges">
-                                <span class="pub-badge">Major Revision</span>
-                                <span class="pub-badge tag-network">#네트워크최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">Major Revision</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#00a882">#네트워크최적화</span>
                             </div>
                         </div>
                     </article>
+
+                    <!-- WP 2 -->
                     <article class="pub-item-full">
                         <div>
                             <h4>Simulation-Based Hierarchical Optimization for Urban Drone Delivery in Multi-Altitude 3D Airspace</h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong></p>
                             <div class="pub-badges">
-                                <span class="pub-badge">Under Review</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">Under Review</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
                     </article>
+
+                    <!-- WP 3 -->
                     <article class="pub-item-full">
                         <div>
                             <h4>Dispatch Strategy Comparison for Overhead Hoist Transport Systems: From State-Aware Dispatching to Predictive Repositioning Across Layout Scales</h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong></p>
                             <div class="pub-badges">
-                                <span class="pub-badge">Under Review</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">Under Review</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
                             </div>
                         </div>
                     </article>
                 </div>
 
+                <!-- Year tabs -->
                 <div class="year-tabs" id="year-tabs">
                     <button class="year-tab active" data-year="all">전체</button>
                     <button class="year-tab" data-year="2025">2025</button>
@@ -402,362 +287,295 @@
                     <button class="year-tab" data-year="2020">2020</button>
                     <button class="year-tab" data-year="2019">2019</button>
                 </div>
+
                 <div class="publications-full-list" id="intl-list">
+
+                    <!-- ===== 2025 ===== -->
                     <div class="year-label">2025</div>
+
+                    <!-- 2025-1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.tre.2025.104415" target="_blank"
-                                    rel="noopener noreferrer">Optimization of Urban Logistics with Multi-Modal Systems:
-                                    A Comprehensive Study of the Airship-Vehicle Routing Problem</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.tre.2025.104415" target="_blank" rel="noopener noreferrer">Optimization of Urban Logistics with Multi-Modal Systems: A Comprehensive Study of the Airship-Vehicle Routing Problem</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Song, B.D.</p>
-                            <p class="pub-journal">Transportation Research Part E: Logistics and Transportation Review,
-                                204, p.104415, 2025</p>
+                            <p class="pub-journal">Transportation Research Part E: Logistics and Transportation Review, 204, p.104415, 2025</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 1.4%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 1.4%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/TRE.jpg" alt="Transportation Research Part E"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/TRE.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2025-2 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.asoc.2025.113930" target="_blank"
-                                    rel="noopener noreferrer">Meta-Learning-Based Adaptive Operator Selection for
-                                    Traveling Salesman Problem</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.asoc.2025.113930" target="_blank" rel="noopener noreferrer">Meta-Learning-Based Adaptive Operator Selection for Traveling Salesman Problem</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Song, B.D.</p>
                             <p class="pub-journal">Applied Soft Computing, p.113930, 2025</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 9.1%</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 9.1%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/AOSC.jpg" alt="Applied Soft Computing" class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/AOSC.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2025-3 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="#" target="_blank" rel="noopener noreferrer">Optimizing Urban Logistics:
-                                    Vehicle Routing Problem with Underground Transportation</a></h4>
+                            <h4><a href="#" target="_blank" rel="noopener noreferrer">Optimizing Urban Logistics: Vehicle Routing Problem with Underground Transportation</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Song, B.D.</p>
                             <p class="pub-journal">IEEE Transactions on Intelligent Transportation Systems, 2025</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 8%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 8%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/IEEETITS.jpg"
-                                alt="IEEE Transactions on Intelligent Transportation Systems"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/IEEETITS.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- ===== 2024 ===== -->
                     <div class="year-label">2024</div>
+
+                    <!-- 2024-1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.cie.2024.110565" target="_blank"
-                                    rel="noopener noreferrer">Drone delivery problem with multi-flight level: Machine
-                                    learning based solution approach</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.cie.2024.110565" target="_blank" rel="noopener noreferrer">Drone delivery problem with multi-flight level: Machine learning based solution approach</a></h4>
                             <p class="pub-authors">Kim, Y., <strong>Jeong, H.Y.*</strong>, and Lee, S.</p>
-                            <p class="pub-journal">Computers & Industrial Engineering, 197, p.110565, 2024</p>
+                            <p class="pub-journal">Computers &amp; Industrial Engineering, 197, p.110565, 2024</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 15%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 15%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/CNIE.jpg" alt="Computers & Industrial Engineering"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/CNIE.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2024-2 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.3390/ma17112578" target="_blank"
-                                    rel="noopener noreferrer">Numerical optimization of variable blank holder force
-                                    trajectories in stamping process for multi-defect reduction</a></h4>
-                            <p class="pub-authors">Guo, F., <strong>Jeong, H.Y.</strong>, Park, D., Kim, G., Sung, B.,
-                                and Kim, N.</p>
+                            <h4><a href="https://doi.org/10.3390/ma17112578" target="_blank" rel="noopener noreferrer">Numerical optimization of variable blank holder force trajectories in stamping process for multi-defect reduction</a></h4>
+                            <p class="pub-authors">Guo, F., <strong>Jeong, H.Y.</strong>, Park, D., Kim, G., Sung, B., and Kim, N.</p>
                             <p class="pub-journal">Materials, 17(11), p.2578, 2024</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/Materials_v7i11.png" alt="Materials" class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/Materials.png');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2024-3 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1007/s00170-024" target="_blank"
-                                    rel="noopener noreferrer">Numerical multi-objective optimization of segmented and
-                                    variable blank holder force trajectories in deep drawing based on DNN-GA-MCS
-                                    strategy</a></h4>
-                            <p class="pub-authors">Guo, F., <strong>Jeong, H.Y.</strong>, Park, D., Sung, B., and Kim,
-                                N.*</p>
-                            <p class="pub-journal">The International Journal of Advanced Manufacturing Technology,
-                                pp.1–24, 2024</p>
+                            <h4><a href="https://doi.org/10.1007/s00170-024" target="_blank" rel="noopener noreferrer">Numerical multi-objective optimization of segmented and variable blank holder force trajectories in deep drawing based on DNN-GA-MCS strategy</a></h4>
+                            <p class="pub-authors">Guo, F., <strong>Jeong, H.Y.</strong>, Park, D., Sung, B., and Kim, N.*</p>
+                            <p class="pub-journal">The International Journal of Advanced Manufacturing Technology, pp.1–24, 2024</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/IJAMT.jfif"
-                                alt="International Journal of Advanced Manufacturing Technology"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/IJAMT.jfif');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- ===== 2023 ===== -->
                     <div class="year-label">2023</div>
+
+                    <!-- 2023-1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.jmrt.2023.11.193" target="_blank"
-                                    rel="noopener noreferrer">Optimizing process parameters for hot forging of Ti-6242
-                                    alloy: A machine learning and FEM simulation approach</a></h4>
-                            <p class="pub-authors">Kim, Y., <strong>Jeong, H.Y.</strong>, Park, J., Kim, K., Kwon, H.,
-                                Ju, G., and Kim, N.</p>
-                            <p class="pub-journal">Journal of Materials Research and Technology, 27, pp.8228–8243, 2023
-                            </p>
+                            <h4><a href="https://doi.org/10.1016/j.jmrt.2023.11.193" target="_blank" rel="noopener noreferrer">Optimizing process parameters for hot forging of Ti-6242 alloy: A machine learning and FEM simulation approach</a></h4>
+                            <p class="pub-authors">Kim, Y., <strong>Jeong, H.Y.</strong>, Park, J., Kim, K., Kwon, H., Ju, G., and Kim, N.</p>
+                            <p class="pub-journal">Journal of Materials Research and Technology, 27, pp.8228–8243, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">IF 6.2</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">IF 6.2</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/JMRT.jpg" alt="Journal of Materials Research and Technology"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/JMRT.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2023-2 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.cor.2023.106389" target="_blank"
-                                    rel="noopener noreferrer">Two-echelon collaborative routing problem with
-                                    heterogeneous crowd-shippers</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.cor.2023.106389" target="_blank" rel="noopener noreferrer">Two-echelon collaborative routing problem with heterogeneous crowd-shippers</a></h4>
                             <p class="pub-authors">Kim, B., <strong>Jeong, H.Y.*</strong>, and Lee, S.</p>
-                            <p class="pub-journal">Computers & Operations Research, 160, p.106389, 2023</p>
+                            <p class="pub-journal">Computers &amp; Operations Research, 160, p.106389, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">IF 5.7</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">IF 5.7</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/CNOR.jpg" alt="Computers & Operations Research"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/CNOR.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2023-3 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.3390/systems11100514" target="_blank"
-                                    rel="noopener noreferrer">Adaptive supply chain system design for fruit crops under
-                                    climate change</a></h4>
+                            <h4><a href="https://doi.org/10.3390/systems11100514" target="_blank" rel="noopener noreferrer">Adaptive supply chain system design for fruit crops under climate change</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Choi, C.*</p>
                             <p class="pub-journal">Systems, 11(10), p.514, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 10%</span>
-                                <span class="pub-badge tag-network">#네트워크최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 10%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#00a882">#네트워크최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/systems_v11c10.png" alt="Systems" class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/systems.png');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2023-4 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.eswa.2023.120260" target="_blank"
-                                    rel="noopener noreferrer">Drone routing problem with truck: Optimization and
-                                    quantitative analysis</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.eswa.2023.120260" target="_blank" rel="noopener noreferrer">Drone routing problem with truck: Optimization and quantitative analysis</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.*</p>
                             <p class="pub-journal">Expert Systems with Applications, 227, p.120260, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 6%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 6%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/ESWA.jpg" alt="Expert Systems with Applications"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/ESWA.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2023-5 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.jmrt.2023.09.059" target="_blank"
-                                    rel="noopener noreferrer">Cogging process design of M50 bearing steel for billet
-                                    quality</a></h4>
-                            <p class="pub-authors">Park, J., Kim, Y., <strong>Jeong, H.Y.</strong>, Kwon, H., Kwon, Y.,
-                                and Kim, N.*</p>
-                            <p class="pub-journal">Journal of Materials Research and Technology, 26, pp.5576–5593, 2023
-                            </p>
+                            <h4><a href="https://doi.org/10.1016/j.jmrt.2023.09.059" target="_blank" rel="noopener noreferrer">Cogging process design of M50 bearing steel for billet quality</a></h4>
+                            <p class="pub-authors">Park, J., Kim, Y., <strong>Jeong, H.Y.</strong>, Kwon, H., Kwon, Y., and Kim, N.*</p>
+                            <p class="pub-journal">Journal of Materials Research and Technology, 26, pp.5576–5593, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">IF 6.2</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">IF 6.2</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/JMRT.jpg" alt="Journal of Materials Research and Technology"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/JMRT.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2023-6 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.simpat.2023.102730" target="_blank"
-                                    rel="noopener noreferrer">Disruption propagation and repair response in
-                                    interdependent systems: Network model and simulation approach</a></h4>
-                            <p class="pub-authors"><strong>Jeong, H.Y.*</strong>, Kim, Y., Lee, S., Moreland, J., and
-                                Zhou, C.</p>
+                            <h4><a href="https://doi.org/10.1016/j.simpat.2023.102730" target="_blank" rel="noopener noreferrer">Disruption propagation and repair response in interdependent systems: Network model and simulation approach</a></h4>
+                            <p class="pub-authors"><strong>Jeong, H.Y.*</strong>, Kim, Y., Lee, S., Moreland, J., and Zhou, C.</p>
                             <p class="pub-journal">Simulation Modelling Practice and Theory, 124, p.102730, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">IF 6.0</span>
-                                <span class="pub-badge tag-network">#네트워크최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">IF 6.0</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#00a882">#네트워크최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/SMPT.jpg" alt="Simulation Modelling Practice and Theory"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/SMPT.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2023-7 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.jmrt.2023.01.067" target="_blank"
-                                    rel="noopener noreferrer">Processing parameters optimization in hot forging of AISI
-                                    4340 steel using instability map and reinforcement learning</a></h4>
-                            <p class="pub-authors"><strong>Jeong, H.Y.</strong>, Park, J., Kim, Y., Shin, S.Y., and Kim,
-                                N.*</p>
-                            <p class="pub-journal">Journal of Materials Research and Technology, 23, pp.1995–2009, 2023
-                            </p>
+                            <h4><a href="https://doi.org/10.1016/j.jmrt.2023.01.067" target="_blank" rel="noopener noreferrer">Processing parameters optimization in hot forging of AISI 4340 steel using instability map and reinforcement learning</a></h4>
+                            <p class="pub-authors"><strong>Jeong, H.Y.</strong>, Park, J., Kim, Y., Shin, S.Y., and Kim, N.*</p>
+                            <p class="pub-journal">Journal of Materials Research and Technology, 23, pp.1995–2009, 2023</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">IF 6.2</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
-                                <span class="pub-badge tag-nextgen">#차세대최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">IF 6.2</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#7c3aed">#차세대최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/JMRT.jpg" alt="Journal of Materials Research and Technology"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/JMRT.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- ===== 2022 ===== -->
                     <div class="year-label">2022</div>
+
+                    <!-- 2022-1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.trc.2022.103831" target="_blank"
-                                    rel="noopener noreferrer">Optimal scheduling and quantitative analysis for
-                                    multi-flying warehouse scheduling problem: Amazon airborne fulfillment center</a>
-                            </h4>
+                            <h4><a href="https://doi.org/10.1016/j.trc.2022.103831" target="_blank" rel="noopener noreferrer">Optimal scheduling and quantitative analysis for multi-flying warehouse scheduling problem: Amazon airborne fulfillment center</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, Song, B.D.*, and Lee, S.</p>
-                            <p class="pub-journal">Transportation Research Part C: Emerging Technologies, 143, p.103831,
-                                2022</p>
+                            <p class="pub-journal">Transportation Research Part C: Emerging Technologies, 143, p.103831, 2022</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 6%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 6%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/TRC.jpg" alt="Transportation Research Part C"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/TRC.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- ===== 2020 ===== -->
                     <div class="year-label">2020</div>
+
+                    <!-- 2020-1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1109/TITS.2020.3049012" target="_blank"
-                                    rel="noopener noreferrer">The flying warehouse delivery system: A quantitative
-                                    approach for the optimal operation policy of airborne fulfillment center</a></h4>
+                            <h4><a href="https://doi.org/10.1109/TITS.2020.3049012" target="_blank" rel="noopener noreferrer">The flying warehouse delivery system: A quantitative approach for the optimal operation policy of airborne fulfillment center</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, Song, B.D.*, and Lee, S.</p>
-                            <p class="pub-journal">IEEE Transactions on Intelligent Transportation Systems, 22(12),
-                                pp.7521–7530, 2020</p>
+                            <p class="pub-journal">IEEE Transactions on Intelligent Transportation Systems, 22(12), pp.7521–7530, 2020</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 8%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 8%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/IEEETITS.jpg"
-                                alt="IEEE Transactions on Intelligent Transportation Systems"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/IEEETITS.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- 2020-2 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.tre.2020.101901" target="_blank"
-                                    rel="noopener noreferrer">The humanitarian flying warehouse</a></h4>
-                            <p class="pub-authors"><strong>Jeong, H.Y.</strong>, David, J.Y., Min, B.C., and Lee, S.*
-                            </p>
-                            <p class="pub-journal">Transportation Research Part E: Logistics and Transportation Review,
-                                136, p.101901, 2020</p>
+                            <h4><a href="https://doi.org/10.1016/j.tre.2020.101901" target="_blank" rel="noopener noreferrer">The humanitarian flying warehouse</a></h4>
+                            <p class="pub-authors"><strong>Jeong, H.Y.</strong>, David, J.Y., Min, B.C., and Lee, S.*</p>
+                            <p class="pub-journal">Transportation Research Part E: Logistics and Transportation Review, 136, p.101901, 2020</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 1.4%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 1.4%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/TRE.jpg" alt="Transportation Research Part E"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/TRE.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
 
+                    <!-- ===== 2019 ===== -->
                     <div class="year-label">2019</div>
+
+                    <!-- 2019-1 -->
                     <article class="pub-item-full">
                         <div>
                             <h4><a href="https://doi.org/10.1016/j.ijpe.2018.11.002" target="_blank" rel="noopener noreferrer">Truck-drone hybrid delivery routing: Payload-energy dependency and No-Fly zones</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, Song, B.D.*, and Lee, S.</p>
-                            <p class="pub-journal">International Journal of Production Economics, 214, pp.220–233, 2019
-                            </p>
+                            <p class="pub-journal">International Journal of Production Economics, 214, pp.220–233, 2019</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">SCIE</span>
-                                <span class="pub-badge metric">JCR 5%</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">SCIE</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(8,145,178,0.1);border:1px solid rgba(8,145,178,0.25);color:#0891b2">JCR 5%</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/journal/IJPE.jpg" alt="International Journal of Production Economics"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/journal/IJPE.jpg');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
-                </div>
-            </div>
+
+                </div><!-- #intl-list -->
+            </div><!-- #international -->
 
             <!-- Domestic Papers -->
             <div class="pub-section" id="domestic">
                 <h3 class="pub-section-title" data-i18n="nav.pub.domestic">국내 논문</h3>
                 <div class="publications-full-list">
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">등록된 국내 논문이 없습니다.</p>
+                    <p style="color:var(--text-muted);font-size:0.9rem;">등록된 국내 논문이 없습니다.</p>
                 </div>
             </div>
 
@@ -765,94 +583,85 @@
             <div class="pub-section" id="conference">
                 <h3 class="pub-section-title" data-i18n="nav.pub.conference">학회지</h3>
                 <div class="publications-full-list">
+
+                    <!-- CP 1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://ssrn.com/abstract=4168513" target="_blank"
-                                    rel="noopener noreferrer">Last-Mile Delivery Capacity Building in Pandemics
-                                    Utilizing Community Resources</a></h4>
+                            <h4><a href="https://ssrn.com/abstract=4168513" target="_blank" rel="noopener noreferrer">Last-Mile Delivery Capacity Building in Pandemics Utilizing Community Resources</a></h4>
                             <p class="pub-authors">Kim, B., <strong>Jeong, H.Y.</strong>, and Lee, S.</p>
                             <p class="pub-journal">Available at SSRN 4168513</p>
                             <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Paper</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(123,104,238,0.12);border:1px solid rgba(123,104,238,0.25);color:#7B68EE">Conference Paper</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
                     </article>
 
+                    <!-- CP 2 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1007/978-3-030-85906-0_5" target="_blank"
-                                    rel="noopener noreferrer">Drone Delivery Vehicle Routing Problem with Multi-Flight
-                                    Level</a></h4>
+                            <h4><a href="https://doi.org/10.1007/978-3-030-85906-0_5" target="_blank" rel="noopener noreferrer">Drone Delivery Vehicle Routing Problem with Multi-Flight Level</a></h4>
                             <p class="pub-authors">Kim, Y., Jung, H., and Lee, S.</p>
-                            <p class="pub-journal">IFIP International Conference on Advances in Production Management
-                                Systems, August 2021. Cham: Springer International Publishing, pp. 43–51</p>
+                            <p class="pub-journal">IFIP International Conference on Advances in Production Management Systems, August 2021. Cham: Springer, pp. 43–51</p>
                             <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Paper</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(123,104,238,0.12);border:1px solid rgba(123,104,238,0.25);color:#7B68EE">Conference Paper</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
                     </article>
 
+                    <!-- CP 3 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1007/978-3-030-85906-0_4" target="_blank"
-                                    rel="noopener noreferrer">Collaborative Hybrid Delivery System: Drone Routing
-                                    Problem Assisted by Truck</a></h4>
+                            <h4><a href="https://doi.org/10.1007/978-3-030-85906-0_4" target="_blank" rel="noopener noreferrer">Collaborative Hybrid Delivery System: Drone Routing Problem Assisted by Truck</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.</p>
-                            <p class="pub-journal">Advances in Production Management Systems. Artificial Intelligence
-                                for Sustainable and Resilient Production Systems: IFIP WG 5.7 International Conference,
-                                APMS 2021, Nantes, France, September 5–9, 2021, Proceedings, Part III. Springer
-                                International Publishing, pp. 33–42</p>
+                            <p class="pub-journal">APMS 2021, IFIP WG 5.7 International Conference, Nantes, France, September 2021, Proceedings, Part III. Springer, pp. 33–42</p>
                             <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Paper</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(123,104,238,0.12);border:1px solid rgba(123,104,238,0.25);color:#7B68EE">Conference Paper</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
                     </article>
 
+                    <!-- CP 4 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://ssrn.com/abstract=4588071" target="_blank"
-                                    rel="noopener noreferrer">Optimizing Process Parameters for Hot Closed Forging of
-                                    Ti-6242 Alloy: A Machine Learning and FEM Simulation Approach</a></h4>
-                            <p class="pub-authors">Kim, Y., <strong>Jeong, H.Y.</strong>, Park, J., Kim, K., Kwon, H.,
-                                Ju, G., and Kim, N.</p>
+                            <h4><a href="https://ssrn.com/abstract=4588071" target="_blank" rel="noopener noreferrer">Optimizing Process Parameters for Hot Closed Forging of Ti-6242 Alloy: A Machine Learning and FEM Simulation Approach</a></h4>
+                            <p class="pub-authors">Kim, Y., <strong>Jeong, H.Y.</strong>, Park, J., Kim, K., Kwon, H., Ju, G., and Kim, N.</p>
                             <p class="pub-journal">Available at SSRN 4588071</p>
                             <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Paper</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(123,104,238,0.12);border:1px solid rgba(123,104,238,0.25);color:#7B68EE">Conference Paper</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
                             </div>
                         </div>
                     </article>
 
+                    <!-- CP 5 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.promfg.2020.01.318" target="_blank"
-                                    rel="noopener noreferrer">Movable Unmanned Aerial System: Optimization of System,
-                                    Resource Design and Drone Routing</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.promfg.2020.01.318" target="_blank" rel="noopener noreferrer">Movable Unmanned Aerial System: Optimization of System, Resource Design and Drone Routing</a></h4>
                             <p class="pub-authors">Song, B.D., Jun, S., Jung, H.Y., and Lee, S.</p>
                             <p class="pub-journal">Procedia Manufacturing, 39, pp.300–306, 2019</p>
                             <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Paper</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(123,104,238,0.12);border:1px solid rgba(123,104,238,0.25);color:#7B68EE">Conference Paper</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
                     </article>
 
+                    <!-- CP 6 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="https://doi.org/10.1016/j.promfg.2020.01.319" target="_blank"
-                                    rel="noopener noreferrer">Optimization of Vehicle-Carrier Routing: Mathematical
-                                    Model and Comparison with Related Routing Models</a></h4>
+                            <h4><a href="https://doi.org/10.1016/j.promfg.2020.01.319" target="_blank" rel="noopener noreferrer">Optimization of Vehicle-Carrier Routing: Mathematical Model and Comparison with Related Routing Models</a></h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.</p>
                             <p class="pub-journal">Procedia Manufacturing, 39, pp.307–313, 2019</p>
                             <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Paper</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(123,104,238,0.12);border:1px solid rgba(123,104,238,0.25);color:#7B68EE">Conference Paper</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#2563eb">#물류최적화</span>
                             </div>
                         </div>
                     </article>
+
                 </div>
             </div>
 
@@ -860,86 +669,57 @@
             <div class="pub-section">
                 <h3 class="pub-section-title">학회 발표</h3>
                 <div class="publications-full-list">
+
+                    <!-- Pres 1 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4>Airship-based drone delivery system: Quantitative approach for managerial and
-                                operational guidelines</h4>
+                            <h4>Airship-based drone delivery system: Quantitative approach for managerial and operational guidelines</h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.</p>
                             <p class="pub-journal">INFORMS Annual Meeting, Seattle, US, 2019</p>
-                            <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Presentation</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                            </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/conference/informs.png" alt="INFORMS" class="journal-cover-full">
-                        </div>
+                        <div style="width:96px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background-color:#f8f9fa;background-image:url('figures/conference/informs.png');background-size:contain;background-repeat:no-repeat;background-position:center;background-origin:content-box;padding:8px;box-sizing:border-box;flex-shrink:0"></div>
                     </article>
 
+                    <!-- Pres 2 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4>Optimization of Vehicle-Carrier Routing Mathematical Model and Comparison with Related
-                                Routing Models</h4>
+                            <h4>Optimization of Vehicle-Carrier Routing Mathematical Model and Comparison with Related Routing Models</h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.</p>
-                            <p class="pub-journal">International Conference on Production Research 25th (ICPR25),
-                                Chicago, US, 2019</p>
-                            <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Presentation</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                            </div>
+                            <p class="pub-journal">International Conference on Production Research 25th (ICPR25), Chicago, US, 2019</p>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/conference/ICPR25.jfif" alt="ICPR25" class="journal-cover-full">
-                        </div>
+                        <div style="width:96px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background-color:#f8f9fa;background-image:url('figures/conference/ICPR25.jfif');background-size:contain;background-repeat:no-repeat;background-position:center;background-origin:content-box;padding:8px;box-sizing:border-box;flex-shrink:0"></div>
                     </article>
 
+                    <!-- Pres 3 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4>Movable Unmanned Aerial System Optimization of System Resource Design and Drone Routing
-                            </h4>
+                            <h4>Movable Unmanned Aerial System Optimization of System Resource Design and Drone Routing</h4>
                             <p class="pub-authors">Song, B.D., Jun, S., <strong>Jeong, H.Y.</strong>, and Lee, S.</p>
-                            <p class="pub-journal">International Conference on Production Research 25th (ICPR25),
-                                Chicago, US, 2019</p>
-                            <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Presentation</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                            </div>
+                            <p class="pub-journal">International Conference on Production Research 25th (ICPR25), Chicago, US, 2019</p>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/conference/ICPR25.jfif" alt="ICPR25" class="journal-cover-full">
-                        </div>
+                        <div style="width:96px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background-color:#f8f9fa;background-image:url('figures/conference/ICPR25.jfif');background-size:contain;background-repeat:no-repeat;background-position:center;background-origin:content-box;padding:8px;box-sizing:border-box;flex-shrink:0"></div>
                     </article>
 
+                    <!-- Pres 4 -->
                     <article class="pub-item-full">
                         <div>
                             <h4>Vehicle-Carrier Routing Problem</h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.</p>
                             <p class="pub-journal">INFORMS Annual Meeting, Phoenix, US, 2018</p>
-                            <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Presentation</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                            </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/conference/informs.png" alt="INFORMS" class="journal-cover-full">
-                        </div>
+                        <div style="width:96px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background-color:#f8f9fa;background-image:url('figures/conference/informs.png');background-size:contain;background-repeat:no-repeat;background-position:center;background-origin:content-box;padding:8px;box-sizing:border-box;flex-shrink:0"></div>
                     </article>
 
+                    <!-- Pres 5 -->
                     <article class="pub-item-full">
                         <div>
-                            <h4>Scheduling Hybrid Delivery System of Truck and Drone: Energy-Payload Dependency and
-                                No-Fly Zone</h4>
+                            <h4>Scheduling Hybrid Delivery System of Truck and Drone: Energy-Payload Dependency and No-Fly Zone</h4>
                             <p class="pub-authors"><strong>Jeong, H.Y.</strong>, and Lee, S.</p>
                             <p class="pub-journal">IISE Annual Meeting, Orlando, US, 2018</p>
-                            <div class="pub-badges">
-                                <span class="pub-badge conference">Conference Presentation</span>
-                                <span class="pub-badge tag-logistics">#물류최적화</span>
-                            </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/conference/IISE.png" alt="IISE" class="journal-cover-full">
-                        </div>
+                        <div style="width:96px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background-color:#f8f9fa;background-image:url('figures/conference/IISE.png');background-size:contain;background-repeat:no-repeat;background-position:center;background-origin:content-box;padding:8px;box-sizing:border-box;flex-shrink:0"></div>
                     </article>
+
                 </div>
             </div>
 
@@ -949,23 +729,19 @@
                 <div class="publications-full-list">
                     <article class="pub-item-full">
                         <div>
-                            <h4><a href="memebers/HYJeong/patent/1020230071207A.pdf" target="_blank"
-                                    rel="noopener noreferrer">강화 학습 기반의 가공 지도를 이용한 단조 공정의 제어변수를 최적화하기 위한 장치 및 이를 위한
-                                    방법</a></h4>
+                            <h4><a href="memebers/HYJeong/patent/1020230071207A.pdf" target="_blank" rel="noopener noreferrer">강화 학습 기반의 가공 지도를 이용한 단조 공정의 제어변수를 최적화하기 위한 장치 및 이를 위한 방법</a></h4>
                             <p class="pub-authors">Kim, N., and <strong>Jeong, H.Y.</strong></p>
                             <p class="pub-journal">Korean Patent No. 10-2023-0071207</p>
                             <div class="pub-badges">
-                                <span class="pub-badge">Pending</span>
-                                <span class="pub-badge tag-production">#생산최적화</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b">Pending</span>
+                                <span style="font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:5px;white-space:nowrap;display:inline-block;line-height:1.4;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#e07820">#생산최적화</span>
                             </div>
                         </div>
-                        <div class="pub-cover-full">
-                            <img src="figures/patent/1020230071207A.png" alt="Patent 10-2023-0071207"
-                                class="journal-cover-full">
-                        </div>
+                        <div style="width:76px;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 2px 8px rgba(15,23,42,0.1);background-image:url('figures/patent/1020230071207A.png');background-size:cover;background-position:center;flex-shrink:0"></div>
                     </article>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -976,17 +752,17 @@
                 <div class="footer-brand">
                     <a href="index.html" class="nav-logo">
                         <img src="figures/io-lab-icon-navy-transparent.png" alt="IO-LAB" class="logo-mark"><span class="logo-text">IO-LAB</span>
-                    </a> </a>
+                    </a>
                     <p>지능형 최적화 연구실<br>경희대학교</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-col">
                         <h4>빠른 링크</h4>
-                        <a href="index.html#news" data-i18n="nav.community.news">소식</a>
+                        <a href="community.html" data-i18n="nav.community.news">소식</a>
                         <a href="research.html" data-i18n="nav.research">연구분야</a>
-                        <a href="index.html#publications" data-i18n="nav.publications">논문</a>
-                        <a href="index.html#projects" data-i18n="nav.projects">연구과제</a>
-                        <a href="team.html" data-i18n="nav.team">구성원</a>
+                        <a href="publications.html" data-i18n="nav.publications">논문</a>
+                        <a href="projects.html" data-i18n="nav.projects">연구과제</a>
+                        <a href="members.html" data-i18n="nav.team">구성원</a>
                     </div>
                     <div class="footer-col">
                         <h4>자료</h4>
@@ -1003,7 +779,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="lang.js"></script>
     <script src="lang.js"></script>
     <script>
         (function () {
@@ -1038,5 +813,4 @@
         })();
     </script>
 </body>
-
 </html>
