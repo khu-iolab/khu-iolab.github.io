@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>구성원 · IO-LAB</title>
+<link rel="icon" type="image/png" href="figures/io-lab-icon-navy-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: #1a1a25; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  a:hover { color: #00a882; }
+  .nav-l { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+  .nav-l:hover { color: #5eead4; }
+  .ft-l { color: #6a6a7a; }
+  .ft-l:hover { color: #00D4AA; }
+  .pg-tab { padding: 13px 26px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: #6a6a7a; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .pg-tab:hover { color: #1a1a25; }
+  .pg-tab[data-active="true"] { color: #00D4AA; border-bottom-color: #00D4AA; }
+  .fac-link { display: inline-flex; align-items: center; gap: 7px; font-size: 0.85rem; font-weight: 600; color: #4a4a5a; padding: 8px 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s; }
+  .fac-link:hover { border-color: #00D4AA; color: #00a882; }
+  .mem-card:hover { border-color: rgba(0,212,170,0.45) !important; transform: translateY(-3px); box-shadow: 0 14px 34px rgba(15,23,42,0.1) !important; }
+</style>
+</head>
+<body>
+<div style="background:#fff;min-height:100vh;">
+
+  <!-- nav -->
+  <nav style="background:#0b1120;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+    <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:32px;width:32px;object-fit:contain;">IO-LAB</a>
+    <div style="display:flex;gap:34px;font-size:0.9rem;font-weight:500;">
+      <a href="members.html" style="color:#5eead4;font-weight:600;">구성원</a><a href="research.html" class="nav-l">연구분야</a><a href="publications.html" class="nav-l">논문</a><a href="projects.html" class="nav-l">연구과제</a><a href="courses.html" class="nav-l">교육자료</a><a href="community.html" class="nav-l">커뮤니티</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
+  </nav>
+
+  <!-- page hero -->
+  <div style="background:#0b1120;padding:72px 52px 58px;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;">People</span>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;">구성원</h1>
+      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:560px;">IO-LAB을 함께 만들어가는 사람들을 소개합니다.</p>
+    </div>
+  </div>
+
+  <!-- tabs -->
+  <div style="border-bottom:1px solid rgba(0,0,0,0.08);padding:0 52px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;display:flex;">
+      <button class="pg-tab" data-active="true" data-tab="advisor">지도교수</button>
+      <button class="pg-tab" data-active="false" data-tab="members">연구원</button>
+    </div>
+  </div>
+
+  <!-- advisor panel -->
+  <div data-tab-panel="advisor" style="padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
+      <!-- left -->
+      <div style="position:sticky;top:110px;">
+        <img src="figures/prof-jeong.jpg" style="width:100%;border-radius:18px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 18px 44px rgba(15,23,42,0.14);" alt="Ho Young Jeong">
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:-0.02em;margin-top:24px;">Ho Young Jeong, Ph.D.</h2>
+        <p style="font-family:'Space Grotesk',monospace;font-size:0.85rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;">Assistant Professor</p>
+        <p style="font-size:0.9rem;color:#6a6a7a;line-height:1.6;margin-top:12px;">Department of Industrial &amp; Management Engineering<br>Kyung Hee University</p>
+        <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-top:12px;">경희대학교 국제캠퍼스 우정원 6034<br>031-201-2430 · ghy27@khu.ac.kr</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;">
+          <a href="mailto:ghy27@khu.ac.kr" class="fac-link">이메일</a>
+          <a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="fac-link">Google Scholar</a>
+          <a href="https://melodic-pithivier-5dfc2b.netlify.app/" target="_blank" class="fac-link">Personal Website</a>
+        </div>
+      </div>
+      <!-- right -->
+      <div style="display:flex;flex-direction:column;gap:44px;">
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Employment</h4>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 180px;gap:16px;padding:13px 4px;border-top:1px solid rgba(0,0,0,0.08);font-size:0.92rem;"><strong>Assistant Professor</strong><span style="color:#4a4a5a;">Kyung Hee University</span><span style="font-family:'Space Grotesk',monospace;font-size:0.82rem;color:#6a6a7a;text-align:right;">Mar 2026 – present</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 180px;gap:16px;padding:13px 4px;border-top:1px solid rgba(0,0,0,0.08);font-size:0.92rem;"><strong>Postdoctoral Researcher</strong><span style="color:#4a4a5a;">Korea University</span><span style="font-family:'Space Grotesk',monospace;font-size:0.82rem;color:#6a6a7a;text-align:right;">Nov 2023 – Mar 2026</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 180px;gap:16px;padding:13px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);font-size:0.92rem;"><strong>Postdoctoral Researcher</strong><span style="color:#4a4a5a;">Sogang University</span><span style="font-family:'Space Grotesk',monospace;font-size:0.82rem;color:#6a6a7a;text-align:right;">Apr 2022 – Oct 2023</span></div>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Education</h4>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:grid;grid-template-columns:80px 1fr 140px;gap:16px;padding:13px 4px;border-top:1px solid rgba(0,0,0,0.08);font-size:0.92rem;"><strong>Ph.D.</strong><span style="color:#4a4a5a;">Purdue University · Industrial Management Engineering</span><span style="font-family:'Space Grotesk',monospace;font-size:0.82rem;color:#6a6a7a;text-align:right;">May 2022</span></div>
+            <div style="display:grid;grid-template-columns:80px 1fr 140px;gap:16px;padding:13px 4px;border-top:1px solid rgba(0,0,0,0.08);font-size:0.92rem;"><strong>M.S.</strong><span style="color:#4a4a5a;">Purdue University · Industrial Management Engineering</span><span style="font-family:'Space Grotesk',monospace;font-size:0.82rem;color:#6a6a7a;text-align:right;">May 2018</span></div>
+            <div style="display:grid;grid-template-columns:80px 1fr 140px;gap:16px;padding:13px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);font-size:0.92rem;"><strong>B.S.</strong><span style="color:#4a4a5a;">Inha University · Industrial Management Engineering</span><span style="font-family:'Space Grotesk',monospace;font-size:0.82rem;color:#6a6a7a;text-align:right;">Jul 2016</span></div>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Research Interests</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);color:#00a882;">Operations Research Applications</span>
+            <span style="font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);color:#00a882;">Logistics Optimization</span>
+            <span style="font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);color:#00a882;">Production Optimization</span>
+            <span style="font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(123,104,238,0.08);border:1px solid rgba(123,104,238,0.28);color:#7B68EE;">Machine Learning</span>
+            <span style="font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(123,104,238,0.08);border:1px solid rgba(123,104,238,0.28);color:#7B68EE;">Artificial Intelligence</span>
+            <span style="font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(123,104,238,0.08);border:1px solid rgba(123,104,238,0.28);color:#7B68EE;">Quantum Computing</span>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Journal Publications</h4>
+          <ol style="padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:0.86rem;color:#4a4a5a;line-height:1.6;">
+            <li><strong>Jeong, H. Y.</strong>, and Song, B. D. (2025). Optimization of Urban Logistics with Multi-Modal Systems: A Comprehensive Study of the Airship-Vehicle Routing Problem. <em>Transportation Research Part E</em>, 204, 104415. (SCIE, JCR 1.4%)</li>
+            <li><strong>Jeong, H. Y.</strong>, and Song, B. D. (2025). Meta-Learning-Based Adaptive Operator Selection for Traveling Salesman Problem. <em>Applied Soft Computing</em>, 113930.</li>
+            <li><strong>Jeong, H. Y.</strong>, and Song, B. D. (2025). Optimizing Urban Logistics: Vehicle Routing Problem with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>. (SCIE, JCR 2.5%)</li>
+            <li>Kim, Y., <strong>Jeong, H. Y.</strong>*, and Lee, S. (2024). Drone delivery problem with multi-flight level: Machine learning based solution approach. <em>Computers &amp; Industrial Engineering</em>, 197, 110565. (SCIE)</li>
+            <li>Guo, F., <strong>Jeong, H. Y.</strong>, Park, D., Kim, G., Sung, B., and Kim, N. (2024). Numerical optimization of variable blank holder force trajectories in stamping process for multi-defect reduction. <em>Materials</em>, 17(11), 2578. (SCIE)</li>
+            <li>Guo, F.†, <strong>Jeong, H. Y.</strong>†, Park, D., Sung, B., and Kim, N.* (2024). Numerical multi-objective optimization of segmented and variable blank holder force trajectories in deep drawing based on DNN-GA-MCS strategy. <em>The International Journal of Advanced Manufacturing Technology</em>, pp.1–24. (SCIE)</li>
+            <li>Kim, Y., <strong>Jeong, H. Y.</strong>, Park, J., Kim, K., Kwon, H., Ju, G., and Kim, N. (2023). Optimizing process parameters for hot forging of Ti-6242 alloy: a machine learning and FEM simulation approach. <em>Journal of Materials Research and Technology</em>, 27, pp.8228–8243. (SCIE, JCR 6.1%)</li>
+            <li>Kim, B., <strong>Jeong, H. Y.</strong>*, and Lee, S. (2023). Two-echelon collaborative routing problem with heterogeneous crowd-shippers. <em>Computers &amp; Operations Research</em>, 160, 106389. (SCIE)</li>
+            <li><strong>Jeong, H. Y.</strong> and Choi, C.* (2023). Adaptive supply chain system design for fruit crops under climate change. <em>Systems</em>, 11(10), 514. (SSCI)</li>
+            <li><strong>Jeong, H. Y.</strong> and Lee, S.* (2023). Drone routing problem with truck: Optimization and quantitative analysis. <em>Expert Systems with Applications</em>, 227, 120260. (SCIE, JCR 5.2%)</li>
+            <li>Park, J., Kim, Y., <strong>Jeong, H. Y.</strong>, Kwon, H., Kwon, Y., and Kim, N.* (2023). Cogging process design of M50 bearing steel for billet quality. <em>Journal of Materials Research and Technology</em>, 26, pp.5576–5593. (SCIE, JCR 6.1%)</li>
+            <li><strong>Jeong, H. Y.</strong>*, Kim, Y., Lee, S., Moreland, J., and Zhou, C. (2023). Disruption propagation and repair response in interdependent systems: Network model and simulation approach. <em>Simulation Modelling Practice and Theory</em>, 124, 102730. (SCIE)</li>
+            <li><strong>Jeong, H. Y.</strong>, Park, J., Kim, Y., Shin, S. Y., and Kim, N.* (2023). Processing parameters optimization in hot forging of AISI 4340 steel using instability map and reinforcement learning. <em>Journal of Materials Research and Technology</em>, 23, pp.1995–2009. (SCIE, JCR 6.1%)</li>
+            <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, and Lee, S. (2022). Optimal scheduling and quantitative analysis for multi-flying warehouse scheduling problem: Amazon airborne fulfillment center. <em>Transportation Research Part C</em>, 143, 103831. (SCIE, JCR 9.0%)</li>
+            <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, and Lee, S. (2020). The flying warehouse delivery system: A quantitative approach for the optimal operation policy of airborne fulfillment center. <em>IEEE Transactions on Intelligent Transportation Systems</em>, 22(12), pp.7521–7530. (SCIE, JCR 2.5%)</li>
+            <li><strong>Jeong, H. Y.</strong>, David, J. Y., Min, B. C., and Lee, S.* (2020). The humanitarian flying warehouse. <em>Transportation Research Part E</em>, 136, 101901. (SCIE, JCR 1.4%)</li>
+            <li><strong>Jeong, H. Y.</strong>, Song, B. D.*, and Lee, S. (2019). Truck-drone hybrid delivery routing: Payload-energy dependency and No-Fly zones. <em>International Journal of Production Economics</em>, 214, pp.220–233. (SCIE, JCR 2.4%)</li>
+          </ol>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Working Papers</h4>
+          <ul style="padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:0.86rem;color:#4a4a5a;line-height:1.6;">
+            <li>(Under review) Choi, C., and <strong>Jeong, H. Y.</strong>*. Integrated approach for long term capacity expansion and operational scheduling of grid system: case study in MISO Region. <em>Sustainable Energy, Grids and Networks</em>.</li>
+            <li>(In preparation) <strong>Jeong, H. Y.</strong>, and Song, B. D. Tariff-Aware Heuristic Optimization for Integrated Vehicle Routing and V2G/G2V Scheduling in Grid-Connected Electric Fleets. <em>IEEE Transactions on Transportation Electrification</em>.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Research Experience</h4>
+          <ul style="padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:0.86rem;color:#4a4a5a;line-height:1.6;">
+            <li>(PI) Optimization of Smart V2G-Based Integrated Logistics and Power Grid Operations, Jan 2025 –. Funded by the Ministry of Education (NRF-02311960)</li>
+            <li>Real-time Last-Mile Delivery Using Collaborative Ground-Aerial Movable Stations, Jan 2023 –. Funded by the Ministry of Science and ICT</li>
+            <li>Development of Multipoint Servocontrol Die Cushion and Process Monitoring Module, Dec 2023. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)한빛산업</li>
+            <li>Motor Housing for High-Quality Electric Vehicles through High-Function Molds, Dec 2023. Funded by the Ministry of SMEs and Startups; Associated with (주)대국정공</li>
+            <li>Development of Material Forging and Manufacturing Process Technology, Dec 2023. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)케이피에프충주공장</li>
+            <li>Development of Vibration Insulation Products and Process Technology for PBV, Jun 2023. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)코다코</li>
+            <li>Development of Multipoint Servocontrol Die Cushion and Process Monitoring Module, Dec 2022. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)한빛산업</li>
+            <li>Development of Manufacturing Technology for Multilateral Body Parts, Dec 2022. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)새한산업</li>
+            <li>Development of Material Forging and Manufacturing Process Technology, Dec 2022. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)케이피에프충주공장</li>
+            <li>Development of Integrated Housing for Powertrain with High Cooling Performance, Dec 2022. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)코벡</li>
+            <li>Development of Vibration Insulation Products and Process Technology for PBV, Dec 2022. Funded by the Ministry of Trade, Industry and Energy; Associated with (주)코다코</li>
+            <li>Visualization of Repair Operations Management for Networked Systems Resilience, May 2022. Funded by Navy Crane Center, IN, United States</li>
+            <li>Resilience in Networked Systems Using Collaboration (RNSC) Project, May 2019. Funded by Navy Crane Center, IN, United States</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Skills</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">Python</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">R</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">MATLAB</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">C#</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">Gurobi</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">CPLEX</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">PyTorch</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">TensorFlow</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">Abaqus</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">DEFORM</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">ARENA</span><span style="font-size:0.8rem;font-weight:600;padding:5px 13px;border-radius:8px;background:#f2f4f7;color:#4a4a5a;">Unity</span>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:16px;">Academic Award</h4>
+          <p style="font-size:0.9rem;color:#4a4a5a;">1st Runner-up Paper — International Conference on Production Research 25th (ICPR25), 2019</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- members panel -->
+  <div data-tab-panel="members" style="display:none;padding:64px 52px 90px;background:#fff;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <h3 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">대학원생</h3>
+      <p style="font-size:0.95rem;color:#8a8a98;padding:22px 0 40px;border-top:1px solid rgba(0,0,0,0.08);">현재 대학원생이 없습니다.</p>
+      <h3 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:22px;">학부연구생</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;">
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/kim-doyoung.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="김도영">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">김도영</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/kim-minseong.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="김민성">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">김민성</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/shin-yunsu.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="신윤수">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">신윤수</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/jung-ilho.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="정일호">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">정일호</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/cho-unhak.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="조운학">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">조운학</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 응용수학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/choi-seunghyun.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="최승현">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">최승현</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/choi-seongwon.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="최성원">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">최성원</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/yu-minsang.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="유민상">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">유민상</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+        <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
+          <img src="figures/members/oh-yunje.jpg" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;" alt="오윤제">
+          <div><h3 style="font-size:1.05rem;font-weight:700;">오윤제</h3><p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p><p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div style="padding:52px 52px 28px;background:#f8f9fa;border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;gap:40px;margin-bottom:34px;flex-wrap:wrap;">
+        <div><div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:34px;width:34px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div><p style="margin-top:14px;font-size:0.9rem;color:#6a6a7a;line-height:1.6;">지능형 최적화 연구실<br>경희대학교</p></div>
+        <div style="display:flex;gap:72px;">
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">빠른 링크</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="community.html" class="ft-l" style="font-size:0.9rem;">소식</a><a href="publications.html" class="ft-l" style="font-size:0.9rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.9rem;">연구과제</a><a href="members.html" class="ft-l" style="font-size:0.9rem;">구성원</a></div></div>
+          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">자료</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.9rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.9rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.9rem;">Instagram</a></div></div>
+        </div>
+      </div>
+      <div style="padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);text-align:center;"><p style="font-size:0.82rem;color:#6a6a7a;">© 2026 IO-LAB. All rights reserved.</p></div>
+    </div>
+  </div>
+
+</div>
+<script>
+document.querySelectorAll('.pg-tab').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.pg-tab').forEach(function (b) {
+      b.setAttribute('data-active', String(b === btn));
+    });
+    var name = btn.getAttribute('data-tab');
+    document.querySelectorAll('[data-tab-panel]').forEach(function (p) {
+      p.style.display = (p.getAttribute('data-tab-panel') === name) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
