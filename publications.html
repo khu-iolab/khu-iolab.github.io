@@ -25,6 +25,9 @@
   .ft-l:hover { color: #00D4AA; }
   .pub-row:hover { background: rgba(0,212,170,0.04); }
   .pub-row:hover .pub-t { color: #00a882; }
+  .yr-hd { cursor:pointer;user-select:none; }
+  .yr-hd:hover { background:rgba(0,0,0,0.02);border-radius:4px; }
+  .yr-cv { margin-left:4px;color:#b6bcc6;font-size:1.1rem;line-height:1;transition:transform 0.22s;display:inline-block; }
 </style>
 </head>
 <body>
@@ -673,5 +676,30 @@
   </div>
 
 </div>
+<script>
+(function(){
+  ['international','conference','presentations'].forEach(function(id){
+    var sec=document.getElementById(id);
+    if(!sec) return;
+    var container=sec.querySelector('div[style*="gap:36px"]');
+    if(!container) return;
+    Array.prototype.forEach.call(container.children,function(g,i){
+      var hd=g.firstElementChild, bd=g.lastElementChild;
+      if(!hd||!bd||hd===bd) return;
+      var cv=document.createElement('span');
+      cv.textContent='▾';
+      cv.className='yr-cv';
+      hd.appendChild(cv);
+      hd.classList.add('yr-hd');
+      if(i>0){ bd.style.display='none'; cv.style.transform='rotate(-90deg)'; }
+      hd.addEventListener('click',function(){
+        var hidden=bd.style.display==='none';
+        bd.style.display=hidden?'':'none';
+        cv.style.transform=hidden?'':'rotate(-90deg)';
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
