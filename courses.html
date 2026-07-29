@@ -12,9 +12,15 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: #1a1a25; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   a { text-decoration: none; color: inherit; }
+  [id] { scroll-margin-top: 24px; }
   a:hover { color: #00a882; }
   .nav-l { color: rgba(255,255,255,0.85); transition: color 0.2s; }
   .nav-l:hover { color: #5eead4; }
+  .nav-item { position: relative; padding-bottom: 12px; margin-bottom: -12px; }
+  .nav-menu { position: absolute; top: 100%; left: 50%; transform: translate(-50%, 6px); min-width: 168px; background: #111a2e; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 2px; opacity: 0; visibility: hidden; transition: opacity 0.2s, transform 0.2s, visibility 0.2s; box-shadow: 0 18px 44px rgba(0,0,0,0.45); z-index: 300; }
+  .nav-item:hover .nav-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  .nav-menu a { padding: 8px 12px; border-radius: 8px; font-size: 0.83rem; font-weight: 500; color: rgba(255,255,255,0.75); white-space: nowrap; }
+  .nav-menu a:hover { background: rgba(94,234,212,0.12); color: #5eead4; }
   .ft-l { color: #6a6a7a; }
   .ft-l:hover { color: #00D4AA; }
   .mat-card:hover { border-color: rgba(0,212,170,0.45) !important; transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,23,42,0.1) !important; }
@@ -23,21 +29,30 @@
 </style>
 </head>
 <body>
-<div style="background:#fff;min-height:100vh;">
+<div style="background:#fff;min-height:100vh;position:relative;">
 
   <!-- nav -->
-  <nav style="background:#0b1120;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+  <nav style="position:absolute;top:0;left:0;right:0;background:transparent;padding:26px 52px;display:flex;align-items:center;justify-content:space-between;z-index:100;">
     <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:32px;width:32px;object-fit:contain;">IO-LAB</a>
-    <div style="display:flex;gap:34px;font-size:0.9rem;font-weight:500;">
-      <a href="members.html" class="nav-l">구성원</a><a href="research.html" class="nav-l">연구분야</a><a href="publications.html" class="nav-l">논문</a><a href="projects.html" class="nav-l">연구과제</a><a href="courses.html" style="color:#5eead4;font-weight:600;">교육자료</a><a href="community.html" class="nav-l">커뮤니티</a>
-    </div>
+    <div style="display:flex;gap:30px;font-size:0.9rem;font-weight:500;">
+        <div class="nav-item"><a href="members.html" class="nav-l">구성원</a><div class="nav-menu"><a href="members.html#advisor">지도교수</a><a href="members.html#researchers">연구원</a></div></div>
+        <div class="nav-item"><a href="research.html" class="nav-l">연구분야</a><div class="nav-menu"><a href="research.html#logistics">물류 최적화</a><a href="research.html#network">네트워크 최적화</a><a href="research.html#production">생산 최적화</a><a href="research.html#nextgen">차세대 최적화</a></div></div>
+        <div class="nav-item"><a href="publications.html" class="nav-l">논문</a><div class="nav-menu"><a href="publications.html#working">Working Papers</a><a href="publications.html#international">국제 논문</a><a href="publications.html#conference">학회지</a><a href="publications.html#presentations">학회 발표</a><a href="publications.html#patent">특허</a></div></div>
+        <div class="nav-item"><a href="projects.html" class="nav-l">연구과제</a><div class="nav-menu"><a href="projects.html#ongoing">진행중인 과제</a><a href="projects.html#completed">완료한 과제</a></div></div>
+        <div class="nav-item"><a href="courses.html" style="color:#5eead4;font-weight:600;">교육자료</a><div class="nav-menu"><a href="courses.html#ie315000">IE315000 공급사슬관리</a><a href="courses.html#ie105000">IE105000 산업경영공학의 이해</a></div></div>
+        <div class="nav-item"><a href="community.html" class="nav-l">커뮤니티</a><div class="nav-menu"><a href="community.html#news">소식</a><a href="community.html#contact">연락처</a></div></div>
+      </div>
     <div style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
   </nav>
 
   <!-- page hero -->
-  <div style="background:#0b1120;padding:72px 52px 58px;">
-    <div style="max-width:1240px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+  <div style="position:relative;overflow:hidden;background:#0b1120;padding:132px 52px 66px;">
+      <div style="position:absolute;top:0;right:0;bottom:0;width:60%;background-image:url('uploads/acadmic material.jfif');background-size:cover;background-position:center;opacity:0.85;-webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 40%);mask-image:linear-gradient(90deg, transparent 0%, #000 40%);"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(105% 120% at 0% 50%, rgba(11,17,32,0.94) 26%, rgba(11,17,32,0.42) 66%, rgba(11,17,32,0.15) 100%);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,17,32,0.35) 0%, rgba(11,17,32,0) 40%, rgba(11,17,32,0.75) 100%);"></div>
+    <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;">
       <div>
+        <nav style="display:flex;align-items:center;gap:9px;font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:16px;"><a href="index.html" style="color:rgba(255,255,255,0.62);">홈</a><span style="color:rgba(255,255,255,0.3);">/</span><span style="color:#5eead4;font-weight:600;">교육자료</span></nav>
         <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;">Learning Materials</span>
         <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;">교육자료</h1>
         <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:560px;">학습 도구 &amp; 실습 자료 — 게임과 시뮬레이션으로 배우는 최적화.</p>
@@ -53,7 +68,7 @@
     <div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:64px;">
 
       <!-- IE315000 -->
-      <div>
+      <div id="ie315000">
         <div style="display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,0.08);margin-bottom:26px;">
           <span style="font-family:'Space Grotesk',monospace;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;color:#00a882;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);padding:5px 14px;border-radius:20px;">IE315000</span>
           <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;">공급사슬관리</h3>
@@ -136,7 +151,7 @@
       </div>
 
       <!-- IE105000 -->
-      <div>
+      <div id="ie105000">
         <div style="display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,0.08);margin-bottom:26px;">
           <span style="font-family:'Space Grotesk',monospace;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;color:#7B68EE;background:rgba(123,104,238,0.08);border:1px solid rgba(123,104,238,0.28);padding:5px 14px;border-radius:20px;">IE105000</span>
           <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;">산업경영공학의 이해</h3>
@@ -216,14 +231,30 @@
   <!-- footer -->
   <div style="padding:52px 52px 28px;background:#f8f9fa;border-top:1px solid rgba(0,0,0,0.08);">
     <div style="max-width:1240px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;gap:40px;margin-bottom:34px;flex-wrap:wrap;">
-        <div><div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.5rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:34px;width:34px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div><p style="margin-top:14px;font-size:0.9rem;color:#6a6a7a;line-height:1.6;">지능형 최적화 연구실<br>경희대학교</p></div>
-        <div style="display:flex;gap:72px;">
-          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">빠른 링크</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="community.html" class="ft-l" style="font-size:0.9rem;">소식</a><a href="publications.html" class="ft-l" style="font-size:0.9rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.9rem;">연구과제</a><a href="members.html" class="ft-l" style="font-size:0.9rem;">구성원</a></div></div>
-          <div><h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">자료</h4><div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.9rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.9rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.9rem;">Instagram</a></div></div>
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;margin-bottom:34px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:32px;width:32px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div>
+          <p style="margin-top:12px;font-size:0.86rem;color:#4a4a5a;line-height:1.6;font-weight:600;">Intelligent Optimization Laboratory</p>
+          <p style="margin-top:2px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;">경희대학교 산업경영공학과<br>경기도 용인시 기흥구 덕영대로 1732<br>국제캠퍼스 우정원 6034호</p>
+          <p style="margin-top:10px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;">T. 031-201-2430<br>E. ghy27@khu.ac.kr</p>
+        </div>
+        <div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">연구실</h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="members.html" class="ft-l" style="font-size:0.86rem;">구성원</a><a href="research.html" class="ft-l" style="font-size:0.86rem;">연구분야</a><a href="community.html" class="ft-l" style="font-size:0.86rem;">소식</a></div>
+        </div>
+        <div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">연구 성과</h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="publications.html" class="ft-l" style="font-size:0.86rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.86rem;">연구과제</a><a href="courses.html" class="ft-l" style="font-size:0.86rem;">교육자료</a></div>
+        </div>
+        <div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">바로가기</h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.86rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.86rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.86rem;">Instagram</a><a href="https://www.khu.ac.kr/" target="_blank" class="ft-l" style="font-size:0.86rem;">경희대학교</a></div>
         </div>
       </div>
-      <div style="padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);text-align:center;"><p style="font-size:0.82rem;color:#6a6a7a;">© 2026 IO-LAB. All rights reserved.</p></div>
+      <div style="padding-top:22px;border-top:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <p style="font-size:0.8rem;color:#6a6a7a;">© 2026 Intelligent Optimization Laboratory, Kyung Hee University. All rights reserved.</p>
+        <p style="font-family:'Space Grotesk',sans-serif;font-size:0.76rem;letter-spacing:0.08em;color:#8a8a98;text-transform:uppercase;">Dept. of Industrial &amp; Management Systems Engineering</p>
+      </div>
     </div>
   </div>
 
