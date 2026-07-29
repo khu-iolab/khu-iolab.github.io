@@ -134,6 +134,7 @@
 
   <!-- ── 네트워크 최적화 ── -->
   <div id="network" data-tab-panel="network" style="display:none;padding:64px 52px 90px;background:#fff;">
+      <span id="tab-network" style="display:none;"></span>
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
@@ -143,15 +144,15 @@
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">01</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">기후 적응형 공급망 설계</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">기후 시나리오와 작황·시장 교란 시뮬레이션, 확률적 최적화를 결합해 식품 공급망의 조달·재고·용량 결정을 회복력 있게 재설계합니다.</p></div>
+                <div><h3 data-i18n="research.network.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">기후 적응형 공급망 설계</h3><p data-i18n="research.network.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">기후 시나리오와 작황·시장 교란 시뮬레이션, 확률적 최적화를 결합해 식품 공급망의 조달·재고·용량 결정을 회복력 있게 재설계합니다.</p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">02</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">상호의존 네트워크 회복력</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">물류·인프라·임무 시스템 사이에서 장애가 전파되는 과정을 모델링하고, 제한된 자원하에서 복구 순서·중복성·회복 정책을 최적화합니다.</p></div>
+                <div><h3 data-i18n="research.network.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">상호의존 네트워크 회복력</h3><p data-i18n="research.network.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">물류·인프라·임무 시스템 사이에서 장애가 전파되는 과정을 모델링하고, 제한된 자원하에서 복구 순서·중복성·회복 정책을 최적화합니다.</p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">03</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">EV-전력망 통합 운영</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">차량 경로, 충·방전 스케줄, V2G/G2V 의사결정, 배전망 용량 계획을 통합해 EV 물류가 이동성과 전력망 안정성을 함께 지원하도록 설계합니다.</p></div>
+                <div><h3 data-i18n="research.network.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">EV-전력망 통합 운영</h3><p data-i18n="research.network.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">차량 경로, 충·방전 스케줄, V2G/G2V 의사결정, 배전망 용량 계획을 통합해 EV 물류가 이동성과 전력망 안정성을 함께 지원하도록 설계합니다.</p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
@@ -194,6 +195,7 @@
 
   <!-- ── 생산 최적화 ── -->
   <div id="production" data-tab-panel="production" style="display:none;padding:64px 52px 90px;background:#fff;">
+      <span id="tab-production" style="display:none;"></span>
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
@@ -203,15 +205,15 @@
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">01</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">팹 물류 디지털 트윈</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">반도체 팹의 OHT·AGV·AMR 배차, 경로, 교통 제어를 이산사건 시뮬레이션으로 재현해 혼잡을 줄이고 장비 가동률과 처리량을 높입니다.</p></div>
+                <div><h3 data-i18n="research.production.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">팹 물류 디지털 트윈</h3><p data-i18n="research.production.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">반도체 팹의 OHT·AGV·AMR 배차, 경로, 교통 제어를 이산사건 시뮬레이션으로 재현해 혼잡을 줄이고 장비 가동률과 처리량을 높입니다.</p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">02</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">FEM+ML 공정 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">유한요소 해석과 DNN-GA-MCS 프레임워크를 결합해 블랭크홀더 하중, 온도, 변형률 속도 등 핵심 공정 파라미터를 다목적으로 조정합니다.</p></div>
+                <div><h3 data-i18n="research.production.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">FEM+ML 공정 최적화</h3><p data-i18n="research.production.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">유한요소 해석과 DNN-GA-MCS 프레임워크를 결합해 블랭크홀더 하중, 온도, 변형률 속도 등 핵심 공정 파라미터를 다목적으로 조정합니다.</p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">03</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">지능형 제조 제어</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">불안정도 맵, 강화학습, 품질 지표를 연결해 열간 단조·스탬핑 공정의 결함을 줄이고 실시간 제어 정책을 설계합니다.</p></div>
+                <div><h3 data-i18n="research.production.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">지능형 제조 제어</h3><p data-i18n="research.production.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">불안정도 맵, 강화학습, 품질 지표를 연결해 열간 단조·스탬핑 공정의 결함을 줄이고 실시간 제어 정책을 설계합니다.</p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
@@ -225,7 +227,7 @@
           </div>
           <div>
             <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;">
-              <img src="figures/about/PO2.gif" style="width:100%;display:block;" alt="반도체 팹 물류 최적화 애니메이션">
+              <img src="figures/about/ProductionOptimizaiton/production-optimization-animation.gif?v=20260714-fast1" style="width:100%;display:block;" alt="반도체 팹 물류 최적화 애니메이션">
               <div style="padding:14px 18px;border-top:1px solid rgba(0,0,0,0.08);">
                 <strong style="display:block;font-size:0.88rem;line-height:1.45;">반도체 팹 물류·생산 최적화 시뮬레이션</strong>
                 <span style="font-size:0.76rem;color:#8a8a98;">Fab logistics, digital twin, FEM, and ML optimization</span>
@@ -253,6 +255,7 @@
 
   <!-- ── 차세대 최적화 ── -->
   <div id="nextgen" data-tab-panel="nextgen" style="display:none;padding:64px 52px 90px;background:#fff;">
+      <span id="tab-nextgen" style="display:none;"></span>
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
@@ -262,15 +265,15 @@
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">01</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">메타러닝 해법기</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">문제 특성에 따라 ALNS 연산자와 탐색 전략을 자동 선택하는 메타러닝 기반 솔버를 설계해 새로운 인스턴스에 빠르게 적응합니다.</p></div>
+                <div><h3 data-i18n="research.nextgen.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">메타러닝 해법기</h3><p data-i18n="research.nextgen.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">문제 특성에 따라 ALNS 연산자와 탐색 전략을 자동 선택하는 메타러닝 기반 솔버를 설계해 새로운 인스턴스에 빠르게 적응합니다.</p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">02</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">강화학습 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">신경망 정책과 보상 설계를 활용해 경로, 스케줄, 네트워크 설계 문제의 순차적 의사결정을 학습하고 대규모 문제로 일반화합니다.</p></div>
+                <div><h3 data-i18n="research.nextgen.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">강화학습 최적화</h3><p data-i18n="research.nextgen.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">신경망 정책과 보상 설계를 활용해 경로, 스케줄, 네트워크 설계 문제의 순차적 의사결정을 학습하고 대규모 문제로 일반화합니다.</p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">03</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">양자 영감 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">QAOA와 양자 영감 탐색을 조합 최적화 모델에 적용해 고전적 휴리스틱과 비교하고, 하이브리드 솔버의 활용 가능성을 평가합니다.</p></div>
+                <div><h3 data-i18n="research.nextgen.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">양자 영감 최적화</h3><p data-i18n="research.nextgen.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">QAOA와 양자 영감 탐색을 조합 최적화 모델에 적용해 고전적 휴리스틱과 비교하고, 하이브리드 솔버의 활용 가능성을 평가합니다.</p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
@@ -284,7 +287,7 @@
           </div>
           <div>
             <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;">
-              <img src="figures/about/nextgen-anim.gif" style="width:100%;display:block;" alt="차세대 AI 최적화 솔버 애니메이션">
+              <img src="figures/about/NextgenOptimization/nextgen-optimization-animation.gif?v=20260714-fast1" style="width:100%;display:block;" alt="차세대 AI 최적화 솔버 애니메이션">
               <div style="padding:14px 18px;border-top:1px solid rgba(0,0,0,0.08);">
                 <strong style="display:block;font-size:0.88rem;line-height:1.45;">차세대 AI 최적화 솔버 시각화</strong>
                 <span style="font-size:0.76rem;color:#8a8a98;">AI solver, adaptive operators, RL, and quantum-inspired optimization</span>

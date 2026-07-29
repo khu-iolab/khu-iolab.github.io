@@ -36,6 +36,23 @@ def test_production_and_nextgen_do_not_use_live_animation_iframes():
     assert "sim3d_solver.html" not in html
 
 
+def test_non_logistics_research_tabs_have_three_topic_cards():
+    html = RESEARCH.read_text(encoding="utf-8")
+    lang = LANG.read_text(encoding="utf-8")
+
+    for tab in ["network", "production", "nextgen"]:
+        assert f'id="tab-{tab}"' in html
+
+        for topic_id in range(1, 4):
+            title_key = f"research.{tab}.topic{topic_id}.title"
+            desc_key = f"research.{tab}.topic{topic_id}.desc"
+
+            assert f'data-i18n="{title_key}"' in html
+            assert f'data-i18n="{desc_key}"' in html
+            assert f"'{title_key}'" in lang
+            assert f"'{desc_key}'" in lang
+
+
 def test_production_and_nextgen_use_rendered_animation_assets():
     html = RESEARCH.read_text(encoding="utf-8")
 
