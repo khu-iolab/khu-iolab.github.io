@@ -179,7 +179,7 @@ const translations = {
         'contact.pi.title':       'Principal Investigator',
         'contact.pi.name.label':  'Name',
         'contact.pi.pos.label':   'Position',
-        'contact.pi.pos.value':   'Assistant Professor, Dept. of Industrial & Management Engineering, Kyung Hee University',
+        'contact.pi.pos.value':   'Assistant Professor, Dept. of Industrial and Management Systems Engineering, Kyung Hee University',
         'contact.pi.office.label':'Office',
         'contact.pi.office.value':'Woojung Hall 6034, International Campus, Kyung Hee University',
         'contact.pi.email.label': 'Email',
