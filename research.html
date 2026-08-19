@@ -91,6 +91,9 @@
     h1[style*="font-size:5.2rem"]{ font-size:2.2rem!important; }
     [style*="height:480px"]{ height:380px!important; }
   }
+  .t-en{display:none;}
+  body.lang-en .t-ko{display:none;}
+  body.lang-en .t-en{display:inline;}
 </style>
 </head>
 <body>
@@ -100,14 +103,14 @@
   <nav style="position:absolute;top:0;left:0;right:0;background:transparent;padding:26px 52px;display:flex;align-items:center;justify-content:space-between;z-index:100;">
     <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:32px;width:32px;object-fit:contain;">IO-LAB</a>
     <div class="nav-links" style="display:flex;gap:30px;font-size:0.9rem;font-weight:500;">
-        <div class="nav-item"><a href="members.html" class="nav-l">구성원</a><div class="nav-menu"><a href="members.html#advisor">지도교수</a><a href="members.html#researchers">연구원</a></div></div>
-        <div class="nav-item"><a href="research.html" style="color:#5eead4;font-weight:600;">연구분야</a><div class="nav-menu"><a href="research.html#logistics">물류 최적화</a><a href="research.html#network">네트워크 최적화</a><a href="research.html#production">생산 최적화</a><a href="research.html#nextgen">차세대 최적화</a></div></div>
-        <div class="nav-item"><a href="publications.html" class="nav-l">논문</a><div class="nav-menu"><a href="publications.html#working">Working Papers</a><a href="publications.html#international">국제 논문</a><a href="publications.html#conference">학회지</a><a href="publications.html#presentations">학회 발표</a><a href="publications.html#patent">특허</a></div></div>
-        <div class="nav-item"><a href="projects.html" class="nav-l">연구과제</a><div class="nav-menu"><a href="projects.html#ongoing">진행중인 과제</a><a href="projects.html#completed">완료한 과제</a></div></div>
-        <div class="nav-item"><a href="courses.html" class="nav-l">교육자료</a><div class="nav-menu"><a href="courses.html#ie315000">IE315000 공급사슬관리</a><a href="courses.html#ie105000">IE105000 산업경영공학의 이해</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></div></div>
-        <div class="nav-item"><a href="community.html" class="nav-l">커뮤니티</a><div class="nav-menu"><a href="community.html#news">소식</a><a href="community.html#contact">연락처</a></div></div>
+        <div class="nav-item"><a href="members.html" class="nav-l"><span class="t-ko">구성원</span><span class="t-en">Members</span></a><div class="nav-menu"><a href="members.html#advisor"><span class="t-ko">지도교수</span><span class="t-en">Advisor</span></a><a href="members.html#researchers"><span class="t-ko">연구원</span><span class="t-en">Researchers</span></a></div></div>
+        <div class="nav-item"><a href="research.html" style="color:#5eead4;font-weight:600;"><span class="t-ko">연구분야</span><span class="t-en">Research</span></a><div class="nav-menu"><a href="research.html#logistics"><span class="t-ko">물류 최적화</span><span class="t-en">Logistics Optimization</span></a><a href="research.html#network"><span class="t-ko">네트워크 최적화</span><span class="t-en">Network Optimization</span></a><a href="research.html#production"><span class="t-ko">생산 최적화</span><span class="t-en">Production Optimization</span></a><a href="research.html#nextgen"><span class="t-ko">차세대 최적화</span><span class="t-en">Next-Gen Optimization</span></a></div></div>
+        <div class="nav-item"><a href="publications.html" class="nav-l"><span class="t-ko">논문</span><span class="t-en">Publications</span></a><div class="nav-menu"><a href="publications.html#working">Working Papers</a><a href="publications.html#international"><span class="t-ko">국제 논문</span><span class="t-en">International</span></a><a href="publications.html#conference"><span class="t-ko">학회지</span><span class="t-en">Conference</span></a><a href="publications.html#presentations"><span class="t-ko">학회 발표</span><span class="t-en">Presentations</span></a><a href="publications.html#patent"><span class="t-ko">특허</span><span class="t-en">Patents</span></a></div></div>
+        <div class="nav-item"><a href="projects.html" class="nav-l"><span class="t-ko">연구과제</span><span class="t-en">Projects</span></a><div class="nav-menu"><a href="projects.html#ongoing"><span class="t-ko">진행중인 과제</span><span class="t-en">Ongoing</span></a><a href="projects.html#completed"><span class="t-ko">완료한 과제</span><span class="t-en">Completed</span></a></div></div>
+        <div class="nav-item"><a href="courses.html" class="nav-l"><span class="t-ko">교육자료</span><span class="t-en">Courses</span></a><div class="nav-menu"><a href="courses.html#ie315000"><span class="t-ko">IE315000 공급사슬관리</span><span class="t-en">IE315000 Supply Chain Mgmt</span></a><a href="courses.html#ie105000"><span class="t-ko">IE105000 산업경영공학의 이해</span><span class="t-en">IE105000 Intro to IE &amp; Mgmt</span></a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></div></div>
+        <div class="nav-item"><a href="community.html" class="nav-l"><span class="t-ko">커뮤니티</span><span class="t-en">Community</span></a><div class="nav-menu"><a href="community.html#news"><span class="t-ko">소식</span><span class="t-en">News</span></a><a href="community.html#contact"><span class="t-ko">연락처</span><span class="t-en">Contact</span></a></div></div>
       </div>
-    <div class="nav-lang" style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
+    <div class="nav-lang" style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span class="nl-en" onclick="setLang('en')" style="cursor:pointer;padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span class="nl-ko" onclick="setLang('ko')" style="cursor:pointer;padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
   <button class="mob-hbg" aria-label="메뉴 열기" onclick="document.getElementById('mob-nav').classList.add('open')"><span></span></button>
   </nav>
 
@@ -117,20 +120,20 @@
       <div style="position:absolute;inset:0;background:radial-gradient(120% 120% at 0% 50%, rgba(11,17,32,0.96) 20%, rgba(11,17,32,0.78) 62%, rgba(11,17,32,0.6) 100%);"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,17,32,0.35) 0%, rgba(11,17,32,0) 40%, rgba(11,17,32,0.75) 100%);"></div>
     <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;">
-      <nav style="display:flex;align-items:center;gap:9px;font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:16px;"><a href="index.html" style="color:rgba(255,255,255,0.62);">홈</a><span style="color:rgba(255,255,255,0.3);">/</span><span style="color:#5eead4;font-weight:600;">연구분야</span></nav>
+      <nav style="display:flex;align-items:center;gap:9px;font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:16px;"><a href="index.html" style="color:rgba(255,255,255,0.62);"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span style="color:rgba(255,255,255,0.3);">/</span><span style="color:#5eead4;font-weight:600;"><span class="t-ko">연구분야</span><span class="t-en">Research Areas</span></span></nav>
       <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;">Research</span>
-      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;">연구분야</h1>
-      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:620px;">물류·네트워크·생산, 그리고 차세대 최적화 방법론까지 — IO-LAB의 네 가지 연구 축을 소개합니다.</p>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;"><span class="t-ko">연구분야</span><span class="t-en">Research Areas</span></h1>
+      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:620px;"><span class="t-ko">물류·네트워크·생산, 그리고 차세대 최적화 방법론까지 — IO-LAB의 네 가지 연구 축을 소개합니다.</span><span class="t-en">Logistics, Network, Production, and Next-Gen Optimization — introducing IO-LAB's four research pillars.</span></p>
     </div>
   </div>
 
   <!-- tabs -->
   <div class="tab-bar-wrap" style="position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(0,0,0,0.07);padding:14px 52px;background:rgba(255,255,255,0.88);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);">
     <div class="tab-bar-scroller" style="max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:4px;background:#f1f3f6;border:1px solid rgba(0,0,0,0.05);border-radius:14px;width:fit-content;">
-      <button class="pg-tab" data-tab="logistics" data-active="true">물류 최적화</button>
-      <button class="pg-tab" data-tab="network" data-active="false">네트워크 최적화</button>
-      <button class="pg-tab" data-tab="production" data-active="false">생산 최적화</button>
-      <button class="pg-tab" data-tab="nextgen" data-active="false">차세대 최적화</button>
+      <button class="pg-tab" data-tab="logistics" data-active="true"><span class="t-ko">물류 최적화</span><span class="t-en">Logistics Optimization</span></button>
+      <button class="pg-tab" data-tab="network" data-active="false"><span class="t-ko">네트워크 최적화</span><span class="t-en">Network Optimization</span></button>
+      <button class="pg-tab" data-tab="production" data-active="false"><span class="t-ko">생산 최적화</span><span class="t-en">Production Optimization</span></button>
+      <button class="pg-tab" data-tab="nextgen" data-active="false"><span class="t-ko">차세대 최적화</span><span class="t-en">Next-Gen Optimization</span></button>
     </div>
   </div>
 
@@ -139,29 +142,29 @@
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
-            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">물류 <span style="color:#2563eb;">최적화</span></h2>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">드론 배송, 지하 물류 네트워크, 시뮬레이션 기반 운영 최적화 세 축을 통해 라스트마일 배송의 비용·탄소 배출을 줄이는 연구를 수행합니다.</p>
+            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;"><span class="t-ko">물류 <span style="color:#2563eb;">최적화</span></span><span class="t-en">Logistics <span style="color:#2563eb;">Optimization</span></span></h2>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;"><span class="t-ko">드론 배송, 지하 물류 네트워크, 시뮬레이션 기반 운영 최적화 세 축을 통해 라스트마일 배송의 비용·탄소 배출을 줄이는 연구를 수행합니다.</span><span class="t-en">We research drone delivery, underground logistics networks, and simulation-based operations optimization to reduce last-mile delivery costs and carbon emissions.</span></p>
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#2563eb;">01</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">드론 배송 최적화</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">트럭-드론 복합 경로(FSTSP/mFSTSP), 비행 창고 기반 보충 스케줄링, 다중 비행 수준(FL1 20m / FL2 60m / FL3 120m) 드론 경로 최적화를 연구합니다. MILP·ALNS·ML 에너지 모델을 결합해 페이로드-에너지 의존성과 No-fly zone 제약을 현실적으로 다룹니다.</p></div>
+                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">드론 배송 최적화</span><span class="t-en">Drone Delivery Optimization</span></h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">트럭-드론 복합 경로(FSTSP/mFSTSP), 비행 창고 기반 보충 스케줄링, 다중 비행 수준(FL1 20m / FL2 60m / FL3 120m) 드론 경로 최적화를 연구합니다. MILP·ALNS·ML 에너지 모델을 결합해 페이로드-에너지 의존성과 No-fly zone 제약을 현실적으로 다룹니다.</span><span class="t-en">We study truck-drone hybrid routing (FSTSP/mFSTSP), flying warehouse-based replenishment scheduling, and multi-flight-level (FL1 20m / FL2 60m / FL3 120m) drone routing. MILP, ALNS, and ML energy models are combined to realistically handle payload-energy dependencies and No-fly zone constraints.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#2563eb;">02</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">지하 물류 네트워크</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">도심 지하를 활용한 화물 캡슐·AGV 터널망과 지상 라스트마일 구간을 통합 설계합니다. 지하-지상 복합 환승 거점 배치, 용량 제약 하의 경로 최적화, 탄소 배출 및 도로 혼잡 비용 동시 절감을 목표로 합니다.</p></div>
+                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">지하 물류 네트워크</span><span class="t-en">Underground Logistics Network</span></h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">도심 지하를 활용한 화물 캡슐·AGV 터널망과 지상 라스트마일 구간을 통합 설계합니다. 지하-지상 복합 환승 거점 배치, 용량 제약 하의 경로 최적화, 탄소 배출 및 도로 혼잡 비용 동시 절감을 목표로 합니다.</span><span class="t-en">We integrate underground freight capsule and AGV tunnel networks with above-ground last-mile segments in urban areas. The goal is to simultaneously reduce carbon emissions and road congestion costs through optimal hub placement and capacity-constrained routing.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#2563eb;">03</span>
-                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">운영 최적화 &amp; 시뮬레이션</h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">VRP 및 변형 문제(CVRP, PDPTW 등)를 수리 모델로 정식화하고 ALNS·GRASP 메타휴리스틱으로 대규모 인스턴스를 해결합니다. 시뮬레이션 기반 검증으로 수요 불확실성·차량 고장·교통 혼잡 시나리오를 평가합니다.</p></div>
+                <div><h3 style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">운영 최적화 &amp; 시뮬레이션</span><span class="t-en">Operations Optimization &amp; Simulation</span></h3><p style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">VRP 및 변형 문제(CVRP, PDPTW 등)를 수리 모델로 정식화하고 ALNS·GRASP 메타휴리스틱으로 대규모 인스턴스를 해결합니다. 시뮬레이션 기반 검증으로 수요 불확실성·차량 고장·교통 혼잡 시나리오를 평가합니다.</span><span class="t-en">We formulate VRP variants (CVRP, PDPTW, etc.) as mathematical models and solve large-scale instances with ALNS and GRASP metaheuristics. Simulation-based validation assesses demand uncertainty, vehicle failures, and traffic congestion scenarios.</span></p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">차량 경로 (VRP)</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">드론 배송</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">라스트마일</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">비행 창고</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">지하 물류</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">공급망 설계</span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;"><span class="t-ko">차량 경로 (VRP)</span><span class="t-en">Vehicle Routing (VRP)</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;"><span class="t-ko">드론 배송</span><span class="t-en">Drone Delivery</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;"><span class="t-ko">라스트마일</span><span class="t-en">Last-Mile</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;"><span class="t-ko">비행 창고</span><span class="t-en">Flying Warehouse</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;"><span class="t-ko">지하 물류</span><span class="t-en">Underground Logistics</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;"><span class="t-ko">공급망 설계</span><span class="t-en">Supply Chain Design</span></span>
             </div>
           </div>
           <div>
@@ -181,7 +184,7 @@
           </div>
         </div>
         <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
-          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;"><span class="t-ko">관련 논문</span><span class="t-en">Related Publications</span></h4>
           <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
             <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimizing Urban Logistics: VRP with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
             <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimization of Urban Logistics with Multi-Modal Systems: Airship-Vehicle Routing Problem. <em>Transportation Research Part E</em>.</li>
@@ -203,32 +206,32 @@
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
-            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">네트워크 <span style="color:#00a882;">최적화</span></h2>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;">기후변화, 공급망 붕괴, EV 대중화 등 복합 리스크가 글로벌 네트워크를 위협하는 시대에, 설계 단계부터 회복력(resilience)을 내재화하는 최적화 방법론을 개발합니다. 식품 공급망, 군사 물류, 스마트그리드 등 임무 중요 분야에 직접 적용됩니다.</p>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">확률적 프로그래밍, 몬테카를로 시뮬레이션, 강건 최적화가 핵심 방법론입니다.</p>
+            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;"><span class="t-ko">네트워크 <span style="color:#00a882;">최적화</span></span><span class="t-en">Network <span style="color:#00a882;">Optimization</span></span></h2>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;"><span class="t-ko">기후변화, 공급망 붕괴, EV 대중화 등 복합 리스크가 글로벌 네트워크를 위협하는 시대에, 설계 단계부터 회복력(resilience)을 내재화하는 최적화 방법론을 개발합니다. 식품 공급망, 군사 물류, 스마트그리드 등 임무 중요 분야에 직접 적용됩니다.</span><span class="t-en">In an era where compound risks like climate change, supply chain disruption, and EV proliferation threaten global networks, we develop optimization methods that embed resilience from the design stage — applied directly to food supply chains, military logistics, and smart grids.</span></p>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;"><span class="t-ko">확률적 프로그래밍, 몬테카를로 시뮬레이션, 강건 최적화가 핵심 방법론입니다.</span><span class="t-en">Core methods include stochastic programming, Monte Carlo simulation, and robust optimization.</span></p>
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">01</span>
-                <div><h3 data-i18n="research.network.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">기후 적응형 공급망 설계</h3><p data-i18n="research.network.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">기후 시나리오와 작황·시장 교란 시뮬레이션, 확률적 최적화를 결합해 식품 공급망의 조달·재고·용량 결정을 회복력 있게 재설계합니다.</p></div>
+                <div><h3 data-i18n="research.network.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">기후 적응형 공급망 설계</span><span class="t-en">Climate-Adaptive Supply Chain Design</span></h3><p data-i18n="research.network.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">기후 시나리오와 작황·시장 교란 시뮬레이션, 확률적 최적화를 결합해 식품 공급망의 조달·재고·용량 결정을 회복력 있게 재설계합니다.</span><span class="t-en">We combine climate scenarios, crop and market disruption simulations, and stochastic optimization to redesign procurement, inventory, and capacity decisions in food supply chains for greater resilience.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">02</span>
-                <div><h3 data-i18n="research.network.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">상호의존 네트워크 회복력</h3><p data-i18n="research.network.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">물류·인프라·임무 시스템 사이에서 장애가 전파되는 과정을 모델링하고, 제한된 자원하에서 복구 순서·중복성·회복 정책을 최적화합니다.</p></div>
+                <div><h3 data-i18n="research.network.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">상호의존 네트워크 회복력</span><span class="t-en">Interdependent Network Resilience</span></h3><p data-i18n="research.network.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">물류·인프라·임무 시스템 사이에서 장애가 전파되는 과정을 모델링하고, 제한된 자원하에서 복구 순서·중복성·회복 정책을 최적화합니다.</span><span class="t-en">We model failure propagation across logistics, infrastructure, and mission-critical systems, and optimize recovery sequencing, redundancy, and restoration policies under limited resources.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#00a882;">03</span>
-                <div><h3 data-i18n="research.network.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">EV-전력망 통합 운영</h3><p data-i18n="research.network.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">차량 경로, 충·방전 스케줄, V2G/G2V 의사결정, 배전망 용량 계획을 통합해 EV 물류가 이동성과 전력망 안정성을 함께 지원하도록 설계합니다.</p></div>
+                <div><h3 data-i18n="research.network.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">EV-전력망 통합 운영</span><span class="t-en">EV-Grid Logistics Operations</span></h3><p data-i18n="research.network.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">차량 경로, 충·방전 스케줄, V2G/G2V 의사결정, 배전망 용량 계획을 통합해 EV 물류가 이동성과 전력망 안정성을 함께 지원하도록 설계합니다.</span><span class="t-en">We integrate vehicle routing, charge/discharge scheduling, V2G/G2V decisions, and distribution grid capacity planning to ensure EV logistics supports both mobility and grid stability.</span></p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">공급망 네트워크</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">기후변화 대응</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">군사 네트워크</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">네트워크 회복력</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">시뮬레이션 최적화</span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">공급망 네트워크</span><span class="t-en">Supply Chain Network</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">기후변화 대응</span><span class="t-en">Climate Resilience</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">군사 네트워크</span><span class="t-en">Military Networks</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">네트워크 회복력</span><span class="t-en">Network Resilience</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">시뮬레이션 최적화</span><span class="t-en">Simulation Optimization</span></span>
               <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">V2G / G2V</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">EV 물류</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;">배전망 최적화</span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">EV 물류</span><span class="t-en">EV Logistics</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.28);color:#00a882;"><span class="t-ko">배전망 최적화</span><span class="t-en">Grid Optimization</span></span>
             </div>
           </div>
           <div>
@@ -243,11 +246,11 @@
               <img src="figures/about/NO1.png" onclick="lbOpen(['figures/about/ga-network.png','figures/about/NO1.png','figures/about/NO2.png'],1)" style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="공급망">
               <img src="figures/about/NO2.png" onclick="lbOpen(['figures/about/ga-network.png','figures/about/NO1.png','figures/about/NO2.png'],2)" style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="전력망 계획">
             </div>
-            <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>식품 공급망 · 군사 물류 · 스마트그리드 · EV 인프라</p>
+            <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span><span class="t-ko">식품 공급망 · 군사 물류 · 스마트그리드 · EV 인프라</span><span class="t-en">Food Supply Chain · Defense Logistics · Smart Grid · EV Infrastructure</span></p>
           </div>
         </div>
         <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
-          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;"><span class="t-ko">관련 논문</span><span class="t-en">Related Publications</span></h4>
           <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
             <li><strong>Jeong, H. Y.</strong>, Choi, C.* (2023). Adaptive supply chain system design for fruit crops under climate change. <em>Systems</em>.</li>
             <li><strong>Jeong, H. Y.</strong>*, Kim, Y., Lee, S., Moreland, J., Zhou, C. (2023). Disruption propagation and repair response in interdependent systems. <em>Simulation Modelling Practice and Theory</em>.</li>
@@ -264,30 +267,30 @@
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
-            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">생산 <span style="color:#e07820;">최적화</span></h2>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;">반도체 팹 내 OHT·AGV 배차 최적화를 통해 생산 처리량과 흐름 효율을 개선하고, FEM 시뮬레이션과 머신러닝을 결합한 공정 최적화로 열간 단조·딥드로잉의 품질을 향상시킵니다.</p>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">첨단 제조 현장의 스마트팩토리 전환에 기여하는 연구입니다.</p>
+            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;"><span class="t-ko">생산 <span style="color:#e07820;">최적화</span></span><span class="t-en">Production <span style="color:#e07820;">Optimization</span></span></h2>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;"><span class="t-ko">반도체 팹 내 OHT·AGV 배차 최적화를 통해 생산 처리량과 흐름 효율을 개선하고, FEM 시뮬레이션과 머신러닝을 결합한 공정 최적화로 열간 단조·딥드로잉의 품질을 향상시킵니다.</span><span class="t-en">We improve throughput and flow efficiency in semiconductor fabs via OHT/AGV dispatch optimization, and enhance hot forging and deep drawing quality through FEM-simulation combined with machine learning.</span></p>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;"><span class="t-ko">첨단 제조 현장의 스마트팩토리 전환에 기여하는 연구입니다.</span><span class="t-en">This research contributes to smart factory transformation in advanced manufacturing environments.</span></p>
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">01</span>
-                <div><h3 data-i18n="research.production.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">팹 물류 디지털 트윈</h3><p data-i18n="research.production.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">반도체 팹의 OHT·AGV·AMR 배차, 경로, 교통 제어를 이산사건 시뮬레이션으로 재현해 혼잡을 줄이고 장비 가동률과 처리량을 높입니다.</p></div>
+                <div><h3 data-i18n="research.production.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">팹 물류 디지털 트윈</span><span class="t-en">Fab Logistics Digital Twin</span></h3><p data-i18n="research.production.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">반도체 팹의 OHT·AGV·AMR 배차, 경로, 교통 제어를 이산사건 시뮬레이션으로 재현해 혼잡을 줄이고 장비 가동률과 처리량을 높입니다.</span><span class="t-en">We replicate OHT/AGV/AMR dispatching, routing, and traffic control in semiconductor fabs via discrete-event simulation to reduce congestion and improve equipment utilization and throughput.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">02</span>
-                <div><h3 data-i18n="research.production.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">FEM+ML 공정 최적화</h3><p data-i18n="research.production.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">유한요소 해석과 DNN-GA-MCS 프레임워크를 결합해 블랭크홀더 하중, 온도, 변형률 속도 등 핵심 공정 파라미터를 다목적으로 조정합니다.</p></div>
+                <div><h3 data-i18n="research.production.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">FEM+ML 공정 최적화</span><span class="t-en">FEM + ML Process Optimization</span></h3><p data-i18n="research.production.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">유한요소 해석과 DNN-GA-MCS 프레임워크를 결합해 블랭크홀더 하중, 온도, 변형률 속도 등 핵심 공정 파라미터를 다목적으로 조정합니다.</span><span class="t-en">Finite element analysis is combined with a DNN-GA-MCS framework to multi-objectively tune key process parameters such as blank holder force, temperature, and strain rate.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#e07820;">03</span>
-                <div><h3 data-i18n="research.production.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">지능형 제조 제어</h3><p data-i18n="research.production.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">불안정도 맵, 강화학습, 품질 지표를 연결해 열간 단조·스탬핑 공정의 결함을 줄이고 실시간 제어 정책을 설계합니다.</p></div>
+                <div><h3 data-i18n="research.production.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">지능형 제조 제어</span><span class="t-en">Intelligent Manufacturing Control</span></h3><p data-i18n="research.production.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">불안정도 맵, 강화학습, 품질 지표를 연결해 열간 단조·스탬핑 공정의 결함을 줄이고 실시간 제어 정책을 설계합니다.</span><span class="t-en">We link instability maps, reinforcement learning, and quality indicators to reduce defects in hot forging and stamping processes, and to design real-time control policies.</span></p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">열간 단조</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">스탬핑</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">유한요소법 (FEM)</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">공정 최적화</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">품질 제어</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;">지능형 제조</span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;"><span class="t-ko">열간 단조</span><span class="t-en">Hot Forging</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;"><span class="t-ko">스탬핑</span><span class="t-en">Stamping</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;"><span class="t-ko">유한요소법 (FEM)</span><span class="t-en">FEM</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;"><span class="t-ko">공정 최적화</span><span class="t-en">Process Optimization</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;"><span class="t-ko">품질 제어</span><span class="t-en">Quality Control</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.3);color:#e07820;"><span class="t-ko">지능형 제조</span><span class="t-en">Intelligent Manufacturing</span></span>
             </div>
           </div>
           <div>
@@ -302,11 +305,11 @@
               <img src="figures/about/ga-production.png" onclick="lbOpen(['figures/about/PO2.gif','figures/about/ga-production.png','figures/about/PO2.png'],1)" style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="제조 최적화">
               <img src="figures/about/PO2.png" onclick="lbOpen(['figures/about/PO2.gif','figures/about/ga-production.png','figures/about/PO2.png'],2)" style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="공정 모델">
             </div>
-            <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>반도체 팹 · 스마트팩토리 · 자동차 부품 제조</p>
+            <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span><span class="t-ko">반도체 팹 · 스마트팩토리 · 자동차 부품 제조</span><span class="t-en">Semiconductor Fab · Smart Factory · Automotive Manufacturing</span></p>
           </div>
         </div>
         <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
-          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;"><span class="t-ko">관련 논문</span><span class="t-en">Related Publications</span></h4>
           <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
             <li>Guo, F., <strong>Jeong, H. Y.</strong>, Park, D., Kim, G., Sung, B., Kim, N. (2024). Numerical optimization of variable blank holder force trajectories in stamping. <em>Materials</em>.</li>
             <li>Guo, F.†, <strong>Jeong, H. Y.</strong>†, Park, D., Sung, B., Kim, N.* (2024). Multi-objective optimization of blank holder force in deep drawing based on DNN-GA-MCS. <em>The International Journal of Advanced Manufacturing Technology</em>.</li>
@@ -324,30 +327,30 @@
       <div style="max-width:1240px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start;">
           <div>
-            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">차세대 <span style="color:#7c3aed;">최적화</span></h2>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;">NP-hard 조합 최적화 문제(TSP, VRP 등)를 기존 알고리즘보다 빠르고 범용적으로 풀기 위해 메타러닝, 강화학습, 양자 컴퓨팅을 운영과학에 접목합니다.</p>
-            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;">새로운 문제 유형에 즉각 적응하는 AI 솔버는 물류, 스케줄링, 네트워크 설계 전반에서 패러다임을 바꿀 잠재력을 지닙니다.</p>
+            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;"><span class="t-ko">차세대 <span style="color:#7c3aed;">최적화</span></span><span class="t-en">Next-Gen <span style="color:#7c3aed;">Optimization</span></span></h2>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:14px;"><span class="t-ko">NP-hard 조합 최적화 문제(TSP, VRP 등)를 기존 알고리즘보다 빠르고 범용적으로 풀기 위해 메타러닝, 강화학습, 양자 컴퓨팅을 운영과학에 접목합니다.</span><span class="t-en">We integrate meta-learning, reinforcement learning, and quantum computing into operations research to solve NP-hard combinatorial optimization problems (TSP, VRP, etc.) faster and more generally than existing algorithms.</span></p>
+            <p style="font-size:0.95rem;color:#4a4a5a;line-height:1.8;margin-bottom:26px;"><span class="t-ko">새로운 문제 유형에 즉각 적응하는 AI 솔버는 물류, 스케줄링, 네트워크 설계 전반에서 패러다임을 바꿀 잠재력을 지닙니다.</span><span class="t-en">AI solvers that instantly adapt to new problem types have the potential to transform logistics, scheduling, and network design.</span></p>
             <div style="display:flex;flex-direction:column;">
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">01</span>
-                <div><h3 data-i18n="research.nextgen.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">메타러닝 해법기</h3><p data-i18n="research.nextgen.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">문제 특성에 따라 ALNS 연산자와 탐색 전략을 자동 선택하는 메타러닝 기반 솔버를 설계해 새로운 인스턴스에 빠르게 적응합니다.</p></div>
+                <div><h3 data-i18n="research.nextgen.topic1.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">메타러닝 해법기</span><span class="t-en">Meta-Learning Solvers</span></h3><p data-i18n="research.nextgen.topic1.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">문제 특성에 따라 ALNS 연산자와 탐색 전략을 자동 선택하는 메타러닝 기반 솔버를 설계해 새로운 인스턴스에 빠르게 적응합니다.</span><span class="t-en">We design meta-learning-based solvers that automatically select ALNS operators and search strategies based on problem characteristics, enabling rapid adaptation to new instances.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">02</span>
-                <div><h3 data-i18n="research.nextgen.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">강화학습 최적화</h3><p data-i18n="research.nextgen.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">신경망 정책과 보상 설계를 활용해 경로, 스케줄, 네트워크 설계 문제의 순차적 의사결정을 학습하고 대규모 문제로 일반화합니다.</p></div>
+                <div><h3 data-i18n="research.nextgen.topic2.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">강화학습 최적화</span><span class="t-en">Reinforcement Learning Optimization</span></h3><p data-i18n="research.nextgen.topic2.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">신경망 정책과 보상 설계를 활용해 경로, 스케줄, 네트워크 설계 문제의 순차적 의사결정을 학습하고 대규모 문제로 일반화합니다.</span><span class="t-en">Using neural network policies and reward design, we learn sequential decision-making for routing, scheduling, and network design problems and generalize to large-scale instances.</span></p></div>
               </div>
               <div style="display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 4px;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08);">
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.95rem;font-weight:600;color:#7c3aed;">03</span>
-                <div><h3 data-i18n="research.nextgen.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;">양자 영감 최적화</h3><p data-i18n="research.nextgen.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;">QAOA와 양자 영감 탐색을 조합 최적화 모델에 적용해 고전적 휴리스틱과 비교하고, 하이브리드 솔버의 활용 가능성을 평가합니다.</p></div>
+                <div><h3 data-i18n="research.nextgen.topic3.title" style="font-size:1.05rem;font-weight:700;margin-bottom:5px;"><span class="t-ko">양자 영감 최적화</span><span class="t-en">Quantum-Inspired Optimization</span></h3><p data-i18n="research.nextgen.topic3.desc" style="font-size:0.87rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">QAOA와 양자 영감 탐색을 조합 최적화 모델에 적용해 고전적 휴리스틱과 비교하고, 하이브리드 솔버의 활용 가능성을 평가합니다.</span><span class="t-en">We apply QAOA and quantum-inspired search to combinatorial optimization models, benchmarking against classical heuristics and evaluating the potential of hybrid solvers.</span></p></div>
               </div>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;">
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">메타러닝</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">강화학습</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">딥러닝</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">양자 컴퓨팅</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">조합 최적화</span>
-              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;">인공지능</span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;"><span class="t-ko">메타러닝</span><span class="t-en">Meta-Learning</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;"><span class="t-ko">강화학습</span><span class="t-en">Reinforcement Learning</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;"><span class="t-ko">딥러닝</span><span class="t-en">Deep Learning</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;"><span class="t-ko">양자 컴퓨팅</span><span class="t-en">Quantum Computing</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;"><span class="t-ko">조합 최적화</span><span class="t-en">Combinatorial Optimization</span></span>
+              <span style="font-size:0.76rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);color:#7c3aed;"><span class="t-ko">인공지능</span><span class="t-en">Artificial Intelligence</span></span>
             </div>
           </div>
           <div>
@@ -362,11 +365,11 @@
               <img src="figures/about/ga-nextgen.png" onclick="lbOpen(['figures/about/NextgenOptimization/nextgen-optimization-animation.gif?v=20260714-fast1','figures/about/ga-nextgen.png','figures/about/NGO1.png'],1)" style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="차세대 최적화">
               <img src="figures/about/NGO1.png" onclick="lbOpen(['figures/about/NextgenOptimization/nextgen-optimization-animation.gif?v=20260714-fast1','figures/about/ga-nextgen.png','figures/about/NGO1.png'],2)" style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(0,0,0,0.08);" alt="메타러닝">
             </div>
-            <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span>물류 라우팅 · 생산 스케줄링 · 네트워크 설계</p>
+            <p style="margin-top:14px;font-size:0.8rem;color:#8a8a98;"><span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4a4a5a;margin-right:8px;">Applications</span><span class="t-ko">물류 라우팅 · 생산 스케줄링 · 네트워크 설계</span><span class="t-en">Logistics Routing · Production Scheduling · Network Design</span></p>
           </div>
         </div>
         <div style="margin-top:48px;border-top:1px solid rgba(0,0,0,0.08);padding-top:28px;">
-          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">관련 논문</h4>
+          <h4 style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;"><span class="t-ko">관련 논문</span><span class="t-en">Related Publications</span></h4>
           <ol style="padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:0.85rem;color:#4a4a5a;line-height:1.6;">
             <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Meta-Learning-Based Adaptive Operator Selection for Traveling Salesman Problem. <em>Applied Soft Computing</em>.</li>
             <li><strong>Jeong, H. Y.</strong>, Song, B. D. (2025). Optimizing Urban Logistics: VRP with Underground Transportation. <em>IEEE Transactions on Intelligent Transportation Systems</em>.</li>
@@ -384,20 +387,20 @@
         <div>
           <div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:32px;width:32px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div>
           <p style="margin-top:12px;font-size:0.86rem;color:#4a4a5a;line-height:1.6;font-weight:600;">Intelligent Optimization Laboratory</p>
-          <p style="margin-top:2px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;">경희대학교 산업경영공학과<br>경기도 용인시 기흥구 덕영대로 1732<br>국제캠퍼스 우정원 6034호</p>
+          <p style="margin-top:2px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">경희대학교 산업경영공학과<br>경기도 용인시 기흥구 덕영대로 1732<br>국제캠퍼스 우정원 6034호</span><span class="t-en">Dept. of Industrial &amp; Management Systems Engineering<br>1732 Deogyeong-daero, Giheung-gu, Yongin-si<br>Intl. Campus, Woojung Hall 6034</span></p>
           <p style="margin-top:10px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;">T. 031-201-2430<br>E. ghy27@khu.ac.kr</p>
         </div>
         <div>
-          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">연구실</h4>
-          <div style="display:flex;flex-direction:column;gap:9px;"><a href="members.html" class="ft-l" style="font-size:0.86rem;">구성원</a><a href="research.html" class="ft-l" style="font-size:0.86rem;">연구분야</a><a href="community.html" class="ft-l" style="font-size:0.86rem;">소식</a></div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;"><span class="t-ko">연구실</span><span class="t-en">Lab</span></h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="members.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">구성원</span><span class="t-en">Members</span></a><a href="research.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">연구분야</span><span class="t-en">Research</span></a><a href="community.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">소식</span><span class="t-en">News</span></a></div>
         </div>
         <div>
-          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">연구 성과</h4>
-          <div style="display:flex;flex-direction:column;gap:9px;"><a href="publications.html" class="ft-l" style="font-size:0.86rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.86rem;">연구과제</a><a href="courses.html" class="ft-l" style="font-size:0.86rem;">교육자료</a></div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;"><span class="t-ko">연구 성과</span><span class="t-en">Research</span></h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="publications.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">논문</span><span class="t-en">Publications</span></a><a href="projects.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">연구과제</span><span class="t-en">Projects</span></a><a href="courses.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">교육자료</span><span class="t-en">Courses</span></a></div>
         </div>
         <div>
-          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">바로가기</h4>
-          <div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.86rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.86rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.86rem;">Instagram</a><a href="https://www.khu.ac.kr/" target="_blank" class="ft-l" style="font-size:0.86rem;">경희대학교</a></div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;"><span class="t-ko">바로가기</span><span class="t-en">Links</span></h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.86rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.86rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.86rem;">Instagram</a><a href="https://www.khu.ac.kr/" target="_blank" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">경희대학교</span><span class="t-en">Kyung Hee Univ.</span></a></div>
         </div>
       </div>
       <div style="padding-top:22px;border-top:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
@@ -410,12 +413,12 @@
 </div>
 <div class="mob-nav" id="mob-nav">
   <button class="mob-x" onclick="document.getElementById('mob-nav').classList.remove('open')">×</button>
-  <a href="members.html">구성원</a>
-  <a href="research.html">연구분야</a>
-  <a href="publications.html">논문</a>
-  <a href="projects.html">연구과제</a>
-  <a href="courses.html">교육자료</a>
-  <a href="community.html">커뮤니티</a>
+  <a href="members.html"><span class="t-ko">구성원</span><span class="t-en">Members</span></a>
+  <a href="research.html"><span class="t-ko">연구분야</span><span class="t-en">Research</span></a>
+  <a href="publications.html"><span class="t-ko">논문</span><span class="t-en">Publications</span></a>
+  <a href="projects.html"><span class="t-ko">연구과제</span><span class="t-en">Projects</span></a>
+  <a href="courses.html"><span class="t-ko">교육자료</span><span class="t-en">Courses</span></a>
+  <a href="community.html"><span class="t-ko">커뮤니티</span><span class="t-en">Community</span></a>
 </div>
 <div id="lb-ov" onclick="if(event.target===this)lbClose()">
   <button class="lb-close" onclick="lbClose()">&#xD7;</button>
@@ -445,5 +448,6 @@ document.addEventListener('DOMContentLoaded', () => {
   activateTab(valid.includes(h) ? h : 'logistics');
 });
 </script>
+<script src="lang.js"></script>
 </body>
 </html>

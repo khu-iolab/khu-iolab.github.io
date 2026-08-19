@@ -95,6 +95,9 @@
     h1[style*="font-size:5.2rem"]{ font-size:2.2rem!important; }
     [style*="height:480px"]{ height:380px!important; }
   }
+  .t-en{display:none;}
+  body.lang-en .t-ko{display:none;}
+  body.lang-en .t-en{display:inline;}
 </style>
 </head>
 <body>
@@ -104,14 +107,14 @@
   <nav style="position:absolute;top:0;left:0;right:0;background:transparent;padding:26px 52px;display:flex;align-items:center;justify-content:space-between;z-index:100;">
     <a href="index.html" style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;"><img src="figures/io-lab-icon-white-transparent.png" style="height:32px;width:32px;object-fit:contain;">IO-LAB</a>
     <div class="nav-links" style="display:flex;gap:30px;font-size:0.9rem;font-weight:500;">
-        <div class="nav-item"><a href="members.html" style="color:#5eead4;font-weight:600;">구성원</a><div class="nav-menu"><a href="members.html#advisor">지도교수</a><a href="members.html#researchers">연구원</a></div></div>
-        <div class="nav-item"><a href="research.html" class="nav-l">연구분야</a><div class="nav-menu"><a href="research.html#logistics">물류 최적화</a><a href="research.html#network">네트워크 최적화</a><a href="research.html#production">생산 최적화</a><a href="research.html#nextgen">차세대 최적화</a></div></div>
-        <div class="nav-item"><a href="publications.html" class="nav-l">논문</a><div class="nav-menu"><a href="publications.html#working">Working Papers</a><a href="publications.html#international">국제 논문</a><a href="publications.html#conference">학회지</a><a href="publications.html#presentations">학회 발표</a><a href="publications.html#patent">특허</a></div></div>
-        <div class="nav-item"><a href="projects.html" class="nav-l">연구과제</a><div class="nav-menu"><a href="projects.html#ongoing">진행중인 과제</a><a href="projects.html#completed">완료한 과제</a></div></div>
-        <div class="nav-item"><a href="courses.html" class="nav-l">교육자료</a><div class="nav-menu"><a href="courses.html#ie315000">IE315000 공급사슬관리</a><a href="courses.html#ie105000">IE105000 산업경영공학의 이해</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></div></div>
-        <div class="nav-item"><a href="community.html" class="nav-l">커뮤니티</a><div class="nav-menu"><a href="community.html#news">소식</a><a href="community.html#contact">연락처</a></div></div>
+        <div class="nav-item"><a href="members.html" style="color:#5eead4;font-weight:600;"><span class="t-ko">구성원</span><span class="t-en">Members</span></a><div class="nav-menu"><a href="members.html#advisor"><span class="t-ko">지도교수</span><span class="t-en">Advisor</span></a><a href="members.html#researchers"><span class="t-ko">연구원</span><span class="t-en">Researchers</span></a></div></div>
+        <div class="nav-item"><a href="research.html" class="nav-l"><span class="t-ko">연구분야</span><span class="t-en">Research</span></a><div class="nav-menu"><a href="research.html#logistics"><span class="t-ko">물류 최적화</span><span class="t-en">Logistics Optimization</span></a><a href="research.html#network"><span class="t-ko">네트워크 최적화</span><span class="t-en">Network Optimization</span></a><a href="research.html#production"><span class="t-ko">생산 최적화</span><span class="t-en">Production Optimization</span></a><a href="research.html#nextgen"><span class="t-ko">차세대 최적화</span><span class="t-en">Next-Gen Optimization</span></a></div></div>
+        <div class="nav-item"><a href="publications.html" class="nav-l"><span class="t-ko">논문</span><span class="t-en">Publications</span></a><div class="nav-menu"><a href="publications.html#working">Working Papers</a><a href="publications.html#international"><span class="t-ko">국제 논문</span><span class="t-en">International</span></a><a href="publications.html#conference"><span class="t-ko">학회지</span><span class="t-en">Conference</span></a><a href="publications.html#presentations"><span class="t-ko">학회 발표</span><span class="t-en">Presentations</span></a><a href="publications.html#patent"><span class="t-ko">특허</span><span class="t-en">Patents</span></a></div></div>
+        <div class="nav-item"><a href="projects.html" class="nav-l"><span class="t-ko">연구과제</span><span class="t-en">Projects</span></a><div class="nav-menu"><a href="projects.html#ongoing"><span class="t-ko">진행중인 과제</span><span class="t-en">Ongoing</span></a><a href="projects.html#completed"><span class="t-ko">완료한 과제</span><span class="t-en">Completed</span></a></div></div>
+        <div class="nav-item"><a href="courses.html" class="nav-l"><span class="t-ko">교육자료</span><span class="t-en">Courses</span></a><div class="nav-menu"><a href="courses.html#ie315000"><span class="t-ko">IE315000 공급사슬관리</span><span class="t-en">IE315000 Supply Chain Mgmt</span></a><a href="courses.html#ie105000"><span class="t-ko">IE105000 산업경영공학의 이해</span><span class="t-en">IE105000 Intro to IE &amp; Mgmt</span></a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/></svg>YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a></div></div>
+        <div class="nav-item"><a href="community.html" class="nav-l"><span class="t-ko">커뮤니티</span><span class="t-en">Community</span></a><div class="nav-menu"><a href="community.html#news"><span class="t-ko">소식</span><span class="t-en">News</span></a><a href="community.html#contact"><span class="t-ko">연락처</span><span class="t-en">Contact</span></a></div></div>
       </div>
-    <div class="nav-lang" style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span style="padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span style="padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
+    <div class="nav-lang" style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:3px 6px;font-size:0.72rem;font-weight:600;"><span class="nl-en" onclick="setLang('en')" style="cursor:pointer;padding:2px 6px;border-radius:14px;color:rgba(255,255,255,0.55);">EN</span><span style="color:rgba(255,255,255,0.3);">|</span><span class="nl-ko" onclick="setLang('ko')" style="cursor:pointer;padding:2px 6px;border-radius:14px;background:#5eead4;color:#0b1120;">KO</span></div>
   <button class="mob-hbg" aria-label="메뉴 열기" onclick="document.getElementById('mob-nav').classList.add('open')"><span></span></button>
   </nav>
 
@@ -121,18 +124,18 @@
       <div style="position:absolute;inset:0;background:radial-gradient(105% 120% at 0% 50%, rgba(11,17,32,0.92) 26%, rgba(11,17,32,0.35) 66%, rgba(11,17,32,0.12) 100%);"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,17,32,0.35) 0%, rgba(11,17,32,0) 40%, rgba(11,17,32,0.75) 100%);"></div>
     <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;">
-      <nav style="display:flex;align-items:center;gap:9px;font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:16px;"><a href="index.html" style="color:rgba(255,255,255,0.62);">홈</a><span style="color:rgba(255,255,255,0.3);">/</span><span style="color:#5eead4;font-weight:600;">구성원</span></nav>
+      <nav style="display:flex;align-items:center;gap:9px;font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:16px;"><a href="index.html" style="color:rgba(255,255,255,0.62);"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span style="color:rgba(255,255,255,0.3);">/</span><span style="color:#5eead4;font-weight:600;"><span class="t-ko">구성원</span><span class="t-en">Members</span></span></nav>
       <span style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;">People</span>
-      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;">구성원</h1>
-      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:560px;">IO-LAB을 함께 만들어가는 사람들을 소개합니다.</p>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;margin-top:14px;"><span class="t-ko">구성원</span><span class="t-en">Members</span></h1>
+      <p style="font-size:1.05rem;color:#94a3b8;margin-top:18px;max-width:560px;"><span class="t-ko">IO-LAB을 함께 만들어가는 사람들을 소개합니다.</span><span class="t-en">Meet the people who make IO-LAB.</span></p>
     </div>
   </div>
 
   <!-- tabs -->
   <div style="position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(0,0,0,0.07);padding:14px 52px;background:rgba(255,255,255,0.88);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);">
     <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:4px;background:#f1f3f6;border:1px solid rgba(0,0,0,0.05);border-radius:14px;width:fit-content;">
-      <button class="pg-tab" data-active="true" data-tab="advisor">지도교수</button>
-      <button class="pg-tab" data-active="false" data-tab="members">연구원</button>
+      <button class="pg-tab" data-active="true" data-tab="advisor"><span class="t-ko">지도교수</span><span class="t-en">Advisor</span></button>
+      <button class="pg-tab" data-active="false" data-tab="members"><span class="t-ko">연구원</span><span class="t-en">Researchers</span></button>
     </div>
   </div>
 
@@ -147,7 +150,7 @@
         <p style="font-size:0.9rem;color:#6a6a7a;line-height:1.6;margin-top:12px;">Department of Industrial and Management Systems Engineering<br>Kyung Hee University</p>
         <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.7;margin-top:12px;">경희대학교 국제캠퍼스 우정원 6034<br>031-201-2430 · ghy27@khu.ac.kr</p>
         <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;">
-          <a href="mailto:ghy27@khu.ac.kr" class="fac-link">이메일</a>
+          <a href="mailto:ghy27@khu.ac.kr" class="fac-link"><span class="t-ko">이메일</span><span class="t-en">Email</span></a>
           <a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="fac-link">Google Scholar</a>
           <a href="https://melodic-pithivier-5dfc2b.netlify.app/" target="_blank" class="fac-link">Personal Website</a>
         </div>
@@ -248,14 +251,14 @@
   <!-- members panel -->
   <div id="researchers" data-tab-panel="members" style="display:none;padding:64px 52px 90px;background:#fff;">
     <div style="max-width:1240px;margin:0 auto;">
-      <h3 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;">대학원생</h3>
+      <h3 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:14px;"><span class="t-ko">대학원생</span><span class="t-en">Graduate Students</span></h3>
       <div style="display:flex;flex-direction:column;gap:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,0.08);margin-bottom:52px;">
         <div class="mem-card" style="display:flex;align-items:center;gap:24px;padding:24px 28px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;max-width:560px;">
           <div style="width:112px;height:112px;border-radius:50%;border:2px solid rgba(123,104,238,0.35);flex-shrink:0;background-image:url('figures/members/kim-seokjung.jpg');background-size:cover;background-position:center;"></div>
           <div>
             <h3 style="font-size:1.2rem;font-weight:700;">김석중</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.72rem;font-weight:600;color:#7B68EE;text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">M.S. Student</p>
-            <p style="font-size:0.85rem;color:#6a6a7a;margin-top:4px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.85rem;color:#6a6a7a;margin-top:4px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
             <p style="font-size:0.83rem;color:#4a4a5a;margin-top:6px;">ff9815@khu.ac.kr</p>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
               <span style="font-size:0.75rem;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.28);color:#2563eb;">Drone VRP</span>
@@ -263,18 +266,18 @@
               <span style="font-size:0.75rem;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.28);color:#7c3aed;">Metaheuristics</span>
               <span style="font-size:0.75rem;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.28);color:#7c3aed;">AI-driven Optimization</span>
             </div>
-            <a href="figures/members/CV_SeokJungKim.pdf" target="_blank" style="display:inline-block;font-size:0.75rem;color:#4a4a5a;padding:3px 10px;border:1px solid rgba(0,0,0,0.1);border-radius:6px;margin-top:10px;transition:all 0.2s;" onmouseover="this.style.borderColor='#00D4AA';this.style.color='#00a882'" onmouseout="this.style.borderColor='rgba(0,0,0,0.1)';this.style.color='#4a4a5a'">CV 다운로드</a>
+            <a href="figures/members/CV_SeokJungKim.pdf" target="_blank" style="display:inline-block;font-size:0.75rem;color:#4a4a5a;padding:3px 10px;border:1px solid rgba(0,0,0,0.1);border-radius:6px;margin-top:10px;transition:all 0.2s;" onmouseover="this.style.borderColor='#00D4AA';this.style.color='#00a882'" onmouseout="this.style.borderColor='rgba(0,0,0,0.1)';this.style.color='#4a4a5a'"><span class="t-ko">CV 다운로드</span><span class="t-en">Download CV</span></a>
           </div>
         </div>
       </div>
-      <h3 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:22px;">학부연구생</h3>
+      <h3 style="font-family:'Space Grotesk',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:#00D4AA;margin-bottom:22px;"><span class="t-ko">학부연구생</span><span class="t-en">Undergraduate Researchers</span></h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;">
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
           <div style="width:64px;height:64px;border-radius:50%;border:2px solid rgba(0,212,170,0.3);flex-shrink:0;background-image:url('figures/members/kim-doyoung.jpg');background-size:cover;background-position:center;"></div>
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">김도영</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -282,7 +285,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">김민성</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -290,7 +293,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">신윤수</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -298,7 +301,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">정일호</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -306,7 +309,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">조운학</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 응용수학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 응용수학과</span><span class="t-en">Applied Mathematics</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -314,7 +317,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">최승현</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -322,7 +325,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">최성원</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -330,7 +333,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">유민상</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
         <div class="mem-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(0,0,0,0.08);border-radius:16px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,0.04);transition:all 0.3s;">
@@ -338,7 +341,7 @@
           <div>
             <h3 style="font-size:1.05rem;font-weight:700;">오윤제</h3>
             <p style="font-family:'Space Grotesk',monospace;font-size:0.7rem;font-weight:600;color:#00a882;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Undergraduate Researcher</p>
-            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;">경희대학교 산업경영공학과</p>
+            <p style="font-size:0.8rem;color:#6a6a7a;margin-top:2px;"><span class="t-ko">경희대학교 산업경영공학과</span><span class="t-en">Industrial &amp; Management Systems Engineering</span></p>
           </div>
         </div>
       </div>
@@ -352,20 +355,20 @@
         <div>
           <div style="display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;"><img src="figures/io-lab-icon-navy-transparent.png" style="height:32px;width:32px;object-fit:contain;"><span style="color:#1a1a25;">IO-LAB</span></div>
           <p style="margin-top:12px;font-size:0.86rem;color:#4a4a5a;line-height:1.6;font-weight:600;">Intelligent Optimization Laboratory</p>
-          <p style="margin-top:2px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;">경희대학교 산업경영공학과<br>경기도 용인시 기흥구 덕영대로 1732<br>국제캠퍼스 우정원 6034호</p>
+          <p style="margin-top:2px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;"><span class="t-ko">경희대학교 산업경영공학과<br>경기도 용인시 기흥구 덕영대로 1732<br>국제캠퍼스 우정원 6034호</span><span class="t-en">Dept. of Industrial &amp; Management Systems Engineering<br>1732 Deogyeong-daero, Giheung-gu, Yongin-si<br>Intl. Campus, Woojung Hall 6034</span></p>
           <p style="margin-top:10px;font-size:0.84rem;color:#6a6a7a;line-height:1.7;">T. 031-201-2430<br>E. ghy27@khu.ac.kr</p>
         </div>
         <div>
-          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">연구실</h4>
-          <div style="display:flex;flex-direction:column;gap:9px;"><a href="members.html" class="ft-l" style="font-size:0.86rem;">구성원</a><a href="research.html" class="ft-l" style="font-size:0.86rem;">연구분야</a><a href="community.html" class="ft-l" style="font-size:0.86rem;">소식</a></div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;"><span class="t-ko">연구실</span><span class="t-en">Lab</span></h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="members.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">구성원</span><span class="t-en">Members</span></a><a href="research.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">연구분야</span><span class="t-en">Research</span></a><a href="community.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">소식</span><span class="t-en">News</span></a></div>
         </div>
         <div>
-          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">연구 성과</h4>
-          <div style="display:flex;flex-direction:column;gap:9px;"><a href="publications.html" class="ft-l" style="font-size:0.86rem;">논문</a><a href="projects.html" class="ft-l" style="font-size:0.86rem;">연구과제</a><a href="courses.html" class="ft-l" style="font-size:0.86rem;">교육자료</a></div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;"><span class="t-ko">연구 성과</span><span class="t-en">Research</span></h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="publications.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">논문</span><span class="t-en">Publications</span></a><a href="projects.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">연구과제</span><span class="t-en">Projects</span></a><a href="courses.html" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">교육자료</span><span class="t-en">Courses</span></a></div>
         </div>
         <div>
-          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;">바로가기</h4>
-          <div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.86rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.86rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.86rem;">Instagram</a><a href="https://www.khu.ac.kr/" target="_blank" class="ft-l" style="font-size:0.86rem;">경희대학교</a></div>
+          <h4 style="font-size:0.74rem;text-transform:uppercase;letter-spacing:0.14em;color:#1a1a25;margin-bottom:14px;"><span class="t-ko">바로가기</span><span class="t-en">Links</span></h4>
+          <div style="display:flex;flex-direction:column;gap:9px;"><a href="https://scholar.google.com/citations?user=mYRD_GYAAAAJ&amp;hl=en" target="_blank" class="ft-l" style="font-size:0.86rem;">Google Scholar</a><a href="https://www.youtube.com/@IO-LAB-khu" target="_blank" class="ft-l" style="font-size:0.86rem;">YouTube</a><a href="https://www.instagram.com/khu_iolab/" target="_blank" class="ft-l" style="font-size:0.86rem;">Instagram</a><a href="https://www.khu.ac.kr/" target="_blank" class="ft-l" style="font-size:0.86rem;"><span class="t-ko">경희대학교</span><span class="t-en">Kyung Hee Univ.</span></a></div>
         </div>
       </div>
       <div style="padding-top:22px;border-top:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
@@ -378,12 +381,12 @@
 </div>
 <div class="mob-nav" id="mob-nav">
   <button class="mob-x" onclick="document.getElementById('mob-nav').classList.remove('open')">×</button>
-  <a href="members.html">구성원</a>
-  <a href="research.html">연구분야</a>
-  <a href="publications.html">논문</a>
-  <a href="projects.html">연구과제</a>
-  <a href="courses.html">교육자료</a>
-  <a href="community.html">커뮤니티</a>
+  <a href="members.html"><span class="t-ko">구성원</span><span class="t-en">Members</span></a>
+  <a href="research.html"><span class="t-ko">연구분야</span><span class="t-en">Research</span></a>
+  <a href="publications.html"><span class="t-ko">논문</span><span class="t-en">Publications</span></a>
+  <a href="projects.html"><span class="t-ko">연구과제</span><span class="t-en">Projects</span></a>
+  <a href="courses.html"><span class="t-ko">교육자료</span><span class="t-en">Courses</span></a>
+  <a href="community.html"><span class="t-ko">커뮤니티</span><span class="t-en">Community</span></a>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -403,5 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
   activateTab(target);
 });
 </script>
+<script src="lang.js"></script>
 </body>
 </html>
