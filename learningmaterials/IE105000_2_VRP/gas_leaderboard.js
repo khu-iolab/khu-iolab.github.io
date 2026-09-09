@@ -10,7 +10,7 @@
 
 const SPREADSHEET_ID  = '11cNAgoTaAIwTgUiVhLPsW53R3OCe1YlDtE14FgsvaCk';
 const SHEET_NAME      = 'IE105000_2';
-const COMMENTS_SHEET  = 'IE105000_3_comments';
+const COMMENTS_SHEET  = 'IE105000_2_comments';
 const COMMENT_HEADERS = ['id', 'student_name', 'posted_at', 'comment'];
 const HEADERS        = [
   'id', 'student_id', 'student_name', 'played_at',
