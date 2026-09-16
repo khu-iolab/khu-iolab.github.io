@@ -21,6 +21,10 @@ build/
 *.swp
 *.swo
 
+# Claude Code tooling
+.claude/
+.superpowers/
+
 # Environment variables
 .env
 .env.local
