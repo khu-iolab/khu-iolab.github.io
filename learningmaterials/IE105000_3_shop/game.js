@@ -70,7 +70,9 @@ const DIRS = [
 ];
 
 // ── Input ─────────────────────────────────────────────────────────────────────
+const isTyping = e => e.target.matches?.('input, textarea, [contenteditable]');
 document.addEventListener('keydown', e => {
+  if (isTyping(e)) return;   // let spaces/arrows work in name, ID and comment fields
   keys[e.key] = true;
   if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) {
     e.preventDefault();
