@@ -4,7 +4,7 @@
 
 const CONFIG = {
   // ── Leaderboard backend (Google Apps Script) ─────────────────────────────
-  gasUrl: 'https://script.google.com/macros/s/AKfycbybiy3yQGnajleNOQ3GvW6FnnbAWBgxNtJcNzkg6NwH8vmzPakG6l8hDkyZjROw4ocB/exec',
+  gasUrl: 'https://script.google.com/macros/s/AKfycbyTClb8Oc44affnKijh23r9mDF06y6UF743at0MjpD2sjJuylw0OnLonGbh3M3ffHwpLA/exec',
 
   // ── Depot ─────────────────────────────────────────────────────────────────
   depot: { id: 'depot', name: 'Warehouse', x: 5.0, y: 5.0 },

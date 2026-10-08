@@ -564,6 +564,7 @@ async function submitScore() {
   const sid  = document.getElementById('input-sid').value.trim();
   if (!name) { alert('Please enter your name.'); return; }
   if (!sid)  { alert('Please enter your student ID.'); return; }
+  if (!(/^20\d{8}$/.test(sid) || (sid === '9999999999' && name === '테스트'))) { alert('학번은 20으로 시작하는 10자리 숫자입니다. / Student ID must be 10 digits starting with 20.'); return; }
 
   const elapsed = state.elapsedMs / 1000;
   const penalty = state.collisions * CONFIG.collision.penaltySec;

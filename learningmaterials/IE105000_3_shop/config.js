@@ -56,5 +56,5 @@ const CONFIG = {
   // ── Google Apps Script Web App URL ────────────────────────────────────────
   // Deploy gas_leaderboard.js as a GAS Web App (Execute as: Me, Access: Anyone)
   // then paste the deployment URL here.
-  gasUrl: 'https://script.google.com/macros/s/AKfycbzBC-8dzBSXtXw4cVZW2QWmp4FE-gIIdSoI1yIj1P95dfVVNd5KlZlEBmt9yk1BL79K6A/exec',
+  gasUrl: 'https://script.google.com/macros/s/AKfycbzzZtimVVu7KsDVvnZC6gQXpsZxZ2lc7jwMXIop4lblPcoDG5d8rRuXTjlRi-cF6xqtKQ/exec',
 };

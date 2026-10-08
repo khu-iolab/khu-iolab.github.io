@@ -8,7 +8,30 @@
  *  3. Paste the URL into CONFIG.gasUrl in config.js.
  */
 
-const SPREADSHEET_ID  = '11cNAgoTaAIwTgUiVhLPsW53R3OCe1YlDtE14FgsvaCk';
+
+// ── Spreadsheet (auto-created, named after this script) ──────────────────────
+// First call creates a Google Sheet named SCRIPT_NAME and remembers its ID.
+const SCRIPT_NAME = 'IE105_1_globalSCM';
+
+function getSpreadsheet_() {
+  const props = PropertiesService.getScriptProperties();
+  const id = props.getProperty('SPREADSHEET_ID');
+  if (id) {
+    try { return SpreadsheetApp.openById(id); } catch (err) { /* deleted → recreate */ }
+  }
+  const ss = SpreadsheetApp.create(SCRIPT_NAME);
+  props.setProperty('SPREADSHEET_ID', ss.getId());
+  return ss;
+}
+
+// 학번 / Student ID: exactly 10 digits, starts with "20"
+// 테스트 계정(학번 9999999999 / 이름 테스트)은 예외로 허용 — Test account is also allowed.
+function validStudentId_(id, name) {
+  id = String(id || '').trim(); name = String(name || '').trim();
+  if (id === '9999999999' && name === '테스트') return true;
+  return /^20\d{8}$/.test(id);
+}
+const BAD_ID_MSG = '학번은 20으로 시작하는 10자리 숫자여야 합니다. / Student ID must be 10 digits starting with 20.';
 const SHEET_NAME      = 'IE105000_1';
 const HEADERS         = ['id', 'student_id', 'student_name', 'submitted_at', 'profit', 'units', 'chain'];
 
@@ -16,7 +39,7 @@ const COMMENTS_SHEET  = 'IE105000_1_comments';
 const COMMENT_HEADERS = ['id', 'student_name', 'posted_at', 'comment'];
 
 function getSheet() {
-  const ss    = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const ss    = getSpreadsheet_();
   let   sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
@@ -31,7 +54,7 @@ function getSheet() {
 }
 
 function getCommentsSheet() {
-  const ss    = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const ss    = getSpreadsheet_();
   let   sheet = ss.getSheetByName(COMMENTS_SHEET);
   if (!sheet) {
     sheet = ss.insertSheet(COMMENTS_SHEET);
@@ -52,6 +75,7 @@ function doGet(e) {
   if (action === 'submit') {
     try {
       const p   = JSON.parse(e.parameter.data);
+      if (!validStudentId_(p.student_id, p.student_name)) return _json({ status: 'error', message: BAD_ID_MSG });
       const sheet = getSheet();
       const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
       sheet.appendRow([

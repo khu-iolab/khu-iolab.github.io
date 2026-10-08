@@ -295,6 +295,7 @@ async function submitToLeaderboard(score, gapNum) {
   const name      = document.getElementById('player-name').value.trim();
   if (!studentId) { toast('학번을 입력하세요!'); return; }
   if (!name)      { toast('이름을 입력하세요!'); return; }
+  if (!(/^20\d{8}$/.test(studentId) || (studentId === '9999999999' && name === '테스트'))) { toast('학번은 20으로 시작하는 10자리 숫자입니다. / Student ID must be 10 digits starting with 20.'); return; }
 
   const url = CONFIG.gasUrl;
   if (!url || url === 'YOUR_GAS_WEB_APP_URL') { toast('Leaderboard not configured.'); return; }

@@ -9,7 +9,7 @@ const CONFIG = {
   // ── Leaderboard backend (Google Apps Script) ─────────────────────────────
   // Deploy gas_leaderboard.js as a GAS Web App (Execute as: Me, Access: Anyone)
   // then paste the deployment URL here.
-  gasUrl: 'https://script.google.com/macros/s/AKfycbzs4h_5Z4uuJfD4o9ujL8l_VwgEqKtssw41qXcN4wQTDSIepC6HP29PsSApOevnaiQzPA/exec',
+  gasUrl: 'https://script.google.com/macros/s/AKfycbwwIshMb26w2b-1-HQa5ZIzhlhMeIkjU7jMhgbcs5Qk3NN17J45wVKsxlIuiDfrm2tiFg/exec',
 
   // ── Starting budget ────────────────────────────────────────────────────────
   budget: {
