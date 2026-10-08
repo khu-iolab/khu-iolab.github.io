@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iolab.khu.ac.kr/sitemap.xml
