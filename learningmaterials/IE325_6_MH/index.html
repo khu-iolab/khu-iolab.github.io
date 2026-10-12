@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IE325 L06 — Material Handling Explorer (student)</title>
+<style>
+:root{--navy:#1D2D3D;--accent:#416180;--accent2:#93ACC5;--gold:#C8962E;--red:#B23A3A;--ink:#1E2328;--mute:#6B7480;--line:#D5DCE3;--bg:#FFFFFF;--panel:#F3F6F9;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Calibri,Carlito,"Segoe UI","Malgun Gothic",sans-serif;font-size:16px}
+header{background:var(--navy);color:#fff;padding:14px 22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+header h1{font-family:Cambria,Caladea,Georgia,serif;font-size:24px;margin:0;font-weight:700}
+header span{color:var(--accent2);font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+nav{display:flex;gap:2px;background:var(--navy);padding:0 16px;flex-wrap:wrap}
+nav button{background:transparent;color:#C9D4DF;border:0;padding:10px 16px;font:inherit;font-size:15px;cursor:pointer;border-bottom:3px solid transparent}
+nav button.on{color:#fff;border-bottom-color:var(--gold)}
+main{max-width:1280px;margin:0 auto;padding:16px}
+.tab{display:none}.tab.on{display:block}
+.kick{color:var(--accent);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+h2{font-family:Cambria,Caladea,Georgia,serif;margin:2px 0 6px;font-size:24px;color:var(--navy)}
+.lead{color:var(--mute);margin:0 0 12px;max-width:900px}
+.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:16px;color:var(--navy)}
+svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:6px;touch-action:manipulation}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{border:1px solid var(--line);padding:4px 8px;text-align:center;background:#fff}
+th{background:#E6ECF2;color:var(--navy);font-weight:700}
+td.bad{color:var(--red);font-weight:700}
+.big{font-family:Cambria,Caladea,Georgia,serif;font-size:30px;color:var(--navy);font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+button.b{background:#fff;border:1px solid var(--accent);color:var(--accent);border-radius:4px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.b:hover{background:#E6ECF2}
+button.b.opt{border-color:var(--gold);color:#8A6418}
+.eq{font-family:Cambria,Caladea,Georgia,serif;font-size:17px;line-height:1.7}
+.eq b{color:var(--navy)}
+.note{font-size:14px;color:var(--mute)}
+.warn{color:var(--red);font-weight:700}
+.ok{color:#2E6B45;font-weight:700}
+label.in{display:inline-flex;align-items:center;gap:6px;font-size:14px;margin-right:12px}
+label.in input[type=number]{width:72px;font:inherit;padding:2px 4px}
+input.cell{width:52px;font:inherit;text-align:center;padding:2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--mute);margin-top:6px}
+.sw{display:inline-block;width:22px;height:4px;vertical-align:middle;margin-right:4px}
+.arc{cursor:pointer}
+.arc:hover line,.arc:hover path{stroke-width:7}
+</style>
+</head>
+<body>
+<header><h1>Material Handling Explorer</h1><span>IE325 Logistics System Optimization · Lecture 06</span></header>
+<nav id="nav">
+  <button data-t="t1" class="on">① AGV Guide Path</button>
+  <button data-t="t2">② AGV Fleet Size</button>
+  <button data-t="t3">③ OHT Fleet &amp; Empty Moves</button>
+</nav>
+<main>
+
+<!-- ============ TAB 1 ============ -->
+<section id="t1" class="tab on">
+  <div class="kick">Problem 1 — Unidirectional guide path design</div>
+  <h2>Choose one direction for every aisle</h2>
+  <p class="lead">Departments 1–3 are P/D points, nodes 4–5 are aisle intersections. <b>Click an aisle</b> to reverse it. Every loaded trip takes the shortest directed path; the objective is Σ f<sub>lm</sub>·Y<sub>lm</sub>.</p>
+  <div class="grid">
+    <div>
+      <svg id="g1" viewBox="0 0 520 360"></svg>
+      <div class="legend"><span><i class="sw" style="background:var(--accent)"></i>directed aisle (click to reverse)</span><span><i class="sw" style="background:var(--gold)"></i>path of the selected pair</span><span><i class="sw" style="background:var(--red)"></i>pair with no path</span></div>
+      <div class="row">
+        <button class="b" id="p1src">Source example</button>
+        <button class="b" id="p1rev">Reverse all</button>
+        <button class="b" id="p1bi">Bidirectional (bound)</button>
+        
+      </div>
+      <div id="p1enum" class="note"></div>
+    </div>
+    <div>
+      <div class="card"><h3>From–to chart f<sub>lm</sub> (loads/hr)</h3><div class="scroll" id="p1ft"></div></div>
+      <div class="card"><h3>Path length Y<sub>lm</sub> — tap a row to trace it</h3><div class="scroll" id="p1y"></div></div>
+      <div class="card"><h3>Objective</h3><div class="big" id="p1obj"></div><div id="p1msg" class="note"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 2 ============ -->
+<section id="t2" class="tab">
+  <div class="kick">Problem 2 — Number of AGVs on a loop</div>
+  <h2>How many vehicles meet the delivery rate?</h2>
+  <p class="lead">One load station, one unload station, a one-way loop of 55 m × 40 m. Move the stations, switch the direction, change the data; the delivery cycle and the fleet size update.</p>
+  <div class="grid">
+    <div>
+      <svg id="g2" viewBox="0 0 520 420"></svg>
+      <div class="legend"><span><i class="sw" style="background:var(--accent)"></i>loaded vehicle</span><span><i class="sw" style="background:var(--gold)"></i>empty vehicle</span></div>
+      <div class="row">
+        <button class="b" id="p2dir">Direction: CCW</button>
+        <button class="b" id="p2play">Pause</button>
+        <button class="b" id="p2src">Source example</button>
+      </div>
+      <div class="row">
+        <label class="in"><span>Load x (bottom)</span> <input type="range" id="p2lx" min="0" max="55" step="5" value="20"><b id="p2lxv">20</b> m</label>
+        <label class="in"><span>Unload x (top)</span> <input type="range" id="p2ux" min="0" max="55" step="5" value="20"><b id="p2uxv">20</b> m</label>
+      </div>
+    </div>
+    <div>
+      <div class="card"><h3>Data</h3>
+        <label class="in"><span>T<sub>L</sub></span> <input type="number" id="p2TL" value="0.75" step="0.05"> min</label>
+        <label class="in"><span>T<sub>U</sub></span> <input type="number" id="p2TU" value="0.5" step="0.05"> min</label>
+        <label class="in"><span>v<sub>c</sub></span> <input type="number" id="p2vc" value="50"> m/min</label>
+        <label class="in"><span>v<sub>e</sub></span> <input type="number" id="p2ve" value="60"> m/min</label>
+        <label class="in"><span>R<sub>f</sub></span> <input type="number" id="p2Rf" value="40"> del/hr</label>
+        <label class="in"><span>A<sub>T</sub></span> <input type="number" id="p2AT" value="51.3" step="0.1"> min/hr</label>
+      </div>
+      <div class="card eq" id="p2eq"></div>
+      <div class="card"><h3>Fleet</h3><div class="big" id="p2n"></div><div class="note" id="p2u"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 3 ============ -->
+<section id="t3" class="tab">
+  <div class="kick">Problem 3 — OHT fleet size with empty-move planning</div>
+  <h2>Where should empty vehicles go?</h2>
+  <p class="lead">An interbay OHT loop of 300 m runs clockwise past six stations. Loaded moves are fixed by the from–to chart. Empty moves are your decision: a station that receives more lots than it sends ends up with spare vehicles; a station that sends more needs vehicles brought in.</p>
+  <div class="grid">
+    <div>
+      <svg id="g3" viewBox="0 0 560 360"></svg>
+      <div class="legend"><span><i class="sw" style="background:var(--accent)"></i>OHT track (clockwise)</span><span><i class="sw" style="background:var(--gold)"></i>empty moves e<sub>ij</sub> (drawn as chords; vehicles still travel clockwise on the track)</span><span>+ surplus · − deficit (vehicles/hr)</span></div>
+      <div class="row">
+        <button class="b" id="p3home">Policy A: return to pickup</button>
+        <button class="b" id="p3near">Policy B: nearest deficit</button>
+        <button class="b" id="p3clr">Clear E</button>
+        
+      </div>
+      <div class="card"><h3>From–to chart f<sub>ij</sub> (lots/hr) and balance</h3><div class="scroll" id="p3ft"></div></div>
+    </div>
+    <div>
+      <div class="card"><h3>Empty-move plan e<sub>ij</sub> (vehicles/hr) — type your own</h3><div class="scroll" id="p3e"></div><div id="p3chk" class="note"></div></div>
+      <div class="card eq" id="p3eq"></div>
+      <div class="card"><h3>Fleet</h3><div class="big" id="p3n"></div><div class="note" id="p3msg"></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+const f1=x=>(Math.round(x*1000)/1000).toString();
+const fx=(x,d)=>x.toFixed(d);
+const C={navy:"#1D2D3D",accent:"#416180",gold:"#C8962E",red:"#B23A3A",line:"#D5DCE3",mute:"#6B7480"};
+
+/* tabs */
+document.querySelectorAll("#nav button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.id===b.dataset.t));
+}));
+
+function arrowDefs(svg){
+  const d=el("defs",{},svg);
+  [["aA",C.accent],["aG",C.gold],["aR",C.red],["aM",C.mute]].forEach(([id,c])=>{
+    const m=el("marker",{id:svg.id+id,viewBox:"0 0 10 10",refX:"8",refY:"5",markerWidth:"5",markerHeight:"5",orient:"auto-start-reverse"},d);
+    el("path",{d:"M0,0 L10,5 L0,10 z",fill:c},m);
+  });
+}
+
+/* ================= PROBLEM 1 ================= */
+const P1={
+  nodes:{1:[70,180],2:[260,185],3:[450,190],4:[260,60],5:[260,300]},
+  dept:[1,2,3],
+  edges:[[1,4,12],[1,5,18],[2,4,3],[2,5,3],[3,4,17],[3,5,13]],   // orientation 0: a->b, 1: b->a
+  flow:{"1-2":10,"1-3":15,"2-1":20,"2-3":8,"3-1":5,"3-2":10},
+  src:[1,0,0,1,1,0],
+  ori:[1,0,0,1,1,0], bidir:false, sel:null
+};
+function p1Adj(ori,bidir){
+  const adj={};
+  P1.edges.forEach(([a,b,w],k)=>{
+    const add=(u,v)=>{(adj[u]=adj[u]||[]).push([v,w]);};
+    if(bidir){add(a,b);add(b,a);} else if(ori[k]===0)add(a,b); else add(b,a);
+  });
+  return adj;
+}
+function dijkstra(adj,s){
+  const d={},prev={};d[s]=0;const Q=new Set([s]);const done=new Set();
+  while(Q.size){let u=null;Q.forEach(x=>{if(u===null||d[x]<d[u]||(d[x]===d[u]&&x<u))u=x;});Q.delete(u);done.add(u);
+    (adj[u]||[]).forEach(([v,w])=>{if(done.has(v))return;if(d[v]===undefined||d[u]+w<d[v]){d[v]=d[u]+w;prev[v]=u;Q.add(v);}});}
+  return {d,prev};
+}
+function p1Eval(ori,bidir){
+  const adj=p1Adj(ori,bidir);const Y={},P={};let obj=0,ok=true;
+  for(const key in P1.flow){const [l,m]=key.split("-").map(Number);const r=dijkstra(adj,l);
+    if(r.d[m]===undefined){Y[key]=null;ok=false;continue;}
+    Y[key]=r.d[m];obj+=P1.flow[key]*r.d[m];
+    const path=[m];let x=m;while(x!==l){x=r.prev[x];path.unshift(x);}P[key]=path;}
+  return {Y,P,obj:ok?obj:null,ok};
+}
+function p1Draw(){
+  const s=$("g1");s.innerHTML="";arrowDefs(s);
+  const res=p1Eval(P1.ori,P1.bidir);
+  const selPath=(P1.sel&&res.P[P1.sel])||[];
+  const onSel=(u,v)=>{for(let i=0;i+1<selPath.length;i++)if(selPath[i]===u&&selPath[i+1]===v)return true;return false;};
+  P1.edges.forEach(([a,b,w],k)=>{
+    const g=el("g",{class:"arc"},s);
+    const [x1,y1]=P1.nodes[a],[x2,y2]=P1.nodes[b];
+    // elbow route like the source layout: horizontal-then-vertical for 1/3, straight for 2
+    const pts=(a===2)?[[x1,y1],[x2,y2]]:[[x1,y1],[x1,y2],[x2,y2]];
+    const u=P1.ori[k]===0?a:b,v=P1.ori[k]===0?b:a;
+    const seq=(u===a)?pts:pts.slice().reverse();
+    const hot=onSel(u,v)||(P1.bidir&&(onSel(a,b)||onSel(b,a)));
+    const col=hot?C.gold:C.accent;
+    const d="M"+seq.map(p=>p.join(",")).join(" L");
+    el("path",{d,stroke:"transparent","stroke-width":22,fill:"none","pointer-events":"stroke"},g);
+    el("path",{d,stroke:col,"stroke-width":hot?6:4,fill:"none","stroke-linejoin":"round"},g);
+    // arrowhead(s) at the middle of the segment that carries the length label
+    const seg=(a===2)?[pts[0],pts[1]]:[pts[1],pts[2]];
+    const tri=(p,q)=>{const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2,L=Math.hypot(q[0]-p[0],q[1]-p[1]),ux=(q[0]-p[0])/L,uy=(q[1]-p[1])/L;
+      const tip=[mx+ux*9,my+uy*9],b1=[mx-ux*9-uy*8,my-uy*9+ux*8],b2=[mx-ux*9+uy*8,my-uy*9-ux*8];
+      el("polygon",{points:[tip,b1,b2].map(z=>z.join(",")).join(" "),fill:col},g);};
+    if(P1.bidir){const m=[(seg[0][0]+seg[1][0])/2,(seg[0][1]+seg[1][1])/2];
+      const off=(a===2)?[[seg[0][0],seg[0][1]],[m[0],m[1]]]:[[seg[0][0],seg[0][1]],[m[0],m[1]]];
+      tri(off[0],off[1]);tri(seg[1],m);}
+    else {const fwd=(u===a);const p=(a===2)?(fwd?seg[0]:seg[1]):(fwd?seg[0]:seg[1]);const q=(p===seg[0])?seg[1]:seg[0];tri(p,q);}
+    // mid arrow & label
+    const mid=pts.length===3?pts[1]:[(x1+x2)/2,(y1+y2)/2];
+    const lab=(a===2)?[mid[0]+18,mid[1]+5]:[ (pts[1][0]+pts[2][0])/2, pts[1][1]+(pts[1][1]<180?-10:22)];
+    el("text",{x:lab[0],y:lab[1],"text-anchor":"middle","font-size":16,fill:C.navy,"font-weight":700},g,w);
+    g.addEventListener("click",()=>{if(P1.bidir){P1.bidir=false;}P1.ori[k]^=1;p1Render();});
+  });
+  for(const n in P1.nodes){const [x,y]=P1.nodes[n];const dep=P1.dept.includes(+n);
+    if(dep)el("circle",{cx:x,cy:y,r:18,fill:"#fff",stroke:C.navy,"stroke-width":2.5},s);
+    else el("rect",{x:x-17,y:y-17,width:34,height:34,fill:"#fff",stroke:C.navy,"stroke-width":2.5},s);
+    el("text",{x,y:y+6,"text-anchor":"middle","font-size":18,"font-weight":700,fill:C.navy},s,n);}
+  el("text",{x:10,y:350,"font-size":13,fill:C.mute},s,"○ department (P/D)   □ intersection   numbers = aisle length (m)");
+  return res;
+}
+function p1Render(){
+  const res=p1Draw();$("p1enum").textContent="";
+  let h="<table><tr><th>from \\ to</th><th>1</th><th>2</th><th>3</th></tr>";
+  [1,2,3].forEach(l=>{h+="<tr><th>"+l+"</th>";[1,2,3].forEach(m=>{h+="<td>"+(l===m?"–":P1.flow[l+"-"+m])+"</td>";});h+="</tr>";});
+  $("p1ft").innerHTML=h+"</table>";
+  h="<table><tr><th>pair</th><th>f</th><th>path</th><th>Y</th><th>f·Y</th></tr>";
+  for(const key in P1.flow){const y=res.Y[key];const bad=y===null;
+    h+="<tr data-k='"+key+"' style='cursor:pointer"+(P1.sel===key?";outline:2px solid "+C.gold:"")+"'><td>"+key.replace("-","→")+"</td><td>"+P1.flow[key]+"</td><td"+(bad?" class='bad'":"")+">"+(bad?"no path":res.P[key].join("→"))+"</td><td"+(bad?" class='bad'":"")+">"+(bad?"—":y)+"</td><td"+(bad?" class='bad'":"")+">"+(bad?"—":P1.flow[key]*y)+"</td></tr>";}
+  $("p1y").innerHTML=h+"</table>";
+  $("p1y").querySelectorAll("tr[data-k]").forEach(tr=>tr.addEventListener("click",()=>{P1.sel=(P1.sel===tr.dataset.k)?null:tr.dataset.k;p1Render();}));
+  if(res.ok){$("p1obj").textContent="Σ f·Y = "+res.obj;
+    $("p1msg").innerHTML=P1.bidir?"Every aisle two-way: a <b>lower bound</b> no one-way design can beat.":"Feasible: every pair with flow has a directed path.";}
+  else{$("p1obj").innerHTML="<span class='warn'>Infeasible</span>";
+    $("p1msg").innerHTML="At least one department cannot be reached. Reverse more aisles.";}
+}
+$("p1src").addEventListener("click",()=>{P1.ori=P1.src.slice();P1.bidir=false;p1Render();});
+$("p1rev").addEventListener("click",()=>{P1.ori=P1.ori.map(x=>x^1);P1.bidir=false;p1Render();});
+$("p1bi").addEventListener("click",()=>{P1.bidir=true;p1Render();});
+
+/* ================= PROBLEM 2 ================= */
+const P2={W:55,H:40,dir:1,play:true,t0:performance.now()}; // dir 1 = CCW
+// loop coordinates (m): origin bottom-left, perimeter param s measured CCW from bottom-left corner
+function p2Per(){return 2*(P2.W+P2.H);}
+function p2Pt(s){const W=P2.W,H=P2.H,L=p2Per();s=((s%L)+L)%L;
+  if(s<=W)return[s,0];if(s<=W+H)return[W,s-W];if(s<=2*W+H)return[W-(s-W-H),H];return[0,H-(s-2*W-H)];}
+function p2Data(){
+  const g=id=>parseFloat($(id).value);
+  const lx=+$("p2lx").value,ux=+$("p2ux").value;
+  const sL=lx, sU=P2.W+P2.H+(P2.W-ux); // CCW coordinates
+  const L=p2Per();
+  const ccw=((sU-sL)%L+L)%L;
+  const Ld=P2.dir===1?ccw:L-ccw, Le=L-Ld;
+  const d={TL:g("p2TL"),TU:g("p2TU"),vc:g("p2vc"),ve:g("p2ve"),Rf:g("p2Rf"),AT:g("p2AT"),Ld,Le,sL,sU,lx,ux};
+  d.Tc=d.TL+d.Ld/d.vc+d.TU+d.Le/d.ve; d.Rdv=d.AT/d.Tc; d.WL=d.Rf*d.Tc; d.nc=d.WL/d.AT; d.n=Math.ceil(d.nc-1e-12);
+  return d;
+}
+const P2S=8,P2X=60,P2Y=370; // scale & origin in svg
+const p2Svg=([x,y])=>[P2X+x*P2S,P2Y-y*P2S];
+function p2Static(d){
+  const s=$("g2");s.innerHTML="";arrowDefs(s);
+  const [x0,y0]=p2Svg([0,0]),[x1,y1]=p2Svg([P2.W,P2.H]);
+  el("rect",{x:x0,y:y1,width:x1-x0,height:y0-y1,rx:24,fill:"none",stroke:C.accent,"stroke-width":5},s);
+  // direction arrows on each side
+  const arr=(a,b)=>{const [ax,ay]=p2Svg(a),[bx,by]=p2Svg(b);el("line",{x1:ax,y1:ay,x2:bx,y2:by,stroke:C.red,"stroke-width":2.5,"marker-end":"url(#"+s.id+"aR)"},s);};
+  const k=P2.dir===1;
+  if(k){arr([30,5],[45,5]);arr([P2.W-5,15],[P2.W-5,28]);arr([30,P2.H-5],[15,P2.H-5]);arr([5,28],[5,15]);}
+  else {arr([45,5],[30,5]);arr([P2.W-5,28],[P2.W-5,15]);arr([15,P2.H-5],[30,P2.H-5]);arr([5,15],[5,28]);}
+  const [lx,ly]=p2Svg([d.lx,0]),[ux,uy]=p2Svg([d.ux,P2.H]);
+  el("rect",{x:lx-30,y:ly+10,width:60,height:26,fill:"#fff",stroke:C.navy,"stroke-width":2},s);
+  el("text",{x:lx,y:ly+29,"text-anchor":"middle","font-size":15,fill:C.navy,"font-weight":700},s,"Load");
+  el("rect",{x:ux-34,y:uy-36,width:68,height:26,fill:"#fff",stroke:C.navy,"stroke-width":2},s);
+  el("text",{x:ux,y:uy-17,"text-anchor":"middle","font-size":15,fill:C.navy,"font-weight":700},s,"Unload");
+  el("text",{x:(x0+x1)/2,y:(y0+y1)/2-6,"text-anchor":"middle","font-size":15,fill:C.mute},s,"55 m × 40 m loop");
+  el("text",{x:(x0+x1)/2,y:(y0+y1)/2+16,"text-anchor":"middle","font-size":15,fill:C.navy},s,"Ld = "+d.Ld+" m   Le = "+d.Le+" m");
+  P2.veh=el("g",{},s);
+}
+function p2Render(){
+  const d=p2Data();P2.d=d;
+  $("p2lxv").textContent=d.lx;$("p2uxv").textContent=d.ux;
+  $("p2dir").textContent="Direction: "+(P2.dir===1?"CCW":"CW");
+  p2Static(d);
+  $("p2eq").innerHTML=
+   "T<sub>c</sub> = T<sub>L</sub> + L<sub>d</sub>/v<sub>c</sub> + T<sub>U</sub> + L<sub>e</sub>/v<sub>e</sub> = "+d.TL+" + "+d.Ld+"/"+d.vc+" + "+d.TU+" + "+d.Le+"/"+d.ve+" = <b>"+fx(d.Tc,3)+"</b> min<br>"+
+   "R<sub>dv</sub> = A<sub>T</sub>/T<sub>c</sub> = "+d.AT+"/"+fx(d.Tc,3)+" = <b>"+fx(d.Rdv,2)+"</b> del/hr per vehicle<br>"+
+   "W<sub>L</sub> = R<sub>f</sub>·T<sub>c</sub> = "+d.Rf+" × "+fx(d.Tc,3)+" = <b>"+fx(d.WL,2)+"</b> min/hr<br>"+
+   "n<sub>c</sub> = W<sub>L</sub>/A<sub>T</sub> = "+fx(d.WL,2)+"/"+d.AT+" = <b>"+fx(d.nc,3)+"</b>";
+  $("p2n").textContent=fx(d.nc,3)+"  →  "+d.n+" AGVs";
+  $("p2u").textContent="Utilisation with "+d.n+" vehicles: "+fx(100*d.nc/d.n,1)+" % of available time.";
+}
+function p2Anim(now){
+  requestAnimationFrame(p2Anim);
+  const d=P2.d;if(!d||!P2.veh||!isFinite(d.Tc)||d.n<1||d.n>30)return;
+  if(!P2.play)return;
+  const SPEED=0.6; // simulated minutes per real second
+  const tm=(now-P2.t0)/1000*SPEED;
+  P2.veh.innerHTML="";
+  const L=p2Per();
+  for(let i=0;i<d.n;i++){
+    let t=((tm+i*d.Tc/d.n)%d.Tc+d.Tc)%d.Tc, s, loaded;
+    const tLd=d.Ld/d.vc,tLe=d.Le/d.ve;
+    if(t<d.TL){s=d.sL;loaded=true;}
+    else if(t<d.TL+tLd){s=d.sL+P2.dir*(t-d.TL)*d.vc;loaded=true;}
+    else if(t<d.TL+tLd+d.TU){s=d.sU;loaded=true;}
+    else{s=d.sU+P2.dir*(t-d.TL-tLd-d.TU)*d.ve;loaded=false;}
+    const [x,y]=p2Svg(p2Pt(s));
+    el("rect",{x:x-9,y:y-9,width:18,height:18,rx:3,fill:loaded?C.accent:C.gold,stroke:"#fff","stroke-width":2},P2.veh);
+  }
+}
+["p2TL","p2TU","p2vc","p2ve","p2Rf","p2AT","p2lx","p2ux"].forEach(id=>$(id).addEventListener("input",p2Render));
+$("p2dir").addEventListener("click",()=>{P2.dir*=-1;p2Render();});
+$("p2play").addEventListener("click",()=>{P2.play=!P2.play;$("p2play").textContent=P2.play?"Pause":"Play";});
+$("p2src").addEventListener("click",()=>{const v={p2TL:.75,p2TU:.5,p2vc:50,p2ve:60,p2Rf:40,p2AT:51.3,p2lx:20,p2ux:20};for(const k in v)$(k).value=v[k];P2.dir=1;p2Render();});
+
+/* ================= PROBLEM 3 ================= */
+const P3={L:300,v:150,TL:.3,TU:.3,AT:51.3,
+  names:["STK","PHOTO","ETCH","DEPO","CMP","METRO"],
+  pos:[0,40,90,150,200,260],
+  F:[[0,30,0,15,0,0],[0,0,30,0,0,10],[10,0,0,20,0,0],[0,0,0,0,25,0],[20,0,0,0,0,10],[15,0,0,0,0,0]],
+  E:null, policy:"pool"};
+const n3=6;
+const d3=(i,j)=>((P3.pos[j]-P3.pos[i])%P3.L+P3.L)%P3.L;
+const bal=()=>{const b=[];for(let i=0;i<n3;i++){let a=0;for(let k=0;k<n3;k++)a+=P3.F[k][i]-P3.F[i][k];b.push(a);}return b;}; // in - out
+const B3=bal();
+const SUR=B3.map((x,i)=>x>0?i:-1).filter(i=>i>=0), DEF=B3.map((x,i)=>x<0?i:-1).filter(i=>i>=0);
+const zeroE=()=>Array.from({length:n3},()=>Array(n3).fill(0));
+P3.E=zeroE();
+// loop geometry: 100 x 50 rectangle, clockwise from top-left
+function p3Pt(s){s=((s%300)+300)%300;const X=70,Y=60,S=4;
+  if(s<=100)return[X+s*S,Y];if(s<=150)return[X+400,Y+(s-100)*S];if(s<=250)return[X+400-(s-150)*S,Y+200];return[X,Y+200-(s-250)*S];}
+function p3Draw(){
+  const s=$("g3");s.innerHTML="";arrowDefs(s);
+  el("rect",{x:70,y:60,width:400,height:200,fill:"none",stroke:C.accent,"stroke-width":5},s);
+  [[310,46,350,46],[486,130,486,170],[420,274,380,274],[54,170,54,130]].forEach(([a,b,c,d])=>el("line",{x1:a,y1:b,x2:c,y2:d,stroke:C.red,"stroke-width":2.5,"marker-end":"url(#"+s.id+"aR)"},s));
+  // empty moves as chords
+  if(P3.policy==="pool"){
+    for(let i=0;i<n3;i++)for(let j=0;j<n3;j++){const q=P3.E[i][j];if(!q)continue;
+      let [x1,y1]=p3Pt(P3.pos[i]),[x2,y2]=p3Pt(P3.pos[j]);
+      const mx=270+(x1+x2-540)*0.25,my=160+(y1+y2-320)*0.25;
+      const pull=(x,y,k)=>{const L=Math.hypot(mx-x,my-y);return[x+(mx-x)*k/L,y+(my-y)*k/L];};
+      [x1,y1]=pull(x1,y1,18);[x2,y2]=pull(x2,y2,24);
+      el("path",{d:`M${x1},${y1} Q${mx},${my} ${x2},${y2}`,fill:"none",stroke:C.gold,"stroke-width":Math.min(2+q/2,9),"stroke-dasharray":"8 5","marker-end":"url(#"+s.id+"aG)"},s);
+      el("text",{x:(x1+2*mx+x2)/4,y:(y1+2*my+y2)/4-4,"text-anchor":"middle","font-size":15,"font-weight":700,fill:"#8A6418"},s,q+" · "+d3(i,j)+" m");}
+  } else {
+    el("text",{x:270,y:165,"text-anchor":"middle","font-size":16,fill:"#8A6418"},s,"Policy A: every vehicle runs back empty to its own pickup station");
+  }
+  for(let i=0;i<n3;i++){const [x,y]=p3Pt(P3.pos[i]);
+    el("rect",{x:x-30,y:y-16,width:60,height:32,rx:4,fill:"#fff",stroke:C.navy,"stroke-width":2},s);
+    el("text",{x,y:y-1,"text-anchor":"middle","font-size":13,"font-weight":700,fill:C.navy},s,(i+1)+" "+P3.names[i]);
+    el("text",{x,y:y+12,"text-anchor":"middle","font-size":11,fill:C.mute},s,P3.pos[i]+" m");
+    const b=B3[i];if(b){const side=(y<=60)?[0,-26]:(y>=260)?[0,36]:(x<=70)?[-48,6]:[50,6];
+      el("text",{x:x+side[0],y:y+side[1],"text-anchor":"middle","font-size":15,"font-weight":700,fill:b>0?C.gold:C.red},s,(b>0?"+":"−")+Math.abs(b));}}
+}
+function p3Calc(){
+  let R=0,LD=0;for(let i=0;i<n3;i++)for(let j=0;j<n3;j++){R+=P3.F[i][j];LD+=P3.F[i][j]*d3(i,j);}
+  let LE=0,okE=true;
+  if(P3.policy==="home"){for(let i=0;i<n3;i++)for(let j=0;j<n3;j++)LE+=P3.F[i][j]*d3(j,i);}
+  else{for(let i=0;i<n3;i++)for(let j=0;j<n3;j++)LE+=P3.E[i][j]*d3(i,j);
+    SUR.forEach(i=>{let r=0;DEF.forEach(j=>r+=P3.E[i][j]);if(r!==B3[i])okE=false;});
+    DEF.forEach(j=>{let c=0;SUR.forEach(i=>c+=P3.E[i][j]);if(c!==-B3[j])okE=false;});}
+  const WL=R*(P3.TL+P3.TU)+(LD+LE)/P3.v, nc=WL/P3.AT;
+  return {R,LD,LE,WL,nc,n:Math.ceil(nc-1e-12),okE};
+}
+function p3Tables(){
+  let h="<table><tr><th>from \\ to</th>"+P3.names.map((n,i)=>"<th>"+(i+1)+"</th>").join("")+"<th>out</th></tr>";
+  for(let i=0;i<n3;i++){let o=0;h+="<tr><th>"+(i+1)+" "+P3.names[i]+"</th>";for(let j=0;j<n3;j++){o+=P3.F[i][j];h+="<td>"+(i===j?"–":P3.F[i][j]||"")+"</td>";}h+="<td>"+o+"</td></tr>";}
+  h+="<tr><th>in</th>";for(let j=0;j<n3;j++){let c=0;for(let i=0;i<n3;i++)c+=P3.F[i][j];h+="<td>"+c+"</td>";}h+="<td></td></tr>";
+  h+="<tr><th>in − out</th>"+B3.map(b=>"<td style='font-weight:700;color:"+(b>0?C.gold:b<0?C.red:C.mute)+"'>"+(b>0?"+":"")+b+"</td>").join("")+"<td></td></tr>";
+  $("p3ft").innerHTML=h+"</table>";
+  h="<table><tr><th>from \\ to</th>"+DEF.map(j=>"<th>"+(j+1)+" "+P3.names[j]+"<br><span style='color:"+C.red+"'>need "+(-B3[j])+"</span></th>").join("")+"</tr>";
+  SUR.forEach(i=>{h+="<tr><th>"+(i+1)+" "+P3.names[i]+" <span style='color:"+C.gold+"'>spare "+B3[i]+"</span></th>";
+    DEF.forEach(j=>{h+="<td><input class='cell' type='number' min='0' step='5' data-i='"+i+"' data-j='"+j+"' value='"+P3.E[i][j]+"'><div class='note'>"+d3(i,j)+" m</div></td>";});h+="</tr>";});
+  $("p3e").innerHTML=h+"</table>";
+  $("p3e").querySelectorAll("input").forEach(inp=>inp.addEventListener("input",()=>{P3.policy="pool";P3.E[+inp.dataset.i][+inp.dataset.j]=Math.max(0,parseInt(inp.value||"0",10)||0);p3Render(false);}));
+}
+function p3Render(full){
+  if(full!==false)p3Tables();
+  p3Draw();
+  const r=p3Calc();
+  $("p3chk").innerHTML=P3.policy==="home"?"Policy A ignores this table: empties are not pooled.":
+    (r.okE?"<span class='ok'>Balanced:</span> every spare vehicle is sent, every need is met.":"<span class='warn'>Not balanced:</span> row sums must equal the spare count and column sums the need.");
+  $("p3eq").innerHTML=
+   "Loaded distance Σ f<sub>ij</sub>d<sub>ij</sub> = <b>"+r.LD.toLocaleString()+"</b> m/hr<br>"+
+   "Empty distance "+(P3.policy==="home"?"Σ f<sub>ij</sub>d<sub>ji</sub>":"Σ e<sub>ij</sub>d<sub>ij</sub>")+" = <b>"+r.LE.toLocaleString()+"</b> m/hr<br>"+
+   "W<sub>L</sub> = R·(T<sub>L</sub>+T<sub>U</sub>) + (loaded + empty)/v = "+r.R+"×"+(P3.TL+P3.TU).toFixed(1)+" + "+(r.LD+r.LE).toLocaleString()+"/"+P3.v+" = <b>"+fx(r.WL,2)+"</b> min/hr<br>"+
+   "n = W<sub>L</sub>/A<sub>T</sub> = "+fx(r.WL,2)+"/"+P3.AT+" = <b>"+fx(r.nc,3)+"</b>";
+  if(P3.policy==="pool"&&!r.okE){$("p3n").innerHTML="<span class='warn'>Plan not feasible</span>";$("p3msg").textContent="";}
+  else{$("p3n").textContent=fx(r.nc,3)+"  →  "+r.n+" OHT vehicles";
+    $("p3msg").textContent="R = "+r.R+" lots/hr, v = "+P3.v+" m/min, T_L = T_U = "+P3.TL+" min, A_T = "+P3.AT+" min/hr.";}
+}
+$("p3home").addEventListener("click",()=>{P3.policy="home";p3Render();});
+$("p3clr").addEventListener("click",()=>{P3.policy="pool";P3.E=zeroE();p3Render();});
+$("p3near").addEventListener("click",()=>{ // surplus stations in loop order; each sends to the nearest downstream station still in need
+  P3.policy="pool";P3.E=zeroE();const need=B3.map(b=>b<0?-b:0);
+  SUR.slice().sort((a,b)=>P3.pos[a]-P3.pos[b]).forEach(i=>{let left=B3[i];
+    while(left>0){let best=-1;DEF.forEach(j=>{if(need[j]>0&&(best<0||d3(i,j)<d3(i,best)))best=j;});
+      const q=Math.min(left,need[best]);P3.E[i][best]+=q;left-=q;need[best]-=q;}});
+  p3Render();
+});
+
+p1Render();p2Render();requestAnimationFrame(p2Anim);p3Render();
+})();
+</script>
+</body>
+</html>
