@@ -269,7 +269,12 @@ function showResult() {
     ? ((ev.totalDistance - opt.totalDistance) / opt.totalDistance * 100)
     : null;
   const gap   = gapNum !== null ? gapNum.toFixed(1) : '—';
-  const score = ev.feasible ? Math.round(1000 * opt.totalDistance / ev.totalDistance) : 0;
+  // Route quality (optimal/yours) scaled by problem size, so more shipments and
+  // more couriers (max 6 / 3) score higher; 1000 = optimal at full size.
+  const sizeFactor = 0.5 * (state.numShipments / 6) + 0.5 * (state.numVehicles / 3);
+  const score = ev.feasible
+    ? Math.round(1000 * sizeFactor * opt.totalDistance / ev.totalDistance)
+    : 0;
 
   document.getElementById('result-title').innerHTML = ev.feasible
     ? `🎯 Score: <span style="color:#81c784">${score}</span> / 1000`
