@@ -31,6 +31,13 @@ function validStudentId_(id, name) {
   if (id === '9999999999' && name === '테스트') return true;
   return /^20\d{8}$/.test(id);
 }
+// 관리자 키 / Admin key — set Script Property ADMIN_KEY (Project Settings → Script properties).
+// Never hard-code it here: this file is public. Fails closed when the property is unset.
+// Usage: <GAS_URL>?action=delete&id=all&key=<ADMIN_KEY>
+function isAdmin_(e) {
+  const key = PropertiesService.getScriptProperties().getProperty('ADMIN_KEY');
+  return !!key && !!(e && e.parameter) && e.parameter.key === key;
+}
 const BAD_ID_MSG = '학번은 20으로 시작하는 10자리 숫자여야 합니다. / Student ID must be 10 digits starting with 20.';
 const SHEET_NAME      = 'IE105000_1';
 const HEADERS         = ['id', 'student_id', 'student_name', 'submitted_at', 'profit', 'units', 'chain'];
@@ -111,6 +118,7 @@ function doGet(e) {
 
   // ── Delete ──
   if (action === 'delete') {
+    if (!isAdmin_(e)) return _json({ success: false, error: 'Unauthorized' });
     const sheet = getSheet();
     if (e.parameter.id === 'all') {
       const last = sheet.getLastRow();
