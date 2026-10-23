@@ -2,6 +2,15 @@
 // Add new items to the TOP of the array (newest first).
 const NEWS_ITEMS = [
     {
+        date: '2026.10.23',
+        badge: null,
+        title: { ko: '한국디지털산업학회 이사 부임', en: 'Appointed Director of KDIS' },
+        desc: {
+            ko: '정호영 교수가 한국디지털산업학회 이사로 부임하였습니다.',
+            en: 'Prof. Ho Young Jeong has been appointed as a Director of the Korean Digital Industry Society (KDIS).'
+        }
+    },
+    {
         date: '2026.04.16',
         badge: { ko: '예정', en: 'Upcoming' },
         title: { ko: '한국물류과학기술학회 특별세션 연사 초청', en: 'Invited Speaker at KLST Special Session' },
