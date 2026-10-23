@@ -42,7 +42,7 @@
   .ft-l { color: #6a6a7a; }
   .ft-l:hover { color: #00D4AA; }
   /* ── Partner logo marquee ── */
-  .partners{ position:absolute;left:0;right:0;bottom:0;z-index:10;background:#fff;padding:22px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.06);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .partners{ background:#fff;padding:22px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.06); }
   .partners-track{ display:flex;width:max-content;animation:partners-scroll 30s linear infinite; }
   .partners:hover .partners-track{ animation-play-state:paused; }
   .partners-set{ display:flex;align-items:center;gap:80px;padding-right:80px; }
@@ -108,7 +108,7 @@
     h1[style*="font-size:5.2rem"]{ font-size:2.2rem!important; }
     [style*="height:480px"]{ height:380px!important; }
     .partners{ padding:16px 0; }
-    .hero-inner{ bottom:70px!important; }
+    .hero-inner{ bottom:74px!important; }
     .partners-set{ gap:48px;padding-right:48px; }
     .partners-set img{ height:38px;max-width:140px; }
   }
@@ -139,7 +139,7 @@
   <div style="position:relative;height:700px;background:#0b1120;overflow:hidden;">
     <iframe src="https://my.spline.design/herobannerfortransportandlogisticscompanygmw2425-i9tIBV5PSdTL7pBjqIP7bNEL/" frameborder="0" title="Spline" style="position:absolute;inset:0;width:100%;height:100%;transform:scale(1.08);pointer-events:none;border:0;"></iframe>
     <div style="position:absolute;inset:0;background:radial-gradient(120% 100% at 0% 50%, rgba(11,17,32,0.97) 30%, rgba(11,17,32,0.5) 62%, rgba(11,17,32,0) 100%);"></div>
-    <div class="hero-inner" style="position:absolute;inset:0 0 96px 0;z-index:9;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 40px;max-width:1400px;margin:0 auto;width:100%;">
+    <div class="hero-inner" style="position:absolute;inset:0 0 80px 0;z-index:9;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 40px;max-width:1400px;margin:0 auto;width:100%;">
       <span class="hero-univ" style="align-self:flex-start;font-family:'Space Grotesk',monospace;font-size:0.78rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:30px;">KYUNG HEE UNIV · Industrial and Management Systems Engineering</span>
       <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:5.2rem;font-weight:800;line-height:0.92;letter-spacing:-0.05em;color:#fff;margin-bottom:26px;">Intelligent<br>Optimization<br><span style="background:linear-gradient(100deg,#5eead4,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Lab.</span></h1>
       <p style="font-size:1.25rem;color:#94a3b8;line-height:1.6;margin-bottom:44px;"><span class="t-ko">지능형 최적화를 통해 물류·제조·생산 및 통합 시스템의 미래를 개척합니다.</span><span class="t-en">Pioneering the future of logistics, manufacturing, production, and integrated systems through intelligent optimization.</span></p>
@@ -152,18 +152,19 @@
         </div>
       </div>
     </div>
-    <!-- partners -->
-    <div class="partners" role="region" aria-label="연구 협력 기관 / Research partners">
-      <div class="partners-track"><div class="partners-set"><img src="figures/project/khu.png" alt="경희대학교" loading="lazy"><img src="figures/project/NRF.svg" alt="한국연구재단" loading="lazy"><img src="figures/project/motie.png" alt="산업통상자원부" loading="lazy"><img src="figures/project/jungseok.jpg" alt="정석물류학술재단" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div></div>
+    <!-- recruiting -->
+    <div class="recruit-banner" style="position:absolute;left:0;right:0;bottom:0;z-index:10;padding:18px 52px;background:linear-gradient(120deg,#00D4AA,#7B68EE);">
+     <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:28px;">
+      <div style="display:flex;align-items:center;gap:20px;"><h3 style="font-size:1.25rem;font-weight:800;color:#fff;margin:0;white-space:nowrap;letter-spacing:-0.01em;"><span class="t-ko">연구진 모집</span><span class="t-en">Join Our Lab</span></h3><p class="recruit-p" style="font-size:0.95rem;margin:0;color:rgba(255,255,255,0.95);"><span class="t-ko">운영과학과 최적화에 열정을 가진 동기부여된 연구자를 찾고 있습니다.</span><span class="t-en">We are looking for motivated researchers passionate about operations research and optimization.</span></p></div>
+      <a href="https://forms.gle/HLLqtRMW9XrrN6pm9" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;padding:11px 30px;background:#fff;color:#0b1120;font-size:0.95rem;font-weight:800;border-radius:28px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,0.2);"><span class="t-ko">지원하기 →</span><span class="t-en">Apply Now →</span></a>
+     </div>
     </div>
   </div>
 
-  <!-- recruiting -->
-  <div class="recruit-banner" style="padding:18px 52px;background:linear-gradient(120deg,#00D4AA,#7B68EE);">
-   <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:28px;">
-    <div style="display:flex;align-items:center;gap:20px;"><h3 style="font-size:1.25rem;font-weight:800;color:#fff;margin:0;white-space:nowrap;letter-spacing:-0.01em;"><span class="t-ko">연구진 모집</span><span class="t-en">Join Our Lab</span></h3><p class="recruit-p" style="font-size:0.95rem;margin:0;color:rgba(255,255,255,0.95);"><span class="t-ko">운영과학과 최적화에 열정을 가진 동기부여된 연구자를 찾고 있습니다.</span><span class="t-en">We are looking for motivated researchers passionate about operations research and optimization.</span></p></div>
-    <a href="https://forms.gle/HLLqtRMW9XrrN6pm9" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;padding:11px 30px;background:#fff;color:#0b1120;font-size:0.95rem;font-weight:800;border-radius:28px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,0.2);"><span class="t-ko">지원하기 →</span><span class="t-en">Apply Now →</span></a>
-   </div>
+
+  <!-- partners -->
+  <div class="partners" role="region" aria-label="연구 협력 기관 / Research partners">
+    <div class="partners-track"><div class="partners-set"><img src="figures/project/khu.png" alt="경희대학교" loading="lazy"><img src="figures/project/NRF.svg" alt="한국연구재단" loading="lazy"><img src="figures/project/motie.png" alt="산업통상자원부" loading="lazy"><img src="figures/project/jungseok.jpg" alt="정석물류학술재단" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div></div>
   </div>
 
   <!-- news -->
