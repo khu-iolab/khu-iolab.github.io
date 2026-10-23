@@ -42,7 +42,7 @@
   .ft-l { color: #6a6a7a; }
   .ft-l:hover { color: #00D4AA; }
   /* ── Partner logo marquee ── */
-  .partners{ background:#fff;padding:22px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.06);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .partners{ position:absolute;left:0;right:0;bottom:0;z-index:10;background:#fff;padding:22px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.06);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
   .partners-track{ display:flex;width:max-content;animation:partners-scroll 30s linear infinite; }
   .partners:hover .partners-track{ animation-play-state:paused; }
   .partners-set{ display:flex;align-items:center;gap:80px;padding-right:80px; }
@@ -88,7 +88,7 @@
     h2[style*="font-size:2.8rem"]{ font-size:2rem!important; }
     h2[style*="font-size:2.4rem"]{ font-size:1.7rem!important; }
     h3[style*="font-size:1.7rem"]{ font-size:1.35rem!important; }
-    [style*="height:700px"]{ height:480px!important; }
+    [style*="height:760px"]{ height:550px!important; }
     [style*="height:600px"]{ height:420px!important; }
     [style*="padding:20px 52px;background:linear-gradient"]{ flex-direction:column!important;align-items:flex-start!important;gap:12px!important;padding:16px 18px!important; }
     [style*="grid-template-columns:64px 150px 1fr"]{ grid-template-columns:40px 1fr!important;gap:12px!important; }
@@ -108,6 +108,7 @@
     h1[style*="font-size:5.2rem"]{ font-size:2.2rem!important; }
     [style*="height:480px"]{ height:380px!important; }
     .partners{ padding:16px 0; }
+    .hero-inner{ bottom:70px!important; }
     .partners-set{ gap:48px;padding-right:48px; }
     .partners-set img{ height:38px;max-width:140px; }
   }
@@ -135,10 +136,10 @@
   </nav>
 
   <!-- hero -->
-  <div style="position:relative;height:700px;background:#0b1120;overflow:hidden;">
+  <div style="position:relative;height:760px;background:#0b1120;overflow:hidden;">
     <iframe src="https://my.spline.design/herobannerfortransportandlogisticscompanygmw2425-i9tIBV5PSdTL7pBjqIP7bNEL/" frameborder="0" title="Spline" style="position:absolute;inset:0;width:100%;height:100%;transform:scale(1.08);pointer-events:none;border:0;"></iframe>
     <div style="position:absolute;inset:0;background:radial-gradient(120% 100% at 0% 50%, rgba(11,17,32,0.97) 30%, rgba(11,17,32,0.5) 62%, rgba(11,17,32,0) 100%);"></div>
-    <div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;justify-content:center;padding:0 52px;max-width:1400px;margin:0 auto;width:100%;">
+    <div class="hero-inner" style="position:absolute;inset:0 0 96px 0;z-index:9;display:flex;flex-direction:column;justify-content:center;padding:0 52px;max-width:1400px;margin:0 auto;width:100%;">
       <span class="hero-univ" style="align-self:flex-start;font-family:'Space Grotesk',monospace;font-size:0.78rem;font-weight:600;color:#5eead4;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:30px;">KYUNG HEE UNIV · Industrial and Management Systems Engineering</span>
       <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:5.2rem;font-weight:800;line-height:0.92;letter-spacing:-0.05em;color:#fff;margin-bottom:26px;">Intelligent<br>Optimization<br><span style="background:linear-gradient(100deg,#5eead4,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Lab.</span></h1>
       <p style="font-size:1.25rem;color:#94a3b8;line-height:1.6;margin-bottom:44px;"><span class="t-ko">지능형 최적화를 통해 물류·제조·생산 및 통합 시스템의 미래를 개척합니다.</span><span class="t-en">Pioneering the future of logistics, manufacturing, production, and integrated systems through intelligent optimization.</span></p>
@@ -151,11 +152,10 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- partners -->
-  <div class="partners" role="region" aria-label="연구 협력 기관 / Research partners">
-    <div class="partners-track"><div class="partners-set"><img src="figures/project/khu.png" alt="경희대학교" loading="lazy"><img src="figures/project/NRF.svg" alt="한국연구재단" loading="lazy"><img src="figures/project/motie.png" alt="산업통상자원부" loading="lazy"><img src="figures/project/jungseok.jpg" alt="정석물류학술재단" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div></div>
+    <!-- partners -->
+    <div class="partners" role="region" aria-label="연구 협력 기관 / Research partners">
+      <div class="partners-track"><div class="partners-set"><img src="figures/project/khu.png" alt="경희대학교" loading="lazy"><img src="figures/project/NRF.svg" alt="한국연구재단" loading="lazy"><img src="figures/project/motie.png" alt="산업통상자원부" loading="lazy"><img src="figures/project/jungseok.jpg" alt="정석물류학술재단" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div></div>
+    </div>
   </div>
 
   <!-- recruiting -->
