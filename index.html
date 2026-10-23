@@ -41,6 +41,14 @@
   .eb-news:hover .eb-arrow { transform: translate(6px,-6px); opacity: 1 !important; }
   .ft-l { color: #6a6a7a; }
   .ft-l:hover { color: #00D4AA; }
+  /* ── Partner logo marquee ── */
+  .partners{ background:#fff;padding:22px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.06);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .partners-track{ display:flex;width:max-content;animation:partners-scroll 30s linear infinite; }
+  .partners:hover .partners-track{ animation-play-state:paused; }
+  .partners-set{ display:flex;align-items:center;gap:80px;padding-right:80px; }
+  .partners-set img{ height:52px;width:auto;max-width:200px;object-fit:contain; }
+  @keyframes partners-scroll{ to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion:reduce){ .partners-track{ animation:none; } }
   /* ── Mobile responsive ── */
   .mob-hbg { display:none; }
   .mob-nav { display:none; }
@@ -99,6 +107,9 @@
     [style*="grid-template-columns:1.4fr 1fr 1fr 1fr"]{ grid-template-columns:1fr!important; }
     h1[style*="font-size:5.2rem"]{ font-size:2.2rem!important; }
     [style*="height:480px"]{ height:380px!important; }
+    .partners{ padding:16px 0; }
+    .partners-set{ gap:48px;padding-right:48px; }
+    .partners-set img{ height:38px;max-width:140px; }
   }
   .t-en{display:none;}
   body.lang-en .t-ko{display:none;}
@@ -140,6 +151,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- partners -->
+  <div class="partners" role="region" aria-label="연구 협력 기관 / Research partners">
+    <div class="partners-track"><div class="partners-set"><img src="figures/project/khu.png" alt="경희대학교" loading="lazy"><img src="figures/project/NRF.svg" alt="한국연구재단" loading="lazy"><img src="figures/project/motie.png" alt="산업통상자원부" loading="lazy"><img src="figures/project/jungseok.jpg" alt="정석물류학술재단" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div><div class="partners-set" aria-hidden="true"><img src="figures/project/khu.png" alt="" loading="lazy"><img src="figures/project/NRF.svg" alt="" loading="lazy"><img src="figures/project/motie.png" alt="" loading="lazy"><img src="figures/project/jungseok.jpg" alt="" loading="lazy"></div></div>
   </div>
 
   <!-- recruiting -->
