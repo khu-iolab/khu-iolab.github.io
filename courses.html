@@ -255,19 +255,19 @@
               <div style="width:48px;height:48px;border-radius:12px;background:#0b1120;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><img src="figures/learning/icon-mh.svg" style="width:26px;height:26px;" alt="Material Handling"></div>
               <div>
                 <span style="font-family:'Space Grotesk',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2563EB;"><span class="t-ko">Web App · 실습 #6</span><span class="t-en">Web App · Lab #6</span></span>
-                <h4 style="font-size:1.1rem;font-weight:700;line-height:1.4;margin-top:3px;"><span class="t-ko">물자 취급(Material Handling) 실습기</span><span class="t-en">Material Handling Lab</span></h4>
+                <h4 style="font-size:1.1rem;font-weight:700;line-height:1.4;margin-top:3px;"><span class="t-ko">AGV 운영 실습기</span><span class="t-en">AGV Operations Lab</span></h4>
               </div>
             </div>
-            <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.65;"><span class="t-ko">AGV 단방향 가이드패스 설계, 루프 위 AGV 대수 산정, 반도체 OHT 대수와 공차 이동 계획 세 문제를 화면에서 직접 조작해 보며 목적함수와 소요 대수가 어떻게 달라지는지 확인하는 실습기입니다.</span><span class="t-en">A hands-on lab with three problems &mdash; unidirectional AGV guide-path design, AGV fleet sizing on a loop, and OHT fleet sizing with empty-move planning &mdash; where you manipulate the system directly and watch the objective and fleet size respond.</span></p>
+            <p style="font-size:0.88rem;color:#6a6a7a;line-height:1.65;"><span class="t-ko">AGV 통로 방향 설계, 교차로 통과 순서, 배차 규칙 세 문제를 화면에서 직접 조작하고 시뮬레이션으로 확인한 뒤, 대수와 배차 순서를 설계해 시간당 총비용을 겨루는 케이스 스터디로 이어지는 실습기입니다.</span><span class="t-en">A hands-on lab on AGV systems &mdash; guide-path direction design, intersection scheduling, and dispatching rules, each checked by simulation &mdash; followed by a case study where you choose the fleet size and dispatching order to minimize hourly total cost.</span></p>
             <ul style="font-size:0.83rem;color:#6a6a7a;padding-left:18px;line-height:1.8;">
-              <li><span class="t-ko">P1: 통로를 클릭해 방향을 정하고 Σ f·Y 최소화, 전수 열거·양방향 하한과 비교</span><span class="t-en">P1: click aisles to set directions and minimize &Sigma; f&middot;Y; compare with full enumeration and the bidirectional bound</span></li>
-              <li><span class="t-ko">P2: 적재·하역 스테이션 위치와 회전 방향을 바꿔 배송 사이클과 AGV 대수 확인</span><span class="t-en">P2: move load/unload stations and switch loop direction to see the delivery cycle and AGV count</span></li>
-              <li><span class="t-ko">P3: OHT 공차 이동 e<sub>ij</sub>를 직접 입력, 회송·최근접 부족 정책과 비교</span><span class="t-en">P3: enter empty moves e<sub>ij</sub> yourself and compare against return-to-pickup and nearest-deficit policies</span></li>
-              <li><span class="t-ko">From–To 차트, 수급 균형, 필요 대수까지 실시간 계산</span><span class="t-en">From&ndash;to chart, balance, and required fleet size computed in real time</span></li>
+              <li><span class="t-ko">P1 주행경로망: 통로를 클릭해 방향을 정하고 Σ f·d 최소화(강연결 유지)</span><span class="t-en">P1 guide-path network: click aisles to set directions and minimize &Sigma; f&middot;d while keeping the network strongly connected</span></li>
+              <li><span class="t-ko">P2 교차로 통과 스케줄링: 통과 순서를 바꿔 지연 비교(FIFO 등)</span><span class="t-en">P2 intersection scheduling: reorder crossings and compare delays (FIFO and others)</span></li>
+              <li><span class="t-ko">P3 배차 정책 평가: 배차 규칙별 대기시간을 진행 보기·장기 실험으로 비교</span><span class="t-en">P3 dispatching policies: compare waiting times by rule with step-by-step playback and long runs</span></li>
+              <li><span class="t-ko">케이스 스터디: AGV 대수 + 배차 순서 나무 설계, 시간당 총비용 제출·실시간 리더보드</span><span class="t-en">Case study: design the fleet size and a dispatching order tree &mdash; submit hourly total cost to a live leaderboard</span></li>
             </ul>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid rgba(0,0,0,0.06);">
-              <span style="font-family:'Space Grotesk',monospace;font-size:0.72rem;color:#8a8a98;">IE325_6_materialhandling · 2026</span>
-              <a href="learningmaterials/IE325_6_MH/index.html" target="_blank" class="launch-btn" style="padding:8px 18px;background:#0b1120;color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;transition:all 0.2s;"><span class="t-ko">앱 실행 ↗</span><span class="t-en">Launch ↗</span></a>
+              <span style="font-family:'Space Grotesk',monospace;font-size:0.72rem;color:#8a8a98;">IE325_6_AGV · 2026</span>
+              <a href="https://script.google.com/macros/s/AKfycbyfytW6GhEMwkUIE7xja48WGlirBBES_VTXoXxVuzDSHAfcML17mWYwT7VDdBA8gFD9/exec" target="_blank" class="launch-btn" style="padding:8px 18px;background:#0b1120;color:#fff;font-size:0.82rem;font-weight:700;border-radius:10px;transition:all 0.2s;"><span class="t-ko">앱 실행 ↗</span><span class="t-en">Launch ↗</span></a>
             </div>
           </div>
 
