@@ -462,8 +462,10 @@ function scene4(){
 const SC=[scene1,scene2,scene3,scene4],DUR=[16,16,17,18];
 const stage=document.getElementById('stage'),prog=document.getElementById('prog'),bar=document.getElementById('bar');
 const qs=new URLSearchParams(location.search);
+const SPEED=Math.max(.25,+qs.get('speed')||1),HOLD=qs.get('hold')==='1';
 let cur=Math.max(0,Math.min(3,(+qs.get('scene')||1)-1)),t=0,paused=false,repeat=false,last=performance.now(),busy=false;
 function render(){stage.innerHTML=`<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${DEFS}${SC[cur]()}</svg>`;
+  if(SPEED!==1)stage.getAnimations({subtree:true}).forEach(a=>{const it=a.effect&&a.effect.getTiming().iterations;if(it!==Infinity)a.playbackRate=SPEED;});
   if(paused)stage.querySelector('svg').pauseAnimations();
   document.querySelectorAll('.dot').forEach(b=>b.classList.toggle('on',+b.dataset.i===cur));}
 function show(i,instant){cur=(i+SC.length)%SC.length;t=0;
@@ -471,8 +473,8 @@ function show(i,instant){cur=(i+SC.length)%SC.length;t=0;
   if(busy)return;busy=true;stage.classList.add('out');setTimeout(()=>{render();stage.classList.remove('out');busy=false},350);}
 function setPause(p){paused=p;stage.classList.toggle('paused',p);const sv=stage.querySelector('svg');if(sv)p?sv.pauseAnimations():sv.unpauseAnimations();document.getElementById('play').textContent=p?'►':'❚❚';}
 function tick(now){const dt=Math.min(.1,(now-last)/1000);last=now;
-  if(!paused&&!busy){t+=dt;if(t>=DUR[cur]){repeat?show(cur):show(cur+1)}}
-  prog.style.width=(Math.min(1,t/DUR[cur])*100)+'%';requestAnimationFrame(tick);}
+  if(!paused&&!busy){t+=dt;if(t>=DUR[cur]/SPEED&&!HOLD){repeat?show(cur):show(cur+1)}}
+  prog.style.width=(Math.min(1,t*SPEED/DUR[cur])*100)+'%';requestAnimationFrame(tick);}
 document.getElementById('prev').onclick=()=>show(cur-1);
 document.getElementById('next').onclick=()=>show(cur+1);
 document.getElementById('play').onclick=()=>setPause(!paused);
