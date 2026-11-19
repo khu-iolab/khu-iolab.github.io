@@ -57,7 +57,7 @@ def test_production_and_nextgen_use_rendered_animation_assets():
     html = RESEARCH.read_text(encoding="utf-8")
 
     assert 'src="figures/about/PO2.gif"' in html
-    assert 'src="figures/about/NextgenOptimization/nextgen-optimization-animation.gif?v=20260714-fast1"' in html
+    assert 'src="figures/about/NextgenOptimization/graphical-abstract-nextgen-bilingual.png"' in html
     assert "sim3d_fab.html" not in html
     assert "sim3d_solver.html" not in html
 
