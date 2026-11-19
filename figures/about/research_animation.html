@@ -137,21 +137,23 @@ function scene1(){
   let s=R(0,0,1600,900,{f:'#f6f8fc'});
   s+=A('fade',0,T(40,54,'Integrated Logistics Optimization',{fs:34,fw:800,c:N})+T(40,88,'Coordinating multimodal delivery and urban freight networks.',{fs:20,c:'#2b3a57'}));
   const ph=(x,w,num,title,d)=>A('fade',d,R(x,110,w,720,{rx:16,f:'#fff',s:'#d5dde9',a:{filter:'url(#sh)'}})+T(x+22,163,num,{fs:34,fw:800,c:B})+L(x+80,136,x+80,170,{s:'#9fb3cf',sw:2})+T(x+97,160,title,{fs:27,fw:700,c:N})+L(x+18,182,x+w-18,182,{s:B,sw:2,a:dr(d+.3)}));
-  s+=ph(25,520,'01','Urban Delivery System',0)+ph(565,500,'02','Optimization',2.2)+ph(1085,490,'03','Coordinated Delivery',5.8);
+  s+=ph(25,520,'01','Current Urban Delivery',0)+ph(565,500,'02','Optimization',2.2)+ph(1085,490,'03','Coordinated Delivery',5.8);
 
-  /* ---- panel 1 : city ---- */
+  /* ---- panel 1 : today's truck-only delivery ---- */
   let p=R(40,498,490,282,{rx:16,f:'url(#soil)'})+R(40,458,490,18,{rx:6,f:'#6dbb5c'})+R(40,474,490,26,{f:'#dfe3e9'})+L(45,487,525,487,{s:'#fff',sw:2,a:{'stroke-dasharray':'12 10'}});
   s+=A('fade',.3,p);
+  s+=A('fade',.4,T(40,222,'Pain points',{fs:19,fw:700,c:'#c0392b'}));
+  [[100,'Delays'],[232,'Emissions'],[378,'Congestion']].forEach(([x,t],i)=>s+=A('pop',.6+i*.15,pill(x,262,t,{fs:17,f:'#fde8e1',c:'#c0392b'})));
   s+=tr(108,466,A('pop',.5,depot(B)))+A('fade',.7,lbl(108,340,'Depot')+L(108,355,108,364,{sw:1.5}));
   [175,245,525].forEach((x,i)=>s+=tr(x,466,A('pop',.6+i*.1,tree())));
   [310,395,480].forEach((x,i)=>s+=tr(x,466,A('pop',.7+i*.12,house(B))));
-  [310,395,480].forEach((x,i)=>s+=tr(x,398,A('pop',1.2+i*.15,G('bob',pin(OR),`animation-delay:${-i*.5}s`))));
-  s+=A('fade',1.4,lbl(425,322,'Customers')+L(410,337,397,358,{sw:1.5})+L(445,337,476,358,{sw:1.5}));
-  s+=A('fade',.9,mv(truck(B),'M75,496 H255',5,{kp:'0;1;1',kt:'0;.75;1',fade:1}));
-  s+=A('fade',1.0,tr(310,262,G('bob',drone(B)+tr(0,10,pkg())))+L(310,292,310,352,{s:B,sw:2.5,m:'b',a:{class:'flow'}})+mv(pkg(),'M310,292 V345',2,{fade:1}));
-  [195,405].forEach((hx,i)=>{s+=tr(hx,560,A('pop',1.6+i*.2,hub(B)));s+=A('fade',1.8+i*.2,R(hx-17,560,34,92,{f:'url(#shaft)'})+upArrow(hx-8,645,568)+dnArrow(hx+8,568,645));});
-  s+=A('fade',2.0,tunnel(55,650,460,84,3,B));
-  s+=A('fade',2.3,lbl(112,600,'Transfer hub')+L(150,585,168,548,{sw:1.5})+lbl(326,600,'Transfer hub')+L(364,585,378,548,{sw:1.5})+lbl(285,768,'Underground transport')+L(285,753,285,738,{sw:1.5}));
+  const clock=()=>C(0,0,14,{f:'#fff',s:OR,sw:3})+L(0,0,6,3,{s:N,sw:2.5})+`<g>${L(0,0,0,-10,{s:N,sw:2.5})}${rot(2.5)}</g>`+C(0,0,2.5,{f:N});
+  [310,395,480].forEach((x,i)=>s+=tr(x,402,A('pop',1.2+i*.15,G('bob',clock(),`animation-delay:${-i*.5}s`))));
+  s+=A('fade',1.4,lbl(425,322,'Waiting customers')+L(405,337,318,384,{sw:1.5})+L(425,337,397,384,{sw:1.5})+L(445,337,476,384,{sw:1.5}));
+  const puff=b=>`<circle cx="-2" cy="-14" r="3" fill="#9aa3b2" opacity="0"><animate attributeName="cy" values="-14;-48" dur="1.8s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="r" values="3;10" dur="1.8s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="opacity" values=".75;0" dur="1.8s" begin="${b}s" repeatCount="indefinite"/></circle>`;
+  [0,1,2].forEach(k=>s+=A('fade',.9,mv(puff(0)+puff(-.9)+truck('#5b6b85'),'M45,496 H455',12,{begin:-k*4,fade:1})));
+  s+=A('fade',1.6,`<g opacity=".35">${[195,405].map(hx=>tr(hx,560,hub(B))+R(hx-17,560,34,92,{f:'#9fb3c8'})).join('')}${tunnel(55,650,460,84,0,B)}</g>`);
+  s+=A('fade',2.0,lbl(112,600,'Transfer hub',{s:'#9aa3b2',c:'#6b7383'})+lbl(326,600,'Transfer hub',{s:'#9aa3b2',c:'#6b7383'})+lbl(285,768,'Underground (unused)',{s:'#9aa3b2',c:'#6b7383'}));
 
   /* ---- panel 2 : optimization ---- */
   const card=(y,h,lines,d)=>A('fade',d,R(585,y,230,h,{rx:12,f:'#e8f1fc'})+T(603,y+33,lines,{fs:21,fw:700,c:N,lh:25}));
@@ -192,29 +194,27 @@ function scene1(){
     tr(795,788,G('blink',P('M4,-20 L-10,3 L-1,3 L-5,20 L10,-4 L1,-4 Z',{f:'#22c07a'})))+T(818,795,'Energy',{fs:17})+L(898,762,898,812,{s:'#c9d3e2'})+
     tr(940,788,P('M0,-18 L18,-9 L18,11 L0,20 L-18,11 L-18,-9 Z M-18,-9 L0,0 L18,-9 M0,0 V20',{s:B,sw:2.5,f:'#fff'}))+T(965,795,'Capacity',{fs:17}));
 
-  /* ---- panel 3 : coordinated ---- */
-  s+=A('fade',6.0,R(1100,430,460,220,{rx:16,f:'url(#soil)'})+R(1100,392,460,18,{rx:6,f:'#6dbb5c'})+R(1100,408,460,26,{f:'#dfe3e9'})+L(1105,421,1555,421,{s:'#fff',sw:2,a:{'stroke-dasharray':'12 10'}}));
-  s+=tr(1152,400,A('pop',6.2,depot(B)),.82)+A('fade',6.4,lbl(1152,290,'Depot')+L(1152,305,1152,314,{sw:1.5}));
-  [1232,1340].forEach((x,i)=>s+=tr(x,400,A('pop',6.3+i*.1,tree())));
-  [1395,1462,1530].forEach((x,i)=>{s+=tr(x,400,A('pop',6.4+i*.1,house(B)));s+=tr(x,332,A('pop',6.8+i*.1,G('bob',pin(OR),`animation-delay:${-i*.5}s`)));});
-  s+=A('fade',7.0,lbl(1495,262,'Customers')+L(1475,277,1465,296,{sw:1.5})+L(1515,277,1528,296,{sw:1.5}));
-  s+=A('fade',7.0,tr(1395,212,G('bob',drone(B)+tr(0,10,pkg())))+L(1395,242,1395,290,{s:B,sw:2.5,m:'b',a:{class:'flow'}}));
-  [1290,1490].forEach((hx,i)=>{s+=tr(hx,480,A('pop',6.6+i*.15,hub(B)));s+=A('fade',6.8,R(hx-17,480,34,58,{f:'url(#shaft)'})+upArrow(hx-8,532,486)+dnArrow(hx+8,486,532));});
-  s+=A('fade',7.2,tunnel(1110,535,440,72,3,B));
-  s+=A('fade',7.4,mv(truck(B),'M1170,429 H1250',4,{kp:'0;1;1',kt:'0;.6;1',fade:1})+
-    P('M1260,420 H1290 V436',{s:B,sw:4,m:'b',a:{class:'flow'}})+
-    P('M1305,434 C1320,400 1345,392 1368,380',{s:B,sw:4,m:'b',a:{class:'flow'}})+
-    P('M1300,420 C1380,420 1420,410 1436,386',{s:B,sw:4,m:'b',a:{class:'flow'}})+
-    P('M1505,434 C1512,410 1515,395 1514,382',{s:B,sw:4,m:'b',a:{class:'flow'}}));
-  s+=A('fade',7.6,lbl(1195,470,'Transfer hub')+L(1240,470,1256,470,{sw:1.5})+lbl(1395,470,'Transfer hub')+L(1440,470,1456,470,{sw:1.5})+lbl(1330,628,'Underground transport'));
-  s+=A('fade',8.0,L(1100,662,1560,662,{s:'#dbe3ee',sw:1.5})+T(1100,695,'Outcomes (Objectives)',{fs:21,fw:700,c:N})+L(1250,720,1250,820,{s:'#dbe3ee'})+L(1410,720,1410,820,{s:'#dbe3ee'}));
+  /* ---- panel 3 : coordinated - transfer timeline + before/after ---- */
+  const DRC='#f39221';
+  s+=A('fade',6.0,T(1105,222,'Transfer synchronization',{fs:21,fw:700,c:N}));
+  [[1300,'Hub 1'],[1450,'Hub 2']].forEach(([x,t],i)=>s+=A('fade',6.2+i*.1,L(x,266,x,436,{s:'#9aa3b2',sw:2,a:{'stroke-dasharray':'5 5'}})+pill(x,250,t,{fs:14,w:66,f:'#e8f1fc',c:N})));
+  const lanes=[[282,DRC,'y',tr(1128,284,drone(DRC),.5)],[352,B,'b',tr(1106,364,truck(B),.45)],[422,GN,'t',tr(1132,422,capsule(GN),.75)]];
+  lanes.forEach(([y,c,m,icon],i)=>{
+    s+=A('pop',6.3+i*.15,icon)+L(1170,y,1552,y,{s:c,sw:4,m,a:dr(6.4+i*.15)});
+    s+=[1300,1450].map((x,k)=>tr(x,y,A('pop',7.0+i*.1+k*.2,C(0,0,7,{f:'#fff',s:c,sw:3})))).join('');
+    s+=A('fade',7.4,mv(C(0,0,6,{f:c}),`M1172,${y} H1545`,4,{fade:1}));
+  });
+  s+=A('fade',7.3,P('M1312,292 C1326,310 1326,326 1312,342',{s:N,sw:2,m:'n',a:{class:'flowS'}})+P('M1462,362 C1476,380 1476,396 1462,412',{s:N,sw:2,m:'n',a:{class:'flowS'}}));
+  s+=A('fade',7.6,T(1330,466,'Drone, van and capsule meet at each hub on schedule',{fs:16,a:'middle',c:'#2b3a57',it:1}));
   const down=(x,y)=>tr(x,y,C(0,0,12,{f:'#dbe9fb'})+P('M0,-6 V6 M-5,1 L0,6 L5,1',{s:B,sw:2.5}));
-  s+=tr(1160,745,A('pop',8.3,E(0,-18,20,7,{f:'#e8f1fc',s:B,sw:3})+P('M-20,-18 V18 A20,7 0 0 0 20,18 V-18',{f:'#e8f1fc',s:B,sw:3})+P('M-20,-6 A20,7 0 0 0 20,-6 M-20,6 A20,7 0 0 0 20,6',{s:B,sw:2.5})+G('bob',down(32,10))));
-  s+=tr(1330,745,A('pop',8.6,G('pulse',P('M-18,22 C-22,-6 -2,-24 22,-26 C24,-2 12,22 -18,22 Z',{f:'#2fb36d'})+P('M-16,20 C-4,6 6,-6 16,-18',{s:'#fff',sw:2.5}))));
-  s+=tr(1480,748,A('pop',8.9,P('M-26,8 V-2 L-18,-14 C-16,-18 -12,-20 -8,-20 H10 C14,-20 18,-18 20,-14 L26,-2 V8 Z',{f:B})+R(-14,-15,12,9,{rx:2,f:'#cfe3ff'})+R(2,-15,12,9,{rx:2,f:'#cfe3ff'})+C(-15,9,6,{f:'#0b1f4d'})+C(15,9,6,{f:'#0b1f4d'})+G('bob',down(36,-4))));
-  s+=A('fade',8.6,T(1165,800,['Lower','delivery cost'],{fs:19,fw:600,a:'middle',lh:22})+T(1330,800,['Lower','emissions'],{fs:19,fw:600,a:'middle',lh:22})+T(1488,800,['Less','congestion'],{fs:19,fw:600,a:'middle',lh:22}));
+  s+=A('fade',8.0,L(1100,492,1560,492,{s:'#dbe3ee',sw:1.5})+T(1100,526,'Outcomes (Objectives)',{fs:21,fw:700,c:N})+
+    R(1100,544,14,14,{rx:3,f:'#c3cad6'})+T(1120,556,'Truck-only',{fs:15,c:'#4a5568'})+R(1215,544,14,14,{rx:3,f:B})+T(1235,556,'Coordinated',{fs:15,c:'#4a5568'}));
+  s+=A('fade',8.2,L(1105,772,1560,772,{s:'#9fb3cf',sw:2}));
+  [[1175,118,'Delivery cost'],[1330,100,'Emissions'],[1485,86,'Congestion']].forEach(([cx,h,t],i)=>{const d=8.3+i*.25;
+    s+=A('growY',d,R(cx-46,602,40,170,{rx:4,f:'#c3cad6'}))+A('growY',d+.3,R(cx+6,772-h,40,h,{rx:4,f:B}))+
+      A('fade',d+.6,G('bob',down(cx+26,772-h-22)))+A('fade',d,T(cx,802,t,{fs:18,fw:600,a:'middle'}));});
 
-  s+=A('fade',9.2,R(25,852,6,34,{f:B})+T(45,878,'<tspan font-weight="800">Applications:</tspan>  Last-mile delivery  •  Underground logistics  •  Truck–drone systems',{fs:23,c:N}));
+    s+=A('fade',9.2,R(25,852,6,34,{f:B})+T(45,878,'<tspan font-weight="800">Applications:</tspan>  Last-mile delivery  •  Underground logistics  •  Truck–drone systems',{fs:23,c:N}));
   return s;
 }
 
@@ -244,14 +244,19 @@ function scene2(){
   s+=A('fade',1.9,P('M199,488 C250,450 300,445 339,447',{s:N,sw:2.5,m:'n'})+P('M369,447 C420,450 460,452 498,457',{s:N,sw:2.5,m:'n'})+P('M199,502 C250,525 300,535 335,537',{s:N,sw:2.5,m:'n'})+P('M367,537 C420,530 460,525 498,523',{s:'#c5ccd8',sw:2.5,m:'g',a:{'stroke-dasharray':'6 6'}}));
   s+=A('fade',2.3,mv(C(0,0,5,{f:BL}),'M199,488 C250,450 300,445 341,447 L369,447 C420,450 460,452 500,457',2.6,{fade:1})+mv(C(0,0,5,{f:BL}),'M199,488 C250,450 300,445 341,447 L369,447 C420,450 460,452 500,457',2.6,{fade:1,begin:-1.3})+mv(C(0,0,5,{f:RED}),'M199,502 C250,525 300,535 337,537',1.6,{fade:1}));
   s+=tr(185,495,A('pop',1.8,R(-14,-14,28,28,{f:'#fff',s:BL,sw:3})))+tr(355,447,A('pop',2.0,C(0,0,14,{f:'#f7b84b',s:'#e08a1e',sw:2})));
-  s+=tr(352,537,A('pop',2.2,C(0,0,15,{s:RED,sw:3,a:{class:'ring'}})+C(0,0,15,{f:RED})+P('M-6,-6 L6,6 M6,-6 L-6,6',{s:'#fff',sw:3.5})));
+  s+=tr(352,537,A('pop',2.6,C(0,0,15,{s:RED,sw:3,a:{class:'ring'}})+C(0,0,15,{f:RED})+P('M-6,-6 L6,6 M6,-6 L-6,6',{s:'#fff',sw:3.5})));
   [[515,457],[515,523]].forEach(([x,y],i)=>s+=tr(x,y,A('pop',2.1+i*.1,P('M0,-14 L14,11 H-14 Z',{f:'#fff',s:GRN,sw:3}))));
   // power plane
   s+=A('fade',2.0,P('M120,755 L165,632 L580,632 L535,755 Z',{f:'#fbe8d6'})+R(40,633,108,64,{rx:8,f:'#fbe8d6'})+T(50,656,['Power','network'],{fs:18,fw:700,lh:20})+T(50,694,'(electricity)',{fs:16}));
   s+=A('fade',2.3,R(170,659,26,26,{f:'#fff',s:BL,sw:3})+L(196,672,552,672,{sw:3})+[230,270,310,350,390,430,470,510,550].map(x=>C(x,672,5,{f:N})).join('')+
     P('M262,672 V708 H292 M388,672 V708 H420 M508,672 V694 H486',{s:N,sw:2.5})+[[262,708],[292,708],[388,708],[420,708],[486,694]].map(([x,y])=>C(x,y,5,{f:N})).join('')+
     T(355,742,'Radial distribution feeder',{fs:17,it:1,a:'middle'}));
-  s+=A('fade',2.5,L(185,510,183,658,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+L(352,553,352,666,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+mv(C(0,0,5,{f:RED}),'M352,556 V668',1.4,{fade:1})+C(350,672,9,{f:'none',s:RED,sw:2.5,a:{class:'blink'}}));
+  s+=A('fade',2.5,L(185,510,183,658,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+L(352,553,352,666,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+mv(C(0,0,5,{f:RED}),'M352,668 V556',1.4,{fade:1})+C(350,672,9,{f:'none',s:RED,sw:2.5,a:{class:'blink'}}));
+  const badge=(x,y,n,d)=>tr(x,y,A('pop',d,C(0,0,11,{f:'#fff',s:RED,sw:2.5})+T(0,5,n,{fs:13,fw:800,c:RED,a:'middle'})));
+  s+=tr(350,672,A('pop',2.2,C(0,0,13,{f:RED})+P('M2,-8 L-4,1 L1,1 L-2,8 L5,-2 L0,-2 Z',{f:'#fff'})));
+  s+=tr(515,523,A('pop',2.9,G('blink',P('M0,-14 L14,11 H-14 Z',{f:RED,s:RED,sw:3}))));
+  s+=badge(374,694,'1',2.3)+badge(378,516,'2',2.7)+badge(540,503,'3',3.0);
+  s+=A('fade',3.0,lbl(470,600,'Cascading failure',{s:RED,c:RED}));
   s+=A('fade',2.7,R(38,790,545,42,{rx:8,f:'#fff',s:'#cfd6e0'})+R(52,802,18,18,{f:'#fff',s:BL,sw:2.5})+T(78,817,'Supplier',{fs:16})+C(168,811,9,{f:'#f7b84b',s:'#e08a1e'})+T(184,817,'Hub',{fs:16})+P('M245,801 L256,820 H234 Z',{f:'#fff',s:GRN,sw:2.5})+T(265,817,'Customer',{fs:16})+C(358,811,10,{f:RED})+P('M354,807 L362,815 M362,807 L354,815',{s:'#fff',sw:2.5})+T(375,817,'Failure',{fs:16})+L(445,811,478,811,{s:O,sw:2,a:{'stroke-dasharray':'5 4'}})+T(486,817,'Dependency',{fs:16}));
 
   /* ---- panel 2 ---- */
@@ -272,22 +277,18 @@ function scene2(){
     T(842,772,'Redundancy',{fs:18,fw:700,a:'middle'})+T(842,795,['(e.g., backup','hubs/lines)'],{fs:15,a:'middle',lh:18})+
     T(975,772,['Recovery','sequence'],{fs:18,fw:700,a:'middle',lh:21})+T(975,815,['(e.g., staged','restoration)'],{fs:15,a:'middle',lh:18}));
 
-  /* ---- panel 3 ---- */
-  s+=A('fade',6.7,P('M1170,405 L1225,258 L1565,258 L1510,405 Z',{f:'#dbe9f7'})+R(1085,282,98,64,{rx:8,f:'#dbe9f7'})+T(1095,306,['Logistics','network'],{fs:18,fw:700,lh:20})+T(1095,344,'(goods)',{fs:16}));
-  const sup=[1240,332],h1=[1410,272],h2=[1408,378],c1=[1515,290],c2=[1490,360];
-  s+=A('fade',7.0,P('M1254,325 C1300,285 1360,272 1394,272',{s:N,sw:2.5,m:'n'})+P('M1426,272 C1460,275 1480,280 1500,286',{s:N,sw:2.5,m:'n'})+P('M1254,339 C1300,370 1350,378 1392,378',{s:N,sw:2.5,m:'n'})+P('M1424,376 C1450,370 1462,366 1474,362',{s:N,sw:2.5,m:'n'}));
-  s+=A('fade',7.6,P('M1255,332 C1310,322 1360,305 1396,283',{s:TL,sw:2.5,m:'t',a:{class:'flow'}})+P('M1418,364 C1450,330 1480,308 1502,298',{s:TL,sw:2.5,m:'t',a:{class:'flow'}})+P('M1420,285 C1440,320 1458,342 1476,352',{s:TL,sw:2.5,m:'t',a:{class:'flow'}}));
-  s+=A('fade',7.8,mv(C(0,0,5,{f:BL}),'M1254,325 C1300,285 1360,272 1410,272 C1460,275 1480,280 1502,288',2.6,{fade:1})+mv(C(0,0,5,{f:BL}),'M1254,339 C1300,370 1350,378 1408,378 C1450,370 1462,366 1476,361',2.6,{fade:1,begin:-1.2}));
-  s+=tr(...sup,A('pop',6.9,R(-14,-14,28,28,{f:'#fff',s:BL,sw:3})));
-  [h1,h2].forEach((h,i)=>s+=tr(...h,A('pop',7.1+i*.1,C(0,0,14,{f:'#f7b84b',s:'#e08a1e',sw:2})+(i===0?G('blink',P('M0,-24 V-33 M-13,-20 L-19,-28 M13,-20 L19,-28',{s:O,sw:3})):''))));
-  [c1,c2].forEach((c,i)=>s+=tr(...c,A('pop',7.2+i*.1,P('M0,-14 L14,11 H-14 Z',{f:'#fff',s:GRN,sw:3}))));
-  s+=A('fade',7.0,P('M1175,605 L1222,468 L1565,468 L1520,605 Z',{f:'#fbe8d6'})+R(1085,480,108,64,{rx:8,f:'#fbe8d6'})+T(1095,503,['Power','network'],{fs:18,fw:700,lh:20})+T(1095,541,'(electricity)',{fs:16}));
-  s+=A('fade',7.3,R(1227,503,26,26,{f:'#fff',s:BL,sw:3})+L(1253,516,1550,516,{sw:3})+[1285,1318,1352,1385,1418,1452,1485,1518,1550].map(x=>C(x,516,5,{f:N})).join('')+
-    P('M1318,516 V552 H1346 M1440,516 V552 H1470 M1518,516 V545 H1496',{s:N,sw:2.5})+[[1318,552],[1346,552],[1440,552],[1470,552],[1496,545]].map(([x,y])=>C(x,y,5,{f:N})).join('')+
-    T(1405,588,'Radial distribution feeder',{fs:17,it:1,a:'middle'}));
-  s+=A('fade',7.5,L(1240,347,1240,502,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+L(1408,393,1408,510,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+L(1490,374,1490,510,{s:O,sw:2,a:{'stroke-dasharray':'5 5'}})+
-    mv(C(0,0,4,{f:'#22c07a'}),'M1408,510 V395',1.5,{fade:1})+mv(C(0,0,4,{f:'#22c07a'}),'M1490,510 V377',1.5,{fade:1,begin:-.7})+mv(C(0,0,4,{f:'#22c07a'}),'M1240,500 V350',1.5,{fade:1,begin:-.3}));
-  s+=A('fade',8.2,R(1098,622,198,32,{rx:6,f:O})+T(1197,644,'Outcomes (Objectives)',{fs:17,fw:700,c:'#fff',a:'middle'})+L(1308,638,1555,638,{s:O,sw:2}));
+  /* ---- panel 3 : resilience curve ---- */
+  s+=A('fade',6.7,T(1090,212,'Service level over time',{fs:21,fw:700,c:N}));
+  s+=A('fade',6.8,L(1140,560,1140,262,{sw:2.5,m:'n'})+L(1140,560,1555,560,{sw:2.5,m:'n'})+L(1134,282,1140,282,{sw:2})+T(1128,287,'100%',{fs:13,a:'end'})+
+    T(1100,420,'Service level',{fs:16,a:'middle',rot:'rotate(-90 1100 420)'})+T(1552,586,'Time',{fs:16,a:'end'}));
+  s+=A('fade',6.9,L(1215,282,1215,558,{s:RED,sw:2,a:{'stroke-dasharray':'6 5'}})+lbl(1215,252,'Disruption',{s:RED,c:RED}));
+  const noPlan='M1142,282 H1215 L1228,470 H1330 C1400,470 1460,350 1548,302',opt='M1142,282 H1215 L1228,400 C1260,400 1285,290 1320,284 H1548';
+  s+=P('M1228,400 C1260,400 1285,290 1320,284 H1548 V302 C1460,350 1400,470 1330,470 H1228 Z',{f:'rgba(242,107,29,.16)',a:{class:'fade',style:'--d:8.3s'}});
+  s+=P(noPlan,{s:'#9aa3b2',sw:4,a:dr(7.0)})+P(opt,{s:O,sw:5,a:dr(7.7)});
+  s+=A('fade',8.5,T(1385,345,'Resilience gained',{fs:17,fw:700,a:'middle',c:O}));
+  s+=A('fade',8.6,mv(C(0,0,7,{f:O,a:{filter:'url(#glow)'}}),opt,4,{fade:1}));
+  s+=A('fade',8.0,L(1140,598,1170,598,{s:'#9aa3b2',sw:4})+T(1178,604,'No recovery plan',{fs:15})+L(1345,598,1375,598,{s:O,sw:5})+T(1383,604,'Optimized plan',{fs:15}));
+    s+=A('fade',8.2,R(1098,622,198,32,{rx:6,f:O})+T(1197,644,'Outcomes (Objectives)',{fs:17,fw:700,c:'#fff',a:'middle'})+L(1308,638,1555,638,{s:O,sw:2}));
   s+=tr(1160,705,A('pop',8.4,P('M-4,-34 L14,-26 L14,-6 L-4,2 L-22,-6 L-22,-26 Z M-22,-26 L-4,-18 L14,-26 M-4,-18 V2',{s:O,sw:2.5,f:'#fff'})+P('M-34,14 C-22,4 -10,8 0,12 L16,12 C22,12 22,20 16,20 L-2,20 M-34,24 L-10,28 L28,14 C32,12 30,6 24,8 L14,12',{s:N,sw:2.5})));
   s+=tr(1325,705,A('pop',8.6,C(8,0,26,{f:'#fff',s:N,sw:3})+`<g transform="translate(8,0)">${L(0,0,0,-17,{sw:3})+rot(4)}</g>`+L(8,0,20,0,{sw:3})+[[-38,-10,-20],[-44,0,-22],[-38,10,-20]].map(([a,y,b])=>L(a,y,b,y,{s:O,sw:3})).join('')));
   s+=tr(1490,705,A('pop',8.8,tr(-8,0,P('M-5,-30 L-16,30 M5,-30 L16,30 M-5,-30 H5 M-10,-6 H10 M-13,12 H13 M-5,-30 L10,-6 L-13,12 L16,30 M5,-30 L-10,-6 L13,12 L-16,30 M-22,-20 H22',{s:N,sw:2.3}))+tr(18,14,P('M0,-16 L14,-10 V0 C14,10 7,15 0,19 C-7,15 -14,10 -14,0 V-10 Z',{f:'#fff',s:O,sw:2.5})+P('M-6,1 L-1,6 L7,-4',{s:O,sw:2.5}))));
